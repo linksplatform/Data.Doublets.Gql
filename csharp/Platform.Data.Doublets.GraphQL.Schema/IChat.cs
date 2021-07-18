@@ -5,18 +5,18 @@ using System.Reactive.Subjects;
 
 namespace GraphQL.Samples.Schemas.Chat
 {
-    public interface IChat
-    {
-        ConcurrentStack<Message> AllMessages { get; }
+    //public interface IChat
+    //{
+    //    ConcurrentStack<Message> AllMessages { get; }
 
-        Message AddMessage(Message message);
+    //    Message AddMessage(Message message);
 
-        IObservable<Message> Messages(string user);
+    //    IObservable<Message> Messages(string user);
 
-        Message AddMessage(ReceivedMessage message);
-    }
+    //    Message AddMessage(ReceivedMessage message);
+    //}
 
-    public class Chat : IChat
+    public class Chat //: IChat
     {
         private readonly ISubject<Message> _messageStream = new ReplaySubject<Message>(1);
 
@@ -34,25 +34,6 @@ namespace GraphQL.Samples.Schemas.Chat
 
         public ConcurrentStack<Message> AllMessages { get; }
 
-        public Message AddMessage(ReceivedMessage message)
-        {
-            if (!Users.TryGetValue(message.FromId, out string displayName))
-            {
-                displayName = "(unknown)";
-            }
-
-            return AddMessage(new Message
-            {
-                Content = message.Content,
-                SentAt = message.SentAt,
-                From = new MessageFrom
-                {
-                    DisplayName = displayName,
-                    Id = message.FromId
-                }
-            });
-        }
-
         public Message AddMessage(Message message)
         {
             AllMessages.Push(message);
@@ -60,16 +41,16 @@ namespace GraphQL.Samples.Schemas.Chat
             return message;
         }
 
-        public IObservable<Message> Messages(string user)
-        {
-            return _messageStream
-                .Select(message =>
-                {
-                    message.Sub = user;
-                    return message;
-                })
-                .AsObservable();
-        }
+        //public IObservable<Message> Messages(string user)
+        //{
+        //    return _messageStream
+        //        .Select(message =>
+        //        {
+        //            message.Sub = user;
+        //            return message;
+        //        })
+        //        .AsObservable();
+        //}
 
         public void AddError(Exception exception) => _messageStream.OnError(exception);
     }

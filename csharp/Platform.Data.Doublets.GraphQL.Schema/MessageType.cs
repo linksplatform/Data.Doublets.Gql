@@ -6,16 +6,19 @@ namespace GraphQL.Samples.Schemas.Chat
     {
         public MessageType()
         {
-            Field(o => o.Content);
-            Field(o => o.SentAt, type: typeof(DateGraphType));
-            Field(o => o.Sub);
-            Field(o => o.From, false, typeof(MessageFromType)).Resolve(ResolveFrom);
+            Field(o => o.Id);
+            Field(o => o.from_id);
+            Field(o => o.from, type: typeof(MessageType));
+            Field(o => o.to, type: typeof(MessageType));
+            Field(o => o.to_id);
+            Field(o => o.type, type: typeof(MessageType));
+            Field(o => o.type_id);
         }
 
-        private MessageFrom ResolveFrom(IResolveFieldContext<Message> context)
-        {
-            var message = context.Source;
-            return message.From;
-        }
+        //private MessageFrom ResolveFrom(IResolveFieldContext<Message> context)
+        //{
+        //    var message = context.Source;
+        //    return message.From;
+        //}
     }
 }

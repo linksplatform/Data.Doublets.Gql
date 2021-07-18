@@ -4,18 +4,8 @@ namespace GraphQL.Samples.Schemas.Chat
 {
     public class ChatMutation : ObjectGraphType<object>
     {
-        public ChatMutation(IChat chat)
+        public ChatMutation(Chat chat)
         {
-            Field<MessageType>("addMessage",
-                arguments: new QueryArguments(
-                    new QueryArgument<MessageInputType> { Name = "message" }
-                ),
-                resolve: context =>
-                {
-                    var receivedMessage = context.GetArgument<ReceivedMessage>("message");
-                    var message = chat.AddMessage(receivedMessage);
-                    return message;
-                });
         }
     }
 
@@ -23,9 +13,14 @@ namespace GraphQL.Samples.Schemas.Chat
     {
         public MessageInputType()
         {
-            Field<StringGraphType>("fromId");
-            Field<StringGraphType>("content");
-            Field<DateGraphType>("sentAt");
+            Field<LongGraphType>("id");
+            Field<MessageType>("from");
+            Field<LongGraphType>("from_id");
+            Field<MessageType>("to");
+            Field<LongGraphType>("to_id");
+            Field<MessageType>("type"); 
+            Field<LongGraphType>("type_id");
+
         }
     }
 }
