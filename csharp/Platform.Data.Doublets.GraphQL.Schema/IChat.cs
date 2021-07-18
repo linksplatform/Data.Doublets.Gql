@@ -5,16 +5,16 @@ using System.Reactive.Subjects;
 
 namespace GraphQL.Samples.Schemas.Chat
 {
-    //public interface IChat
-    //{
-    //    ConcurrentStack<Message> AllMessages { get; }
+    public interface IChat
+    {
+        ConcurrentStack<Message> AllMessages { get; }
 
-    //    Message AddMessage(Message message);
+       // Message AddMessage(Message message);
 
-    //    IObservable<Message> Messages(string user);
+        IObservable<Message> Messages(string user);
 
-    //    Message AddMessage(ReceivedMessage message);
-    //}
+        //Message AddMessage(ReceivedMessage message);
+    }
 
     public class Chat //: IChat
     {
@@ -34,23 +34,23 @@ namespace GraphQL.Samples.Schemas.Chat
 
         public ConcurrentStack<Message> AllMessages { get; }
 
-        public Message AddMessage(Message message)
-        {
-            AllMessages.Push(message);
-            _messageStream.OnNext(message);
-            return message;
-        }
-
-        //public IObservable<Message> Messages(string user)
+        //public Message AddMessage(Message message)
         //{
-        //    return _messageStream
-        //        .Select(message =>
-        //        {
-        //            message.Sub = user;
-        //            return message;
-        //        })
-        //        .AsObservable();
+        //    AllMessages.Push(message);
+        //    _messageStream.OnNext(message);
+        //    return message;
         //}
+
+        public IObservable<Message> Messages(string user)
+        {
+            return _messageStream
+                .Select(message =>
+                {
+                    //message.Sub = user;
+                    return message;
+                })
+                .AsObservable();
+        }
 
         public void AddError(Exception exception) => _messageStream.OnError(exception);
     }
