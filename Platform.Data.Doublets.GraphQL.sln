@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Doublets.GraphQL.Schema", "Data.Doublets.GraphQL.Schema\Data.Doublets.GraphQL.Schema.csproj", "{A18609CA-2D91-4834-8013-B8299EA8B3DB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Doublets.GraphQL.Server", "Data.Doublets.GraphQL.Server\Data.Doublets.GraphQL.Server.csproj", "{AD25F601-3E53-444E-83BF-9CCD765D8D7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A18609CA-2D91-4834-8013-B8299EA8B3DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A18609CA-2D91-4834-8013-B8299EA8B3DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A18609CA-2D91-4834-8013-B8299EA8B3DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A18609CA-2D91-4834-8013-B8299EA8B3DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD25F601-3E53-444E-83BF-9CCD765D8D7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD25F601-3E53-444E-83BF-9CCD765D8D7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD25F601-3E53-444E-83BF-9CCD765D8D7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD25F601-3E53-444E-83BF-9CCD765D8D7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E2776E21-99AB-4B53-9D2F-FD1EFB814538}
+	EndGlobalSection
+EndGlobal
