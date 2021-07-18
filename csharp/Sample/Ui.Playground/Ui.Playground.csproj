@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net5;netcoreapp3.1</TargetFrameworks>
+    <Description>GraphQL Playground integration for ASP.NET Core</Description>
+    <PackageTags>GraphQL;Playground</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Internal\playground.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+</Project>
