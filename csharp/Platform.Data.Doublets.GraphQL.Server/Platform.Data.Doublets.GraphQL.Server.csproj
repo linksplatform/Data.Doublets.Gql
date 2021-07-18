@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Samples.Schemas.Chat\Samples.Schemas.Chat.csproj" />
+    <ProjectReference Include="..\Platform.Data.Doublets.GraphQL.Schema\Platform.Data.Doublets.GraphQL.Schema.csproj" />
   </ItemGroup>
 
 </Project>

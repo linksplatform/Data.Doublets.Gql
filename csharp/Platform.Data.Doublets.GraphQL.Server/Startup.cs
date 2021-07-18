@@ -30,7 +30,7 @@ namespace GraphQL.Samples.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddSingleton<IChat, Chat>()
+                .AddSingleton<Chat, Chat>()
                 .AddSingleton<ChatSchema>()
                 .AddGraphQL((options, provider) =>
                 {
