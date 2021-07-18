@@ -9,7 +9,7 @@ namespace GraphQL.Samples.Schemas.Chat
         {
             Query = new ChatQuery(chat);
             //Mutation = new ChatMutation(chat);
-            Subscription = new ChatSubscriptions();
+            //Subscription = new ChatSubscriptions();
         }
     }
 }
