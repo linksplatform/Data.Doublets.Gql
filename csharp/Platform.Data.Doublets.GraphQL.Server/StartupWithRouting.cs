@@ -52,7 +52,6 @@ namespace GraphQL.Samples.Server
         {
             if (Environment.IsDevelopment())
                 app.UseDeveloperExceptionPage();
-
             app.UseWebSockets();
 
             app.UseRouting();

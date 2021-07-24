@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GraphQL.Samples.Schemas.Chat;
 using GraphQL.Server;
@@ -5,12 +6,18 @@ using GraphQL.Server.Ui.Altair;
 using GraphQL.Server.Ui.GraphiQL;
 using GraphQL.Server.Ui.Playground;
 using GraphQL.Server.Ui.Voyager;
+using LinksStorage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Platform.Data;
+using Platform.Data.Doublets;
+using Platform.Data.Doublets.Memory;
+using Platform.Data.Doublets.Memory.United.Generic;
+using Platform.Memory;
 
 namespace GraphQL.Samples.Server
 {
@@ -30,6 +37,7 @@ namespace GraphQL.Samples.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                .AddSingleton<ILinks<ulong>>(sp => new UnitedMemoryLinks<UInt64>(new FileMappedResizableDirectMemory("db.links"), UnitedMemoryLinks<UInt64>.DefaultLinksSizeStep, new LinksConstants<UInt64>(enableExternalReferencesSupport: true), IndexTreeType.Default))
                 .AddSingleton<Links, Links>()
                 .AddSingleton<ChatSchema>()
                 .AddGraphQL((options, provider) =>
