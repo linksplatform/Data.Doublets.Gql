@@ -7,15 +7,15 @@ namespace LinksStorage
     {
         public long Id { get; set; }
 
-        public Link<Link> from { get; set; }
+        public Link from { get; set; }
 
         public long from_id { get; set; }
 
-        public Link<Link> to { get; set; }
+        public Link to { get; set; }
 
         public long to_id { get; set; }
 
-        public Link<Link> type {get;set;}
+        public Link type {get;set;}
 
         public long type_id { get; set; }
     }
