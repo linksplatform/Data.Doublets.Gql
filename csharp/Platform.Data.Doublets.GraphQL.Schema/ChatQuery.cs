@@ -5,9 +5,9 @@ namespace GraphQL.Samples.Schemas.Chat
 {
     public class ChatQuery : ObjectGraphType
     {
-        public ChatQuery(Chat chat)
+        public ChatQuery(Links chat)
         {
-            Field<ListGraphType<MessageType>>("messages", resolve: context => chat.AllMessages.Take(100));
+            Field<ListGraphType<LinkType>>("links", resolve: context => chat.AllLinks.Take(100));
         }
     }
 }

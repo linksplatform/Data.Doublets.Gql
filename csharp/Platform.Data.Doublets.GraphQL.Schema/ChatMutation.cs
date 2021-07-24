@@ -4,7 +4,7 @@ namespace GraphQL.Samples.Schemas.Chat
 {
     public class ChatMutation : ObjectGraphType<object>
     {
-        public ChatMutation(Chat chat)
+        public ChatMutation(Links chat)
         {
         }
     }
@@ -14,13 +14,12 @@ namespace GraphQL.Samples.Schemas.Chat
         public MessageInputType()
         {
             Field<LongGraphType>("id");
-            Field<MessageType>("from");
+            Field<LinkType>("from");
             Field<LongGraphType>("from_id");
-            Field<MessageType>("to");
+            Field<LinkType>("to");
             Field<LongGraphType>("to_id");
-            Field<MessageType>("type"); 
+            Field<LinkType>("type"); 
             Field<LongGraphType>("type_id");
-
         }
     }
 }
