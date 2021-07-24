@@ -8,16 +8,16 @@ namespace GraphQL.Samples.Schemas.Chat
 {
     public interface ILinks
     {
-        ConcurrentStack<Links> AllLinks { get; }
+        ConcurrentStack<Link> AllLinks { get; }
 
        // Message AddMessage(Message message);
 
-        IObservable<Links> Links(string user);
+        IObservable<Link> Link(string user);
 
         //Message AddMessage(ReceivedMessage message);
     }
 
-    public class Links //: IChat
+    public class Links : ILinks
     {
         private readonly ISubject<Links> _messageStream = new ReplaySubject<Links>(1);
 
