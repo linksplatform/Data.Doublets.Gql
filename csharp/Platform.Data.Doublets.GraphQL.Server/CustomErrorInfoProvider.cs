@@ -13,7 +13,7 @@ namespace GraphQL.Samples.Server
     /// </summary>
     public class CustomErrorInfoProvider : DefaultErrorInfoProvider
     {
-        public CustomErrorInfoProvider(IOptions<ErrorInfoProviderOptions> options) : base(options)
+        public CustomErrorInfoProvider(IOptions<ErrorInfoProviderOptions> options) : base((IOptions<Execution.ErrorInfoProviderOptions>)options)
         { }
 
         public override ErrorInfo GetInfo(ExecutionError executionError)

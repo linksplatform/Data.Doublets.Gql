@@ -31,7 +31,7 @@ namespace GraphQL.Samples.Server
         {
             services
                 .AddRouting()
-                .AddSingleton<Chat, Chat>()
+                .AddSingleton<Links, Links>()
                 .AddSingleton<ChatSchema>()
                 .AddGraphQL((options, provider) =>
                 {
