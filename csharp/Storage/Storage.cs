@@ -13,6 +13,7 @@ using Platform.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using TLinkAddress = System.UInt64;
 
@@ -32,7 +33,7 @@ namespace LinksStorage
 
         private readonly IConverter<TLinkAddress, string> _unicodeSequenceToStringConverter;
 
-        private readonly UnitedMemoryLinks<UInt64> Links;
+        public readonly UnitedMemoryLinks<UInt64> Links;
 
         private readonly TLinkAddress _unicodeSymbolMarker;
 
@@ -84,6 +85,17 @@ namespace LinksStorage
                 return Links.Constants.Continue;
             }, query);
             return links;
+        }
+
+        public Link GetLink(Link link)
+        {
+        var query = new Link<UInt64>(index: (ulong)link.Id, source: Any, target: Any);
+        Links.Each(link =>
+        {
+            return Links.Constants.Continue;
+        }, query);
+        link.from = new Link() {from_id = (long) query.First(), to_id = link.to_id, type_id = link.type_id};
+        return link;
         }
     }
 }
