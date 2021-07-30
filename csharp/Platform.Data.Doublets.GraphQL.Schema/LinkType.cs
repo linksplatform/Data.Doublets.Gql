@@ -47,12 +47,42 @@ namespace GraphQL.Samples.Schemas.Chat
         private Link ResolveTo(IResolveFieldContext<Link> context)
         {
             var link = context.Source;
-            return link.to ?? new Link();
+            if (link.from != null)
+            {
+                return link.from;
+            }
+            else
+            {
+                var service = context.RequestServices.GetService(typeof(ILinks<ulong>));
+                ILinks<ulong> Links = (ILinks<ulong>)service;
+                var fromLink = Links.GetLink((ulong)link.from_id);
+                return new Link()
+                {
+                    Id = (long)Links.GetIndex(fromLink),
+                    from_id = (long)Links.GetSource(fromLink),
+                    to_id = (long)Links.GetTarget(fromLink)
+                };
+            }
         }
         private Link ResolveType(IResolveFieldContext<Link> context)
         {
             var link = context.Source;
-            return link.type ?? new Link();
+            if (link.from != null)
+            {
+                return link.from;
+            }
+            else
+            {
+                var service = context.RequestServices.GetService(typeof(ILinks<ulong>));
+                ILinks<ulong> Links = (ILinks<ulong>)service;
+                var fromLink = Links.GetLink((ulong)link.from_id);
+                return new Link()
+                {
+                    Id = (long)Links.GetIndex(fromLink),
+                    from_id = (long)Links.GetSource(fromLink),
+                    to_id = (long)Links.GetTarget(fromLink)
+                };
+            }
         }
     }
 }
