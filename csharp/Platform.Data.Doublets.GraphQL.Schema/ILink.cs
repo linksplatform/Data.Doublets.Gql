@@ -3,14 +3,15 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using Platform.Data;
 using Platform.Data.Doublets;
 
 namespace GraphQL.Samples.Schemas.Link
 {
     public interface ILinks
     {
-        ConcurrentStack<Link> AllLinks { get; } 
-        long insert_link(Link link);
+        ConcurrentStack<Link> AllLinks { get; }
+        Link insert_link(object service, Link link);
 
         //Message AddLink(Message message);
 
@@ -46,9 +47,24 @@ namespace GraphQL.Samples.Schemas.Link
 
         public ConcurrentStack<Link> AllLinks { get; set; }
 
-        public long insert_link(Link link)
+        public Link insert_link(object service, Link link)
         {
-            return (long)LinksSrorage.GetOrCreate(source: (ulong)link.from_id, target: (ulong)link.to_id);
+            //var service = context.RequestServices.GetService(typeof(ILinks<ulong>));
+            ILinks<ulong> Links = (ILinks<ulong>)service;
+            if (Links.Exists((ulong)link.from_id))
+            {
+                //var fromLink = Links.GetLink((ulong)link.from_id);
+                return new Link()
+                {
+                    id = link.id,
+                    from_id = link.from_id,
+                    to_id = link.to_id
+                };
+            }
+            else
+            {
+                return null;
+            }            //return (long)LinksSrorage.GetOrCreate(source: (ulong)link.from_id, target: (ulong)link.to_id);
         }
 
         public IObservable<Link> Link(string user)

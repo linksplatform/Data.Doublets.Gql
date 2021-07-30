@@ -1,5 +1,6 @@
 using GraphQL.NewtonsoftJson;
 using GraphQL.Types;
+using Platform.Data.Doublets;
 
 namespace GraphQL.Samples.Schemas.Link
 {
@@ -14,7 +15,7 @@ namespace GraphQL.Samples.Schemas.Link
                 resolve: context =>
                 {
                     var receivedLink = context.GetArgument<Link>("link");
-                    var link = links.insert_link(receivedLink);
+                    var link = links.insert_link(context.RequestServices.GetService(typeof(ILinks<ulong>)), receivedLink);
                     return link;
                 });
         }
