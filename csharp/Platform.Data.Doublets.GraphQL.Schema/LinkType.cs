@@ -14,7 +14,7 @@ namespace GraphQL.Samples.Schemas.Chat
     {
         public LinkType()
         {
-            Field(o => o.Id);
+            Field(o => o.id);
             Field(o => o.from_id);
             Field(o => o.from, false, type: typeof(LinkType)).Resolve(ResolveFrom);
             Field(o => o.to, type: typeof(LinkType)).Resolve(ResolveTo);
@@ -37,16 +37,16 @@ namespace GraphQL.Samples.Schemas.Chat
         {
             return context.Source.type ?? GetLinkOrDefault(context, context.Source.type_id);
         }
-        private static Link GetLinkOrDefault(IResolveFieldContext<Link> context, long linkId)
+        private static Link GetLinkOrDefault(IResolveFieldContext<Link> context, long linkid)
         {
             var service = context.RequestServices.GetService(typeof(ILinks<ulong>));
             ILinks<ulong> Links = (ILinks<ulong>)service;
-            if (Links.Exists((ulong)linkId))
+            if (Links.Exists((ulong)linkid))
             {
-                var fromLink = Links.GetLink((ulong)linkId);
+                var fromLink = Links.GetLink((ulong)linkid);
                 return new Link()
                 {
-                    Id = (long)Links.GetIndex(fromLink),
+                    id = (long)Links.GetIndex(fromLink),
                     from_id = (long)Links.GetSource(fromLink),
                     to_id = (long)Links.GetTarget(fromLink)
                 };

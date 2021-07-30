@@ -29,13 +29,13 @@ namespace GraphQL.Samples.Schemas.Chat
             var query = new Link<UInt64>(index: Storage.Constants.Any, source: Storage.Constants.Any, target: Storage.Constants.Any);
             Storage.Each(link =>
             {
-                links.Add(new Link() { Id = (long)Storage.GetIndex(link), from_id = (long)Storage.GetSource(link), to_id = (long)Storage.GetTarget(link) });
+                links.Add(new Link() { id = (long)Storage.GetIndex(link), from_id = (long)Storage.GetSource(link), to_id = (long)Storage.GetTarget(link) });
                 return Storage.Constants.Continue;
             }, query);
             AllLinks = new ConcurrentStack<Link>();
             foreach (var link in links)
             {
-                AllLinks.Push(new Link(){Id = link.Id, from_id = link.from_id, to_id = link.to_id});
+                AllLinks.Push(new Link(){id = link.id, from_id = link.from_id, to_id = link.to_id});
             }
         }
 

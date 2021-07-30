@@ -5,7 +5,7 @@ namespace LinksStorage
 {
     public class Link
     {
-        public long Id { get; set; }
+        public long id { get; set; }
 
         public Link from { get; set; }
 
