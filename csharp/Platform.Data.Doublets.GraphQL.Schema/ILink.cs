@@ -10,8 +10,9 @@ namespace GraphQL.Samples.Schemas.Link
     public interface ILinks
     {
         ConcurrentStack<Link> AllLinks { get; }
+        public ulong insert_link(Link link);
 
-       // Message AddMessage(Message message);
+        //Message AddLink(Message message);
 
         IObservable<Link> Link(string user);
 
@@ -22,18 +23,20 @@ namespace GraphQL.Samples.Schemas.Link
     {
         private readonly ISubject<Links> _messageStream = new ReplaySubject<Links>(1);
 
+        private readonly ILinks<ulong> LinksSrorage;
 
-        public Links(ILinks<ulong> Storage)
+        public Links(ILinks<ulong> links)
         {
-            List<Link> links = new() { };
-            var query = new Link<UInt64>(index: Storage.Constants.Any, source: Storage.Constants.Any, target: Storage.Constants.Any);
-            Storage.Each(link =>
+            this.LinksSrorage = links;
+            List<Link> alllinks = new() { };
+            var query = new Link<UInt64>(index: links.Constants.Any, source: links.Constants.Any, target: links.Constants.Any);
+            links.Each(link =>
             {
-                links.Add(new Link() { id = (long)Storage.GetIndex(link), from_id = (long)Storage.GetSource(link), to_id = (long)Storage.GetTarget(link) });
-                return Storage.Constants.Continue;
+                alllinks.Add(new Link() { id = (long)links.GetIndex(link), from_id = (long)links.GetSource(link), to_id = (long)links.GetTarget(link) });
+                return links.Constants.Continue;
             }, query);
             AllLinks = new ConcurrentStack<Link>();
-            foreach (var link in links)
+            foreach (var link in alllinks)
             {
                 AllLinks.Push(new Link(){id = link.id, from_id = link.from_id, to_id = link.to_id});
             }
@@ -43,12 +46,10 @@ namespace GraphQL.Samples.Schemas.Link
 
         public ConcurrentStack<Link> AllLinks { get; set; }
 
-        //public Message AddMessage(Message message)
-        //{
-        //    AllMessages.Push(message);
-        //    _messageStream.OnNext(message);
-        //    return message;
-        //}
+        public ulong insert_link(Link link)
+        {
+           return LinksSrorage.GetOrCreate(source: (ulong) link.from_id, target: (ulong) link.to_id);
+        }
 
         public IObservable<Link> Link(string user)
         {
