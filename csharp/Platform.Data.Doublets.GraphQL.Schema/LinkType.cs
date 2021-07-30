@@ -37,13 +37,13 @@ namespace GraphQL.Samples.Schemas.Chat
         {
             return context.Source.type ?? GetLinkOrDefault(context, context.Source.type_id);
         }
-        private static Link GetLinkOrDefault(IResolveFieldContext<Link> context, long linkid)
+        private static Link GetLinkOrDefault(IResolveFieldContext<Link> context, long linkId)
         {
             var service = context.RequestServices.GetService(typeof(ILinks<ulong>));
             ILinks<ulong> Links = (ILinks<ulong>)service;
-            if (Links.Exists((ulong)linkid))
+            if (Links.Exists((ulong)linkId))
             {
-                var fromLink = Links.GetLink((ulong)linkid);
+                var fromLink = Links.GetLink((ulong)linkId);
                 return new Link()
                 {
                     Id = (long)Links.GetIndex(fromLink),
