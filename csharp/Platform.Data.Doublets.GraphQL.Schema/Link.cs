@@ -1,7 +1,7 @@
 using Platform.Data.Doublets;
 using System;
 
-namespace LinksStorage
+namespace GraphQL.Samples.Schemas.Link
 {
     public class Link
     {

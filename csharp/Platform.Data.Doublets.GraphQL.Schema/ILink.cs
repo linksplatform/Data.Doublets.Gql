@@ -1,11 +1,11 @@
-using LinksStorage;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Platform.Data.Doublets;
-namespace GraphQL.Samples.Schemas.Chat
+
+namespace GraphQL.Samples.Schemas.Link
 {
     public interface ILinks
     {

@@ -2,13 +2,12 @@ using System;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Net.Sockets;
-using LinksStorage;
 using GraphQL.Types;
 using Platform.Data.Doublets;
 using Microsoft.Extensions.DependencyInjection;
 using Platform.Data;
 
-namespace GraphQL.Samples.Schemas.Chat
+namespace GraphQL.Samples.Schemas.Link
 {
     public class LinkType : ObjectGraphType<Link>
     {
@@ -37,13 +36,13 @@ namespace GraphQL.Samples.Schemas.Chat
         {
             return context.Source.type ?? GetLinkOrDefault(context, context.Source.type_id);
         }
-        private static Link GetLinkOrDefault(IResolveFieldContext<Link> context, long linkId)
+        private static Link GetLinkOrDefault(IResolveFieldContext<Link> context, long linkid)
         {
             var service = context.RequestServices.GetService(typeof(ILinks<ulong>));
             ILinks<ulong> Links = (ILinks<ulong>)service;
-            if (Links.Exists((ulong)linkId))
+            if (Links.Exists((ulong)linkid))
             {
-                var fromLink = Links.GetLink((ulong)linkId);
+                var fromLink = Links.GetLink((ulong)linkid);
                 return new Link()
                 {
                     id = (long)Links.GetIndex(fromLink),
