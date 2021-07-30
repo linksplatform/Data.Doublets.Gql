@@ -1,7 +1,12 @@
+using System;
+using System.Linq;
 using System.Net.Http.Headers;
+using System.Net.Sockets;
 using LinksStorage;
 using GraphQL.Types;
 using Platform.Data.Doublets;
+using Microsoft.Extensions.DependencyInjection;
+using Platform.Data;
 
 namespace GraphQL.Samples.Schemas.Chat
 {
@@ -21,7 +26,22 @@ namespace GraphQL.Samples.Schemas.Chat
         private Link ResolveFrom(IResolveFieldContext<Link> context)
         {
             var link = context.Source;
-            return link.from ?? new Link();
+            if (link.from != null)
+            {
+                return link.from;
+            }
+            else
+            {
+                var service = context.RequestServices.GetService(typeof(ILinks<ulong>));
+                ILinks<ulong> Links = (ILinks<ulong>)service;
+                var fromLink = Links.GetLink((ulong)link.from_id);
+                return new Link()
+                {
+                    Id = (long)Links.GetIndex(fromLink),
+                    from_id = (long)Links.GetSource(fromLink),
+                    to_id = (long)Links.GetTarget(fromLink)
+                };
+            }
         }
 
         private Link ResolveTo(IResolveFieldContext<Link> context)
