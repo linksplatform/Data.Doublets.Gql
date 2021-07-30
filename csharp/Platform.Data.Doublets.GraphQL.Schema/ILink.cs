@@ -10,7 +10,7 @@ namespace GraphQL.Samples.Schemas.Link
     public interface ILinks
     {
         ConcurrentStack<Link> AllLinks { get; } 
-        ulong insert_link(Link link);
+        long insert_link(Link link);
 
         //Message AddLink(Message message);
 
@@ -46,9 +46,9 @@ namespace GraphQL.Samples.Schemas.Link
 
         public ConcurrentStack<Link> AllLinks { get; set; }
 
-        public ulong insert_link(Link link)
+        public long insert_link(Link link)
         {
-           return LinksSrorage.GetOrCreate(source: (ulong) link.from_id, target: (ulong) link.to_id);
+            return (long)LinksSrorage.GetOrCreate(source: (ulong)link.from_id, target: (ulong)link.to_id);
         }
 
         public IObservable<Link> Link(string user)
