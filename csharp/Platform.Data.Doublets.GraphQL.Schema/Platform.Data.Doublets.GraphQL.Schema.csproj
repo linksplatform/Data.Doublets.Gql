@@ -16,8 +16,4 @@
     <PackageReference Include="Platform.Data.Doublets" Version="0.6.10" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\LinksStorage\LinksStorage.csproj" />
-  </ItemGroup>
-
 </Project>

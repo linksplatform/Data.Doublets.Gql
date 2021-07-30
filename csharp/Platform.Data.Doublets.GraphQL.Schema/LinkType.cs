@@ -25,85 +25,35 @@ namespace GraphQL.Samples.Schemas.Chat
 
         private Link ResolveFrom(IResolveFieldContext<Link> context)
         {
-            var link = context.Source;
-            if (link.from != null)
-            {
-                return link.from;
-            }
-            else
-            {
-                var service = context.RequestServices.GetService(typeof(ILinks<ulong>));
-                ILinks<ulong> Links = (ILinks<ulong>) service;
-                if (Links.Exists((ulong) link.to_id))
-                {
-                    var fromLink = Links.GetLink((ulong) link.from_id);
-                    return new Link()
-                    {
-                        Id = (long) Links.GetIndex(fromLink),
-                        from_id = (long) Links.GetSource(fromLink),
-                        to_id = (long) Links.GetTarget(fromLink)
-                    };
-                }
-                else
-                {
-                    return null;
-                }
-            }
+            return context.Source.from ?? GetLinkOrDefault(context,context.Source.from_id);
         }
 
         private Link ResolveTo(IResolveFieldContext<Link> context)
         {
-            var link = context.Source;
-            if (link.from != null)
-            {
-                return link.from;
-            }
-            else
-            {
-                var service = context.RequestServices.GetService(typeof(ILinks<ulong>));
-                ILinks<ulong> Links = (ILinks<ulong>) service;
-                if (Links.Exists((ulong) link.to_id))
-                {
-                    var fromLink = Links.GetLink((ulong) link.to_id);
-                    return new Link()
-                    {
-                        Id = (long) Links.GetIndex(fromLink),
-                        from_id = (long) Links.GetSource(fromLink),
-                        to_id = (long) Links.GetTarget(fromLink)
-                    };
-                }
-                else
-                {
-                    return null;
-                }
-            }
+            return context.Source.to ?? GetLinkOrDefault(context, context.Source.to_id);
         }
 
         private Link ResolveType(IResolveFieldContext<Link> context)
         {
-            var link = context.Source;
-            if (link.from != null)
+            return context.Source.type ?? GetLinkOrDefault(context, context.Source.type_id);
+        }
+        private static Link GetLinkOrDefault(IResolveFieldContext<Link> context, long linkid)
+        {
+            var service = context.RequestServices.GetService(typeof(ILinks<ulong>));
+            ILinks<ulong> Links = (ILinks<ulong>)service;
+            if (Links.Exists((ulong)linkid))
             {
-                return link.from;
+                var fromLink = Links.GetLink((ulong)linkid);
+                return new Link()
+                {
+                    Id = (long)Links.GetIndex(fromLink),
+                    from_id = (long)Links.GetSource(fromLink),
+                    to_id = (long)Links.GetTarget(fromLink)
+                };
             }
             else
             {
-                var service = context.RequestServices.GetService(typeof(ILinks<ulong>));
-                ILinks<ulong> Links = (ILinks<ulong>) service;
-                if (Links.Exists((ulong) link.type_id))
-                {
-                    var fromLink = Links.GetLink((ulong) link.type_id);
-                    return new Link()
-                    {
-                        Id = (long) Links.GetIndex(fromLink),
-                        from_id = (long) Links.GetSource(fromLink),
-                        to_id = (long) Links.GetTarget(fromLink)
-                    };
-                }
-                else
-                {
-                    return null;
-                }
+                return null;
             }
         }
     }
