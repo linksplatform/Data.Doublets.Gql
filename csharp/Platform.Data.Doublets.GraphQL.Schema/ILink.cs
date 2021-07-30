@@ -9,8 +9,8 @@ namespace GraphQL.Samples.Schemas.Link
 {
     public interface ILinks
     {
-        ConcurrentStack<Link> AllLinks { get; }
-        public ulong insert_link(Link link);
+        ConcurrentStack<Link> AllLinks { get; } 
+        ulong insert_link(Link link);
 
         //Message AddLink(Message message);
 

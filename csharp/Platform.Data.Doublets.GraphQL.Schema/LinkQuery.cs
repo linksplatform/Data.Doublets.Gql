@@ -5,7 +5,7 @@ namespace GraphQL.Samples.Schemas.Link
 {
     public class LinkQuery : ObjectGraphType
     {
-        public LinkQuery(Links Link)
+        public LinkQuery(ILinks Link)
         {
             Field<ListGraphType<LinkType>>("links", resolve: context => Link.AllLinks.Take(100));
         }

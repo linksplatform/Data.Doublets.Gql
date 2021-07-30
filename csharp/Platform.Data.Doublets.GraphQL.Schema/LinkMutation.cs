@@ -9,7 +9,7 @@ namespace GraphQL.Samples.Schemas.Link
         {
             Field<LinkType>("addLinks",
                 arguments: new QueryArguments(
-                    new QueryArgument<MessageInputType> { Name = "link" }
+                    new QueryArgument<LinkInputType> { Name = "link" }
                 ),
                 resolve: context =>
                 {
@@ -18,11 +18,5 @@ namespace GraphQL.Samples.Schemas.Link
                     return link;
                 });
         }
-    }
-    
-
-    public class MessageInputType : InputObjectGraphType
-    {
-
     }
 }
