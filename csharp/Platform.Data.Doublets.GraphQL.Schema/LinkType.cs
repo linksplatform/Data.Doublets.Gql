@@ -33,14 +33,21 @@ namespace GraphQL.Samples.Schemas.Chat
             else
             {
                 var service = context.RequestServices.GetService(typeof(ILinks<ulong>));
-                ILinks<ulong> Links = (ILinks<ulong>)service;
-                var fromLink = Links.GetLink((ulong)link.from_id);
-                return new Link()
+                ILinks<ulong> Links = (ILinks<ulong>) service;
+                if (Links.Exists((ulong) link.to_id))
                 {
-                    Id = (long)Links.GetIndex(fromLink),
-                    from_id = (long)Links.GetSource(fromLink),
-                    to_id = (long)Links.GetTarget(fromLink)
-                };
+                    var fromLink = Links.GetLink((ulong) link.from_id);
+                    return new Link()
+                    {
+                        Id = (long) Links.GetIndex(fromLink),
+                        from_id = (long) Links.GetSource(fromLink),
+                        to_id = (long) Links.GetTarget(fromLink)
+                    };
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
@@ -54,16 +61,24 @@ namespace GraphQL.Samples.Schemas.Chat
             else
             {
                 var service = context.RequestServices.GetService(typeof(ILinks<ulong>));
-                ILinks<ulong> Links = (ILinks<ulong>)service;
-                var fromLink = Links.GetLink((ulong)link.from_id);
-                return new Link()
+                ILinks<ulong> Links = (ILinks<ulong>) service;
+                if (Links.Exists((ulong) link.to_id))
                 {
-                    Id = (long)Links.GetIndex(fromLink),
-                    from_id = (long)Links.GetSource(fromLink),
-                    to_id = (long)Links.GetTarget(fromLink)
-                };
+                    var fromLink = Links.GetLink((ulong) link.to_id);
+                    return new Link()
+                    {
+                        Id = (long) Links.GetIndex(fromLink),
+                        from_id = (long) Links.GetSource(fromLink),
+                        to_id = (long) Links.GetTarget(fromLink)
+                    };
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
+
         private Link ResolveType(IResolveFieldContext<Link> context)
         {
             var link = context.Source;
@@ -74,14 +89,21 @@ namespace GraphQL.Samples.Schemas.Chat
             else
             {
                 var service = context.RequestServices.GetService(typeof(ILinks<ulong>));
-                ILinks<ulong> Links = (ILinks<ulong>)service;
-                var fromLink = Links.GetLink((ulong)link.from_id);
-                return new Link()
+                ILinks<ulong> Links = (ILinks<ulong>) service;
+                if (Links.Exists((ulong) link.type_id))
                 {
-                    Id = (long)Links.GetIndex(fromLink),
-                    from_id = (long)Links.GetSource(fromLink),
-                    to_id = (long)Links.GetTarget(fromLink)
-                };
+                    var fromLink = Links.GetLink((ulong) link.type_id);
+                    return new Link()
+                    {
+                        Id = (long) Links.GetIndex(fromLink),
+                        from_id = (long) Links.GetSource(fromLink),
+                        to_id = (long) Links.GetTarget(fromLink)
+                    };
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
     }
