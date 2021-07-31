@@ -49,16 +49,9 @@ namespace GraphQL.Samples.Schemas.Link
 
         public Link insert_link(object service, Link link)
         {
-            ILinks<ulong> Links = (ILinks<ulong>)service;
-            if (Links.Exists((ulong)link.from_id))
-            {
-                var create = Links.GetOrCreate((ulong)link.from_id, (ulong)link.to_id);
-                return LinkType.GetLinkOrDefault(service, (long)create);
-            }
-            else
-            {
-                return null;
-            }
+            ILinks<ulong> Links = (ILinks<ulong>) service;
+            var create = Links.GetOrCreate((ulong) link.from_id, (ulong) link.to_id);
+            return LinkType.GetLinkOrDefault(service, (long) create);
         }
 
         public IObservable<Link> Link(string user)
