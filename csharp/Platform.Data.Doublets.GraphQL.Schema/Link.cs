@@ -1,5 +1,7 @@
+using GraphQL.Types;
 using Platform.Data.Doublets;
 using System;
+using System.Collections.Generic;
 
 namespace GraphQL.Samples.Schemas.Link
 {
@@ -18,5 +20,7 @@ namespace GraphQL.Samples.Schemas.Link
         public Link type {get;set;}
 
         public long type_id { get; set; }
+
+        public ListGraphType<LinkType> In { get; set; }
     }
 }

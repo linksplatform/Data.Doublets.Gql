@@ -8,14 +8,14 @@ namespace GraphQL.Samples.Schemas.Link
     {
         public LinkMutation(ILinks links)
         {
-            Field<LinkType>("addLinks",
+            Field<LinkType>("insert_links_one",
                 arguments: new QueryArguments(
-                    new QueryArgument<LinkInputType> { Name = "link" }
+                    new QueryArgument<LinkInputType> { Name = "object" }
                 ),
                 resolve: context =>
                 {
-                    var receivedLink = context.GetArgument<Link>("link");
-                    var link = links.insert_link(context.RequestServices.GetService(typeof(ILinks<ulong>)), receivedLink);
+                    var receivedLink = context.GetArgument<Link>("object");
+                    var link = links.InsertLink(context.RequestServices.GetService(typeof(ILinks<ulong>)), receivedLink);
                     return link;
                 });
         }

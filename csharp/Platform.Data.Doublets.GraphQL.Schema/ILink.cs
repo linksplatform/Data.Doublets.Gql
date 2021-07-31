@@ -11,7 +11,7 @@ namespace GraphQL.Samples.Schemas.Link
     public interface ILinks
     {
         ConcurrentStack<Link> AllLinks { get; }
-        Link insert_link(object service, Link link);
+        Link InsertLink(object service, Link link);
 
         //Message AddLink(Message message);
 
@@ -47,7 +47,7 @@ namespace GraphQL.Samples.Schemas.Link
 
         public ConcurrentStack<Link> AllLinks { get; set; }
 
-        public Link insert_link(object service, Link link)
+        public Link InsertLink(object service, Link link)
         {
             ILinks<ulong> Links = (ILinks<ulong>) service;
             var create = Links.GetOrCreate((ulong) link.from_id, (ulong) link.to_id);

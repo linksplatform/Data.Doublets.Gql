@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Net.Sockets;
@@ -20,8 +21,13 @@ namespace GraphQL.Samples.Schemas.Link
             Field(o => o.to_id);
             Field(o => o.type, type: typeof(LinkType)).Resolve(ResolveType);
             Field(o => o.type_id);
+            Field<ListGraphType<LinkType>>().Name("in").Resolve(ResolveList);
         }
 
+        private List<LinkType> ResolveList(IResolveFieldContext<Link> context)
+        {
+            return new List<LinkType> { };
+        }
         private Link ResolveFrom(IResolveFieldContext<Link> context)
         {
             return context.Source.from ?? GetLinkOrDefault(context.RequestServices.GetService(typeof(ILinks<ulong>)), context.Source.from_id);
