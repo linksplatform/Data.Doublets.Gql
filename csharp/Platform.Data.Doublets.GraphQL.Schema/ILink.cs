@@ -53,7 +53,7 @@ namespace GraphQL.Samples.Schemas.Link
             if (Links.Exists((ulong)link.from_id))
             {
                 var create = Links.GetOrCreate((ulong)link.from_id, (ulong)link.to_id);
-                return LinkType.GetLinkOrDefault((IServiceProvider)service, (long)create);
+                return LinkType.GetLinkOrDefault(service, (long)create);
             }
             else
             {
