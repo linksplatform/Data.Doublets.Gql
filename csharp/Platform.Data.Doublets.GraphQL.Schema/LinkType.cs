@@ -24,21 +24,20 @@ namespace GraphQL.Samples.Schemas.Link
 
         private Link ResolveFrom(IResolveFieldContext<Link> context)
         {
-            return context.Source.from ?? GetLinkOrDefault(context,context.Source.from_id);
+            return context.Source.from ?? GetLinkOrDefault((IServiceProvider)context.RequestServices.GetService(typeof(ILinks<ulong>)), context.Source.from_id);
         }
 
         private Link ResolveTo(IResolveFieldContext<Link> context)
         {
-            return context.Source.to ?? GetLinkOrDefault(context, context.Source.to_id);
+            return context.Source.to ?? GetLinkOrDefault((IServiceProvider)context.RequestServices.GetService(typeof(ILinks<ulong>)), context.Source.to_id);
         }
 
         private Link ResolveType(IResolveFieldContext<Link> context)
         {
-            return context.Source.type ?? GetLinkOrDefault(context, context.Source.type_id);
+            return context.Source.type ?? GetLinkOrDefault((IServiceProvider)context.RequestServices.GetService(typeof(ILinks<ulong>)) , context.Source.type_id);
         }
-        private static Link GetLinkOrDefault(IResolveFieldContext<Link> context, long linkid)
+        public static Link GetLinkOrDefault(IServiceProvider service, long linkid)
         {
-            var service = context.RequestServices.GetService(typeof(ILinks<ulong>));
             ILinks<ulong> Links = (ILinks<ulong>)service;
             if (Links.Exists((ulong)linkid))
             {

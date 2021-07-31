@@ -49,22 +49,16 @@ namespace GraphQL.Samples.Schemas.Link
 
         public Link insert_link(object service, Link link)
         {
-            //var service = context.RequestServices.GetService(typeof(ILinks<ulong>));
             ILinks<ulong> Links = (ILinks<ulong>)service;
             if (Links.Exists((ulong)link.from_id))
             {
-                //var fromLink = Links.GetLink((ulong)link.from_id);
-                return new Link()
-                {
-                    id = link.id,
-                    from_id = link.from_id,
-                    to_id = link.to_id
-                };
+                var create = Links.GetOrCreate((ulong)link.from_id, (ulong)link.to_id);
+                return LinkType.GetLinkOrDefault((IServiceProvider)service, (long)create);
             }
             else
             {
                 return null;
-            }            //return (long)LinksSrorage.GetOrCreate(source: (ulong)link.from_id, target: (ulong)link.to_id);
+            }
         }
 
         public IObservable<Link> Link(string user)
