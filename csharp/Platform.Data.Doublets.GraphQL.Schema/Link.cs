@@ -22,5 +22,7 @@ namespace GraphQL.Samples.Schemas.Link
         public long type_id { get; set; }
 
         public ListGraphType<LinkType> In { get; set; }
+
+        public ListGraphType<LinkType> Out { get; set; }
     }
 }
