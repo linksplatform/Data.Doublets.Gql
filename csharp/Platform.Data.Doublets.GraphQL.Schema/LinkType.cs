@@ -7,6 +7,7 @@ using GraphQL.Types;
 using Platform.Data.Doublets;
 using Microsoft.Extensions.DependencyInjection;
 using Platform.Data;
+using Platform.Memory;
 
 namespace GraphQL.Samples.Schemas.Link
 {
@@ -23,6 +24,7 @@ namespace GraphQL.Samples.Schemas.Link
             Field(o => o.type_id);
             Field<ListGraphType<LinkType>>().Name("in").Resolve(ResolveIn);
             Field<ListGraphType<LinkType>>().Name("out").Resolve(ResolveOut);
+            Field(o => o.limit);
         }
 
         private List<Link> ResolveIn(IResolveFieldContext<Link> context)

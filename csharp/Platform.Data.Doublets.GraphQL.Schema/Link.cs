@@ -24,5 +24,7 @@ namespace GraphQL.Samples.Schemas.Link
         public ListGraphType<LinkType> In { get; set; }
 
         public ListGraphType<LinkType> Out { get; set; }
+
+        public LongGraphType limit { get; set; }
     }
 }
