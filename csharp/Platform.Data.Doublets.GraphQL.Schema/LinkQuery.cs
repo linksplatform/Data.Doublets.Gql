@@ -20,17 +20,11 @@ namespace GraphQL.Samples.Schemas.Link
                 ),
                 resolve: context =>
                 {
-                    if (context.HasArgument("limit"))
-                    {
-                        long receivedLink = context.GetArgument<long>("limit");
-                        return Link.AllLinks.Take((int) receivedLink);
-                    }
-
+                    var Links = (ILinks<ulong>)context.RequestServices.GetService(typeof(ILinks<ulong>));
+                    var allLinks = new ConcurrentStack<Link>();
                     if (context.HasArgument("where"))
                     {
-                        var allLinks = new ConcurrentStack<Link>();
                         LinkBooleanExpression arg = context.GetArgument<LinkBooleanExpression>("where");
-                        var Links = (ILinks<ulong>)context.RequestServices.GetService(typeof(ILinks<ulong>));
                         Link<UInt64> query;
                         if (arg?.from_id?._eq != null && arg?.to_id?._eq != null)
                         {
@@ -64,18 +58,23 @@ namespace GraphQL.Samples.Schemas.Link
                                 return Links.Constants.Continue;
                             }, query);
                         }
-
-                        if (context.HasArgument("limit"))
-                        {
-                            return allLinks.Take((int)context.GetArgument<long>("limit"));
-
-                        }
-                        else
-                        {
-                            return allLinks.Take(1);
-                        }
                     }
-                    return Link.AllLinks.Take(0);
+                    if (context.HasArgument("limit"))
+                    {
+                        if (!context.HasArgument("where"))
+                        {
+                            var query = new Link<UInt64>(index: Links.Constants.Any, source: Links.Constants.Any, target: Links.Constants.Any);
+                            Links.Each(link =>
+                            {
+                                allLinks.Push(new Link(link));
+                                return Links.Constants.Continue;
+                            }, query);
+                        }
+                        long receivedLink = context.GetArgument<long>("limit");
+                        return allLinks.Take((int)receivedLink);
+                    }
+
+                    return allLinks;
                 });
         }
     }
