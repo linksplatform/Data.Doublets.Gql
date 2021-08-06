@@ -2,9 +2,9 @@
 
 namespace GraphQL.Samples.Schemas.Link
 {
-    class LocomparisonExpressionInputType : InputObjectGraphType
+    class LongComparisonExpressionInputType : InputObjectGraphType
     {
-        public LocomparisonExpressionInputType()
+        public LongComparisonExpressionInputType()
         {
             Field<LongGraphType>("_eq");
             Field<LongGraphType>("_gt");

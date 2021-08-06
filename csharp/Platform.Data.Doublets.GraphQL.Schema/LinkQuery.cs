@@ -11,28 +11,17 @@ namespace GraphQL.Samples.Schemas.Link
         {
             Field<ListGraphType<LinkType>>("links",
                 arguments: new QueryArguments(
-                    new QueryArgument<BooleanGraphType>{ Name = "limit" }
+                    new QueryArgument<LongGraphType> {Name = "limit"},
+                    new QueryArgument<BooleanGraphType> {Name = "where"}
                 ),
                 resolve: context =>
                 {
                     if (context.HasArgument("limit"))
                     {
                         long receivedLink = context.GetArgument<long>("limit");
-                        return Link.AllLinks.Take((int)receivedLink);
+                        return Link.AllLinks.Take((int) receivedLink);
                     }
-                    return Link.AllLinks.Take(0);
-                });
-            Field<ListGraphType<LinkType>>("links",
-                arguments: new QueryArguments(
-                    new QueryArgument<BooleanGraphType> { Name = "where" }
-                ),
-                resolve: context =>
-                {
-                    if (context.HasArgument("where"))
-                    {
-                        long receivedLink = context.GetArgument<long>("where");
-                        return Link.AllLinks.Take((int)receivedLink);
-                    }
+
                     return Link.AllLinks.Take(0);
                 });
         }
