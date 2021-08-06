@@ -15,9 +15,9 @@ namespace GraphQL.Samples.Schemas.Link
                 ),
                 resolve: context =>
                 {
-                    long receivedLink = context.GetArgument<long>("limit");
                     if (context.HasArgument("limit"))
                     {
+                        long receivedLink = context.GetArgument<long>("limit");
                         return Link.AllLinks.Take((int)receivedLink);
                     }
                     return Link.AllLinks.Take(0);

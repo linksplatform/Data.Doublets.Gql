@@ -24,7 +24,6 @@ namespace GraphQL.Samples.Schemas.Link
             Field(o => o.type_id);
             Field<ListGraphType<LinkType>>().Name("in").Resolve(ResolveIn);
             Field<ListGraphType<LinkType>>().Name("out").Resolve(ResolveOut);
-            Field(o => o.limit);
         }
 
         private List<Link> ResolveIn(IResolveFieldContext<Link> context)
