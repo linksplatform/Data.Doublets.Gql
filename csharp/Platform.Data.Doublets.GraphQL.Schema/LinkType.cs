@@ -67,12 +67,15 @@ namespace GraphQL.Samples.Schemas.Link
                 context.Source.type_id);
         }
 
-        public static Link GetLinkOrDefault(object service, long linkid)
+        public static Link GetLinkOrDefault(object service, long linkId)
         {
-            ILinks<ulong> Links = (ILinks<ulong>)service;
-            if (Links.Exists((ulong)linkid))
+           return GetLinkOrDefault((ILinks<ulong>)service, (linkId));
+        }
+        public static Link GetLinkOrDefault(ILinks<ulong> links, ulong link)
+        {
+            if (links.Exists((ulong)link))
             {
-                var fromLink = Links.GetLink((ulong)linkid);
+                var fromLink = links.GetLink((ulong)link);
                 return new Link(fromLink);
             }
             else

@@ -20,13 +20,12 @@ namespace GraphQL.Samples.Schemas.Link
         public Link type {get;set;}
 
         public long type_id { get; set; }
-                
         public Link(IList<UInt64> links)
         {
-             var i = 0;
-             id = (long)links[i++];
-             from_id = (long)links[i++];
-             to_id = (long)links[i++];
+            var i = 0;
+            id = (long)links[i++];
+            from_id = (long)links[i++];
+            to_id = (long)links[i++];
         }
     }
 }
