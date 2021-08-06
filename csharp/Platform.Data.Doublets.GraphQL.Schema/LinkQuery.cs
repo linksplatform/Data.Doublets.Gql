@@ -22,27 +22,22 @@ namespace GraphQL.Samples.Schemas.Link
                 {
                     var Links = (ILinks<ulong>)context.RequestServices.GetService(typeof(ILinks<ulong>));
                     var allLinks = new List<Link>();
+                    Link<UInt64> query;
                     if (context.HasArgument("where"))
                     {
                         LinkBooleanExpression arg = context.GetArgument<LinkBooleanExpression>("where");
-                        Link<UInt64> query;
                         query = new Link<UInt64>(index: Links.Constants.Any, source: arg?.from_id?._eq != null ?
                         (ulong) arg.from_id._eq : Links.Constants.Any, target: arg?.to_id?._eq != null ? (ulong) arg.to_id._eq : Links.Constants.Any);
-                        Links.Each(link =>
-                        {
-                            allLinks.Add(new Link(link));
-                            return Links.Constants.Continue;
-                        }, query);
                     }
                     else
-                    {
-                        var query = new Link<UInt64>(index: Links.Constants.Any, source: Links.Constants.Any, target: Links.Constants.Any);
-                        Links.Each(link =>
-                        {
-                            allLinks.Add(new Link(link));
-                            return Links.Constants.Continue;
-                        }, query);
+                    { 
+                        query = new Link<UInt64>(index: Links.Constants.Any, source: Links.Constants.Any, target: Links.Constants.Any);
                     }
+                    Links.Each(link =>
+                    {
+                        allLinks.Add(new Link(link));
+                        return Links.Constants.Continue;
+                    }, query);
                     if (context.HasArgument("limit"))
                     {
                         long receivedLink = context.GetArgument<long>("limit");
