@@ -7,8 +7,8 @@ namespace GraphQL.Samples.Schemas.Link
         public LinkBooleanExpressionInputType()
         {
             Field<ListGraphType<LinkBooleanExpressionInputType>>("_and");
-            Field<ListGraphType<LinkBooleanExpressionInputType>>("_not");
-            Field<LinkBooleanExpressionInputType>("_or");
+            Field<ListGraphType<LinkBooleanExpressionInputType>>("_or");
+            Field<LinkBooleanExpressionInputType>("_not");
             Field<LinkBooleanExpressionInputType>("from");
             Field<LongComparisonExpressionInputType>("from_id");
             Field<LongComparisonExpressionInputType>("id");
