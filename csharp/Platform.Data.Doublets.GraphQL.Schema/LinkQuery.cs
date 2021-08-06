@@ -32,46 +32,39 @@ namespace GraphQL.Samples.Schemas.Link
                         LinkBooleanExpression arg = context.GetArgument<LinkBooleanExpression>("where");
                         var Links = (ILinks<ulong>)context.RequestServices.GetService(typeof(ILinks<ulong>));
                         Link<UInt64> query;
-                        if (arg.from_id != null && arg.to_id != null)
+                        if (arg?.from_id?._eq != null && arg?.to_id?._eq != null)
                         {
-                            if (arg.from_id._eq != 0 && arg.to_id._eq != 0)
+                            query = new Link<UInt64>(index: Links.Constants.Any, source: (ulong) arg.from_id._eq,
+                                target: (ulong) arg.to_id._eq);
+                            Links.Each(link =>
                             {
-                                query = new Link<UInt64>(index: Links.Constants.Any, source: (ulong) arg.from_id._eq,
-                                    target: (ulong) arg.to_id._eq);
-                                Links.Each(link =>
-                                {
-                                    allLinks.Push(new Link(link));
-                                    return Links.Constants.Continue;
-                                }, query);
-                            }
-                        }
-                        if (arg.to_id != null)
-                        {
-                            if (arg.to_id._eq != 0)
-                            {
-                                query = new Link<UInt64>(index: Links.Constants.Any, source: Links.Constants.Any,
-                                    target: (ulong) arg.to_id._eq);
-                                Links.Each(link =>
-                                {
-                                    allLinks.Push(new Link(link));
-                                    return Links.Constants.Continue;
-                                }, query);
-                            }
+                                allLinks.Push(new Link(link));
+                                return Links.Constants.Continue;
+                            }, query);
                         }
 
-                        if (arg.from_id != null)
+                        if (arg?.to_id?._eq != null)
                         {
-                            if (arg.from_id._eq != 0)
+                            query = new Link<UInt64>(index: Links.Constants.Any, source: Links.Constants.Any,
+                                target: (ulong) arg.to_id._eq);
+                            Links.Each(link =>
                             {
-                                query = new Link<UInt64>(index: Links.Constants.Any, source: (ulong) arg.from_id._eq,
-                                    target: Links.Constants.Any);
-                                Links.Each(link =>
-                                {
-                                    allLinks.Push(new Link(link));
-                                    return Links.Constants.Continue;
-                                }, query);
-                            }
+                                allLinks.Push(new Link(link));
+                                return Links.Constants.Continue;
+                            }, query);
                         }
+
+                        if (arg?.from_id?._eq != null)
+                        {
+                            query = new Link<UInt64>(index: Links.Constants.Any, source: (ulong) arg.from_id._eq,
+                                target: Links.Constants.Any);
+                            Links.Each(link =>
+                            {
+                                allLinks.Push(new Link(link));
+                                return Links.Constants.Continue;
+                            }, query);
+                        }
+
                         if (context.HasArgument("limit"))
                         {
                             return allLinks.Take((int)context.GetArgument<long>("limit"));
