@@ -20,28 +20,25 @@ namespace GraphQL.Samples.Schemas.Link
                 ),
                 resolve: context =>
                 {
-                    var Links = (ILinks<ulong>)context.RequestServices.GetService(typeof(ILinks<ulong>));
+                    var links = (ILinks<ulong>)context.RequestServices.GetService(typeof(ILinks<ulong>));
                     var allLinks = new List<Link>();
-                    Link<UInt64> query;
+                    var any = links.Constants.Any;
+                    Link<UInt64> query = new(index: any, source: any, target: any);
                     if (context.HasArgument("where"))
                     {
-                        LinkBooleanExpression arg = context.GetArgument<LinkBooleanExpression>("where");
-                        query = new Link<UInt64>(index: Links.Constants.Any, source: arg?.from_id?._eq != null ?
-                        (ulong) arg.from_id._eq : Links.Constants.Any, target: arg?.to_id?._eq != null ? (ulong) arg.to_id._eq : Links.Constants.Any);
+                        var where = context.GetArgument<LinkBooleanExpression>("where");
+                        query = new Link<UInt64>(index: any, source: where?.from_id?._eq != null ?
+                        (ulong)where.from_id._eq : any, target: where?.to_id?._eq != null ? (ulong)where.to_id._eq : any);
                     }
-                    else
-                    { 
-                        query = new Link<UInt64>(index: Links.Constants.Any, source: Links.Constants.Any, target: Links.Constants.Any);
-                    }
-                    Links.Each(link =>
+                    links.Each(link =>
                     {
                         allLinks.Add(new Link(link));
-                        return Links.Constants.Continue;
+                        return links.Constants.Continue;
                     }, query);
                     if (context.HasArgument("limit"))
                     {
-                        long receivedLink = context.GetArgument<long>("limit");
-                        return allLinks.Take((int)receivedLink);
+                        long limit = context.GetArgument<long>("limit");
+                        return allLinks.Take((int)limit);
                     }
 
                     return allLinks;
