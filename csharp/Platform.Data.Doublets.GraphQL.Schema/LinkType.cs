@@ -65,14 +65,10 @@ namespace GraphQL.Samples.Schemas.Link
         {
             return context.Source.type ?? GetLinkOrDefault(context,context.Source.type_id);
         }
-        public static Link GetLinkOrDefault(IResolveFieldContext<Link> context, long linkId)
-        {
-            return GetLinkOrDefault(context, (linkId));
-        }
-        public static Link GetLinkOrDefault(object service, long linkId)
-        {
-           return GetLinkOrDefault((ILinks<ulong>)service, (linkId));
-        }
+        public static Link GetLinkOrDefault(IResolveFieldContext<Link> context, long linkId) => GetLinkOrDefault(context.RequestServices.GetService(typeof(ILinks<ulong>))
+            , (linkId));
+      
+        public static Link GetLinkOrDefault(object service, long linkId) => GetLinkOrDefault((ILinks<ulong>)service, (linkId));
         public static Link GetLinkOrDefault(ILinks<ulong> links, ulong link)
         {
             if (links.Exists((ulong)link))
