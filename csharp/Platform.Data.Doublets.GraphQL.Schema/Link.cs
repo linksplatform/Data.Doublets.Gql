@@ -7,6 +7,12 @@ namespace GraphQL.Samples.Schemas.Link
 {
     public class Link
     {
+        public Link(IList<UInt64> links)
+        {
+             id = (long)links[0];
+             from_id = (long)links[1];
+             to_id = (long)links[2];
+        }
         public long id { get; set; }
 
         public Link from { get; set; }
@@ -20,9 +26,5 @@ namespace GraphQL.Samples.Schemas.Link
         public Link type {get;set;}
 
         public long type_id { get; set; }
-
-        public ListGraphType<LinkType> In { get; set; }
-
-        public ListGraphType<LinkType> Out { get; set; }
     }
 }

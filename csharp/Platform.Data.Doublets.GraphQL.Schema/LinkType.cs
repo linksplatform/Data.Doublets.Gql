@@ -33,12 +33,7 @@ namespace GraphQL.Samples.Schemas.Link
             var query = new Link<UInt64>(index: Links.Constants.Any, source: Links.Constants.Any, target: (ulong)context.Source.id);
             Links.Each(link =>
             {
-                inList.Add(new Link()
-                {
-                    id = (long)Links.GetIndex(link),
-                    from_id = (long)Links.GetSource(link),
-                    type_id = (long)Links.GetTarget(link)
-                });
+                inList.Add(new Link(link));
                 return Links.Constants.Continue;
             }, query);
             return inList;
@@ -50,12 +45,7 @@ namespace GraphQL.Samples.Schemas.Link
             var query = new Link<UInt64>(index: Links.Constants.Any, source: (ulong)context.Source.id ,target: Links.Constants.Any);
             Links.Each(link =>
             {
-                outList.Add(new Link()
-                {
-                    id = (long)Links.GetIndex(link),
-                    from_id = (long)Links.GetSource(link),
-                    type_id = (long)Links.GetTarget(link)
-                });
+                outList.Add(new Link(link));
                 return Links.Constants.Continue;
             }, query);
             return outList;
@@ -73,20 +63,17 @@ namespace GraphQL.Samples.Schemas.Link
 
         private Link ResolveType(IResolveFieldContext<Link> context)
         {
-            return context.Source.type ?? GetLinkOrDefault(context.RequestServices.GetService(typeof(ILinks<ulong>)) , context.Source.type_id);
+            return context.Source.type ?? GetLinkOrDefault(context.RequestServices.GetService(typeof(ILinks<ulong>)),
+                context.Source.type_id);
         }
+
         public static Link GetLinkOrDefault(object service, long linkid)
         {
             ILinks<ulong> Links = (ILinks<ulong>)service;
             if (Links.Exists((ulong)linkid))
             {
                 var fromLink = Links.GetLink((ulong)linkid);
-                return new Link()
-                {
-                    id = (long)Links.GetIndex(fromLink),
-                    from_id = (long)Links.GetSource(fromLink),
-                    to_id = (long)Links.GetTarget(fromLink)
-                };
+                return new Link(fromLink);
             }
             else
             {

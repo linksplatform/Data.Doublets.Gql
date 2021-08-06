@@ -31,16 +31,12 @@ namespace GraphQL.Samples.Schemas.Link
             this.LinksSrorage = links;
             List<Link> alllinks = new() { };
             var query = new Link<UInt64>(index: links.Constants.Any, source: links.Constants.Any, target: links.Constants.Any);
+            AllLinks = new ConcurrentStack<Link>();
             links.Each(link =>
             {
-                alllinks.Add(new Link() { id = (long)links.GetIndex(link), from_id = (long)links.GetSource(link), to_id = (long)links.GetTarget(link) });
+                AllLinks.Push(new Link(link));
                 return links.Constants.Continue;
             }, query);
-            AllLinks = new ConcurrentStack<Link>();
-            foreach (var link in alllinks)
-            {
-                AllLinks.Push(new Link(){id = link.id, from_id = link.from_id, to_id = link.to_id});
-            }
         }
 
         public ConcurrentDictionary<string, string> Users { get; set; }
