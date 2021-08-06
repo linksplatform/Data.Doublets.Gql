@@ -26,38 +26,13 @@ namespace GraphQL.Samples.Schemas.Link
                     {
                         LinkBooleanExpression arg = context.GetArgument<LinkBooleanExpression>("where");
                         Link<UInt64> query;
-                        if (arg?.from_id?._eq != null && arg?.to_id?._eq != null)
+                        query = new Link<UInt64>(index: Links.Constants.Any, source: arg?.from_id?._eq != null ?
+                        (ulong) arg.from_id._eq : Links.Constants.Any, target: arg?.to_id?._eq != null ? (ulong) arg.to_id._eq : Links.Constants.Any);
+                        Links.Each(link =>
                         {
-                            query = new Link<UInt64>(index: Links.Constants.Any, source: (ulong) arg.from_id._eq,
-                                target: (ulong) arg.to_id._eq);
-                            Links.Each(link =>
-                            {
-                                allLinks.Add(new Link(link));
-                                return Links.Constants.Continue;
-                            }, query);
-                        }
-
-                        if (arg?.to_id?._eq != null)
-                        {
-                            query = new Link<UInt64>(index: Links.Constants.Any, source: Links.Constants.Any,
-                                target: (ulong) arg.to_id._eq);
-                            Links.Each(link =>
-                            {
-                                allLinks.Add(new Link(link));
-                                return Links.Constants.Continue;
-                            }, query);
-                        }
-
-                        if (arg?.from_id?._eq != null)
-                        {
-                            query = new Link<UInt64>(index: Links.Constants.Any, source: (ulong) arg.from_id._eq,
-                                target: Links.Constants.Any);
-                            Links.Each(link =>
-                            {
-                                allLinks.Add(new Link(link));
-                                return Links.Constants.Continue;
-                            }, query);
-                        }
+                            allLinks.Add(new Link(link));
+                            return Links.Constants.Continue;
+                        }, query);
                     }
                     else
                     {
