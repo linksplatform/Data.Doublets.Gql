@@ -1,37 +1,31 @@
-﻿using GraphQL.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GraphQL.Samples.Schemas.Link;
+﻿using System.Collections.Generic;
 
 namespace GraphQL.Samples.Schemas.Link
 {
     public class LinkBooleanExpression
     {
-        public List<LinkBooleanExpression> _and;
+        public List<LinkBooleanExpression> _and{ get; set; }
 
-        public List<LinkBooleanExpression> _or;
+        public List<LinkBooleanExpression> _or{ get; set; }
 
-        public LinkBooleanExpression _not;
+        public LinkBooleanExpression _not{ get; set; }
 
-        public LinkBooleanExpression from;
+        public LinkBooleanExpression from{ get; set; }
 
-        public LongComparisonExpression from_id;
+        public LongComparisonExpression from_id{ get; set; }
 
-        public LongComparisonExpression id;
+        public LongComparisonExpression id{ get; set; }
 
-        public LinkBooleanExpression In;
+        public LinkBooleanExpression @in { get; set; }
 
-        public LinkBooleanExpression Out;
+        public LinkBooleanExpression @out { get; set; }
 
-        public LinkBooleanExpression to;
+        public LinkBooleanExpression to{ get; set; }
 
-        public LongComparisonExpression to_id;
+        public LongComparisonExpression to_id{ get; set; }
 
-        public LinkBooleanExpression type;
+        public LinkBooleanExpression type{ get; set; }
 
-        public LongComparisonExpression type_id;
+        public LongComparisonExpression type_id{ get; set; }
     }
 }
