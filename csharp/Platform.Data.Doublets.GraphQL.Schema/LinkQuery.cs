@@ -59,17 +59,17 @@ namespace GraphQL.Samples.Schemas.Link
                             }, query);
                         }
                     }
+                    else
+                    {
+                        var query = new Link<UInt64>(index: Links.Constants.Any, source: Links.Constants.Any, target: Links.Constants.Any);
+                        Links.Each(link =>
+                        {
+                            allLinks.Push(new Link(link));
+                            return Links.Constants.Continue;
+                        }, query);
+                    }
                     if (context.HasArgument("limit"))
                     {
-                        if (!context.HasArgument("where"))
-                        {
-                            var query = new Link<UInt64>(index: Links.Constants.Any, source: Links.Constants.Any, target: Links.Constants.Any);
-                            Links.Each(link =>
-                            {
-                                allLinks.Push(new Link(link));
-                                return Links.Constants.Continue;
-                            }, query);
-                        }
                         long receivedLink = context.GetArgument<long>("limit");
                         return allLinks.Take((int)receivedLink);
                     }
