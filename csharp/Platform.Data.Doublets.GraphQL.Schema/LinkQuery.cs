@@ -72,8 +72,15 @@ namespace GraphQL.Samples.Schemas.Link
                                 }, query);
                             }
                         }
+                        if (context.HasArgument("limit"))
+                        {
+                            return AllLinks.Take((int)context.GetArgument<long>("limit"));
 
-                        return AllLinks.Take((int) context.GetArgument<long>("limit"));
+                        }
+                        else
+                        {
+                            return AllLinks.Take(1);
+                        }
                     }
                     return Link.AllLinks.Take(0);
                 });
