@@ -28,7 +28,7 @@ namespace GraphQL.Samples.Schemas.Link
 
                     if (context.HasArgument("where"))
                     {
-                        var AllLinks = new ConcurrentStack<Link>();
+                        var allLinks = new ConcurrentStack<Link>();
                         LinkBooleanExpression arg = context.GetArgument<LinkBooleanExpression>("where");
                         var Links = (ILinks<ulong>)context.RequestServices.GetService(typeof(ILinks<ulong>));
                         Link<UInt64> query;
@@ -40,7 +40,7 @@ namespace GraphQL.Samples.Schemas.Link
                                     target: (ulong) arg.to_id._eq);
                                 Links.Each(link =>
                                 {
-                                    AllLinks.Push(new Link(link));
+                                    allLinks.Push(new Link(link));
                                     return Links.Constants.Continue;
                                 }, query);
                             }
@@ -53,7 +53,7 @@ namespace GraphQL.Samples.Schemas.Link
                                     target: (ulong) arg.to_id._eq);
                                 Links.Each(link =>
                                 {
-                                    AllLinks.Push(new Link(link));
+                                    allLinks.Push(new Link(link));
                                     return Links.Constants.Continue;
                                 }, query);
                             }
@@ -67,19 +67,19 @@ namespace GraphQL.Samples.Schemas.Link
                                     target: Links.Constants.Any);
                                 Links.Each(link =>
                                 {
-                                    AllLinks.Push(new Link(link));
+                                    allLinks.Push(new Link(link));
                                     return Links.Constants.Continue;
                                 }, query);
                             }
                         }
                         if (context.HasArgument("limit"))
                         {
-                            return AllLinks.Take((int)context.GetArgument<long>("limit"));
+                            return allLinks.Take((int)context.GetArgument<long>("limit"));
 
                         }
                         else
                         {
-                            return AllLinks.Take(1);
+                            return allLinks.Take(1);
                         }
                     }
                     return Link.AllLinks.Take(0);
