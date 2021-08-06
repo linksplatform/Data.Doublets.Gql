@@ -21,7 +21,7 @@ namespace GraphQL.Samples.Schemas.Link
                 resolve: context =>
                 {
                     var Links = (ILinks<ulong>)context.RequestServices.GetService(typeof(ILinks<ulong>));
-                    var allLinks = new ConcurrentStack<Link>();
+                    var allLinks = new List<Link>();
                     if (context.HasArgument("where"))
                     {
                         LinkBooleanExpression arg = context.GetArgument<LinkBooleanExpression>("where");
@@ -32,7 +32,7 @@ namespace GraphQL.Samples.Schemas.Link
                                 target: (ulong) arg.to_id._eq);
                             Links.Each(link =>
                             {
-                                allLinks.Push(new Link(link));
+                                allLinks.Add(new Link(link));
                                 return Links.Constants.Continue;
                             }, query);
                         }
@@ -43,7 +43,7 @@ namespace GraphQL.Samples.Schemas.Link
                                 target: (ulong) arg.to_id._eq);
                             Links.Each(link =>
                             {
-                                allLinks.Push(new Link(link));
+                                allLinks.Add(new Link(link));
                                 return Links.Constants.Continue;
                             }, query);
                         }
@@ -54,7 +54,7 @@ namespace GraphQL.Samples.Schemas.Link
                                 target: Links.Constants.Any);
                             Links.Each(link =>
                             {
-                                allLinks.Push(new Link(link));
+                                allLinks.Add(new Link(link));
                                 return Links.Constants.Continue;
                             }, query);
                         }
@@ -64,7 +64,7 @@ namespace GraphQL.Samples.Schemas.Link
                         var query = new Link<UInt64>(index: Links.Constants.Any, source: Links.Constants.Any, target: Links.Constants.Any);
                         Links.Each(link =>
                         {
-                            allLinks.Push(new Link(link));
+                            allLinks.Add(new Link(link));
                             return Links.Constants.Continue;
                         }, query);
                     }
