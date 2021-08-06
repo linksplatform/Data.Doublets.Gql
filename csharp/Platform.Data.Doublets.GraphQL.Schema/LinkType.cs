@@ -69,7 +69,7 @@ namespace GraphQL.Samples.Schemas.Link
 
         public static Link GetLinkOrDefault(object service, long linkId)
         {
-           return GetLinkOrDefault((ILinks<ulong>)service, (linkId));
+           return GetLinkOrDefault((ILinks<ulong>)service, (ulong)linkId);
         }
         public static Link GetLinkOrDefault(ILinks<ulong> links, ulong link)
         {
