@@ -34,7 +34,7 @@ namespace GraphQL.Samples.Schemas.Link
                         Link<UInt64> query;
                         if (arg.from_id != null && arg.to_id != null)
                         {
-                            if (arg.from_id._eq != 0)
+                            if (arg.from_id._eq != 0 && arg.to_id._eq != 0)
                             {
                                 query = new Link<UInt64>(index: Links.Constants.Any, source: (ulong) arg.from_id._eq,
                                     target: (ulong) arg.to_id._eq);
