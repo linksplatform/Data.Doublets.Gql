@@ -20,15 +20,4 @@ namespace GraphQL.Samples.Schemas.Link
             Field<LongComparisonExpressionInputType>("type_id");
         }
     }
-}/*        private ListGraphType<LinkBooleanExpressionInputType> _and;
-        private ListGraphType<LinkBooleanExpressionInputType> _or;
-        private LinkBooleanExpressionInputType _not;
-        private LinkBooleanExpressionInputType from;
-        private LongComparisonExpressionInputType from_id;
-        private LongComparisonExpressionInputType id;
-        private LinkBooleanExpressionInputType In;
-        private LinkBooleanExpressionInputType Out;
-        private LinkBooleanExpressionInputType to;
-        private LongComparisonExpressionInputType to_id;
-        private LinkBooleanExpressionInputType type;
-        private LongComparisonExpressionInputType type_id;*/
+}
