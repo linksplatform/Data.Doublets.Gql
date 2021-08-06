@@ -51,20 +51,12 @@ namespace GraphQL.Samples.Schemas.Link
             return outList;
         }
 
-        private Link ResolveFrom(IResolveFieldContext<Link> context)
-        {
-            return context.Source.from ?? GetLinkOrDefault(context, context.Source.from_id);
-        }
+        private Link ResolveFrom(IResolveFieldContext<Link> context) => context.Source.@from ?? GetLinkOrDefault(context, context.Source.from_id);
 
-        private Link ResolveTo(IResolveFieldContext<Link> context)
-        {
-            return context.Source.to ?? GetLinkOrDefault(context, context.Source.to_id);
-        }
+        private Link ResolveTo(IResolveFieldContext<Link> context) => context.Source.to ?? GetLinkOrDefault(context, context.Source.to_id);
 
-        private Link ResolveType(IResolveFieldContext<Link> context)
-        {
-            return context.Source.type ?? GetLinkOrDefault(context,context.Source.type_id);
-        }
+        private Link ResolveType(IResolveFieldContext<Link> context) => context.Source.type ?? GetLinkOrDefault(context,context.Source.type_id);
+
         public static Link GetLinkOrDefault(IResolveFieldContext<Link> context, long linkId) => GetLinkOrDefault(context.RequestServices.GetService(typeof(ILinks<ulong>))
             , (linkId));
       
