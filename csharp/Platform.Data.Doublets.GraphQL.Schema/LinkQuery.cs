@@ -37,6 +37,18 @@ namespace GraphQL.Samples.Schemas.Link
                         allLinks.Add(new Link(link));
                         return links.Constants.Continue;
                     }, query);
+                    if (context.HasArgument("order_by"))
+                    {
+                        var orderBy = context.GetArgument<OrderBy>("order_by");
+                        if (orderBy.from_id == order_by.asc)
+                        {
+                            allLinks = allLinks.OrderBy(l => links.GetSource(new List<ulong>(){(ulong)l.id, (ulong)l.to_id, (ulong)l.from_id})).ToList();
+                        }
+                        else if(orderBy.from_id == order_by.desc)
+                        {
+                            allLinks = allLinks.OrderByDescending(l => links.GetSource(new List<ulong>() { (ulong)l.id, (ulong)l.to_id, (ulong)l.from_id })).ToList();
+                        }
+                    }
                     if (context.HasArgument("limit"))
                     {
                         long limit = context.GetArgument<long>("limit");
