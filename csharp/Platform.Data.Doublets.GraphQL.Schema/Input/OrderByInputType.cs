@@ -3,18 +3,19 @@ using GraphQL.Types;
 
 namespace Input
 {
-    class OrderByInputType : InputObjectGraphType
+    class OrderByInputType : InputObjectGraphType<OrderByEnum>
     {
+
         public OrderByInputType()
         {
             //Field<OrderByEnum>("order_by");
             Field<OrderByInputType>("from");
-            Field<OrderByEnum>("from_id");
-            Field<OrderByEnum>("id");
+            Field<OrderByEnum>(x => x.from_id,nullable: true,type: typeof(OrderByEnum));
+            Field<OrderByEnum>(x => x.id, nullable: true, type: typeof(OrderByEnum));
             Field<OrderByInputType>("to");
-            Field<OrderByEnum>("to_id");
+            Field<OrderByEnum>(x => x.to_id, nullable: true, type: typeof(OrderByEnum));
             Field<OrderByInputType>("type");
-            Field<OrderByEnum>("type_id");
+            Field<OrderByEnum>(x => x.type_id, nullable: true, type: typeof(OrderByEnum));
         }
     }
 }

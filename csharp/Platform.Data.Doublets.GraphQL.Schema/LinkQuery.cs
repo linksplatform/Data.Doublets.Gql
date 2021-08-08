@@ -40,15 +40,47 @@ namespace GraphQL.Samples.Schemas.Link
                     if (context.HasArgument("order_by"))
                     {
                         var orderBy = context.GetArgument<OrderBy>("order_by");
-                        if (orderBy.from_id == order_by.asc)
+                        if (orderBy.from_id != null)
                         {
-                            allLinks = allLinks.OrderBy(l => links.GetSource(new List<ulong>(){(ulong)l.id, (ulong)l.to_id, (ulong)l.from_id})).ToList();
+                            if (orderBy.from_id == order_by.asc)
+                            {
+                                allLinks = allLinks.OrderBy(l => l.from_id).ToList();
+                            }
+                            else if (orderBy.from_id == order_by.desc)
+                            {
+                                allLinks = allLinks.OrderByDescending(l => l.from_id).ToList();
+                            }
                         }
-                        else if(orderBy.from_id == order_by.desc)
-                        {
-                            allLinks = allLinks.OrderByDescending(l => links.GetSource(new List<ulong>() { (ulong)l.id, (ulong)l.to_id, (ulong)l.from_id })).ToList();
-                        }
+
+                        //if (orderBy.to_id != null)
+                        //{
+                        //    {
+                        //        if (orderBy.to_id == order_by.asc)
+                        //        {
+                        //            allLinks = allLinks.OrderBy(l => l.to_id).ToList();
+                        //        }
+                        //        else if (orderBy.to_id == order_by.desc)
+                        //        {
+                        //            allLinks = allLinks.OrderByDescending(l => l.to_id).ToList();
+                        //        }
+                        //    }
+                        //}
+
+                        //if (orderBy.id != null)
+                        //{
+                        //    {
+                        //        if (orderBy.id == order_by.asc)
+                        //        {
+                        //            allLinks = allLinks.OrderBy(l => l.id).ToList();
+                        //        }
+                        //        else if (orderBy.id == order_by.desc)
+                        //        {
+                        //            allLinks = allLinks.OrderByDescending(l => l.id).ToList();
+                        //        }
+                        //    }
+                        //}
                     }
+
                     if (context.HasArgument("limit"))
                     {
                         long limit = context.GetArgument<long>("limit");
