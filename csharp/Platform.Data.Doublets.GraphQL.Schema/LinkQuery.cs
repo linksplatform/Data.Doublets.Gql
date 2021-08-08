@@ -52,33 +52,46 @@ namespace GraphQL.Samples.Schemas.Link
                             }
                         }
 
-                        //if (orderBy.to_id != null)
-                        //{
-                        //    {
-                        //        if (orderBy.to_id == order_by.asc)
-                        //        {
-                        //            allLinks = allLinks.OrderBy(l => l.to_id).ToList();
-                        //        }
-                        //        else if (orderBy.to_id == order_by.desc)
-                        //        {
-                        //            allLinks = allLinks.OrderByDescending(l => l.to_id).ToList();
-                        //        }
-                        //    }
-                        //}
+                        if (orderBy.to_id != null)
+                        {
+                            {
+                                if (orderBy.to_id == order_by.asc)
+                                {
+                                    allLinks = allLinks.OrderBy(l => l.to_id).ToList();
+                                }
+                                else if (orderBy.to_id == order_by.desc)
+                                {
+                                    allLinks = allLinks.OrderByDescending(l => l.to_id).ToList();
+                                }
+                            }
+                        }
 
-                        //if (orderBy.id != null)
-                        //{
-                        //    {
-                        //        if (orderBy.id == order_by.asc)
-                        //        {
-                        //            allLinks = allLinks.OrderBy(l => l.id).ToList();
-                        //        }
-                        //        else if (orderBy.id == order_by.desc)
-                        //        {
-                        //            allLinks = allLinks.OrderByDescending(l => l.id).ToList();
-                        //        }
-                        //    }
-                        //}
+                        if (orderBy.id != null)
+                        {
+                            {
+                                if (orderBy.id == order_by.asc)
+                                {
+                                    allLinks = allLinks.OrderBy(l => l.id).ToList();
+                                }
+                                else if (orderBy.id == order_by.desc)
+                                {
+                                    allLinks = allLinks.OrderByDescending(l => l.id).ToList();
+                                }
+                            }
+                        }
+                        if (orderBy.type_id != null)
+                        {
+                            {
+                                if (orderBy.type_id == order_by.asc)
+                                {
+                                    allLinks = allLinks.OrderBy(l => l.type_id).ToList();
+                                }
+                                else if (orderBy.type_id == order_by.desc)
+                                {
+                                    allLinks = allLinks.OrderByDescending(l => l.type_id).ToList();
+                                }
+                            }
+                        }
                     }
 
                     if (context.HasArgument("limit"))

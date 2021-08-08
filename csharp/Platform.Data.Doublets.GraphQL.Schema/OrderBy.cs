@@ -21,17 +21,17 @@ namespace GraphQL.Samples.Schemas.Link
 
         public OrderBy from { get; set; }
 
-        public order_by from_id { get; set; }
+        public order_by? from_id { get; set; }
 
-        public order_by id { get; set; }
+        public order_by? id { get; set; }
 
         public OrderBy to { get; set; }
 
-        public order_by to_id { get; set; }
+        public order_by? to_id { get; set; }
 
         public OrderBy type { get; set; }
 
-        public order_by type_id { get; set; }
+        public order_by? type_id { get; set; }
     }
     /*
      * input dc_dg_links_order_by {
