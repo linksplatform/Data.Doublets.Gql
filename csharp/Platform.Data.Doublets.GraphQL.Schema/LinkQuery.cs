@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GraphQL.Types;
 using GraphQL.Validation;
+using Microsoft.Extensions.DependencyInjection;
 using Platform.Data.Doublets;
 using static GraphQL.Samples.Schemas.Link.Link;
 
@@ -20,15 +21,14 @@ namespace GraphQL.Samples.Schemas.Link
                 ),
                 resolve: context =>
                 {
-                    var links = (ILinks<ulong>)context.RequestServices.GetService(typeof(ILinks<ulong>));
+                    var links = context.RequestServices.GetService<ILinks<ulong>>();
                     var allLinks = new List<Link>();
                     var any = links.Constants.Any;
                     Link<UInt64> query = new(index: any, source: any, target: any);
                     if (context.HasArgument("where"))
                     {
                         var where = context.GetArgument<LinkBooleanExpression>("where");
-                        query = new Link<UInt64>(index: any, source: where?.from_id?._eq != null ?
-                        (ulong)where.from_id._eq : any, target: where?.to_id?._eq != null ? (ulong)where.to_id._eq : any);
+                        query = new Link<UInt64>(index: any, source: (ulong?)where?.from_id?._eq ?? any, target: (ulong?)where?.to_id?._eq ?? any);
                     }
                     links.Each(link =>
                     {
