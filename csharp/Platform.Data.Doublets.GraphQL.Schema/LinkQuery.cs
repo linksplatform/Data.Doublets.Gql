@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Serialization;
 using GraphQL.Types;
 using GraphQL.Validation;
 using Microsoft.Extensions.DependencyInjection;
@@ -44,19 +45,21 @@ namespace GraphQL.Samples.Schemas.Link
                         Func<Link, long> fromIdKeySelector = l => l.from_id;
                         Func<Link, long> toIdSelector = l => l.to_id;
                         Func<Link, long> typeIdSelector = l => l.type_id;
-                        Func<Func<Link, long>, IOrderedEnumerable<Link>> order = allLinks.OrderBy;
+                        Func<Func<Link, long>, IOrderedEnumerable<Link>> orderAscending = allLinks.OrderBy;
                         Func<Func<Link, long>, IOrderedEnumerable<Link>> orderDecending = allLinks.OrderByDescending;
+
+                        var selector = idKeySelector;
 
                         var orderBy = context.GetArgument<OrderBy>("order_by");
                         if (orderBy.from_id != null)
                         {
                             if (orderBy.from_id == order_by.asc)
                             {
-                                allLinks = order(fromIdKeySelector).ToList();
+                                allLinks = Sort(fromIdKeySelector, orderAscending);
                             }
                             else if (orderBy.from_id == order_by.desc)
                             {
-                                allLinks = orderDecending(fromIdKeySelector).ToList();
+                                allLinks = Sort(fromIdKeySelector, orderDecending);
                             }
                         }
 
@@ -65,11 +68,11 @@ namespace GraphQL.Samples.Schemas.Link
                             {
                                 if (orderBy.to_id == order_by.asc)
                                 {
-                                    allLinks = order(toIdSelector).ToList();
+                                    allLinks = Sort(toIdSelector, orderAscending);
                                 }
                                 else if (orderBy.to_id == order_by.desc)
                                 {
-                                    allLinks = orderDecending(toIdSelector).ToList();
+                                    allLinks = Sort(toIdSelector, orderDecending);
                                 }
                             }
                         }
@@ -79,11 +82,11 @@ namespace GraphQL.Samples.Schemas.Link
                             {
                                 if (orderBy.id == order_by.asc)
                                 {
-                                    allLinks = order(idKeySelector).ToList();
+                                    allLinks = Sort(idKeySelector, orderAscending);
                                 }
                                 else if (orderBy.id == order_by.desc)
                                 {
-                                    allLinks = orderDecending(idKeySelector).ToList();
+                                    allLinks = Sort(idKeySelector, orderDecending);
                                 }
                             }
                         }
@@ -92,11 +95,11 @@ namespace GraphQL.Samples.Schemas.Link
                             {
                                 if (orderBy.type_id == order_by.asc)
                                 {
-                                    allLinks = order(typeIdSelector).ToList();
+                                    allLinks = Sort(typeIdSelector, orderAscending);
                                 }
                                 else if (orderBy.type_id == order_by.desc)
                                 {
-                                    allLinks = orderDecending(typeIdSelector).ToList();
+                                    allLinks = Sort(typeIdSelector, orderDecending);
                                 }
                             }
                         }
@@ -111,5 +114,7 @@ namespace GraphQL.Samples.Schemas.Link
                     return allLinks;
                 });
         }
+
+        private IOrderedEnumerable<Link> Sort(Func<Link, long> selector, Func<Func<Link, long>, IOrderedEnumerable<Link>> orderer) => orderer(selector);
     }
 }
