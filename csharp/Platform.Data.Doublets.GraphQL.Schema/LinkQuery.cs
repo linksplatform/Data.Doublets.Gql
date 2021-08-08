@@ -6,6 +6,7 @@ using GraphQL.Types;
 using GraphQL.Validation;
 using Microsoft.Extensions.DependencyInjection;
 using Platform.Data.Doublets;
+using Input;
 using static GraphQL.Samples.Schemas.Link.Link;
 
 namespace GraphQL.Samples.Schemas.Link
@@ -17,7 +18,8 @@ namespace GraphQL.Samples.Schemas.Link
             Field<ListGraphType<LinkType>>("links",
                 arguments: new QueryArguments(
                     new QueryArgument<LongGraphType> {Name = "limit"},
-                    new QueryArgument<LinkBooleanExpressionInputType> {Name = "where"}
+                    new QueryArgument<LinkBooleanExpressionInputType> {Name = "where"},
+                    new QueryArgument<LongGraphType>{Name = "order_by"}
                 ),
                 resolve: context =>
                 {

@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using Input;
 using Platform.Data;
 using Platform.Data.Doublets;
 
@@ -13,11 +14,7 @@ namespace GraphQL.Samples.Schemas.Link
         ConcurrentStack<Link> AllLinks { get; }
         Link InsertLink(object service, Link link);
 
-        //Message AddLink(Message message);
-
         IObservable<Link> Link(string user);
-
-        //Message AddMessage(ReceivedMessage message);
     }
 
     public class Links : ILinks

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using GraphQL.NewtonsoftJson;
 using GraphQL.Types;
 using Platform.Data.Doublets;
+using Input;
 
 namespace GraphQL.Samples.Schemas.Link
 {
@@ -25,6 +26,7 @@ namespace GraphQL.Samples.Schemas.Link
                 ),
                 resolve: context =>
                 {
+                   // EnumGraphType a;
                     var insertLinks = new List<Link>();
                     var receivedLinks = context.GetArgument<List<Link>>("objects");
                     var linksStorage = context.RequestServices.GetService(typeof(ILinks<ulong>));
