@@ -24,7 +24,8 @@ namespace GraphQL.Samples.Schemas.Link
                 resolve: context =>
                 {
                     var links = context.RequestServices.GetService<ILinks<ulong>>();
-                    var allLinks = new List<Link>();
+                    var linksList = new List<Link>();
+                    IEnumerable<Link> allLinks = linksList;
                     var any = links.Constants.Any;
                     Link<UInt64> query = new(index: any, source: any, target: any);
                     if (context.HasArgument("where"))
@@ -34,21 +35,28 @@ namespace GraphQL.Samples.Schemas.Link
                     }
                     links.Each(link =>
                     {
-                        allLinks.Add(new Link(link));
+                        linksList.Add(new Link(link));
                         return links.Constants.Continue;
                     }, query);
                     if (context.HasArgument("order_by"))
                     {
+                        Func<Link, long> idKeySelector = l => l.id;
+                        Func<Link, long> fromIdKeySelector = l => l.from_id;
+                        Func<Link, long> toIdSelector = l => l.to_id;
+                        Func<Link, long> typeIdSelector = l => l.type_id;
+                        Func<Func<Link, long>, IOrderedEnumerable<Link>> order = allLinks.OrderBy;
+                        Func<Func<Link, long>, IOrderedEnumerable<Link>> orderDecending = allLinks.OrderByDescending;
+
                         var orderBy = context.GetArgument<OrderBy>("order_by");
                         if (orderBy.from_id != null)
                         {
                             if (orderBy.from_id == order_by.asc)
                             {
-                                allLinks = allLinks.OrderBy(l => l.from_id).ToList();
+                                allLinks = order(fromIdKeySelector).ToList();
                             }
                             else if (orderBy.from_id == order_by.desc)
                             {
-                                allLinks = allLinks.OrderByDescending(l => l.from_id).ToList();
+                                allLinks = orderDecending(fromIdKeySelector).ToList();
                             }
                         }
 
@@ -57,11 +65,11 @@ namespace GraphQL.Samples.Schemas.Link
                             {
                                 if (orderBy.to_id == order_by.asc)
                                 {
-                                    allLinks = allLinks.OrderBy(l => l.to_id).ToList();
+                                    allLinks = order(toIdSelector).ToList();
                                 }
                                 else if (orderBy.to_id == order_by.desc)
                                 {
-                                    allLinks = allLinks.OrderByDescending(l => l.to_id).ToList();
+                                    allLinks = orderDecending(toIdSelector).ToList();
                                 }
                             }
                         }
@@ -71,11 +79,11 @@ namespace GraphQL.Samples.Schemas.Link
                             {
                                 if (orderBy.id == order_by.asc)
                                 {
-                                    allLinks = allLinks.OrderBy(l => l.id).ToList();
+                                    allLinks = order(idKeySelector).ToList();
                                 }
                                 else if (orderBy.id == order_by.desc)
                                 {
-                                    allLinks = allLinks.OrderByDescending(l => l.id).ToList();
+                                    allLinks = orderDecending(idKeySelector).ToList();
                                 }
                             }
                         }
@@ -84,11 +92,11 @@ namespace GraphQL.Samples.Schemas.Link
                             {
                                 if (orderBy.type_id == order_by.asc)
                                 {
-                                    allLinks = allLinks.OrderBy(l => l.type_id).ToList();
+                                    allLinks = order(typeIdSelector).ToList();
                                 }
                                 else if (orderBy.type_id == order_by.desc)
                                 {
-                                    allLinks = allLinks.OrderByDescending(l => l.type_id).ToList();
+                                    allLinks = orderDecending(typeIdSelector).ToList();
                                 }
                             }
                         }
