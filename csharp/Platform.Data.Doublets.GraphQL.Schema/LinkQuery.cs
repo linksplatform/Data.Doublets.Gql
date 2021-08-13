@@ -48,11 +48,11 @@ namespace GraphQL.Samples.Schemas.Link
                         Func<Link, long> selector = idKeySelector;
                         Func<Func<Link, long>, IOrderedEnumerable<Link>> orderer = orderDecending;
                         order_by? orderByValue = new();
+                        GetSelectorAndOrderByValue(out selector,out orderByValue, orderBy);
                         if (orderByValue == order_by.asc)
                         {
                             orderer = orderAscending;
                         }
-                        GetSelectorAndOrderByValue(out selector, orderBy);
                         allLinks = orderer(selector);
                     }
 
@@ -67,31 +67,33 @@ namespace GraphQL.Samples.Schemas.Link
 
         }
 
-        private void GetSelectorAndOrderByValue(out Func<Link, long> selector, OrderBy orderBy)
+        private void GetSelectorAndOrderByValue(out Func<Link, long> selector, out order_by? orderByValue, OrderBy orderBy)
         {
-            order_by? orderByValue = new();
             if (orderBy.from_id != null)
             {
                 selector = l => l.from_id;
                 orderByValue = orderBy.from_id;
+                return;
             }
-
             if (orderBy.to_id != null)
             {
                 selector = l => l.to_id;
                 orderByValue = orderBy.to_id;
+                return;
             }
-
             if (orderBy.id != null)
             {
                 selector = l => l.id;
                 orderByValue = orderBy.id;
+                return;
             }
             if (orderBy.type_id != null)
             {
                 selector = l => l.type_id;
                 orderByValue = orderBy.type_id;
+                return;
             }
+            orderByValue = orderBy.id;
             selector = l => l.id;
         }
     }
