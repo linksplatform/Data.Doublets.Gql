@@ -47,9 +47,6 @@ namespace GraphQL.Samples.Schemas.Link
                         Func<Link, long> typeIdSelector = l => l.type_id;
                         Func<Func<Link, long>, IOrderedEnumerable<Link>> orderAscending = allLinks.OrderBy;
                         Func<Func<Link, long>, IOrderedEnumerable<Link>> orderDecending = allLinks.OrderByDescending;
-
-                        var selector = idKeySelector;
-
                         var orderBy = context.GetArgument<OrderBy>("order_by");
                         if (orderBy.from_id != null)
                         {
