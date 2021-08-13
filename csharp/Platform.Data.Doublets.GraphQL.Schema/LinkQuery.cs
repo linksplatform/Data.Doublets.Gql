@@ -41,14 +41,11 @@ namespace GraphQL.Samples.Schemas.Link
                     }, query);
                     if (context.HasArgument("order_by"))
                     {
-                        Func<Link, long> idKeySelector = l => l.id;
                         Func<Func<Link, long>, IOrderedEnumerable<Link>> orderAscending = allLinks.OrderBy;
                         Func<Func<Link, long>, IOrderedEnumerable<Link>> orderDecending = allLinks.OrderByDescending;
                         var orderBy = context.GetArgument<OrderBy>("order_by");
-                        Func<Link, long> selector = idKeySelector;
                         Func<Func<Link, long>, IOrderedEnumerable<Link>> orderer = orderDecending;
-                        order_by? orderByValue = new();
-                        GetSelectorAndOrderByValue(out selector,out orderByValue, orderBy);
+                        GetSelectorAndOrderByValue(out Func<Link, long> selector, out order_by? orderByValue, orderBy);
                         if (orderByValue == order_by.asc)
                         {
                             orderer = orderAscending;
