@@ -41,14 +41,12 @@ namespace GraphQL.Samples.Schemas.Link
                     }, query);
                     if (context.HasArgument("order_by"))
                     {
-                        Func<Func<Link, long>, IOrderedEnumerable<Link>> orderAscending = allLinks.OrderBy;
-                        Func<Func<Link, long>, IOrderedEnumerable<Link>> orderDecending = allLinks.OrderByDescending;
                         var orderBy = context.GetArgument<OrderBy>("order_by");
-                        Func<Func<Link, long>, IOrderedEnumerable<Link>> orderer = orderDecending;
+                        Func<Func<Link, long>, IOrderedEnumerable<Link>> orderer = allLinks.OrderByDescending;
                         GetSelectorAndOrderByValue(orderBy, out Func<Link, long> selector, out order_by? orderByValue);
                         if (orderByValue == order_by.asc)
                         {
-                            orderer = orderAscending;
+                            orderer = allLinks.OrderBy;
                         }
                         allLinks = orderer(selector);
                     }
@@ -66,22 +64,22 @@ namespace GraphQL.Samples.Schemas.Link
 
         private static void GetSelectorAndOrderByValue(OrderBy orderBy, out Func<Link, long> selector, out order_by? orderByValue)
         {
-            if (orderBy.from_id != null)
+            orderByValue = orderBy.from_id;
+            if (orderByValue != null)
             {
                 selector = l => l.from_id;
-                orderByValue = orderBy.from_id;
                 return;
             }
-            if (orderBy.to_id != null)
+            orderByValue = orderBy.to_id;
+            if (orderByValue != null)
             {
                 selector = l => l.to_id;
-                orderByValue = orderBy.to_id;
                 return;
             }
-            if (orderBy.type_id != null)
+            orderByValue = orderBy.type_id;
+            if (orderByValue != null)
             {
                 selector = l => l.type_id;
-                orderByValue = orderBy.type_id;
                 return;
             }
             orderByValue = orderBy.id;
