@@ -48,58 +48,35 @@ namespace GraphQL.Samples.Schemas.Link
                         Func<Func<Link, long>, IOrderedEnumerable<Link>> orderAscending = allLinks.OrderBy;
                         Func<Func<Link, long>, IOrderedEnumerable<Link>> orderDecending = allLinks.OrderByDescending;
                         var orderBy = context.GetArgument<OrderBy>("order_by");
+                        Func<Link, long> selector = idKeySelector;
+                        Func<Func<Link, long>, IOrderedEnumerable<Link>> orderer = orderAscending;
+                        if (orderBy.from_id == order_by.asc || orderBy.to_id == order_by.asc || orderBy.id == order_by.asc || orderBy.type_id == order_by.asc)
+                        {
+                            orderer = orderAscending;
+                        }
+                        else
+                        {
+                            orderer = orderDecending;
+                        }
                         if (orderBy.from_id != null)
                         {
-                            if (orderBy.from_id == order_by.asc)
-                            {
-                                allLinks = Sort(fromIdKeySelector, orderAscending);
-                            }
-                            else if (orderBy.from_id == order_by.desc)
-                            {
-                                allLinks = Sort(fromIdKeySelector, orderDecending);
-                            }
+                            selector = fromIdKeySelector;
                         }
 
                         if (orderBy.to_id != null)
                         {
-                            {
-                                if (orderBy.to_id == order_by.asc)
-                                {
-                                    allLinks = Sort(toIdSelector, orderAscending);
-                                }
-                                else if (orderBy.to_id == order_by.desc)
-                                {
-                                    allLinks = Sort(toIdSelector, orderDecending);
-                                }
-                            }
+                            selector = toIdSelector;
                         }
 
                         if (orderBy.id != null)
                         {
-                            {
-                                if (orderBy.id == order_by.asc)
-                                {
-                                    allLinks = Sort(idKeySelector, orderAscending);
-                                }
-                                else if (orderBy.id == order_by.desc)
-                                {
-                                    allLinks = Sort(idKeySelector, orderDecending);
-                                }
-                            }
+                            selector = idKeySelector;
                         }
                         if (orderBy.type_id != null)
                         {
-                            {
-                                if (orderBy.type_id == order_by.asc)
-                                {
-                                    allLinks = Sort(typeIdSelector, orderAscending);
-                                }
-                                else if (orderBy.type_id == order_by.desc)
-                                {
-                                    allLinks = Sort(typeIdSelector, orderDecending);
-                                }
-                            }
+                            selector = typeIdSelector;
                         }
+                        allLinks = Sort(selector, orderer);
                     }
 
                     if (context.HasArgument("limit"))
