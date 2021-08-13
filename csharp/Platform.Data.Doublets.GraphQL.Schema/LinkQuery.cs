@@ -18,9 +18,9 @@ namespace GraphQL.Samples.Schemas.Link
         {
             Field<ListGraphType<LinkType>>("links",
                 arguments: new QueryArguments(
-                    new QueryArgument<LongGraphType> {Name = "limit"},
-                    new QueryArgument<LinkBooleanExpressionInputType> {Name = "where"},
-                    new QueryArgument<OrderByInputType>{Name = "order_by"}
+                    new QueryArgument<LongGraphType> { Name = "limit" },
+                    new QueryArgument<LinkBooleanExpressionInputType> { Name = "where" },
+                    new QueryArgument<OrderByInputType> { Name = "order_by" }
                 ),
                 resolve: context =>
                 {
@@ -42,41 +42,17 @@ namespace GraphQL.Samples.Schemas.Link
                     if (context.HasArgument("order_by"))
                     {
                         Func<Link, long> idKeySelector = l => l.id;
-                        Func<Link, long> fromIdKeySelector = l => l.from_id;
-                        Func<Link, long> toIdSelector = l => l.to_id;
-                        Func<Link, long> typeIdSelector = l => l.type_id;
                         Func<Func<Link, long>, IOrderedEnumerable<Link>> orderAscending = allLinks.OrderBy;
                         Func<Func<Link, long>, IOrderedEnumerable<Link>> orderDecending = allLinks.OrderByDescending;
                         var orderBy = context.GetArgument<OrderBy>("order_by");
                         Func<Link, long> selector = idKeySelector;
                         Func<Func<Link, long>, IOrderedEnumerable<Link>> orderer = orderDecending;
                         order_by? orderByValue = new();
-                        if (orderBy.from_id != null)
-                        {
-                            selector = fromIdKeySelector;
-                            orderByValue = orderBy.from_id;
-                        }
-
-                        if (orderBy.to_id != null)
-                        {
-                            selector = toIdSelector;
-                            orderByValue = orderBy.to_id;
-                        }
-
-                        if (orderBy.id != null)
-                        {
-                            selector = idKeySelector;
-                            orderByValue = orderBy.id;
-                        }
-                        if (orderBy.type_id != null)
-                        {
-                            selector = typeIdSelector;
-                            orderByValue = orderBy.type_id;
-                        }
                         if (orderByValue == order_by.asc)
                         {
                             orderer = orderAscending;
                         }
+                        GetSelectorAndOrderByValue(out selector, orderBy);
                         allLinks = orderer(selector);
                     }
 
@@ -88,6 +64,35 @@ namespace GraphQL.Samples.Schemas.Link
 
                     return allLinks;
                 });
+
+        }
+
+        private void GetSelectorAndOrderByValue(out Func<Link, long> selector, OrderBy orderBy)
+        {
+            order_by? orderByValue = new();
+            if (orderBy.from_id != null)
+            {
+                selector = l => l.from_id;
+                orderByValue = orderBy.from_id;
+            }
+
+            if (orderBy.to_id != null)
+            {
+                selector = l => l.to_id;
+                orderByValue = orderBy.to_id;
+            }
+
+            if (orderBy.id != null)
+            {
+                selector = l => l.id;
+                orderByValue = orderBy.id;
+            }
+            if (orderBy.type_id != null)
+            {
+                selector = l => l.type_id;
+                orderByValue = orderBy.type_id;
+            }
+            selector = l => l.id;
         }
     }
 }
