@@ -45,7 +45,7 @@ namespace GraphQL.Samples.Schemas.Link
                         Func<Func<Link, long>, IOrderedEnumerable<Link>> orderDecending = allLinks.OrderByDescending;
                         var orderBy = context.GetArgument<OrderBy>("order_by");
                         Func<Func<Link, long>, IOrderedEnumerable<Link>> orderer = orderDecending;
-                        GetSelectorAndOrderByValue(out Func<Link, long> selector, out order_by? orderByValue, orderBy);
+                        GetSelectorAndOrderByValue(orderBy, out Func<Link, long> selector, out order_by? orderByValue);
                         if (orderByValue == order_by.asc)
                         {
                             orderer = orderAscending;
