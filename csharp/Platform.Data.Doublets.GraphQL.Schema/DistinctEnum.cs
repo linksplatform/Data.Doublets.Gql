@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace GraphQL.Samples.Schemas.Link
 {
-    enum distinct
+    public enum distinct
     {
-        fromid,
+        from_id,
         id,
         to_id,
         type_id

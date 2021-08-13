@@ -21,8 +21,8 @@ namespace GraphQL.Samples.Schemas.Link
                     new QueryArgument<LongGraphType> { Name = "limit" },
                     new QueryArgument<LinkBooleanExpressionInputType> { Name = "where" },
                     new QueryArgument<OrderByInputType> { Name = "order_by" },
-                    new QueryArgument<LongGraphType> { Name = "offset"},
-                    new QueryArgument<ListGraphType<DistinctEnum>> { Name = "distinct"}
+                    new QueryArgument<LongGraphType> { Name = "offset" },
+                    new QueryArgument<ListGraphType<DistinctEnum>> { Name = "distinct" }
                 ),
                 resolve: context =>
                 {
@@ -55,21 +55,7 @@ namespace GraphQL.Samples.Schemas.Link
                     if (context.HasArgument("distinct"))
                     {
                         var dis = context.GetArgument<List<distinct>>("distinct");
-                        switch (dis.First())
-                        {
-                            case distinct.from_id:
-                                allLinks = allLinks.DistinctBy(x => x.from_id);
-                                break;
-                            case distinct.type_id:
-                                allLinks = allLinks.DistinctBy(x => x.type_id);
-                                break;
-                            case distinct.to_id:
-                                allLinks = allLinks.DistinctBy(x => x.to_id);
-                                break;
-                            default:
-                                allLinks = allLinks.DistinctBy(x => x.id);
-                                break;
-                        }
+                        allLinks = allLinks.DistinctBy(GetDistinctSelector(dis.First()));
                     }
                     if (context.HasArgument("offset"))
                     {
@@ -85,6 +71,20 @@ namespace GraphQL.Samples.Schemas.Link
                     return allLinks;
                 });
 
+        }
+        private static Func<Link, long> GetDistinctSelector(distinct distinct)
+        {
+            switch (distinct)
+            {
+                case distinct.from_id:
+                    return x => x.from_id;
+                case distinct.type_id:
+                    return x => x.type_id;
+                case distinct.to_id:
+                    return x => x.to_id;
+                default:
+                    return x => x.id;
+            }
         }
 
         private static void GetSelectorAndOrderByValue(OrderBy orderBy, out Func<Link, long> selector, out order_by? orderByValue)
@@ -112,3 +112,4 @@ namespace GraphQL.Samples.Schemas.Link
         }
     }
 }
+
