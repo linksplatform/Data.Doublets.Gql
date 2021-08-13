@@ -50,13 +50,12 @@ namespace GraphQL.Samples.Schemas.Link
                             orderer = allLinks.OrderBy;
                         }
                         allLinks = orderer(selector);
-                        if (context.HasArgument("offset"))
-                        {
-                            int offset = context.GetArgument<int>("offset");
-                            allLinks = allLinks.Skip(offset);
-                        }
                     }
-
+                    if (context.HasArgument("offset"))
+                    {
+                        int offset = context.GetArgument<int>("offset");
+                        allLinks = allLinks.Skip(offset);
+                    }
                     if (context.HasArgument("limit"))
                     {
                         long limit = context.GetArgument<long>("limit");
