@@ -5,10 +5,8 @@ namespace Input
 {
     class OrderByInputType : InputObjectGraphType<OrderBy>
     {
-
         public OrderByInputType()
         {
-            //Field("order_by");
             Field<OrderByInputType>("from");
             Field(x => x.from_id,nullable: true,type: typeof(OrderByEnum));
             Field(x => x.id, nullable: true, type: typeof(OrderByEnum));
