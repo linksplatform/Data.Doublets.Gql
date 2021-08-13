@@ -20,7 +20,8 @@ namespace GraphQL.Samples.Schemas.Link
                 arguments: new QueryArguments(
                     new QueryArgument<LongGraphType> { Name = "limit" },
                     new QueryArgument<LinkBooleanExpressionInputType> { Name = "where" },
-                    new QueryArgument<OrderByInputType> { Name = "order_by" }
+                    new QueryArgument<OrderByInputType> { Name = "order_by" },
+                    new QueryArgument<LongGraphType> { Name = "offset"}
                 ),
                 resolve: context =>
                 {
@@ -49,6 +50,11 @@ namespace GraphQL.Samples.Schemas.Link
                             orderer = allLinks.OrderBy;
                         }
                         allLinks = orderer(selector);
+                        if (context.HasArgument("offset"))
+                        {
+                            int offset = context.GetArgument<int>("offset");
+                            allLinks = allLinks.Skip(offset);
+                        }
                     }
 
                     if (context.HasArgument("limit"))
