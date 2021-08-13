@@ -52,6 +52,25 @@ namespace GraphQL.Samples.Schemas.Link
                         }
                         allLinks = orderer(selector);
                     }
+                    if (context.HasArgument("distinct"))
+                    {
+                        var dis = context.GetArgument<List<distinct>>("distinct");
+                        switch (dis.First())
+                        {
+                            case distinct.from_id:
+                                allLinks = allLinks.DistinctBy(x => x.from_id);
+                                break;
+                            case distinct.type_id:
+                                allLinks = allLinks.DistinctBy(x => x.type_id);
+                                break;
+                            case distinct.to_id:
+                                allLinks = allLinks.DistinctBy(x => x.to_id);
+                                break;
+                            default:
+                                allLinks = allLinks.DistinctBy(x => x.id);
+                                break;
+                        }
+                    }
                     if (context.HasArgument("offset"))
                     {
                         int offset = context.GetArgument<int>("offset");
