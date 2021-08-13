@@ -50,29 +50,34 @@ namespace GraphQL.Samples.Schemas.Link
                         var orderBy = context.GetArgument<OrderBy>("order_by");
                         Func<Link, long> selector = idKeySelector;
                         Func<Func<Link, long>, IOrderedEnumerable<Link>> orderer = orderDecending;
-                        if (orderBy.from_id == order_by.asc || orderBy.to_id == order_by.asc || orderBy.id == order_by.asc || orderBy.type_id == order_by.asc)
-                        {
-                            orderer = orderAscending;
-                        }
+                        order_by? orderByValue = new();
                         if (orderBy.from_id != null)
                         {
                             selector = fromIdKeySelector;
+                            orderByValue = orderBy.from_id;
                         }
 
                         if (orderBy.to_id != null)
                         {
                             selector = toIdSelector;
+                            orderByValue = orderBy.to_id;
                         }
 
                         if (orderBy.id != null)
                         {
                             selector = idKeySelector;
+                            orderByValue = orderBy.id;
                         }
                         if (orderBy.type_id != null)
                         {
                             selector = typeIdSelector;
+                            orderByValue = orderBy.type_id;
                         }
-                        allLinks = Sort(selector, orderer);
+                        if (orderByValue == order_by.asc)
+                        {
+                            orderer = orderAscending;
+                        }
+                        allLinks = orderer(selector);
                     }
 
                     if (context.HasArgument("limit"))
@@ -84,7 +89,5 @@ namespace GraphQL.Samples.Schemas.Link
                     return allLinks;
                 });
         }
-
-        private IOrderedEnumerable<Link> Sort(Func<Link, long> selector, Func<Func<Link, long>, IOrderedEnumerable<Link>> orderer) => orderer(selector);
     }
 }
