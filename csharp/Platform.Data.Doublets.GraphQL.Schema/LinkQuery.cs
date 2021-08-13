@@ -21,7 +21,8 @@ namespace GraphQL.Samples.Schemas.Link
                     new QueryArgument<LongGraphType> { Name = "limit" },
                     new QueryArgument<LinkBooleanExpressionInputType> { Name = "where" },
                     new QueryArgument<OrderByInputType> { Name = "order_by" },
-                    new QueryArgument<LongGraphType> { Name = "offset"}
+                    new QueryArgument<LongGraphType> { Name = "offset"},
+                    new QueryArgument<ListGraphType<DistinctEnum>> { Name = "distinct"}
                 ),
                 resolve: context =>
                 {
