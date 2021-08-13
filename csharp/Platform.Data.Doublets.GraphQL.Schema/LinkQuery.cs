@@ -81,12 +81,6 @@ namespace GraphQL.Samples.Schemas.Link
                 orderByValue = orderBy.to_id;
                 return;
             }
-            if (orderBy.id != null)
-            {
-                selector = l => l.id;
-                orderByValue = orderBy.id;
-                return;
-            }
             if (orderBy.type_id != null)
             {
                 selector = l => l.type_id;
