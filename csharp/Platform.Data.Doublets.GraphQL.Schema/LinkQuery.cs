@@ -64,7 +64,7 @@ namespace GraphQL.Samples.Schemas.Link
 
         }
 
-        private void GetSelectorAndOrderByValue(out Func<Link, long> selector, out order_by? orderByValue, OrderBy orderBy)
+        private static void GetSelectorAndOrderByValue(OrderBy orderBy, out Func<Link, long> selector, out order_by? orderByValue)
         {
             if (orderBy.from_id != null)
             {
