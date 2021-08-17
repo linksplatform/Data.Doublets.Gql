@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Gql.Samples.Schemas.Link;
+using Platform.Data.Doublets.Gql.Schema;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Altair;
 using GraphQL.Server.Ui.GraphiQL;
