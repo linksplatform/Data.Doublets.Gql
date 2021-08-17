@@ -20,9 +20,10 @@ namespace Platform.Data.Doublets.Gql.Server
             try
             {
                 Log.Information("Starting host");
-                if(args[0] != null)
+                var DbFileName = Platform.IO.ConsoleHelpers.GetOrReadArgument(0,"Database file name",args);
+                if(DbFileName != "")
                 {
-                    Startup.DbFileName = args[0];
+                    Startup.DbFileName = DbFileName;
                 }
                 CreateHostBuilder(args).Build().Run();
                 return 0;
