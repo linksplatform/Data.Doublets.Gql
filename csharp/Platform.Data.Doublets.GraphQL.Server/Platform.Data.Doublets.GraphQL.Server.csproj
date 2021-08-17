@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LinksStorage\LinksStorage.csproj" />
     <ProjectReference Include="..\Platform.Data.Doublets.GraphQL.Schema\Platform.Data.Doublets.GraphQL.Schema.csproj" />
   </ItemGroup>
 
