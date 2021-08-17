@@ -18,7 +18,7 @@ using Platform.Data.Doublets.Memory;
 using Platform.Data.Doublets.Memory.United.Generic;
 using Platform.Memory;
 
-namespace GraphQL.Samples.Server
+namespace Platform.Data.Doublets.Gql.Server
 {
     public class Startup
     {

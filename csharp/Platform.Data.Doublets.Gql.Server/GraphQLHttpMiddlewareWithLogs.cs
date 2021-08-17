@@ -6,7 +6,7 @@ using GraphQL.Types;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
-namespace GraphQL.Samples.Server
+namespace Platform.Data.Doublets.Gql.Server
 {
     // Example of a custom GraphQL Middleware that sends execution result to Microsoft.Extensions.Logging API
     public class GraphQLHttpMiddlewareWithLogs<TSchema> : GraphQLHttpMiddleware<TSchema>

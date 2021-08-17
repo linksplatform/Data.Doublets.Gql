@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 
-namespace GraphQL.Samples.Server
+namespace Platform.Data.Doublets.Gql.Server
 {
     public class Program
     {

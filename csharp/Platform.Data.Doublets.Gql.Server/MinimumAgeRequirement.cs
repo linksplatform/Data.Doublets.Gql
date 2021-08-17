@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 
-namespace GraphQL.Samples.Server
+namespace Platform.Data.Doublets.Gql.Server
 {
     /// <summary>
     /// A <see cref="IAuthorizationRequirement"/> enforcing a minimum user age.
