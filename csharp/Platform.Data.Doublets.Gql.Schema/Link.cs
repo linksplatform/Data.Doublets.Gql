@@ -20,6 +20,9 @@ namespace Platform.Data.Doublets.Gql.Schema
         public Link type {get;set;}
 
         public long type_id { get; set; }
+
+        public Link() { }
+
         public Link(IList<UInt64> links)
         {
             var i = 0;
