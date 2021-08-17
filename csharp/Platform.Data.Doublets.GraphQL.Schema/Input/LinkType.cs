@@ -8,7 +8,7 @@ using Platform.Data.Doublets;
 using Microsoft.Extensions.DependencyInjection;
 using Platform.Data;
 using Platform.Memory;
-using GraphQL.Samples.Schemas.Link;
+using Gql.Samples.Schemas.Link;
 using GraphQL;
 
 namespace Input

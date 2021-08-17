@@ -3,8 +3,9 @@ using GraphQL.NewtonsoftJson;
 using GraphQL.Types;
 using Platform.Data.Doublets;
 using Input;
+using GraphQL;
 
-namespace GraphQL.Samples.Schemas.Link
+namespace Gql.Samples.Schemas.Link
 {
     public class LinkMutation : ObjectGraphType<object>
     {

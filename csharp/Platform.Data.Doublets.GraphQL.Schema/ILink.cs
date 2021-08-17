@@ -7,7 +7,7 @@ using Input;
 using Platform.Data;
 using Platform.Data.Doublets;
 
-namespace GraphQL.Samples.Schemas.Link
+namespace Gql.Samples.Schemas.Link
 {
     public interface ILinks
     {

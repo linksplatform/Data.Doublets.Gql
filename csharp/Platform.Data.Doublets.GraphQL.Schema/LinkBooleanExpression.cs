@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GraphQL.Samples.Schemas.Link
+namespace Gql.Samples.Schemas.Link
 {
     public class LinkBooleanExpression
     {

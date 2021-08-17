@@ -1,4 +1,4 @@
-﻿using GraphQL.Samples.Schemas.Link;
+﻿using Gql.Samples.Schemas.Link;
 using GraphQL.Types;
 
 namespace Input

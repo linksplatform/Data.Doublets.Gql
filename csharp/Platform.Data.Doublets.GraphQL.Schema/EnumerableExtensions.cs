@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace GraphQL.Samples.Schemas.Link
+namespace Gql.Samples.Schemas.Link
 {
     static class EnumerableExtensions
     {

@@ -8,9 +8,10 @@ using GraphQL.Validation;
 using Microsoft.Extensions.DependencyInjection;
 using Platform.Data.Doublets;
 using Input;
-using static GraphQL.Samples.Schemas.Link.Link;
+using static Gql.Samples.Schemas.Link.Link;
+using GraphQL;
 
-namespace GraphQL.Samples.Schemas.Link
+namespace Gql.Samples.Schemas.Link
 {
     public class LinkQuery : ObjectGraphType
     {
@@ -55,7 +56,7 @@ namespace GraphQL.Samples.Schemas.Link
                     if (context.HasArgument("distinct"))
                     {
                         var dis = context.GetArgument<List<distinct>>("distinct");
-                        allLinks = allLinks.DistinctBy(GetDistinctSelector(dis.First()));
+                        allLinks = allLinks.DistinctBy(GetSortSelectorAndOrderByValue(dis.First()));
                     }
                     if (context.HasArgument("offset"))
                     {
@@ -72,7 +73,7 @@ namespace GraphQL.Samples.Schemas.Link
                 });
 
         }
-        private static Func<Link, long> GetDistinctSelector(distinct distinct)
+        private static Func<Link, long> GetSortSelectorAndOrderByValue(distinct distinct)
         {
             switch (distinct)
             {

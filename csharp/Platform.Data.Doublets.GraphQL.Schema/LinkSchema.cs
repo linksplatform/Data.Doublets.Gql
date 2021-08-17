@@ -1,7 +1,7 @@
 using System;
 using GraphQL.Types;
 
-namespace GraphQL.Samples.Schemas.Link
+namespace Gql.Samples.Schemas.Link
 {
     public class LinkSchema : Schema
     {
