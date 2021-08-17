@@ -10,7 +10,7 @@ By default Gql server uses `db.links` as a name of the database:
 dotnet run
 ```
 
-You can set any path do database file:
+You can set any path to a database file:
 ```
 dotnet run path/to/db.links
 ```
