@@ -1,10 +1,12 @@
-# Data.Doublets.GraphQL
+# Data.Doublets.Gql
 
 Execute:
 ```
 cd csharp/Platform.Data.Doublets.GraphQL.Server
 dotnet run
 ```
+
+By default Gql server uses `db.links` as a name of the database.
 
 Navigate to:
 ```
