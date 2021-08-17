@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using GraphQL.Samples.Schemas.Chat;
+using GraphQL.Samples.Schemas.Link;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Altair;
 using GraphQL.Server.Ui.GraphiQL;
@@ -32,7 +32,7 @@ namespace GraphQL.Samples.Server
             services
                 .AddRouting()
                 .AddSingleton<Links, Links>()
-                .AddSingleton<ChatSchema>()
+                .AddSingleton<LinkSchema>()
                 .AddGraphQL((options, provider) =>
                 {
                     options.EnableMetrics = Environment.IsDevelopment();
@@ -44,7 +44,7 @@ namespace GraphQL.Samples.Server
                 .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = Environment.IsDevelopment())
                 .AddWebSockets()
                 .AddDataLoader()
-                .AddGraphTypes(typeof(ChatSchema));
+                .AddGraphTypes(typeof(LinkSchema));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,8 +58,8 @@ namespace GraphQL.Samples.Server
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGraphQLWebSockets<ChatSchema>();
-                endpoints.MapGraphQL<ChatSchema, GraphQLHttpMiddlewareWithLogs<ChatSchema>>();
+                endpoints.MapGraphQLWebSockets<LinkSchema>();
+                endpoints.MapGraphQL<LinkSchema, GraphQLHttpMiddlewareWithLogs<LinkSchema>>();
 
                 endpoints.MapGraphQLPlayground(new PlaygroundOptions
                 {

@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using GraphQL.Samples.Schemas.Chat;
+using GraphQL.Samples.Schemas.Link;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Altair;
 using GraphQL.Server.Ui.GraphiQL;
 using GraphQL.Server.Ui.Playground;
 using GraphQL.Server.Ui.Voyager;
-using LinksStorage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -39,7 +38,7 @@ namespace GraphQL.Samples.Server
             services
                 .AddSingleton<ILinks<ulong>>(sp => new UnitedMemoryLinks<UInt64>(new FileMappedResizableDirectMemory("db.links"), UnitedMemoryLinks<UInt64>.DefaultLinksSizeStep, new LinksConstants<UInt64>(enableExternalReferencesSupport: true), IndexTreeType.Default))
                 .AddSingleton<Links, Links>()
-                .AddSingleton<ChatSchema>()
+                .AddSingleton<LinkSchema>()
                 .AddGraphQL((options, provider) =>
                 {
                     options.EnableMetrics = Environment.IsDevelopment();
@@ -50,7 +49,7 @@ namespace GraphQL.Samples.Server
                 .AddErrorInfoProvider<CustomErrorInfoProvider>(opt => opt.ExposeExceptionStackTrace = Environment.IsDevelopment())
                 .AddWebSockets()
                 .AddDataLoader()
-                .AddGraphTypes(typeof(ChatSchema));
+                .AddGraphTypes(typeof(LinkSchema));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,8 +60,8 @@ namespace GraphQL.Samples.Server
 
             app.UseWebSockets();
 
-            app.UseGraphQLWebSockets<ChatSchema>();
-            app.UseGraphQL<ChatSchema, GraphQLHttpMiddlewareWithLogs<ChatSchema>>();
+            app.UseGraphQLWebSockets<LinkSchema>();
+            app.UseGraphQL<LinkSchema, GraphQLHttpMiddlewareWithLogs<LinkSchema>>();
 
             app.UseGraphQLPlayground(new PlaygroundOptions
             {
