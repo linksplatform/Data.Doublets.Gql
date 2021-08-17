@@ -22,7 +22,7 @@ namespace Platform.Data.Doublets.Gql.Server
             {
                 Log.Information("Starting host");
                 var dbFileName = ConsoleHelpers.GetOrReadArgument(0, $"Document name (default: {Startup.DbFileName})", args);
-                if (string.IsNullOrWhiteSpace(dbFileName))
+                if (!string.IsNullOrWhiteSpace(dbFileName))
                 {
                     Startup.DbFileName = dbFileName;
                 }
