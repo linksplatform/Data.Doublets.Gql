@@ -20,6 +20,42 @@ Use query:
 }
 ```
 
+```gql
+{
+  links(
+    where: { from_id: { _eq: 1 }, to_id: { _eq: 1 } }
+    distinct: [FROM_ID]
+    order_by: { id: ASC }
+    offset: 0
+    limit: 1
+  ) {
+    id
+    from_id
+    from {
+      id
+      from_id
+      to_id
+    }
+    out {
+      id
+      from_id
+      to_id
+    }
+    to_id
+    to {
+      id
+      from_id
+      to_id
+    }
+    in {
+      id
+      from_id
+      to_id
+    }
+  }
+}
+```
+
 Use mutation:
 ```gql
 mutation {
