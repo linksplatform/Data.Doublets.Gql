@@ -37,7 +37,7 @@ namespace GraphQL.Samples.Server
         {
             services
                 .AddSingleton<ILinks<ulong>>(sp => new UnitedMemoryLinks<UInt64>(new FileMappedResizableDirectMemory("db.links"), UnitedMemoryLinks<UInt64>.DefaultLinksSizeStep, new LinksConstants<UInt64>(enableExternalReferencesSupport: true), IndexTreeType.Default))
-                .AddSingleton<Links, Links>()
+                .AddSingleton<ILinks, Links>()
                 .AddSingleton<LinkSchema>()
                 .AddGraphQL((options, provider) =>
                 {
