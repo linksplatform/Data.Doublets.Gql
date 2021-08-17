@@ -22,6 +22,8 @@ namespace Platform.Data.Doublets.Gql.Server
 {
     public class Startup
     {
+        public static string DbFileName = "db.links";
+
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
@@ -36,7 +38,7 @@ namespace Platform.Data.Doublets.Gql.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddSingleton<ILinks<ulong>>(sp => new UnitedMemoryLinks<UInt64>(new FileMappedResizableDirectMemory("db.links"), UnitedMemoryLinks<UInt64>.DefaultLinksSizeStep, new LinksConstants<UInt64>(enableExternalReferencesSupport: true), IndexTreeType.Default))
+                .AddSingleton<ILinks<ulong>>(sp => new UnitedMemoryLinks<UInt64>(new FileMappedResizableDirectMemory(DbFileName), UnitedMemoryLinks<UInt64>.DefaultLinksSizeStep, new LinksConstants<UInt64>(enableExternalReferencesSupport: true), IndexTreeType.Default))
                 .AddSingleton<ILinks, Links>()
                 .AddSingleton<LinkSchema>()
                 .AddGraphQL((options, provider) =>
