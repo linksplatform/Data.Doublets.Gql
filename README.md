@@ -2,7 +2,7 @@
 
 Execute:
 ```
-cd csharp/Platform.Data.Doublets.GraphQL.Server
+cd csharp/Platform.Data.Doublets.Gql.Server
 dotnet run
 ```
 
