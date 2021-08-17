@@ -15,3 +15,12 @@ Use query:
 ```gql
 { links { id} }
 ```
+
+Use mutation:
+```
+mutation {
+	insert_links_one(object: { from_id: 1, to_id: 1 }) {
+		id
+	}
+}
+```
