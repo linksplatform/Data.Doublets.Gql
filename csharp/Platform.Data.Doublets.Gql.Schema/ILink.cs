@@ -7,7 +7,7 @@ using Input;
 using Platform.Data;
 using Platform.Data.Doublets;
 
-namespace Gql.Samples.Schemas.Link
+namespace Platform.Data.Doublets.Gql.Schema
 {
     public interface ILinks
     {

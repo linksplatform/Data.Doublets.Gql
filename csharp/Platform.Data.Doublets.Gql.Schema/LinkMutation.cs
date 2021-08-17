@@ -5,7 +5,7 @@ using Platform.Data.Doublets;
 using Input;
 using GraphQL;
 
-namespace Gql.Samples.Schemas.Link
+namespace Platform.Data.Doublets.Gql.Schema
 {
     public class LinkMutation : ObjectGraphType<object>
     {

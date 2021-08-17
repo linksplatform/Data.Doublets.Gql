@@ -3,7 +3,7 @@ using Platform.Data.Doublets;
 using System;
 using System.Collections.Generic;
 
-namespace Gql.Samples.Schemas.Link
+namespace Platform.Data.Doublets.Gql.Schema
 {
     public class Link
     {

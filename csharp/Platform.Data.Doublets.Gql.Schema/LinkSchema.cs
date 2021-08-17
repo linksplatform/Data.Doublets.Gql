@@ -1,9 +1,9 @@
 using System;
 using GraphQL.Types;
 
-namespace Gql.Samples.Schemas.Link
+namespace Platform.Data.Doublets.Gql.Schema
 {
-    public class LinkSchema : Schema
+    public class LinkSchema : GraphQL.Types.Schema
     {
         public LinkSchema(ILinks Link, IServiceProvider provider) : base(provider)
         {

@@ -1,4 +1,4 @@
-﻿using Gql.Samples.Schemas.Link;
+﻿using Platform.Data.Doublets.Gql.Schema;
 using GraphQL.Types;
 
 namespace Input

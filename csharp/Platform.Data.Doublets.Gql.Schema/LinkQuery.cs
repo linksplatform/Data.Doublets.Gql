@@ -8,10 +8,10 @@ using GraphQL.Validation;
 using Microsoft.Extensions.DependencyInjection;
 using Platform.Data.Doublets;
 using Input;
-using static Gql.Samples.Schemas.Link.Link;
+using static Platform.Data.Doublets.Gql.Schema.Link;
 using GraphQL;
 
-namespace Gql.Samples.Schemas.Link
+namespace Platform.Data.Doublets.Gql.Schema
 {
     public class LinkQuery : ObjectGraphType
     {
