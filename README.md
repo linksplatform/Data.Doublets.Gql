@@ -3,10 +3,17 @@
 Execute:
 ```
 cd csharp/Platform.Data.Doublets.Gql.Server
+```
+
+By default Gql server uses `db.links` as a name of the database:
+```
 dotnet run
 ```
 
-By default Gql server uses `db.links` as a name of the database.
+You can set any path do database file:
+```
+dotnet run path/to/db.links
+```
 
 Navigate to:
 ```
