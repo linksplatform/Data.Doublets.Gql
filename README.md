@@ -28,3 +28,11 @@ mutation {
   }
 }
 ```
+
+```gql
+mutation {
+  insert_links(objects: [{ from_id: 1, to_id: 1 }, { from_id: 2, to_id: 2 }]) {
+    id
+  }
+}
+```
