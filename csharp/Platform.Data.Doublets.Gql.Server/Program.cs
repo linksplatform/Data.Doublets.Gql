@@ -1,6 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Platform.IO;
 using Serilog;
 using Serilog.Events;
 
@@ -20,10 +21,10 @@ namespace Platform.Data.Doublets.Gql.Server
             try
             {
                 Log.Information("Starting host");
-                var DbFileName = Platform.IO.ConsoleHelpers.GetOrReadArgument(0,"Database file name",args);
-                if(DbFileName != "")
+                var dbFileName = ConsoleHelpers.GetOrReadArgument(0, $"Document name (default: {Startup.DbFileName})", args);
+                if (string.IsNullOrWhiteSpace(dbFileName))
                 {
-                    Startup.DbFileName = DbFileName;
+                    Startup.DbFileName = dbFileName;
                 }
                 CreateHostBuilder(args).Build().Run();
                 return 0;
