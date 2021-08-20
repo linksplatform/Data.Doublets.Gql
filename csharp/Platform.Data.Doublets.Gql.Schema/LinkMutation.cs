@@ -49,17 +49,17 @@ namespace Platform.Data.Doublets.Gql.Schema
                     var any = links.Constants.Any;
                     var where = context.GetArgument<LinkBooleanExpression>("where");
                     var query = new Link<UInt64>(index: any, source: (ulong?)where?.from_id?._eq ?? any, target: (ulong?)where?.to_id?._eq ?? any);
-                    var linksToDelete = new List<List<ulong>>();
+                    List<IList<ulong>> linksToDelete = new List<IList<ulong>>();
                     links.Each(link =>
                     {
-                        linksToDelete.Add((List<ulong>)link);
+                        linksToDelete.Add(link);
                         return links.Constants.Continue;
                     }, query);
                     foreach(var linkToDelete in linksToDelete)
                     {
                         links.Delete(linkToDelete);
                     }
-                    List<Link> linksAfterDelete = new();
+                    List<Link> linksAfterDelete = new List<Link>();
                     links.Each(link =>
                     {
                         linksAfterDelete.Add(new Link(link));
