@@ -10,6 +10,6 @@ namespace Platform.Data.Doublets.Gql.Schema
     {
         public int affected_rows { get; set; }
 
-        public List<IList<ulong>> returning { get; set; }
+        public IList<Link> returning { get; set; }
     }
 }

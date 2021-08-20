@@ -13,7 +13,7 @@ namespace Input
         public LinksMutationResponseType()
         {
             Field<IntGraphType>("affected_rows");
-            Field<ListGraphType<ListGraphType<LongGraphType>>>("returning");
+            Field<ListGraphType<LongGraphType>>("returning");
         }
     }
 }

@@ -58,7 +58,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                         return links.Constants.Continue;
                     }, query);
                     response.affected_rows = linksToDelete.Count();
-                    response.returning = linksToDelete;
+                    response.returning = (IList<Link>)LinkQuery.GetLinks(context, links);
                     foreach(var linkToDelete in linksToDelete)
                     {
                         links.Delete(linkToDelete);
