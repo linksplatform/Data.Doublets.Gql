@@ -38,15 +38,7 @@ namespace Platform.Data.Doublets.Gql.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddSingleton<ILinks<ulong>>(sp =>
-                {
-                    LinksConstants<UInt64> linksConstants = new(enableExternalReferencesSupport: true);
-                    FileMappedResizableDirectMemory fileMappedResizableDirectMemory = new(DbFileName);
-                    var unitedMemoryLinks = UnitedMemoryLinks<UInt64>.DefaultLinksSizeStep;
-                    const IndexTreeType indexTreeType = IndexTreeType.Default;
-                    using UnitedMemoryLinks<UInt64> memoryAdapter = new(fileMappedResizableDirectMemory, unitedMemoryLinks, linksConstants, indexTreeType);
-                    return memoryAdapter.DecorateWithAutomaticUniquenessAndUsagesResolution();
-                })
+                .AddSingleton<ILinks<ulong>>(sp => new UnitedMemoryLinks<UInt64>(new FileMappedResizableDirectMemory(DbFileName), UnitedMemoryLinks<UInt64>.DefaultLinksSizeStep, new LinksConstants<UInt64>(enableExternalReferencesSupport: true), IndexTreeType.Default).DecorateWithAutomaticUniquenessAndUsagesResolution())
                 .AddSingleton<ILinks, Links>()
                 .AddSingleton<LinkSchema>()
                 .AddGraphQL((options, provider) =>
