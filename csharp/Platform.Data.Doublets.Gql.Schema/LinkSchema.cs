@@ -9,7 +9,6 @@ namespace Platform.Data.Doublets.Gql.Schema
         {
             Query = new LinkQuery(Link);
             Mutation = new LinkMutation(Link);
-            //Subscription = new LinkSubscriptions();
         }
     }
 }

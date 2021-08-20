@@ -10,6 +10,10 @@ using Platform.Data.Doublets;
 using Input;
 using static Platform.Data.Doublets.Gql.Schema.Link;
 using GraphQL;
+using Platform.Data;
+using Platform.Data.Doublets.Memory;
+using Platform.Data.Doublets.Memory.United.Generic;
+using Platform.Memory;
 
 namespace Platform.Data.Doublets.Gql.Schema
 {
