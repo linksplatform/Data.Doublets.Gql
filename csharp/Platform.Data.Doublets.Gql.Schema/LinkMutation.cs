@@ -6,6 +6,7 @@ using Input;
 using GraphQL;
 using System;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
 
 namespace Platform.Data.Doublets.Gql.Schema
 {
@@ -39,7 +40,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                     }
                     return insertLinks;
                 });
-            Field<ListGraphType<LinkType>>("delete_links",
+            Field<LinksMutationResponseType>("delete_links",
                 arguments: new QueryArguments(
                     new QueryArgument<LinkBooleanExpressionInputType> { Name = "where" }
                 ),
@@ -50,11 +51,14 @@ namespace Platform.Data.Doublets.Gql.Schema
                     var where = context.GetArgument<LinkBooleanExpression>("where");
                     var query = new Link<UInt64>(index: any, source: (ulong?)where?.from_id?._eq ?? any, target: (ulong?)where?.to_id?._eq ?? any);
                     List<IList<ulong>> linksToDelete = new List<IList<ulong>>();
+                    var response = new LinksMutationResponse();
                     links.Each(link =>
                     {
                         linksToDelete.Add(link);
                         return links.Constants.Continue;
                     }, query);
+                    response.affected_rows = linksToDelete.Count();
+                    response.returning = linksToDelete;
                     foreach(var linkToDelete in linksToDelete)
                     {
                         links.Delete(linkToDelete);
@@ -65,7 +69,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                         linksAfterDelete.Add(new Link(link));
                         return links.Constants.Continue;
                     }, query);
-                    return linksAfterDelete;
+                    return response;
                 });
         }
     }
