@@ -77,7 +77,13 @@ namespace Platform.Data.Doublets.Gql.Schema
                     {
                         links.Delete(linkToDelete);
                     }
-                    return links;
+                    List<Link> linksAfterDelete = new();
+                    links.Each(link =>
+                    {
+                        linksAfterDelete.Add(new Link(link));
+                        return links.Constants.Continue;
+                    }, query);
+                    return linksAfterDelete;
                 });
         }
     }
