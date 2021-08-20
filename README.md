@@ -88,7 +88,7 @@ mutation {
 
 ```gql
 mutation {
-  insert_links(where: { from_id: { _eq: 1 }, to_id: { _eq: 1 } }) {
+  delete_links(where: { from_id: { _eq: 1 }, to_id: { _eq: 1 } }) {
     id
   }
 }
