@@ -37,7 +37,7 @@ namespace Platform.Data.Doublets.Gql.Schema
 
         }
 
-        public static IEnumerable<Link> GetLinks(IResolveFieldContext<object> context, ILinks<ulong> links, long? forceFromId, long? forceToId)
+        public static IEnumerable<Link> GetLinks(IResolveFieldContext<object> context, ILinks<ulong> links, long? forceFromId = null, long? forceToId = null)
         {
             var linksList = new List<Link>();
             IEnumerable<Link> allLinks = linksList;
