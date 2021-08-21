@@ -23,9 +23,9 @@ namespace Input
             Field<ListGraphType<LinkType>>("out", null, LinkQuery.Arguments, ResolveOut, null);
         }
 
-        private List<Link> ResolveIn(IResolveFieldContext<Link> context) => LinkQuery.GetLinks(context, (ILinks<ulong>)context.RequestServices.GetService(typeof(ILinks<ulong>)), null, context.Source.id).ToList();
+        private List<Link> ResolveIn(IResolveFieldContext<Link> context) => LinkQuery.GetLinks(context,null, context.Source.id).ToList();
         
-        private List<Link> ResolveOut(IResolveFieldContext<Link> context) => LinkQuery.GetLinks(context, (ILinks<ulong>)context.RequestServices.GetService(typeof(ILinks<ulong>)), context.Source.id, null).ToList();
+        private List<Link> ResolveOut(IResolveFieldContext<Link> context) => LinkQuery.GetLinks(context, context.Source.id, null).ToList();
 
         private Link ResolveFrom(IResolveFieldContext<Link> context) => context.Source.@from ?? GetLinkOrDefault(context, context.Source.from_id);
 

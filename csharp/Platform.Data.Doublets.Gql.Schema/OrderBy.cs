@@ -28,17 +28,4 @@ namespace Platform.Data.Doublets.Gql.Schema
 
         public order_by? type_id { get; set; }
     }
-    /*
-     * input dc_dg_links_order_by {
-  from: dc_dg_links_order_by
-  from_id: order_by
-  id: order_by
-  in_aggregate: dc_dg_links_aggregate_order_by
-  out_aggregate: dc_dg_links_aggregate_order_by
-  to: dc_dg_links_order_by
-  to_id: order_by
-  type: dc_dg_links_order_by
-  type_id: order_by
-}
-     */
 }

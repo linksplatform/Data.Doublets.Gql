@@ -35,6 +35,45 @@ namespace Platform.Data.Doublets.Gql.Schema
                 });
         }
 
+        public static IEnumerable<Link> GetLinks(IResolveFieldContext<object> context, long? forceFromId = null, long? forceToId = null)
+        {
+            var links = context.RequestServices.GetService<ILinks<ulong>>();
+            var any = links.Constants.Any;
+            Link<UInt64> query = new(index: any, source: any, target: any);
+            IEnumerable<Link> allLinks = (IEnumerable<Link>)links.All(query);
+            if (context.HasArgument("where"))
+            {
+                var where = context.GetArgument<LinkBooleanExpression>("where");
+                query = new Link<UInt64>(index: any, source: (ulong?)forceFromId ?? (ulong?)where?.from_id?._eq ?? any, target: (ulong?)forceToId ?? (ulong?)where?.to_id?._eq ?? any);
+            }
+            if (context.HasArgument("order_by"))
+            {
+                var orderBy = context.GetArgument<OrderBy>("order_by");
+                Func<Func<Link, long>, IOrderedEnumerable<Link>> orderer = allLinks.OrderByDescending;
+                GetSelectorAndOrderByValue(orderBy, out Func<Link, long> selector, out order_by? orderByValue);
+                if (orderByValue == order_by.asc)
+                {
+                    orderer = allLinks.OrderBy;
+                }
+                allLinks = orderer(selector);
+            }
+            if (context.HasArgument("distinct"))
+            {
+                var dis = context.GetArgument<List<distinct>>("distinct");
+                allLinks = allLinks.DistinctBy(GetSortSelectorAndOrderByValue(dis.First()));
+            }
+            if (context.HasArgument("offset"))
+            {
+                int offset = context.GetArgument<int>("offset");
+                allLinks = allLinks.Skip(offset);
+            }
+            if (context.HasArgument("limit"))
+            {
+                long limit = context.GetArgument<long>("limit");
+                return allLinks.Take((int)limit);
+            }
+            return allLinks;
+        }
         public static IEnumerable<Link> GetLinks(IResolveFieldContext<object> context, ILinks<ulong> links, long? forceFromId = null, long? forceToId = null)
         {
             var any = links.Constants.Any;
