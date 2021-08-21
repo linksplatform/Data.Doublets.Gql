@@ -28,30 +28,8 @@ namespace Input
             Field<ListGraphType<LinkType>>().Name("out").Resolve(ResolveOut);
         }
 
-        private List<Link> ResolveIn(IResolveFieldContext<Link> context)
-        {
-            var inList = new List<Link>();
-            ILinks<ulong> Links = (ILinks<ulong>) context.RequestServices.GetService(typeof(ILinks<ulong>));
-            var query = new Link<UInt64>(index: Links.Constants.Any, source: Links.Constants.Any, target: (ulong)context.Source.id);
-            Links.Each(link =>
-            {
-                inList.Add(new Link(link));
-                return Links.Constants.Continue;
-            }, query);
-            return inList;
-        }
-        private List<Link> ResolveOut(IResolveFieldContext<Link> context)
-        {
-            var outList = new List<Link>();
-            ILinks<ulong> Links = (ILinks<ulong>)context.RequestServices.GetService(typeof(ILinks<ulong>));
-            var query = new Link<UInt64>(index: Links.Constants.Any, source: (ulong)context.Source.id ,target: Links.Constants.Any);
-            Links.Each(link =>
-            {
-                outList.Add(new Link(link));
-                return Links.Constants.Continue;
-            }, query);
-            return outList;
-        }
+        private List<Link> ResolveIn(IResolveFieldContext<Link> context) => (List<Link>)LinkQuery.GetLinks(context, (ILinks<ulong>)context.RequestServices.GetService(typeof(ILinks<ulong>)), null, context.Source.id);
+        private List<Link> ResolveOut(IResolveFieldContext<Link> context) => (List<Link>)LinkQuery.GetLinks(context, (ILinks<ulong>)context.RequestServices.GetService(typeof(ILinks<ulong>)), context.Source.id, null);
 
         private Link ResolveFrom(IResolveFieldContext<Link> context) => context.Source.@from ?? GetLinkOrDefault(context, context.Source.from_id);
 
