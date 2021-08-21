@@ -1,9 +1,4 @@
 ﻿using GraphQL.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Platform.Data.Doublets.Gql.Schema
 {
@@ -21,18 +16,4 @@ namespace Platform.Data.Doublets.Gql.Schema
             Name = "DistinctEnum";
         }
     }
-    /*enum dc_dg_links_select_column {
-  """column name"""
-  from_id
-
-  """column name"""
-  id
-
-  """column name"""
-  to_id
-
-  """column name"""
-  type_id
-}
-*/
 }

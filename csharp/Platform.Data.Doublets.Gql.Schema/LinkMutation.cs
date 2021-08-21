@@ -1,10 +1,7 @@
 using System.Collections.Generic;
-using GraphQL.NewtonsoftJson;
 using GraphQL.Types;
-using Platform.Data.Doublets;
 using Input;
 using GraphQL;
-using System;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 

@@ -1,5 +1,4 @@
 using System;
-using GraphQL.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema
 {

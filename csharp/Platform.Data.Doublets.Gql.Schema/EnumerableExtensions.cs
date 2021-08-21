@@ -1,7 +1,6 @@
 ﻿using Platform.Exceptions;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace Platform.Data.Doublets.Gql.Schema
 {
