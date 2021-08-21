@@ -21,13 +21,7 @@ namespace Platform.Data.Doublets.Gql.Schema
         public LinkQuery(ILinks Link)
         {
             Field<ListGraphType<LinkType>>("links",
-                arguments: new QueryArguments(
-                    new QueryArgument<LongGraphType> { Name = "limit" },
-                    new QueryArgument<LinkBooleanExpressionInputType> { Name = "where" },
-                    new QueryArgument<OrderByInputType> { Name = "order_by" },
-                    new QueryArgument<LongGraphType> { Name = "offset" },
-                    new QueryArgument<ListGraphType<DistinctEnum>> { Name = "distinct" }
-                ),
+                arguments: Arguments,
                 resolve: context =>
                 {
                     var links = context.RequestServices.GetService<ILinks<ulong>>();
