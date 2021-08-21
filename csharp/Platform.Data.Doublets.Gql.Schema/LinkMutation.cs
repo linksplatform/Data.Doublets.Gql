@@ -69,9 +69,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                     foreach (var a in LinkQuery.GetLinks(context, links))
                     {
                         var updatedLink = links.UpdateOrCreateOrGet((ulong)a.from_id, (ulong)a.to_id, (ulong)set.from_id, (ulong)set.to_id );
-                        var source = links.GetSource(updatedLink);
-                        var targer = links.GetTarget(updatedLink);
-                        response.returning.Add(new Link() { id = (long)updatedLink, from_id = (long)links.GetSource(updatedLink), to_id = (long)links.GetTarget(updatedLink) });
+                        response.returning.Add(new Link(links.GetLink(updatedLink)));
                     }
                     response.affected_rows = response.returning.Count;
                     return response;
