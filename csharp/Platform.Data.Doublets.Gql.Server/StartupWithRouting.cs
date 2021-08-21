@@ -11,6 +11,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Platform.Data.Doublets.Memory.United.Generic;
+using System;
+using Platform.Memory;
+using Platform.Data.Doublets.Memory;
 
 namespace Platform.Data.Doublets.Gql.Server
 {
@@ -31,7 +35,7 @@ namespace Platform.Data.Doublets.Gql.Server
         {
             services
                 .AddRouting()
-                .AddSingleton<Links, Links>()
+                .AddSingleton<ILinks<ulong>>(sp => new UnitedMemoryLinks<UInt64>(new FileMappedResizableDirectMemory(Startup.DbFileName), UnitedMemoryLinks<UInt64>.DefaultLinksSizeStep, new LinksConstants<UInt64>(enableExternalReferencesSupport: true), IndexTreeType.Default).DecorateWithAutomaticUniquenessAndUsagesResolution())
                 .AddSingleton<LinkSchema>()
                 .AddGraphQL((options, provider) =>
                 {

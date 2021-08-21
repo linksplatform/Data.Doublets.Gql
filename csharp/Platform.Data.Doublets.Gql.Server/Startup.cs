@@ -39,7 +39,6 @@ namespace Platform.Data.Doublets.Gql.Server
         {
             services
                 .AddSingleton<ILinks<ulong>>(sp => new UnitedMemoryLinks<UInt64>(new FileMappedResizableDirectMemory(DbFileName), UnitedMemoryLinks<UInt64>.DefaultLinksSizeStep, new LinksConstants<UInt64>(enableExternalReferencesSupport: true), IndexTreeType.Default).DecorateWithAutomaticUniquenessAndUsagesResolution())
-                .AddSingleton<ILinks, Links>()
                 .AddSingleton<LinkSchema>()
                 .AddGraphQL((options, provider) =>
                 {
