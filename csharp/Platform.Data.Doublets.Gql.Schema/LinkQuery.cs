@@ -34,12 +34,12 @@ namespace Platform.Data.Doublets.Gql.Schema
             var links = context.RequestServices.GetService<ILinks<ulong>>();
             var any = links.Constants.Any;
             Link<UInt64> query = new(index: any, source: any, target: any);
-            IEnumerable<Link> allLinks = (IEnumerable<Link>)links.All(query);
             if (context.HasArgument("where"))
             {
                 var where = context.GetArgument<LinkBooleanExpression>("where");
                 query = new Link<UInt64>(index: any, source: (ulong?)forceFromId ?? (ulong?)where?.from_id?._eq ?? any, target: (ulong?)forceToId ?? (ulong?)where?.to_id?._eq ?? any);
             }
+            IEnumerable<Link> allLinks = (IEnumerable<Link>)links.All(query);
             if (context.HasArgument("order_by"))
             {
                 var orderBy = context.GetArgument<OrderBy>("order_by");

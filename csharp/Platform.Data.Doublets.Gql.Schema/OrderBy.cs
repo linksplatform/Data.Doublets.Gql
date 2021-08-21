@@ -13,7 +13,6 @@ namespace Platform.Data.Doublets.Gql.Schema
 
     class OrderBy
     {
-
         public OrderBy from { get; set; }
 
         public order_by? from_id { get; set; }
