@@ -29,11 +29,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                 });
         }
 
-        public static IEnumerable<Link> GetLinks(IResolveFieldContext<object> context, long? forceFromId = null, long? forceToId = null)
-        {
-            var links = context.RequestServices.GetService<ILinks<ulong>>();
-            return GetLinks(context, links, forceFromId, forceToId);
-        }
+        public static IEnumerable<Link> GetLinks(IResolveFieldContext<object> context, long? forceFromId = null, long? forceToId = null) => GetLinks(context, context.RequestServices.GetService<ILinks<ulong>>(), forceFromId, forceToId);
         public static IEnumerable<Link> GetLinks(IResolveFieldContext<object> context, ILinks<ulong> links, long? forceFromId = null, long? forceToId = null)
         {
             var any = links.Constants.Any;

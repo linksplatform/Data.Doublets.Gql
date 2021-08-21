@@ -19,7 +19,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                 {
                     return new LinksMutationResponse()
                     {
-                        returning = new List<Link>() { links.InsertLink(context.RequestServices.GetService(typeof(ILinks<ulong>)), context.GetArgument<Link>("object")) },
+                        returning = new List<Link>() {InsertLink(context.RequestServices.GetService(typeof(ILinks<ulong>)), context.GetArgument<Link>("object")) },
                         affected_rows = 1
                     };
                 });
@@ -33,7 +33,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                     var linksStorage = context.RequestServices.GetService(typeof(ILinks<ulong>));
                     foreach (var link in context.GetArgument<List<Link>>("objects"))
                     {
-                        response.returning.Add(links.InsertLink(linksStorage, link));
+                        response.returning.Add(InsertLink(linksStorage, link));
                     }
                     response.affected_rows = response.returning.Count;
                     return response;
@@ -66,14 +66,20 @@ namespace Platform.Data.Doublets.Gql.Schema
                     var set = context.GetArgument<Link>("_set");
                     var links = context.RequestServices.GetService<ILinks<ulong>>();
                     var response = new LinksMutationResponse() { returning = new List<Link>() };
-                    foreach (var a in LinkQuery.GetLinks(context, links))
+                    foreach (var link in LinkQuery.GetLinks(context, links))
                     {
-                        var updatedLink = links.UpdateOrCreateOrGet((ulong)a.from_id, (ulong)a.to_id, (ulong)set.from_id, (ulong)set.to_id );
+                        var updatedLink = links.UpdateOrCreateOrGet((ulong)link.from_id, (ulong)link.to_id, (ulong)set.from_id, (ulong)set.to_id );
                         response.returning.Add(new Link(links.GetLink(updatedLink)));
                     }
                     response.affected_rows = response.returning.Count;
                     return response;
                 });
+        }
+        public static Link InsertLink(object service, Link link)
+        {
+            ILinks<ulong> Links = (ILinks<ulong>)service;
+            var create = Links.GetOrCreate((ulong)link.from_id, (ulong)link.to_id);
+            return LinkType.GetLinkOrDefault(service, (long)create);
         }
     }
 }
