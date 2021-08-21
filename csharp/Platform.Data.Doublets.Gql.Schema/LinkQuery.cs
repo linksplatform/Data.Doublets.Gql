@@ -18,13 +18,12 @@ namespace Platform.Data.Doublets.Gql.Schema
                     new QueryArgument<LongGraphType> { Name = "offset" },
                     new QueryArgument<ListGraphType<DistinctEnum>> { Name = "distinct" }
                 );
-        public LinkQuery(ILinks Link)
+        public LinkQuery(ILinks<ulong> links)
         {
             Field<ListGraphType<LinkType>>("links",
                 arguments: Arguments,
                 resolve: context =>
                 {
-                    var links = context.RequestServices.GetService<ILinks<ulong>>();
                     return GetLinks(context, links);
                 });
         }

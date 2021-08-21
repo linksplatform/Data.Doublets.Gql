@@ -9,7 +9,7 @@ namespace Platform.Data.Doublets.Gql.Schema
 {
     public class LinkMutation : ObjectGraphType<object>
     {
-        public LinkMutation(ILinks links)
+        public LinkMutation(ILinks<ulong> links)
         {
             Field<LinksMutationResponseType>("insert_links_one",
                 arguments: new QueryArguments(
@@ -19,7 +19,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                 {
                     return new LinksMutationResponse()
                     {
-                        returning = new List<Link>() {InsertLink(context.RequestServices.GetService<ILinks<ulong>>(), context.GetArgument<Link>("object")) },
+                        returning = new List<Link>() {InsertLink(links, context.GetArgument<Link>("object")) },
                         affected_rows = 1
                     };
                 });
@@ -30,10 +30,9 @@ namespace Platform.Data.Doublets.Gql.Schema
                 resolve: context =>
                 {
                     var response = new LinksMutationResponse() { returning = new List<Link>()};
-                    var linksStorage = context.RequestServices.GetService<ILinks<ulong>>();
                     foreach (var link in context.GetArgument<List<Link>>("objects"))
                     {
-                        response.returning.Add(InsertLink(linksStorage, link));
+                        response.returning.Add(InsertLink(links, link));
                     }
                     response.affected_rows = response.returning.Count;
                     return response;
@@ -44,7 +43,6 @@ namespace Platform.Data.Doublets.Gql.Schema
                 ),
                 resolve: context =>
                 {
-                    var links = context.RequestServices.GetService<ILinks<ulong>>();
                     var response = new LinksMutationResponse
                     {
                         returning = LinkQuery.GetLinks(context, links).ToList()
@@ -64,7 +62,6 @@ namespace Platform.Data.Doublets.Gql.Schema
                 resolve: context =>
                 {
                     var set = context.GetArgument<Link>("_set");
-                    var links = context.RequestServices.GetService<ILinks<ulong>>();
                     var response = new LinksMutationResponse() { returning = new List<Link>() };
                     foreach (var link in LinkQuery.GetLinks(context, links))
                     {

@@ -4,10 +4,10 @@ namespace Platform.Data.Doublets.Gql.Schema
 {
     public class LinkSchema : GraphQL.Types.Schema
     {
-        public LinkSchema(ILinks Link, IServiceProvider provider) : base(provider)
+        public LinkSchema(ILinks<ulong> links, IServiceProvider provider) : base(provider)
         {
-            Query = new LinkQuery(Link);
-            Mutation = new LinkMutation(Link);
+            Query = new LinkQuery(links);
+            Mutation = new LinkMutation(links);
         }
     }
 }
