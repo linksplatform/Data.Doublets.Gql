@@ -19,15 +19,8 @@ namespace Input
             Field(o => o.to_id);
             Field(o => o.type, type: typeof(LinkType)).Resolve(ResolveType);
             Field(o => o.type_id);
-            QueryArguments args = new(
-                 new QueryArgument<LongGraphType> { Name = "limit" },
-                 new QueryArgument<LinkBooleanExpressionInputType> { Name = "where" },
-                 new QueryArgument<OrderByInputType> { Name = "order_by" },
-                 new QueryArgument<LongGraphType> { Name = "offset" },
-                 new QueryArgument<ListGraphType<DistinctEnum>> { Name = "distinct" }
-            );
-            Field<ListGraphType<LinkType>>("in", null,args, ResolveIn, null); 
-            Field<ListGraphType<LinkType>>("out", null,args, ResolveOut, null);
+            Field<ListGraphType<LinkType>>("in", null, LinkQuery.Arguments, ResolveIn, null); 
+            Field<ListGraphType<LinkType>>("out", null, LinkQuery.Arguments, ResolveOut, null);
         }
 
         private List<Link> ResolveIn(IResolveFieldContext<Link> context) => LinkQuery.GetLinks(context, (ILinks<ulong>)context.RequestServices.GetService(typeof(ILinks<ulong>)), null, context.Source.id).ToList();

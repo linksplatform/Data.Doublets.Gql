@@ -11,6 +11,13 @@ namespace Platform.Data.Doublets.Gql.Schema
 {
     public class LinkQuery : ObjectGraphType
     {
+        public static readonly QueryArguments Arguments = new QueryArguments(
+                    new QueryArgument<LongGraphType> { Name = "limit" },
+                    new QueryArgument<LinkBooleanExpressionInputType> { Name = "where" },
+                    new QueryArgument<OrderByInputType> { Name = "order_by" },
+                    new QueryArgument<LongGraphType> { Name = "offset" },
+                    new QueryArgument<ListGraphType<DistinctEnum>> { Name = "distinct" }
+                );
         public LinkQuery(ILinks Link)
         {
             Field<ListGraphType<LinkType>>("links",
@@ -30,20 +37,14 @@ namespace Platform.Data.Doublets.Gql.Schema
 
         public static IEnumerable<Link> GetLinks(IResolveFieldContext<object> context, ILinks<ulong> links, long? forceFromId = null, long? forceToId = null)
         {
-            var linksList = new List<Link>();
-            IEnumerable<Link> allLinks = linksList;
             var any = links.Constants.Any;
             Link<UInt64> query = new(index: any, source: any, target: any);
+            IEnumerable<Link> allLinks = (IEnumerable<Link>)links.All(query);
             if (context.HasArgument("where"))
             {
                 var where = context.GetArgument<LinkBooleanExpression>("where");
                 query = new Link<UInt64>(index: any, source: (ulong?)forceFromId ?? (ulong?)where?.from_id?._eq ?? any, target: (ulong?)forceToId ?? (ulong?)where?.to_id?._eq ?? any);
             }
-            links.Each(link =>
-            {
-                linksList.Add(new Link(link));
-                return links.Constants.Continue;
-            }, query);
             if (context.HasArgument("order_by"))
             {
                 var orderBy = context.GetArgument<OrderBy>("order_by");
