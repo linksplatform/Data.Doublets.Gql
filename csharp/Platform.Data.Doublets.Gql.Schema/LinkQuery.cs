@@ -37,19 +37,13 @@ namespace Platform.Data.Doublets.Gql.Schema
             if (context.HasArgument("where"))
             {
                 var where = context.GetArgument<LinkBooleanExpression>("where");
-                query = new Link<UInt64>(index: any, source: (ulong?)forceFromId ?? (ulong?)where?.from_id?._eq ?? any, target: (ulong?)forceToId ?? (ulong?)where?.to_id?._eq ?? any);
+                query = new Link<UInt64>(index: (ulong?)where?.id?._eq ?? any, source: (ulong?)forceFromId ?? (ulong?)where?.from_id?._eq ?? any, target: (ulong?)forceToId ?? (ulong?)where?.to_id?._eq ?? any);
             }
             IEnumerable<Link> allLinks = (IEnumerable<Link>)links.All(query);
             if (context.HasArgument("order_by"))
             {
-                var orderBy = context.GetArgument<OrderBy>("order_by");
-                Func<Func<Link, long>, IOrderedEnumerable<Link>> orderer = allLinks.OrderByDescending;
-                GetSelectorAndOrderByValue(orderBy, out Func<Link, long> selector, out order_by? orderByValue);
-                if (orderByValue == order_by.asc)
-                {
-                    orderer = allLinks.OrderBy;
-                }
-                allLinks = orderer(selector);
+                GetSelectorAndOrderByValue(context.GetArgument<OrderBy>("order_by"), out Func<Link, long> selector, out order_by? orderByValue);
+                allLinks = orderByValue == order_by.asc ? allLinks.OrderBy(selector) : allLinks.OrderByDescending(selector);
             }
             if (context.HasArgument("distinct"))
             {
