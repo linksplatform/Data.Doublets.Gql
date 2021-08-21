@@ -69,7 +69,7 @@ http://localhost:60341/ui/voyager
 }
 ```
 
-```
+```gql
 {
   links(
     where: { from_id: { _eq: 1 }, to_id: { _eq: 1 } }
