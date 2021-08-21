@@ -92,6 +92,16 @@ mutation {
 
 ```gql
 mutation {
+  insert_links(set: object: { from_id: 1, to_id: 2 }, where: { from_id: { _eq: 1 }, to_id: { _eq: 1 } }) {
+    returning {
+      id
+    }
+  }
+}
+```
+
+```gql
+mutation {
   delete_links(where: { from_id: { _eq: 1 }, to_id: { _eq: 1 } }) {
     returning {
       id
