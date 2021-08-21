@@ -14,31 +14,32 @@ namespace Platform.Data.Doublets.Gql.Schema
     {
         public LinkMutation(ILinks links)
         {
-            Field<LinkType>("insert_links_one",
+            Field<LinksMutationResponseType>("insert_links_one",
                 arguments: new QueryArguments(
                     new QueryArgument<LinkInputType> { Name = "object" }
                 ),
                 resolve: context =>
                 {
-                    var receivedLink = context.GetArgument<Link>("object");
-                    var link = links.InsertLink(context.RequestServices.GetService(typeof(ILinks<ulong>)), receivedLink);
-                    return link;
+                    return new LinksMutationResponse()
+                    {
+                        returning = new List<Link>() { links.InsertLink(context.RequestServices.GetService(typeof(ILinks<ulong>)), context.GetArgument<Link>("object")) },
+                        affected_rows = 1
+                    };
                 });
-            Field<ListGraphType<LinkType>>("insert_links",
+            Field<LinksMutationResponseType>("insert_links",
                 arguments: new QueryArguments(
                     new QueryArgument<ListGraphType<LinkInputType>> { Name = "objects" }
                 ),
                 resolve: context =>
                 {
-                   // EnumGraphType a;
-                    var insertLinks = new List<Link>();
-                    var receivedLinks = context.GetArgument<List<Link>>("objects");
+                    var response = new LinksMutationResponse();
                     var linksStorage = context.RequestServices.GetService(typeof(ILinks<ulong>));
-                    foreach (var link in receivedLinks)
+                    foreach (var link in context.GetArgument<List<Link>>("objects"))
                     {
-                        insertLinks.Add(links.InsertLink(linksStorage, link));
+                        response.returning.Add(links.InsertLink(linksStorage, link));
                     }
-                    return insertLinks;
+                    response.affected_rows = response.returning.Count;
+                    return response;
                 });
             Field<LinksMutationResponseType>("delete_links",
                 arguments: new QueryArguments(
@@ -47,8 +48,10 @@ namespace Platform.Data.Doublets.Gql.Schema
                 resolve: context =>
                 {
                     var links = context.RequestServices.GetService<ILinks<ulong>>();
-                    var response = new LinksMutationResponse();
-                    response.returning = (List<Link>)LinkQuery.GetLinks(context, links);
+                    var response = new LinksMutationResponse
+                    {
+                        returning = (List<Link>)LinkQuery.GetLinks(context, links)
+                    };
                     response.affected_rows = response.returning.Count();
                     foreach(var linkToDelete in response.returning)
                     {
