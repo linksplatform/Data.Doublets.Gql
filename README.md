@@ -24,7 +24,7 @@ http://localhost:60341/ui/voyager
 ```
 
 
-# Supported query examples:
+## Supported query examples:
 ```gql
 {
   links {
@@ -69,7 +69,7 @@ http://localhost:60341/ui/voyager
 }
 ```
 
-# Supported mutation examples:
+## Supported mutation examples:
 ```gql
 mutation {
   insert_links_one(object: { from_id: 1, to_id: 1 }) {
