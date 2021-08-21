@@ -79,7 +79,6 @@ namespace Platform.Data.Doublets.Gql.Schema
                 long limit = context.GetArgument<long>("limit");
                 return allLinks.Take((int)limit);
             }
-
             return allLinks;
         }
 
