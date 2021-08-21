@@ -123,6 +123,8 @@ mutation {
   insert_links_one(object: { from_id: 1, to_id: 1 }) {
     returning {
       id
+      from_id
+      to_id
     }
   }
 }
@@ -133,6 +135,8 @@ mutation {
   insert_links(objects: [{ from_id: 1, to_id: 1 }, { from_id: 2, to_id: 2 }]) {
     returning {
       id
+      from_id
+      to_id
     }
   }
 }
@@ -143,6 +147,8 @@ mutation {
   update_links(_set: { from_id: 1, to_id: 2 }, where: { from_id: { _eq: 2 }, to_id: { _eq: 2 } }) {
     returning {
       id
+      from_id
+      to_id
     }
   }
 }
@@ -153,6 +159,8 @@ mutation {
   delete_links(where: { from_id: { _eq: 1 }, to_id: { _eq: 1 } }) {
     returning {
       id
+      from_id
+      to_id
     }
   }
 }
