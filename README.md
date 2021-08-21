@@ -16,12 +16,10 @@ dotnet run path/to/db.links
 ```
 
 Navigate to:
-```
-http://localhost:60341/ui/playground
-http://localhost:60341/ui/graphiql
-http://localhost:60341/ui/altair
-http://localhost:60341/ui/voyager
-```
+* http://localhost:60341/ui/playground
+* http://localhost:60341/ui/graphiql
+* http://localhost:60341/ui/altair
+* http://localhost:60341/ui/voyager
 
 
 ## Supported query examples:
