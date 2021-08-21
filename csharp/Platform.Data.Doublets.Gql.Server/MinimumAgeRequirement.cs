@@ -10,9 +10,6 @@ namespace Platform.Data.Doublets.Gql.Server
     {
         public int MinimumAge { get; }
 
-        public MinimumAgeRequirement(int minimumAge)
-        {
-            MinimumAge = minimumAge;
-        }
+        public MinimumAgeRequirement(int minimumAge) => MinimumAge = minimumAge;
     }
 }

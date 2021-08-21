@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using Platform.Data.Doublets.Gql.Schema;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Altair;
 using GraphQL.Server.Ui.GraphiQL;
@@ -12,11 +9,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Platform.Data;
-using Platform.Data.Doublets;
+using Platform.Data.Doublets.Gql.Schema;
 using Platform.Data.Doublets.Memory;
 using Platform.Data.Doublets.Memory.United.Generic;
 using Platform.Memory;
+using System.Collections.Generic;
 
 namespace Platform.Data.Doublets.Gql.Server
 {
@@ -35,10 +32,8 @@ namespace Platform.Data.Doublets.Gql.Server
         public IWebHostEnvironment Environment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services
-                .AddSingleton<ILinks<ulong>>(sp => new UnitedMemoryLinks<UInt64>(new FileMappedResizableDirectMemory(DbFileName), UnitedMemoryLinks<UInt64>.DefaultLinksSizeStep, new LinksConstants<UInt64>(enableExternalReferencesSupport: true), IndexTreeType.Default).DecorateWithAutomaticUniquenessAndUsagesResolution())
+        public void ConfigureServices(IServiceCollection services) => services
+                .AddSingleton<ILinks<ulong>>(sp => new UnitedMemoryLinks<ulong>(new FileMappedResizableDirectMemory(DbFileName), UnitedMemoryLinks<ulong>.DefaultLinksSizeStep, new LinksConstants<ulong>(enableExternalReferencesSupport: true), IndexTreeType.Default).DecorateWithAutomaticUniquenessAndUsagesResolution())
                 .AddSingleton<LinkSchema>()
                 .AddGraphQL((options, provider) =>
                 {
@@ -51,13 +46,14 @@ namespace Platform.Data.Doublets.Gql.Server
                 .AddWebSockets()
                 .AddDataLoader()
                 .AddGraphTypes(typeof(LinkSchema));
-        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
             if (Environment.IsDevelopment())
+            {
                 app.UseDeveloperExceptionPage();
+            }
 
             app.UseWebSockets();
 

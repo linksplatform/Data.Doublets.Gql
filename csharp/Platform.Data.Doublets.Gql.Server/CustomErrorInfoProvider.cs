@@ -1,10 +1,10 @@
-using System.Text;
 using GraphQL;
 using GraphQL.Execution;
 using GraphQL.Server;
 using GraphQL.Server.Authorization.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
+using System.Text;
 
 namespace Platform.Data.Doublets.Gql.Server
 {
@@ -14,7 +14,7 @@ namespace Platform.Data.Doublets.Gql.Server
     /// </summary>
     public class CustomErrorInfoProvider : DefaultErrorInfoProvider
     {
-        public CustomErrorInfoProvider(IOptions<ErrorInfoProviderOptions> options) : base((IOptions<GraphQL.Execution.ErrorInfoProviderOptions>)options)
+        public CustomErrorInfoProvider(IOptions<ErrorInfoProviderOptions> options) : base(options)
         { }
 
         public override ErrorInfo GetInfo(ExecutionError executionError)
