@@ -2,7 +2,7 @@
 
 namespace Input
 {
-    class LinkInputType : InputObjectGraphType
+    internal class LinkInputType : InputObjectGraphType
     {
         public LinkInputType()
         {

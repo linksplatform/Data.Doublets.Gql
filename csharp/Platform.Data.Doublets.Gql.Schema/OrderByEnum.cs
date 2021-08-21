@@ -2,11 +2,8 @@
 
 namespace Platform.Data.Doublets.Gql.Schema
 {
-    class OrderByEnum : EnumerationGraphType<order_by>
+    internal class OrderByEnum : EnumerationGraphType<order_by>
     {
-        public OrderByEnum()
-        {
-            Name = "OrderByEnum";
-        }
+        public OrderByEnum() => Name = "OrderByEnum";
     }
 }

@@ -1,9 +1,9 @@
-﻿using Platform.Data.Doublets.Gql.Schema;
-using GraphQL.Types;
+﻿using GraphQL.Types;
+using Platform.Data.Doublets.Gql.Schema;
 
 namespace Input
 {
-    class LongComparisonExpressionInputType : InputObjectGraphType<LongComparisonExpression>
+    internal class LongComparisonExpressionInputType : InputObjectGraphType<LongComparisonExpression>
     {
         public LongComparisonExpressionInputType()
         {

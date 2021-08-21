@@ -9,11 +9,9 @@ namespace Platform.Data.Doublets.Gql.Schema
         to_id,
         type_id
     }
-    class DistinctEnum : EnumerationGraphType<distinct>
+
+    internal class DistinctEnum : EnumerationGraphType<distinct>
     {
-        public DistinctEnum()
-        {
-            Name = "DistinctEnum";
-        }
+        public DistinctEnum() => Name = "DistinctEnum";
     }
 }

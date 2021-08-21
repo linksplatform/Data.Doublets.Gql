@@ -2,7 +2,7 @@
 
 namespace Input
 {
-    class LinkBooleanExpressionInputType : InputObjectGraphType
+    internal class LinkBooleanExpressionInputType : InputObjectGraphType
     {
         public LinkBooleanExpressionInputType()
         {

@@ -2,7 +2,7 @@
 
 namespace Input
 {
-    class LinksMutationResponseType : ObjectGraphType
+    internal class LinksMutationResponseType : ObjectGraphType
     {
         public LinksMutationResponseType()
         {

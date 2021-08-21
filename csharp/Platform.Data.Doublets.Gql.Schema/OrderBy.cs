@@ -11,7 +11,7 @@ namespace Platform.Data.Doublets.Gql.Schema
         desc_nulls_lasr
     }
 
-    class OrderBy
+    internal class OrderBy
     {
         public OrderBy from { get; set; }
 

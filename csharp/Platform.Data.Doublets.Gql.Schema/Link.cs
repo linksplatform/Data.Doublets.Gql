@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Platform.Data.Doublets.Gql.Schema
@@ -15,13 +14,13 @@ namespace Platform.Data.Doublets.Gql.Schema
 
         public long to_id { get; set; }
 
-        public Link type {get;set;}
+        public Link type { get; set; }
 
         public long type_id { get; set; }
 
         public Link() { }
 
-        public Link(IList<UInt64> links)
+        public Link(IList<ulong> links)
         {
             var i = 0;
             id = (long)links[i++];

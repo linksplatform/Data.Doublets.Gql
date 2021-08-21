@@ -1,14 +1,14 @@
-﻿using Platform.Data.Doublets.Gql.Schema;
-using GraphQL.Types;
+﻿using GraphQL.Types;
+using Platform.Data.Doublets.Gql.Schema;
 
 namespace Input
 {
-    class OrderByInputType : InputObjectGraphType<OrderBy>
+    internal class OrderByInputType : InputObjectGraphType<OrderBy>
     {
         public OrderByInputType()
         {
             Field<OrderByInputType>("from");
-            Field(x => x.from_id,nullable: true,type: typeof(OrderByEnum));
+            Field(x => x.from_id, nullable: true, type: typeof(OrderByEnum));
             Field(x => x.id, nullable: true, type: typeof(OrderByEnum));
             Field<OrderByInputType>("to");
             Field(x => x.to_id, nullable: true, type: typeof(OrderByEnum));

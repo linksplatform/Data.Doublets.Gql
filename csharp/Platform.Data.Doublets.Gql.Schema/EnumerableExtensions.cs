@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Platform.Data.Doublets.Gql.Schema
 {
-    static class EnumerableExtensions
+    internal static class EnumerableExtensions
     {
         private const int DefaultInternalSetCapacity = 7;
         /// <summary>Returns distinct elements from a sequence according to a specified key selector function.</summary>
@@ -41,14 +41,14 @@ namespace Platform.Data.Doublets.Gql.Schema
 
         private static IEnumerable<TSource> DistinctByIterator<TSource, TKey>(IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IEqualityComparer<TKey>? comparer)
         {
-            using IEnumerator<TSource> enumerator = source.GetEnumerator();
+            using var enumerator = source.GetEnumerator();
 
             if (enumerator.MoveNext())
             {
                 var set = new HashSet<TKey>(DefaultInternalSetCapacity, comparer);
                 do
                 {
-                    TSource element = enumerator.Current;
+                    var element = enumerator.Current;
                     if (set.Add(keySelector(element)))
                     {
                         yield return element;

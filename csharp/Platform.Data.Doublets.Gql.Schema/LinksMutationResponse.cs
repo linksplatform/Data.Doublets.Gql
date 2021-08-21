@@ -2,7 +2,7 @@
 
 namespace Platform.Data.Doublets.Gql.Schema
 {
-    class LinksMutationResponse
+    internal class LinksMutationResponse
     {
         public int affected_rows { get; set; }
 
