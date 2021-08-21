@@ -36,7 +36,7 @@ http://localhost:60341/ui/voyager
 ```gql
 {
   links(
-    where: { from_id: { _eq: 1 }, to_id: { _eq: 1 } }
+    where: { id: { _eq: 1 }, from_id: { _eq: 1 }, to_id: { _eq: 1 } }
     distinct: [FROM_ID]
     order_by: { id: ASC }
     offset: 0
@@ -72,7 +72,7 @@ http://localhost:60341/ui/voyager
 ```gql
 {
   links(
-    where: { from_id: { _eq: 1 }, to_id: { _eq: 1 } }
+    where: { id: { _eq: 1 }, from_id: { _eq: 1 }, to_id: { _eq: 1 } }
     distinct: [FROM_ID]
     order_by: { id: ASC }
     offset: 0
