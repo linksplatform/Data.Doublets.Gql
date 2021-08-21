@@ -19,7 +19,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                 {
                     return new LinksMutationResponse()
                     {
-                        returning = new List<Link>() {InsertLink(context.RequestServices.GetService(typeof(ILinks<ulong>)), context.GetArgument<Link>("object")) },
+                        returning = new List<Link>() {InsertLink(context.RequestServices.GetService<ILinks<ulong>>(), context.GetArgument<Link>("object")) },
                         affected_rows = 1
                     };
                 });
@@ -30,7 +30,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                 resolve: context =>
                 {
                     var response = new LinksMutationResponse() { returning = new List<Link>()};
-                    var linksStorage = context.RequestServices.GetService(typeof(ILinks<ulong>));
+                    var linksStorage = context.RequestServices.GetService<ILinks<ulong>>();
                     foreach (var link in context.GetArgument<List<Link>>("objects"))
                     {
                         response.returning.Add(InsertLink(linksStorage, link));
@@ -47,7 +47,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                     var links = context.RequestServices.GetService<ILinks<ulong>>();
                     var response = new LinksMutationResponse
                     {
-                        returning = (List<Link>)LinkQuery.GetLinks(context, links)
+                        returning = LinkQuery.GetLinks(context, links).ToList()
                     };
                     response.affected_rows = response.returning.Count();
                     foreach(var linkToDelete in response.returning)

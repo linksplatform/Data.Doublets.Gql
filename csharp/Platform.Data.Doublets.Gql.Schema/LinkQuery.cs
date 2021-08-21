@@ -39,7 +39,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                 var where = context.GetArgument<LinkBooleanExpression>("where");
                 query = new Link<UInt64>(index: (ulong?)where?.id?._eq ?? any, source: (ulong?)forceFromId ?? (ulong?)where?.from_id?._eq ?? any, target: (ulong?)forceToId ?? (ulong?)where?.to_id?._eq ?? any);
             }
-            IEnumerable<Link> allLinks = (IEnumerable<Link>)links.All(query);
+            IEnumerable<Link> allLinks = links.All(query).Select(l => new Link(l));
             if (context.HasArgument("order_by"))
             {
                 GetSelectorAndOrderByValue(context.GetArgument<OrderBy>("order_by"), out Func<Link, long> selector, out order_by? orderByValue);
