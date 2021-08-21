@@ -32,7 +32,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                 ),
                 resolve: context =>
                 {
-                    var response = new LinksMutationResponse();
+                    var response = new LinksMutationResponse() { returning = new List<Link>()};
                     var linksStorage = context.RequestServices.GetService(typeof(ILinks<ulong>));
                     foreach (var link in context.GetArgument<List<Link>>("objects"))
                     {
@@ -57,6 +57,26 @@ namespace Platform.Data.Doublets.Gql.Schema
                     {
                         links.Delete((ulong)linkToDelete.id);
                     }
+                    return response;
+                });
+            Field<LinksMutationResponseType>("update_links",
+                arguments: new QueryArguments(
+                    new QueryArgument<LinkInputType> { Name = "_set" },
+                    new QueryArgument<LinkBooleanExpressionInputType> { Name = "where"}
+                ),
+                resolve: context =>
+                {
+                    var set = context.GetArgument<Link>("_set");
+                    var links = context.RequestServices.GetService<ILinks<ulong>>();
+                    var response = new LinksMutationResponse() { returning = new List<Link>() };
+                    foreach (var a in LinkQuery.GetLinks(context, links))
+                    {
+                        var updatedLink = links.UpdateOrCreateOrGet((ulong)a.from_id, (ulong)a.to_id, (ulong)set.from_id, (ulong)set.to_id );
+                        var source = links.GetSource(updatedLink);
+                        var targer = links.GetTarget(updatedLink);
+                        response.returning.Add(new Link() { id = (long)updatedLink, from_id = (long)links.GetSource(updatedLink), to_id = (long)links.GetTarget(updatedLink) });
+                    }
+                    response.affected_rows = response.returning.Count;
                     return response;
                 });
         }
