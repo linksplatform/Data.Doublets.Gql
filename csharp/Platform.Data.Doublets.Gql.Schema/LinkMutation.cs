@@ -52,7 +52,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                     response.affected_rows = response.returning.Count();
                     foreach(var linkToDelete in response.returning)
                     {
-                        links.Delete(new List<ulong> { (ulong)linkToDelete.id, (ulong)linkToDelete.from_id, (ulong)linkToDelete.to_id });
+                        links.Delete((ulong)linkToDelete.id);
                     }
                     return response;
                 });
