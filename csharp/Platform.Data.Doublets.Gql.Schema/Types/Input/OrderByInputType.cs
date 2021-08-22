@@ -1,4 +1,5 @@
-﻿using GraphQL;
+﻿using Gql.Samples.Schemas.Link.Types;
+using GraphQL;
 using GraphQL.Types;
 using Platform.Data.Doublets.Gql.Schema;
 using System.Collections.Generic;
@@ -17,16 +18,16 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
             Field(x => x.to_id, nullable: true, type: typeof(OrderByEnum));
             Field<OrderByInputType>("type");
             Field(x => x.type_id, nullable: true, type: typeof(OrderByEnum));
-            Field<AggregateOrderByInputType>("out_aggregate", null, LinkQuery.Arguments, ResolveOut, null);
-            Field<AggregateOrderByInputType>("in_aggreagate", null, LinkQuery.Arguments, ResolveIn, null);
+            Field<LinksAggregateType>("out_aggregate", null, LinkQuery.Arguments, ResolveOut, null);
+            Field<LinksAggregateType>("in_aggreagate", null, LinkQuery.Arguments, ResolveIn, null);
         }
-        private AggregateOrderByInputType ResolveOut(IResolveFieldContext<OrderBy> context)
+        private LinksAggregateType ResolveOut(IResolveFieldContext<OrderBy> context)
         {
-            return new AggregateOrderByInputType();
+            return new LinksAggregateType();
         }
-        private AggregateOrderByInputType ResolveIn(IResolveFieldContext<OrderBy> context)
+        private LinksAggregateType ResolveIn(IResolveFieldContext<OrderBy> context)
         {
-            return new AggregateOrderByInputType();
+            return new LinksAggregateType();
         }
     }
 }
