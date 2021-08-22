@@ -1,12 +1,11 @@
 ﻿using GraphQL.Types;
-using Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gql.Samples.Schemas.Link.Input
+namespace Platform.Data.Doublets.Gql.Schema.Input
 {
     class AggregateOrderByInputType : InputObjectGraphType
     {

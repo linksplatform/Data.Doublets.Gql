@@ -1,6 +1,7 @@
 using GraphQL;
 using GraphQL.Types;
-using Input;
+using Platform.Data.Doublets.Gql.Schema.Input;
+using Platform.Data.Doublets.Gql.Schema.Types;
 using System.Collections.Generic;
 using System.Linq;
 

@@ -1,6 +1,6 @@
 ﻿using GraphQL.Types;
 
-namespace Input
+namespace Platform.Data.Doublets.Gql.Schema.Types
 {
     internal class LinksMutationResponseType : ObjectGraphType
     {

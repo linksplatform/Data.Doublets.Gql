@@ -7,7 +7,7 @@ using Platform.Data.Doublets.Gql.Schema;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Input
+namespace Platform.Data.Doublets.Gql.Schema.Types
 {
     public class LinkType : ObjectGraphType<Link>
     {

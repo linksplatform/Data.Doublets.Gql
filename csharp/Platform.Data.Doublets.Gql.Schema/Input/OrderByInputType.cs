@@ -1,11 +1,10 @@
-﻿using Gql.Samples.Schemas.Link.Input;
-using GraphQL;
+﻿using GraphQL;
 using GraphQL.Types;
 using Platform.Data.Doublets.Gql.Schema;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Input
+namespace Platform.Data.Doublets.Gql.Schema.Input
 {
     internal class OrderByInputType : InputObjectGraphType<OrderBy>
     {
