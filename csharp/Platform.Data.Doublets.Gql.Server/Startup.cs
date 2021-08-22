@@ -33,7 +33,7 @@ namespace Platform.Data.Doublets.Gql.Server
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) => services
-                .AddSingleton<ILinks<ulong>>(sp => new UnitedMemoryLinks<ulong>(new FileMappedResizableDirectMemory(DbFileName), UnitedMemoryLinks<ulong>.DefaultLinksSizeStep, new LinksConstants<ulong>(enableExternalReferencesSupport: true), IndexTreeType.Default).DecorateWithAutomaticUniquenessAndUsagesResolution())
+                .AddSingleton<ILinks<ulong>>(sp => new SynchronizedLinks<ulong>(new UnitedMemoryLinks<ulong>(new FileMappedResizableDirectMemory(DbFileName), UnitedMemoryLinks<ulong>.DefaultLinksSizeStep, new LinksConstants<ulong>(enableExternalReferencesSupport: true), IndexTreeType.Default).DecorateWithAutomaticUniquenessAndUsagesResolution()))
                 .AddSingleton<LinkSchema>()
                 .AddGraphQL((options, provider) =>
                 {
