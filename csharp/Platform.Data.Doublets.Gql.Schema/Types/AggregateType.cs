@@ -1,4 +1,5 @@
 ﻿using GraphQL.Types;
+using Platform.Data.Doublets.Gql.Schema.Types;
 using Platform.Data.Doublets.Gql.Schema.Types.Input;
 using System;
 using System.Collections.Generic;
@@ -8,10 +9,12 @@ using System.Threading.Tasks;
 
 namespace Gql.Samples.Schemas.Link.Types
 {
-    class AggregateType
+    class AggregateType : ObjectGraphType
     {
-        public AggregateOrderByFieldInputType aggregate_fields { get; set; }
-
-        public List<Platform.Data.Doublets.Gql.Schema.Link> nodes { get; set; }
+        public AggregateType()
+        {
+            Field<AggregateOrderByFieldInputType>("aggregate_fields");
+            Field<ListGraphType<LinkType>>("returning");
+        }
     }
 }
