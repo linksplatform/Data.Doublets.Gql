@@ -1,11 +1,5 @@
 ﻿using GraphQL;
 using GraphQL.Types;
-using Platform.Data.Doublets.Gql.Schema.Types.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
@@ -13,19 +7,20 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     {
         public LinksAggregateFieldsType()
         {
-            Field<LinksAggregateFloatFieldsInputType>("avg");
-            Field<IntGraphType>("count", null, LinkQuery.Arguments, ResolveCount, null);
+            Field<LinksAggregateFloatFieldsType>("avg");
+            Field<IntGraphType>("count", null,
+                new QueryArguments() {new QueryArgument<ListGraphType<LinksSelectColumnEnum>> { Name = "columns" }, 
+                new QueryArgument<BooleanGraphType>{ Name = "distinct"}
+                }, ResolveCount, null);
             Field<LinksAggregateBigIntFieldsType>("max");
             Field<LinksAggregateBigIntFieldsType>("min");
-            Field<LinksAggregateFloatFieldsInputType>("stddev");
-            Field<LinksAggregateFloatFieldsInputType>("stddev_pop");
-            Field<LinksAggregateFloatFieldsInputType>("stddev_samp");
+            Field<LinksAggregateFloatFieldsType>("stddev");
+            Field<LinksAggregateFloatFieldsType>("stddev_pop");
+            Field<LinksAggregateFloatFieldsType>("stddev_samp");
             Field<LongGraphType>("sum");
-            Field<LinksAggregateFloatFieldsInputType>("var_pop");
-            Field<LinksAggregateFloatFieldsInputType>("var_samp");
-            Field<LinkInputType>("type");
-            Field<LinksAggregateFloatFieldsInputType>("variance");
-            Field<LongGraphType>("type_id");
+            Field<LinksAggregateFloatFieldsType>("var_pop");
+            Field<LinksAggregateFloatFieldsType>("var_samp");
+            Field<LinksAggregateFloatFieldsType>("variance");
         }
 
         private object ResolveCount(IResolveFieldContext<object> arg)

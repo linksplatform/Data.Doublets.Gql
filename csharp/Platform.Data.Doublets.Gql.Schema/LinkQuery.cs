@@ -17,7 +17,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                     new QueryArgument<LinkBooleanExpressionInputType> { Name = "where" },
                     new QueryArgument<OrderByInputType> { Name = "order_by" },
                     new QueryArgument<LongGraphType> { Name = "offset" },
-                    new QueryArgument<ListGraphType<DistinctEnum>> { Name = "distinct" }
+                    new QueryArgument<ListGraphType<DistinctEnum>> { Name = "distinct_on" }
                 );
         public LinkQuery(ILinks<ulong> links) => Field<ListGraphType<LinkType>>("links",
                 arguments: Arguments,
