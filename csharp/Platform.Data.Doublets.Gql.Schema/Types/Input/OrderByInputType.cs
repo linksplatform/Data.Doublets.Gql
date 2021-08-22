@@ -17,16 +17,16 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
             Field(x => x.to_id, nullable: true, type: typeof(OrderByEnum));
             Field<OrderByInputType>("type");
             Field(x => x.type_id, nullable: true, type: typeof(OrderByEnum));
-            Field<AggregateOrderByType>("out_aggregate", null, LinkQuery.Arguments, ResolveOut, null);
-            Field<AggregateOrderByType>("in_aggreagate", null, LinkQuery.Arguments, ResolveIn, null);
+            Field<AggregateOrderByInputType>("out_aggregate", null, LinkQuery.Arguments, ResolveOut, null);
+            Field<AggregateOrderByInputType>("in_aggreagate", null, LinkQuery.Arguments, ResolveIn, null);
         }
-        private AggregateOrderByType ResolveOut(IResolveFieldContext<OrderBy> context)
+        private AggregateOrderByInputType ResolveOut(IResolveFieldContext<OrderBy> context)
         {
-            return new AggregateOrderByType();
+            return new AggregateOrderByInputType();
         }
-        private AggregateOrderByType ResolveIn(IResolveFieldContext<OrderBy> context)
+        private AggregateOrderByInputType ResolveIn(IResolveFieldContext<OrderBy> context)
         {
-            return new AggregateOrderByType();
+            return new AggregateOrderByInputType();
         }
     }
 }

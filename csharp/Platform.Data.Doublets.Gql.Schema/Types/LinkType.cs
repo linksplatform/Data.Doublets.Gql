@@ -23,8 +23,8 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
             Field(o => o.type_id);
             Field<ListGraphType<LinkType>>("in", null, LinkQuery.Arguments, ResolveIn, null);
             Field<ListGraphType<LinkType>>("out", null, LinkQuery.Arguments, ResolveOut, null);
-            Field<AggregateOrderByType>("in_aggregate", null, LinkQuery.Arguments, ResolveInAggregate, null);
-            Field<AggregateOrderByType>("out_aggregate", null, LinkQuery.Arguments, ResolveOutAggregate, null);
+            Field<AggregateOrderByInputType>("in_aggregate", null, LinkQuery.Arguments, ResolveInAggregate, null);
+            Field<AggregateOrderByInputType>("out_aggregate", null, LinkQuery.Arguments, ResolveOutAggregate, null);
         }
         private OrderBy ResolveInAggregate(IResolveFieldContext<Link> context) => new OrderBy();
         private OrderBy ResolveOutAggregate(IResolveFieldContext<Link> context) => new OrderBy();

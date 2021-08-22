@@ -11,10 +11,10 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     {
         public AggregateOrderByFieldInputType()
         {
-            Field<AggregateOrderByType>("id");
-            Field<AggregateOrderByType>("from_id");
-            Field<AggregateOrderByType>("to_id");
-            Field<AggregateOrderByType>("type_id");
+            Field<AggregateOrderByInputType>("id");
+            Field<AggregateOrderByInputType>("from_id");
+            Field<AggregateOrderByInputType>("to_id");
+            Field<AggregateOrderByInputType>("type_id");
         }
     }
 }
