@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Platform.Data;
 using Platform.Data.Doublets;
 using Platform.Data.Doublets.Gql.Schema;
+using Platform.Data.Doublets.Gql.Schema.Types.Input;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,7 +23,11 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
             Field(o => o.type_id);
             Field<ListGraphType<LinkType>>("in", null, LinkQuery.Arguments, ResolveIn, null);
             Field<ListGraphType<LinkType>>("out", null, LinkQuery.Arguments, ResolveOut, null);
+            Field<AggregateOrderByInputType>("in_aggregate", null, LinkQuery.Arguments, ResolveInAggregate, null);
+            Field<AggregateOrderByInputType>("out_aggregate", null, LinkQuery.Arguments, ResolveOutAggregate, null);
         }
+        private OrderBy ResolveInAggregate(IResolveFieldContext<Link> context) => new OrderBy();
+        private OrderBy ResolveOutAggregate(IResolveFieldContext<Link> context) => new OrderBy();
 
         private List<Link> ResolveIn(IResolveFieldContext<Link> context) => LinkQuery.GetLinks(context, null, context.Source.id).ToList();
 
