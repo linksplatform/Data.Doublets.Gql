@@ -13,8 +13,8 @@ namespace Gql.Samples.Schemas.Link.Types
     {
         public LinksAggregateType()
         {
-            Field<LinksFieldsOrderByInputType>("aggregate_fields");
-            Field<ListGraphType<LinkType>>("returning");
+            Field<LinksAggregateFieldsType>("aggregate_fields");
+            Field<ListGraphType<LinkType>>("nodes");
         }
     }
 }
