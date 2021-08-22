@@ -2,7 +2,7 @@
 using GraphQL.Types;
 using Microsoft.Extensions.DependencyInjection;
 using Platform.Data.Doublets;
-using Platform.Data.Doublets.Gql.Schema.Input;
+using Platform.Data.Doublets.Gql.Schema.Types.Input;
 using Platform.Data.Doublets.Gql.Schema.Types;
 using System;
 using System.Collections.Generic;
