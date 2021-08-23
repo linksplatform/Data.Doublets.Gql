@@ -35,7 +35,7 @@ Navigate to:
 {
   links(
     where: { id: { _eq: 1 }, from_id: { _eq: 1 }, to_id: { _eq: 1 } }
-    distinct: [FROM_ID]
+    distinct_on: [FROM_ID]
     order_by: { id: ASC }
     offset: 0
     limit: 1
@@ -71,7 +71,7 @@ Navigate to:
 {
   links(
     where: { id: { _eq: 1 }, from_id: { _eq: 1 }, to_id: { _eq: 1 } }
-    distinct: [FROM_ID]
+    distinct_on: [FROM_ID]
     order_by: { id: ASC }
     offset: 0
     limit: 1
@@ -85,7 +85,7 @@ Navigate to:
     }
     out(
       where: { from_id: { _eq: 1 }, to_id: { _eq: 1 } }
-      distinct: [FROM_ID]
+      distinct_on: [FROM_ID]
       order_by: { id: ASC }
       offset: 0
       limit: 1
@@ -102,7 +102,7 @@ Navigate to:
     }
     in(
       where: { from_id: { _eq: 1 }, to_id: { _eq: 1 } }
-      distinct: [FROM_ID]
+      distinct_on: [FROM_ID]
       order_by: { id: ASC }
       offset: 0
       limit: 1
