@@ -16,7 +16,7 @@ namespace Platform.Data.Doublets.Gql.Schema
         public static readonly QueryArguments Arguments = new QueryArguments(
                     new QueryArgument<LongGraphType> { Name = "limit" },
                     new QueryArgument<LinkBooleanExpressionInputType> { Name = "where" },
-                    new QueryArgument<OrderByInputType> { Name = "order_by" },
+                    new QueryArgument<LinksOrderByInputType> { Name = "order_by" },
                     new QueryArgument<LongGraphType> { Name = "offset" },
                     new QueryArgument<ListGraphType<LinksSelectColumnEnumType>> { Name = "distinct_on" }
                 );
