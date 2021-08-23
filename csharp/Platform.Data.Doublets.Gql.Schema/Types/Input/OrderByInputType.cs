@@ -1,9 +1,6 @@
 ﻿using Gql.Samples.Schemas.Link.Types;
 using GraphQL;
 using GraphQL.Types;
-using Platform.Data.Doublets.Gql.Schema;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
@@ -21,13 +18,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
             Field<LinksAggregateType>("out_aggregate", null, LinkQuery.Arguments, ResolveOut, null);
             Field<LinksAggregateType>("in_aggreagate", null, LinkQuery.Arguments, ResolveIn, null);
         }
-        private LinksAggregateType ResolveOut(IResolveFieldContext<OrderBy> context)
-        {
-            return new LinksAggregateType();
-        }
-        private LinksAggregateType ResolveIn(IResolveFieldContext<OrderBy> context)
-        {
-            return new LinksAggregateType();
-        }
+        private LinksAggregateType ResolveOut(IResolveFieldContext<OrderBy> context) => new LinksAggregateType();
+        private LinksAggregateType ResolveIn(IResolveFieldContext<OrderBy> context) => new LinksAggregateType();
     }
 }

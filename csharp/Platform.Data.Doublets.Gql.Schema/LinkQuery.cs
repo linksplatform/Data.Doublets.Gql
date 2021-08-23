@@ -17,7 +17,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                     new QueryArgument<LinkBooleanExpressionInputType> { Name = "where" },
                     new QueryArgument<OrderByInputType> { Name = "order_by" },
                     new QueryArgument<LongGraphType> { Name = "offset" },
-                    new QueryArgument<ListGraphType<DistinctEnum>> { Name = "distinct_on" }
+                    new QueryArgument<ListGraphType<LinksSelectColumnEnum>> { Name = "distinct_on" }
                 );
         public LinkQuery(ILinks<ulong> links) => Field<ListGraphType<LinkType>>("links",
                 arguments: Arguments,
@@ -44,8 +44,8 @@ namespace Platform.Data.Doublets.Gql.Schema
             }
             if (context.HasArgument("distinct"))
             {
-                var dis = context.GetArgument<List<distinct>>("distinct");
-                allLinks = allLinks.DistinctBy(GetSortSelectorAndOrderByValue(dis.First()));
+                var distinct = context.GetArgument<List<distinct>>("distinct");
+                allLinks = allLinks.DistinctBy(GetSortSelectorAndOrderByValue(distinct.First()));
             }
             if (context.HasArgument("offset"))
             {

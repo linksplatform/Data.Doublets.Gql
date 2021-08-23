@@ -2,10 +2,6 @@ using Gql.Samples.Schemas.Link.Types;
 using GraphQL;
 using GraphQL.Types;
 using Microsoft.Extensions.DependencyInjection;
-using Platform.Data;
-using Platform.Data.Doublets;
-using Platform.Data.Doublets.Gql.Schema;
-using Platform.Data.Doublets.Gql.Schema.Types.Input;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -40,7 +36,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
 
         private Link ResolveType(IResolveFieldContext<Link> context) => context.Source.type ?? GetLinkOrDefault(context, context.Source.type_id);
 
-        public static Link GetLinkOrDefault(IResolveFieldContext<Link> context, long linkId) => GetLinkOrDefault(context.RequestServices.GetService<ILinks<ulong>>(),(linkId));
+        public static Link GetLinkOrDefault(IResolveFieldContext<Link> context, long linkId) => GetLinkOrDefault(context.RequestServices.GetService<ILinks<ulong>>(), (linkId));
 
         public static Link GetLinkOrDefault(object service, long linkId) => GetLinkOrDefault((ILinks<ulong>)service, (ulong)linkId);
 

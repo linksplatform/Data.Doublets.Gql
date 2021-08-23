@@ -1,5 +1,4 @@
 ﻿using GraphQL.Types;
-using Platform.Data.Doublets.Gql.Schema;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
