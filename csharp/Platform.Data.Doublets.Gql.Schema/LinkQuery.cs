@@ -1,4 +1,5 @@
-﻿using GraphQL;
+﻿using Gql.Samples.Schemas.Link;
+using GraphQL;
 using GraphQL.Types;
 using Microsoft.Extensions.DependencyInjection;
 using Platform.Data.Doublets;
@@ -17,7 +18,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                     new QueryArgument<LinkBooleanExpressionInputType> { Name = "where" },
                     new QueryArgument<OrderByInputType> { Name = "order_by" },
                     new QueryArgument<LongGraphType> { Name = "offset" },
-                    new QueryArgument<ListGraphType<LinksSelectColumnEnum>> { Name = "distinct_on" }
+                    new QueryArgument<ListGraphType<LinksSelectColumnEnumType>> { Name = "distinct_on" }
                 );
         public LinkQuery(ILinks<ulong> links) => Field<ListGraphType<LinkType>>("links",
                 arguments: Arguments,
@@ -44,7 +45,7 @@ namespace Platform.Data.Doublets.Gql.Schema
             }
             if (context.HasArgument("distinct"))
             {
-                var distinct = context.GetArgument<List<distinct>>("distinct");
+                var distinct = context.GetArgument<List<LinksSelectColumn>>("distinct");
                 allLinks = allLinks.DistinctBy(GetSortSelectorAndOrderByValue(distinct.First()));
             }
             if (context.HasArgument("offset"))
@@ -60,15 +61,15 @@ namespace Platform.Data.Doublets.Gql.Schema
             return allLinks;
         }
 
-        private static Func<Link, long> GetSortSelectorAndOrderByValue(distinct distinct)
+        private static Func<Link, long> GetSortSelectorAndOrderByValue(LinksSelectColumn distinct)
         {
             switch (distinct)
             {
-                case distinct.from_id:
+                case LinksSelectColumn.from_id:
                     return x => x.from_id;
-                case distinct.type_id:
+                case LinksSelectColumn.type_id:
                     return x => x.type_id;
-                case distinct.to_id:
+                case LinksSelectColumn.to_id:
                     return x => x.to_id;
                 default:
                     return x => x.id;

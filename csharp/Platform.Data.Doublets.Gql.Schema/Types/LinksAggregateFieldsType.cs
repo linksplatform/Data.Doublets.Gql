@@ -9,7 +9,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
         {
             Field<LinksAggregateFloatFieldsType>("avg");
             Field<IntGraphType>("count", null,
-                new QueryArguments() {new QueryArgument<ListGraphType<LinksSelectColumnEnum>> { Name = "columns" },
+                new QueryArguments() {new QueryArgument<ListGraphType<LinksSelectColumnEnumType>> { Name = "columns" },
                 new QueryArgument<BooleanGraphType>{ Name = "distinct"}
                 }, ResolveCount, null);
             Field<LinksAggregateBigIntFieldsType>("max");

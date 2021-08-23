@@ -9,12 +9,12 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         public OrderByInputType()
         {
             Field<OrderByInputType>("from");
-            Field(x => x.from_id, nullable: true, type: typeof(OrderByEnum));
-            Field(x => x.id, nullable: true, type: typeof(OrderByEnum));
+            Field(x => x.from_id, nullable: true, type: typeof(OrderByEnumType));
+            Field(x => x.id, nullable: true, type: typeof(OrderByEnumType));
             Field<OrderByInputType>("to");
-            Field(x => x.to_id, nullable: true, type: typeof(OrderByEnum));
+            Field(x => x.to_id, nullable: true, type: typeof(OrderByEnumType));
             Field<OrderByInputType>("type");
-            Field(x => x.type_id, nullable: true, type: typeof(OrderByEnum));
+            Field(x => x.type_id, nullable: true, type: typeof(OrderByEnumType));
             Field<LinksAggregateOrderByInputType>("out_aggregate", null, LinkQuery.Arguments, ResolveOut, null);
             Field<LinksAggregateOrderByInputType>("in_aggreagate", null, LinkQuery.Arguments, ResolveIn, null);
         }
