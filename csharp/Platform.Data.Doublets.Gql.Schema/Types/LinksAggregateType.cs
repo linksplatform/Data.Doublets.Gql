@@ -7,7 +7,7 @@ namespace Gql.Samples.Schemas.Link.Types
     {
         public LinksAggregateType()
         {
-            Field<LinksAggregateFieldsType>("aggregate_fields");
+            Field<LinksAggregateFieldsType>("aggregate");
             Field<ListGraphType<LinkType>>("nodes");
         }
     }
