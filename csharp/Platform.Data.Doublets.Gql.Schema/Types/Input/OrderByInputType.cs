@@ -15,10 +15,10 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
             Field(x => x.to_id, nullable: true, type: typeof(OrderByEnum));
             Field<OrderByInputType>("type");
             Field(x => x.type_id, nullable: true, type: typeof(OrderByEnum));
-            Field<LinksAggregateType>("out_aggregate", null, LinkQuery.Arguments, ResolveOut, null);
-            Field<LinksAggregateType>("in_aggreagate", null, LinkQuery.Arguments, ResolveIn, null);
+            Field<LinksAggregateOrderByInputType>("out_aggregate", null, LinkQuery.Arguments, ResolveOut, null);
+            Field<LinksAggregateOrderByInputType>("in_aggreagate", null, LinkQuery.Arguments, ResolveIn, null);
         }
-        private LinksAggregateType ResolveOut(IResolveFieldContext<OrderBy> context) => new LinksAggregateType();
-        private LinksAggregateType ResolveIn(IResolveFieldContext<OrderBy> context) => new LinksAggregateType();
+        private LinksAggregateOrderByInputType ResolveOut(IResolveFieldContext<OrderBy> context) => new LinksAggregateOrderByInputType();
+        private LinksAggregateOrderByInputType ResolveIn(IResolveFieldContext<OrderBy> context) => new LinksAggregateOrderByInputType();
     }
 }

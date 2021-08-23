@@ -2,7 +2,7 @@
 
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
-    internal class LinksAggregateFloatFieldsType : InputObjectGraphType
+    internal class LinksAggregateFloatFieldsType : ObjectGraphType
     {
         public LinksAggregateFloatFieldsType()
         {
