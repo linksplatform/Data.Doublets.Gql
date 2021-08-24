@@ -2,6 +2,12 @@
 
 Get real-time support at: https://discord.gg/eEXJyjWv5e
 
+Comparison of theories:
+
+![Comparison of theories](https://github.com/LinksPlatform/Documentation/raw/master/doc/TheoriesComparison/theories_comparison_en.png)
+
+## Start
+
 Execute:
 ```
 cd csharp/Platform.Data.Doublets.Gql.Server
