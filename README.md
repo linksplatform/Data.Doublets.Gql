@@ -1,5 +1,7 @@
 # Data.Doublets.Gql
 
+Get real-time support at: discord.gg/eEXJyjWv5e
+
 Execute:
 ```
 cd csharp/Platform.Data.Doublets.Gql.Server
