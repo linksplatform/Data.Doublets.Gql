@@ -1,6 +1,6 @@
 # Data.Doublets.Gql
 
-Get real-time support at: discord.gg/eEXJyjWv5e
+Get real-time support at: https://discord.gg/eEXJyjWv5e
 
 Execute:
 ```
