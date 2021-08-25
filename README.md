@@ -23,6 +23,11 @@ You can set any path to a database file:
 dotnet run path/to/db.links
 ```
 
+You can change the port like this:
+```
+dotnet run -f net5 -c Release --urls http://0.0.0.0:29018
+```
+
 Navigate to:
 * http://localhost:60341/ui/playground
 * http://localhost:60341/ui/graphiql
