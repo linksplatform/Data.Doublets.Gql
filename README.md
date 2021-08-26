@@ -6,6 +6,19 @@ Comparison of theories:
 
 ![Comparison of theories](https://github.com/LinksPlatform/Documentation/raw/master/doc/TheoriesComparison/theories_comparison_en.png)
 
+## Online demo
+
+If you are lucky (our server is up) you can test our GraphQL server online using these urls:
+* http://linksplatform.ddns.net:29018/ui/playground
+* http://linksplatform.ddns.net:29018/ui/graphiql
+* http://linksplatform.ddns.net:29018/ui/altair
+* http://linksplatform.ddns.net:29018/ui/voyager
+
+You can use this URL to access the GraphQL server directly from code, browser or any GraphQL client like [Insomnia](https://insomnia.rest/).
+```
+http://linksplatform.ddns.net:29018/graphql
+```
+
 ## Start
 
 Execute:
@@ -23,17 +36,16 @@ You can set any path to a database file:
 dotnet run path/to/db.links
 ```
 
-You can change the port like this:
-```
-dotnet run -f net5 -c Release --urls http://0.0.0.0:29018
-```
-
 Navigate to:
 * http://localhost:60341/ui/playground
 * http://localhost:60341/ui/graphiql
 * http://localhost:60341/ui/altair
 * http://localhost:60341/ui/voyager
 
+You can change the port like this:
+```
+dotnet run -f net5 -c Release --urls http://0.0.0.0:29018
+```
 
 ## Supported query examples:
 ```gql
