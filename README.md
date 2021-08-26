@@ -44,7 +44,7 @@ Navigate to:
 
 You can change the port like this:
 ```
-dotnet run -f net5 -c Release --urls http://0.0.0.0:29018
+dotnet run -f net5 -c Release db.links --urls http://0.0.0.0:29018
 ```
 
 ## Supported query examples:
