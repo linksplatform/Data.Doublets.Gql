@@ -19,7 +19,7 @@ You can use this URL to access the GraphQL server directly from code, browser or
 http://linksplatform.ddns.net:29018/graphql
 ```
 
-## Start
+## Start locally
 
 Execute:
 ```
