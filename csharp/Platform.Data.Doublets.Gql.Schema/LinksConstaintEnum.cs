@@ -8,6 +8,6 @@ namespace Platform.Data.Doublets.Gql.Schema
 {
     enum links_constraint
     {
-        pkey
+        links_pkey
     }
 }
