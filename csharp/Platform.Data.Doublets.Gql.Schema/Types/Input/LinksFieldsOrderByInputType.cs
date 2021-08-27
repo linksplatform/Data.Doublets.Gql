@@ -6,10 +6,10 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     {
         public LinksFieldsOrderByInputType()
         {
-            Field<OrderByEnumType>("id");
-            Field<OrderByEnumType>("from_id");
-            Field<OrderByEnumType>("to_id");
-            Field<OrderByEnumType>("type_id");
+            Field<OrderByEnumType>("id", null, true, null);
+            Field<OrderByEnumType>("from_id", null, true, null);
+            Field<OrderByEnumType>("to_id", null, true, null);
+            Field<OrderByEnumType>("type_id", null, true, null);
         }
     }
 }

@@ -11,15 +11,15 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     {
         public LinksInsertInputType()
         {
-            Field<LinksObjRelInsertInputType>("from");
-            Field<LongGraphType>("from_id");
-            Field<LongGraphType>("id");
-            Field<LinksArrRelInsertInputType>("in");
-            Field<LinksArrRelInsertInputType>("out");
-            Field<LinksObjRelInsertInputType>("to");
-            Field<LinksObjRelInsertInputType>("type");
-            Field<LongGraphType>("to_id");
-            Field<LongGraphType>("type_id");
+            Field<LinksObjRelInsertInputType>("from", null, true, null);
+            Field<LongGraphType>("from_id", null, true, null);
+            Field<LongGraphType>("id", null, true, null);
+            Field<LinksArrRelInsertInputType>("in", null, true, null);
+            Field<LinksArrRelInsertInputType>("out", null, true, null);
+            Field<LinksObjRelInsertInputType>("to", null, true, null);
+            Field<LinksObjRelInsertInputType>("type", null, true, null);
+            Field<LongGraphType>("to_id", null, true, null);
+            Field<LongGraphType>("type_id", null, true, null);
         }
     }
 }

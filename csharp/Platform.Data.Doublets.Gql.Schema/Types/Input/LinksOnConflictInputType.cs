@@ -13,7 +13,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         {
             Field<LinksConstraintEnumType>("constraint");
             Field<ListGraphType<LinksColumnType>>("update_columns");
-            Field<LinkBooleanExpressionInputType>("where");
+            Field<LinkBooleanExpressionInputType>("where", null, true, null);
         }
     }
 }
