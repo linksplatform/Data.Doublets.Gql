@@ -12,10 +12,10 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
         {
             Field(o => o.id, nullable: true);
             Field(o => o.from_id);
-            Field(o => o.from, type: typeof(LinkType)).Resolve(ResolveFrom);
+            Field(o => o.from, nullable: true, type: typeof(LinkType)).Resolve(ResolveFrom);
             Field(o => o.to, type: typeof(LinkType)).Resolve(ResolveTo);
             Field(o => o.to_id, nullable: true);
-            Field(o => o.type, type: typeof(LinkType)).Resolve(ResolveType);
+            Field(o => o.type, nullable: true, type: typeof(LinkType)).Resolve(ResolveType);
             Field(o => o.type_id, nullable: true);
             Field<ListGraphType<LinkType>>("in", null, LinkQuery.Arguments, ResolveIn, null);
             Field<ListGraphType<LinkType>>("out", null, LinkQuery.Arguments, ResolveOut, null);
