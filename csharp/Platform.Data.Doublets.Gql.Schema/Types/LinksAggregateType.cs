@@ -1,7 +1,7 @@
 ﻿using GraphQL.Types;
 using Platform.Data.Doublets.Gql.Schema.Types;
 
-namespace Gql.Samples.Schemas.Link.Types
+namespace Platform.Data.Doublets.Gql.Schema.Types
 {
     internal class LinksAggregateType : ObjectGraphType
     {

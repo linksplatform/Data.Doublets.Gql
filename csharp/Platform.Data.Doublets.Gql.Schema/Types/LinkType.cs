@@ -1,4 +1,3 @@
-using Gql.Samples.Schemas.Link.Types;
 using GraphQL;
 using GraphQL.Types;
 using Microsoft.Extensions.DependencyInjection;

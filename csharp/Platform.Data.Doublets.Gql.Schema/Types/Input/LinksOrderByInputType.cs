@@ -1,5 +1,4 @@
-﻿using Gql.Samples.Schemas.Link.Types;
-using GraphQL;
+﻿using GraphQL;
 using GraphQL.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input

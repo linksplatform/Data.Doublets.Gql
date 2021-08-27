@@ -1,5 +1,4 @@
-﻿using Gql.Samples.Schemas.Link.Types;
-using GraphQL.Types;
+﻿using GraphQL.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    class LinksOnConflictInputType : InputObjectGraphType<LinksConstraint>
+    class LinksOnConflictInputType : InputObjectGraphType<LinksConstraintEnumType>
     {
         public LinksOnConflictInputType()
         {

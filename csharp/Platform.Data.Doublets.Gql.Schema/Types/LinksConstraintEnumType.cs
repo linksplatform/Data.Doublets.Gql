@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gql.Samples.Schemas.Link.Types
+namespace Platform.Data.Doublets.Gql.Schema.Types
 {
-    class LinksConstraintEnumType : EnumerationGraphType<Platform.Data.Doublets.Gql.Schema.links_constraint>
+    class LinksConstraintEnumType : EnumerationGraphType<links_constraint>
     {
         public LinksConstraintEnumType() => Name = "LinksConstraintEnum";
     }

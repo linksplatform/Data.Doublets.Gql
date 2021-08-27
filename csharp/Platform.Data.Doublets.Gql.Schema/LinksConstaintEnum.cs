@@ -10,9 +10,4 @@ namespace Platform.Data.Doublets.Gql.Schema
     {
         pkey
     }
-
-    class LinksConstraint
-    {
-        public links_constraint links_Constraint { get; set; }
-    }
 }
