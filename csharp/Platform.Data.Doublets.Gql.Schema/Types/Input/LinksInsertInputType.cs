@@ -16,8 +16,8 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
             Field<LongGraphType>("id");
             Field<LinksArrRelInsertInputType>("in");
             Field<LinksArrRelInsertInputType>("out");
-            Field<LinksArrRelInsertInputType>("to");
-            Field<LinksArrRelInsertInputType>("type");
+            Field<LinksObjRelInsertInputType>("to");
+            Field<LinksObjRelInsertInputType>("type");
             Field<LongGraphType>("to_id");
             Field<LongGraphType>("type_id");
         }
