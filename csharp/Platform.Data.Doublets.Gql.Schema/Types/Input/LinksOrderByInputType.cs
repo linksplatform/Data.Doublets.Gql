@@ -9,7 +9,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         {
             Field<LinksOrderByInputType>("from");
             Field(x => x.from_id, nullable: true, type: typeof(OrderByEnumType));
-            Field(x => x.id, nullable: true, type: typeof(OrderByEnumType));
+            Field(x => x.id, nullable:true, type: typeof(OrderByEnumType));
             Field<LinksOrderByInputType>("to");
             Field(x => x.to_id, nullable: true, type: typeof(OrderByEnumType));
             Field<LinksOrderByInputType>("type");

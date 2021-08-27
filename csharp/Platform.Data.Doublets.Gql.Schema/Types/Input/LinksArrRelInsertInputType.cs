@@ -12,7 +12,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         public LinksArrRelInsertInputType()
         {
             Field<ListGraphType<LinksInsertInputType>>("data");
-            Field<LinksOnConflictInputType>("on_conflict", null, true, null);
+            Field<LinksOnConflictInputType>("on_conflict", null, nullable: true, null);
         }
     }
 }
