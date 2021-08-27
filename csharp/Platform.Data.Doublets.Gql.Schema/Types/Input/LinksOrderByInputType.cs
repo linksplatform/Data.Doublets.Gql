@@ -4,7 +4,7 @@ using GraphQL.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    internal class LinksOrderByInputType : InputObjectGraphType<OrderBy>
+    internal class LinksOrderByInputType : InputObjectGraphType<LinksOrderBy>
     {
         public LinksOrderByInputType()
         {

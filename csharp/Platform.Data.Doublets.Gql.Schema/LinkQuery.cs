@@ -40,7 +40,7 @@ namespace Platform.Data.Doublets.Gql.Schema
             var allLinks = links.All(query).Select(l => new Link(l));
             if (context.HasArgument("order_by"))
             {
-                GetSelectorAndOrderByValue(context.GetArgument<OrderBy>("order_by"), out var selector, out var orderByValue);
+                GetSelectorAndOrderByValue(context.GetArgument<LinksOrderBy>("order_by"), out var selector, out var orderByValue);
                 allLinks = orderByValue == order_by.asc ? allLinks.OrderBy(selector) : allLinks.OrderByDescending(selector);
             }
             if (context.HasArgument("distinct"))
@@ -76,7 +76,7 @@ namespace Platform.Data.Doublets.Gql.Schema
             }
         }
 
-        private static void GetSelectorAndOrderByValue(OrderBy orderBy, out Func<Link, long> selector, out order_by? orderByValue)
+        private static void GetSelectorAndOrderByValue(LinksOrderBy orderBy, out Func<Link, long> selector, out order_by? orderByValue)
         {
             orderByValue = orderBy.from_id;
             if (orderByValue != null)

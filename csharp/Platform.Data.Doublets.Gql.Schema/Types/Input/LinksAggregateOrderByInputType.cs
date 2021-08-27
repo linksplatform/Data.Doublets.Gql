@@ -7,7 +7,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         public LinksAggregateOrderByInputType()
         {
             Field<LinksFieldsOrderByInputType>("avg");
-            Field<LinksOrderByInputType>("count");
+            Field<OrderByEnumType>("count");
             Field<LinksFieldsOrderByInputType>("max");
             Field<LinksFieldsOrderByInputType>("min");
             Field<LinksFieldsOrderByInputType>("stddev");

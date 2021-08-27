@@ -23,8 +23,9 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
             Field<LinksAggregateType>("in_aggregate", null, LinkQuery.Arguments, ResolveInAggregate, null);
             Field<LinksAggregateType>("out_aggregate", null, LinkQuery.Arguments, ResolveOutAggregate, null);
         }
-        private OrderBy ResolveInAggregate(IResolveFieldContext<Link> context) => new OrderBy();
-        private OrderBy ResolveOutAggregate(IResolveFieldContext<Link> context) => new OrderBy();
+        private LinksAggregateType ResolveInAggregate(IResolveFieldContext<Link> context) => new();
+
+        private LinksAggregateType ResolveOutAggregate(IResolveFieldContext<Link> context) => new();
 
         private List<Link> ResolveIn(IResolveFieldContext<Link> context) => LinkQuery.GetLinks(context, null, context.Source.id).ToList();
 
