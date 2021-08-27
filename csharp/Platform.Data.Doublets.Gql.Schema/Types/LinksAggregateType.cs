@@ -7,7 +7,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     {
         public LinksAggregateType()
         {
-            Field<LinksAggregateFieldsType>("aggregate");
+            Field<LinksAggregateFieldsType>("aggregate", null, true, null);
             Field<ListGraphType<LinkType>>("nodes");
         }
     }

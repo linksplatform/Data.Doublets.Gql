@@ -6,10 +6,10 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     {
         public LinksAggregateFloatFieldsType()
         {
-            Field<FloatGraphType>("id");
-            Field<FloatGraphType>("from_id");
-            Field<FloatGraphType>("to_id");
-            Field<FloatGraphType>("type_id");
+            Field<FloatGraphType>("id", null, true, null);
+            Field<FloatGraphType>("from_id", null, true, null);
+            Field<FloatGraphType>("to_id", null, true, null);
+            Field<FloatGraphType>("type_id", null, true, null);
         }
     }
 }

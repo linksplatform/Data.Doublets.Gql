@@ -6,10 +6,10 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     {
         public LinksAggregateBigIntFieldsType()
         {
-            Field<LongGraphType>("id");
-            Field<LongGraphType>("from_id");
-            Field<LongGraphType>("to_id");
-            Field<LongGraphType>("type_id");
+            Field<LongGraphType>("id",null,true,null);
+            Field<LongGraphType>("from_id", null, true, null);
+            Field<LongGraphType>("to_id", null, true, null);
+            Field<LongGraphType>("type_id", null, true, null);
         }
     }
 }

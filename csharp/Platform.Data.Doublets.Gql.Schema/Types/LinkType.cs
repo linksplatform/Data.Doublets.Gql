@@ -11,8 +11,8 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
         public LinkType()
         {
             Field(o => o.id);
-            Field(o => o.from_id);
-            Field(o => o.from, false, type: typeof(LinkType)).Resolve(ResolveFrom);
+            Field(o => o.from_id, nullable: true);
+            Field(o => o.from, type: typeof(LinkType)).Resolve(ResolveFrom);
             Field(o => o.to, type: typeof(LinkType)).Resolve(ResolveTo);
             Field(o => o.to_id);
             Field(o => o.type, type: typeof(LinkType)).Resolve(ResolveType);
