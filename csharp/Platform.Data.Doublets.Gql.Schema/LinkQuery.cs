@@ -18,7 +18,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                     new QueryArgument<LinkBooleanExpressionInputType> { Name = "where" },
                     new QueryArgument<LinksOrderByInputType> { Name = "order_by" },
                     new QueryArgument<LongGraphType> { Name = "offset" },
-                    new QueryArgument<ListGraphType<LinksSelectColumnEnumType>> { Name = "distinct_on" }
+                    new QueryArgument<ListGraphType<LinksColumnType>> { Name = "distinct_on" }
                 );
         public LinkQuery(ILinks<ulong> links) => Field<ListGraphType<LinkType>>("links",
                 arguments: Arguments,
@@ -45,7 +45,7 @@ namespace Platform.Data.Doublets.Gql.Schema
             }
             if (context.HasArgument("distinct"))
             {
-                var distinct = context.GetArgument<List<LinksSelectColumn>>("distinct");
+                var distinct = context.GetArgument<List<LinksColumn>>("distinct");
                 allLinks = allLinks.DistinctBy(GetSortSelectorAndOrderByValue(distinct.First()));
             }
             if (context.HasArgument("offset"))
@@ -61,15 +61,15 @@ namespace Platform.Data.Doublets.Gql.Schema
             return allLinks;
         }
 
-        private static Func<Link, long> GetSortSelectorAndOrderByValue(LinksSelectColumn distinct)
+        private static Func<Link, long> GetSortSelectorAndOrderByValue(LinksColumn distinct)
         {
             switch (distinct)
             {
-                case LinksSelectColumn.from_id:
+                case LinksColumn.from_id:
                     return x => x.from_id;
-                case LinksSelectColumn.type_id:
+                case LinksColumn.type_id:
                     return x => x.type_id;
-                case LinksSelectColumn.to_id:
+                case LinksColumn.to_id:
                     return x => x.to_id;
                 default:
                     return x => x.id;
