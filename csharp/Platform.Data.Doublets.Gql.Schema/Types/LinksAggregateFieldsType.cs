@@ -23,6 +23,6 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
             Field(x => x.variance, nullable: true, type: typeof(LinksAggregateFloatFieldsType));
         }
 
-        private object ResolveCount(IResolveFieldContext<object> arg) => 0;
+        private object ResolveCount(IResolveFieldContext<object> arg) => 0 ;
     }
 }

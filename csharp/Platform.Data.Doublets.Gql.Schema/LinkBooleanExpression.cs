@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Platform.Data.Doublets.Gql.Schema
 {
@@ -16,16 +20,17 @@ namespace Platform.Data.Doublets.Gql.Schema
 
         public LongComparisonExpression id { get; set; }
 
+        public LongComparisonExpression to_id { get; set; }
+
         public LinkBooleanExpression @in { get; set; }
+
+        public LinkBooleanExpression @type_id { get; set; }
 
         public LinkBooleanExpression @out { get; set; }
 
-        public LinkBooleanExpression to { get; set; }
+        public LinkBooleanExpression @to { get; set; }
 
-        public LongComparisonExpression to_id { get; set; }
+        public LinkBooleanExpression @type { get; set; }
 
-        public LinkBooleanExpression type { get; set; }
-
-        public LongComparisonExpression type_id { get; set; }
     }
 }
