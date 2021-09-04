@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    class LinksIncInputType : InputObjectGraphType
+    class LinksIncInputType : InputObjectGraphType<Link>
     {
         public LinksIncInputType()
         {
-            Field<LongGraphType>("id", null, nullable: true, null);
-            Field<LongGraphType>("from_id", null, nullable: true, null);
-            Field<LongGraphType>("to_id", null, nullable: true, null);
-            Field<LongGraphType>("type_id", null, nullable: true, null);
+            Field(x => x.id, nullable: true, type: typeof(LongGraphType));
+            Field(x => x.from_id, nullable: true, type: typeof(LongGraphType));
+            Field(x => x.to_id, nullable: true, type: typeof(LongGraphType));
+            Field(x => x.type_id, nullable: true, type: typeof(LongGraphType));
         }
     }
 }

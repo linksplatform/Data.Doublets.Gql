@@ -1,5 +1,4 @@
-﻿using Gql.Samples.Schemas.Link;
-using GraphQL;
+﻿using GraphQL;
 using GraphQL.Types;
 using Microsoft.Extensions.DependencyInjection;
 using Platform.Data.Doublets;

@@ -1,15 +1,17 @@
 ﻿using GraphQL.Types;
+using Platform.Data.Doublets.Gql.Schema.Types.Input;
 
-namespace Platform.Data.Doublets.Gql.Schema.Types.Input
+
+namespace Platform.Data.Doublets.Gql.Schema.Types
 {
-    internal class LinksFieldsOrderByInputType : InputObjectGraphType
+    internal class LinksFieldsOrderByType : InputObjectGraphType<LinksFieldsOrderBy>
     {
-        public LinksFieldsOrderByInputType()
+        public LinksFieldsOrderByType()
         {
-            Field<OrderByEnumType>("id", null, nullable: true, null);
-            Field<OrderByEnumType>("from_id", null, nullable: true, null);
-            Field<OrderByEnumType>("to_id", null, nullable: true, null);
-            Field<OrderByEnumType>("type_id", null, nullable: true, null);
+            Field(x => x.id, nullable: true, type: typeof(OrderByEnumType));
+            Field(x => x.from_id, nullable: true, type: typeof(OrderByEnumType));
+            Field(x => x.to_id, nullable: true, type: typeof(OrderByEnumType));
+            Field(x => x.type_id, nullable: true, type: typeof(OrderByEnumType));
         }
     }
 }

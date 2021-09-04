@@ -2,14 +2,14 @@
 
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
-    internal class LinksAggregateFloatFieldsType : ObjectGraphType
+    internal class LinksAggregateFloatFieldsType : ObjectGraphType<LinksAggregateFloatFields>
     {
         public LinksAggregateFloatFieldsType()
         {
-            Field<FloatGraphType>("id", null, nullable: true, null);
-            Field<FloatGraphType>("from_id", null, nullable: true, null);
-            Field<FloatGraphType>("to_id", null, nullable: true, null);
-            Field<FloatGraphType>("type_id", null, nullable: true, null);
+            Field(x => x.id, nullable: true, type: typeof(FloatGraphType));
+            Field(x => x.from_id, nullable: true, type: typeof(FloatGraphType));
+            Field(x => x.to_id, nullable: true, type: typeof(FloatGraphType));
+            Field(x => x.type_id, nullable: true, type: typeof(FloatGraphType));
         }
     }
 }

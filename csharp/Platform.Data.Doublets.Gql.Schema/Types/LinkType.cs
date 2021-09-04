@@ -17,7 +17,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
             Field(o => o.to_id, nullable: true);
             Field(o => o.type, nullable: true, type: typeof(LinkType)).Resolve(ResolveType);
             Field(o => o.type_id, nullable: true);
-            Field<ListGraphType<LinkType>>("in", null, LinkQuery.Arguments, ResolveIn, null);
+            Field<ListGraphType<LinkType>>("in",null, LinkQuery.Arguments, ResolveIn, null);
             Field<ListGraphType<LinkType>>("out", null, LinkQuery.Arguments, ResolveOut, null);
             Field<LinksAggregateType>("in_aggregate", null, LinkQuery.Arguments, ResolveInAggregate, null);
             Field<LinksAggregateType>("out_aggregate", null, LinkQuery.Arguments, ResolveOutAggregate, null);

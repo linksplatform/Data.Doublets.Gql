@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    class LinksOnConflictInputType : InputObjectGraphType<LinksConstraintEnumType>
+    class LinksOnConflictInputType : InputObjectGraphType<LinksOnConflict>
     {
         public LinksOnConflictInputType()
         {
             Field<LinksConstraintEnumType>("constraint");
             Field<ListGraphType<LinksColumnType>>("update_columns");
-            Field<LinkBooleanExpressionInputType>("where", null, nullable: true , null);
+            Field(x => x.where, nullable: true, type: typeof(LinkBooleanExpressionInputType));
         }
     }
 }

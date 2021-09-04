@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Platform.Data.Doublets.Gql.Schema
 {
-    enum links_constraint
+    public enum links_constraint
     {
         links_pkey
     }

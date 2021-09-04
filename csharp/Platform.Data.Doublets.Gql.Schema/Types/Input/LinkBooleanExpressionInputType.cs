@@ -1,23 +1,25 @@
 ﻿using GraphQL.Types;
+using System;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    internal class LinkBooleanExpressionInputType : InputObjectGraphType
+    public class LinkBooleanExpressionInputType : InputObjectGraphType<LinkBooleanExpression>
     {
         public LinkBooleanExpressionInputType()
         {
-            Field<ListGraphType<LinkBooleanExpressionInputType>>("_and", null, nullable: true, null);
-            Field<ListGraphType<LinkBooleanExpressionInputType>>("_or", null, nullable: true, null);
-            Field<LinkBooleanExpressionInputType>("_not", null, nullable: true, null);
-            Field<LinkBooleanExpressionInputType>("from", null, nullable: true, null);
-            Field<LongComparisonExpressionInputType>("from_id", null, nullable: true, null);
-            Field<LongComparisonExpressionInputType>("id", null, nullable: true, null);
-            Field<LinkBooleanExpressionInputType>("in", null, true, null);
-            Field<LinkBooleanExpressionInputType>("out", null, true, null);
-            Field<LinkBooleanExpressionInputType>("to", null, nullable: true, null);
-            Field<LongComparisonExpressionInputType>("to_id", null, nullable: true, null);
-            Field<LinkBooleanExpressionInputType>("type", null, nullable: true, null);
-            Field<LongComparisonExpressionInputType>("type_id", null, nullable: true, null);
+
+            Field(x => x._and, nullable: true,type: typeof(ListGraphType<LinkBooleanExpressionInputType>));
+            Field(x => x._or, nullable: true, type: typeof(ListGraphType<LinkBooleanExpressionInputType>));
+            Field(x => x._not, nullable: true, type: typeof(LinkBooleanExpressionInputType));
+            Field(x => x.from, nullable: true, type: typeof(LinkBooleanExpressionInputType));
+            Field(x => x.from_id, nullable: true, type: typeof(LongComparisonExpressionInputType)); 
+            Field(x => x.id, nullable: true, type: typeof(LongComparisonExpressionInputType));
+            Field(x => x.@in, nullable: true, type: typeof(LinkBooleanExpressionInputType));
+            Field(x => x.@out, nullable: true, type: typeof(LinkBooleanExpressionInputType));
+            Field(x => x.to, nullable: true, type: typeof(LinkBooleanExpressionInputType));
+            Field(x => x.to_id, nullable: true, type: typeof(LongComparisonExpressionInputType));
+            Field(x => x.type, nullable: true, type: typeof(LinkBooleanExpressionInputType));
+            Field(x => x.type_id, nullable: true, type: typeof(LongComparisonExpressionInputType));
         }
     }
 }

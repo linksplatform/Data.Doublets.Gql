@@ -3,11 +3,11 @@ using Platform.Data.Doublets.Gql.Schema.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
-    internal class LinksAggregateType : ObjectGraphType
+    internal class LinksAggregateType : ObjectGraphType<LinksAggregate>
     {
         public LinksAggregateType()
         {
-            Field<LinksAggregateFieldsType>("aggregate", null, nullable: true, null);
+            Field(x => x.aggregate, nullable: true, type: typeof(LinksAggregateFieldsType));
             Field<ListGraphType<LinkType>>("nodes");
         }
     }

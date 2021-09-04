@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Platform.Data.Doublets.Gql.Schema
+namespace Platform.Data.Doublets.Gql.Schema.Types
 {
-    public enum LinksColumn
+    public class LinksAggregate
     {
-        from_id,
-        id,
-        to_id,
-        type_id
+        public LinksAggregateFields? aggregate { get; set; }
     }
 }

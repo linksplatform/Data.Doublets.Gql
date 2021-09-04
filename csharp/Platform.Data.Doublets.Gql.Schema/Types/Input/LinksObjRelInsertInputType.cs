@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    class LinksObjRelInsertInputType : InputObjectGraphType
+    class LinksObjRelInsertInputType : InputObjectGraphType<LinksObjRelInsert>
     {
         public LinksObjRelInsertInputType()
         {
             Field<LinksInsertInputType>("data");
-            Field<LinksOnConflictInputType>("on_conflict", null, nullable: true, null);
+            Field(x => x.on_conflict, nullable: true, type: typeof(LinksOnConflictInputType));
         }
     }
 }

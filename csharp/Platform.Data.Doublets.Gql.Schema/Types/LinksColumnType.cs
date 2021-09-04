@@ -1,5 +1,4 @@
-﻿using Gql.Samples.Schemas.Link;
-using GraphQL.Types;
+﻿using GraphQL.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
