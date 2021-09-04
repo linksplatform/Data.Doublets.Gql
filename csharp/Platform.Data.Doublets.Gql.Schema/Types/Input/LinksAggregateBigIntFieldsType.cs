@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    class LinksAggregateBigIntFieldsType : InputObjectGraphType
+    class LinksAggregateBigIntFieldsType : ObjectGraphType
     {
         public LinksAggregateBigIntFieldsType()
         {
