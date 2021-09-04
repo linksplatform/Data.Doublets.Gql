@@ -22,10 +22,13 @@ namespace Platform.Data.Doublets.Gql.Schema
 
         public Link(IList<ulong> links)
         {
-            var i = 0;
-            id = (long)links[i++];
-            from_id = (long)links[i++];
-            to_id = (long)links[i++];
+            if (links != null && links.Count == 3)
+            {
+                var i = 0;
+                id = (long)links[i++];
+                from_id = (long)links[i++];
+                to_id = (long)links[i++];
+            }
         }
     }
 }
