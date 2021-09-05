@@ -19,8 +19,6 @@ namespace Platform.Data.Doublets.Gql.Server
 {
     public class Startup
     {
-        public static string DbFileName = "db.links";
-
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
@@ -33,7 +31,7 @@ namespace Platform.Data.Doublets.Gql.Server
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) => services
-                .AddSingleton<ILinks<ulong>>(sp => new SynchronizedLinks<ulong>(new UnitedMemoryLinks<ulong>(new FileMappedResizableDirectMemory(DbFileName), UnitedMemoryLinks<ulong>.DefaultLinksSizeStep, new LinksConstants<ulong>(enableExternalReferencesSupport: true), IndexTreeType.Default).DecorateWithAutomaticUniquenessAndUsagesResolution()))
+                .AddSingleton<ILinks<ulong>>(sp => Data.CreateLinks())
                 .AddSingleton<LinkSchema>()
                 .AddGraphQL((options, provider) =>
                 {
@@ -42,7 +40,7 @@ namespace Platform.Data.Doublets.Gql.Server
                     options.UnhandledExceptionDelegate = ctx => logger.LogError("{Error} occurred", ctx.OriginalException.Message);
                 })
                 .AddSystemTextJson(deserializerSettings => { }, serializerSettings => { })
-                .AddErrorInfoProvider<CustomErrorInfoProvider>(opt => opt.ExposeExceptionStackTrace = Environment.IsDevelopment())
+                .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = Environment.IsDevelopment())
                 .AddWebSockets()
                 .AddDataLoader()
                 .AddGraphTypes(typeof(LinkSchema));

@@ -21,10 +21,10 @@ namespace Platform.Data.Doublets.Gql.Server
             try
             {
                 Log.Information("Starting host");
-                var dbFileName = ConsoleHelpers.GetOrReadArgument(0, $"Document name (default: {Startup.DbFileName})", args);
+                var dbFileName = ConsoleHelpers.GetOrReadArgument(0, $"Document name (default: {Data.DefaultDatabaseFileName})", args);
                 if (!string.IsNullOrWhiteSpace(dbFileName))
                 {
-                    Startup.DbFileName = dbFileName;
+                    Data.DefaultDatabaseFileName = dbFileName;
                 }
                 CreateHostBuilder(args).Build().Run();
                 return 0;
