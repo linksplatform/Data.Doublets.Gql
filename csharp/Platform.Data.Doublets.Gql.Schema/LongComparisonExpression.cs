@@ -13,7 +13,7 @@ namespace Platform.Data.Doublets.Gql.Schema
 
         public List<long> _in { get; set; }
 
-        public bool? is_null { get; set; }
+        public bool? _is_null { get; set; }
 
         public long? _lt { get; set; }
 

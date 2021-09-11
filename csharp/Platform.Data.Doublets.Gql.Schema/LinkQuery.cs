@@ -34,6 +34,14 @@ namespace Platform.Data.Doublets.Gql.Schema
             if (context.HasArgument("where"))
             {
                 var where = context.GetArgument<LinkBooleanExpression>("where");
+                if(where?.from_id._eq != null && forceFromId != null && where?.from_id._eq != forceFromId)
+                {
+                    return new List<Link>();
+                }
+                if (where?.to_id._eq != null && forceToId != null && where?.to_id._eq != forceToId)
+                {
+                    return new List<Link>();
+                }
                 query = new Link<ulong>(index: (ulong?)where?.id?._eq ?? any, source: (ulong?)forceFromId ?? (ulong?)where?.from_id?._eq ?? any, target: (ulong?)forceToId ?? (ulong?)where?.to_id?._eq ?? any);
             }
             var allLinks = links.All(query).Select(l => new Link(l));

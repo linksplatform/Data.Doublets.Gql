@@ -1,17 +1,3 @@
-using GraphQL.Server;
-using GraphQL.Server.Ui.Altair;
-using GraphQL.Server.Ui.GraphiQL;
-using GraphQL.Server.Ui.Playground;
-using GraphQL.Server.Ui.Voyager;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Platform.Data.Doublets.Gql.Schema;
-using Platform.Data.Doublets.Memory;
-using Platform.Data.Doublets.Memory.United.Generic;
 using Platform.Data.Doublets.Memory.Split.Generic;
 using Platform.Memory;
 using System.Collections.Generic;
