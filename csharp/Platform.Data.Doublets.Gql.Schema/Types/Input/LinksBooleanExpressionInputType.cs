@@ -28,8 +28,8 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         {
 
             Field(x => x._and, nullable: true,type: typeof(ListGraphType<LinksBooleanExpressionInputType>));
-            Field(x => x._or, nullable: true, type: typeof(ListGraphType<LinksBooleanExpressionInputType>));
             Field(x => x._not, nullable: true, type: typeof(LinksBooleanExpressionInputType));
+            Field(x => x._or, nullable: true, type: typeof(ListGraphType<LinksBooleanExpressionInputType>));
             Field(x => x.from, nullable: true, type: typeof(LinksBooleanExpressionInputType));
             Field(x => x.from_id, nullable: true, type: typeof(LongComparisonExpressionInputType)); 
             Field(x => x.id, nullable: true, type: typeof(LongComparisonExpressionInputType));

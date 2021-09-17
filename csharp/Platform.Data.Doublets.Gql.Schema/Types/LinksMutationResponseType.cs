@@ -7,11 +7,11 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     /// response of any mutation on the table "links"
     /// """
     /// type links_mutation_response {
-    ///   """number of affected rows by the mutation"""
-    ///   affected_rows: Int!
+    ///  """number of affected rows by the mutation"""
+    ///  affected_rows: Int!
     ///
-    ///   """data of the affected rows by the mutation"""
-    ///   returning: [links!]!
+    ///  """data of the affected rows by the mutation"""
+    ///  returning: [links!]!
     /// }
     /// </remarks>
     internal class LinksMutationResponseType : ObjectGraphType

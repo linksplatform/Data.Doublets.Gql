@@ -10,29 +10,29 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     /// <remarks>
     /// """aggregate max on columns"""
     /// type links_max_fields {
-    ///   from_id: bigint
-    ///   id: bigint
-    ///   to_id: bigint
-    ///   type_id: bigint
+    ///  from_id: bigint
+    ///  id: bigint
+    ///  to_id: bigint
+    ///  type_id: bigint
     /// }
     ///
     /// """aggregate min on columns"""
     /// type links_min_fields {
-    ///   from_id: bigint
-    ///   id: bigint
-    ///   to_id: bigint
-    ///   type_id: bigint
+    ///  from_id: bigint
+    ///  id: bigint
+    ///  to_id: bigint
+    ///  type_id: bigint
     /// }
     ///
     /// """aggregate sum on columns"""
     /// type links_sum_fields {
-    ///   from_id: bigint
-    ///   id: bigint
-    ///   to_id: bigint
-    ///   type_id: bigint
+    ///  from_id: bigint
+    ///  id: bigint
+    ///  to_id: bigint
+    ///  type_id: bigint
     /// }
     /// </remarks>
-    class LinksAggregateBigIntFieldsType : ObjectGraphType
+    internal class LinksAggregateBigIntFieldsType : ObjectGraphType
     {
         public LinksAggregateBigIntFieldsType()
         {

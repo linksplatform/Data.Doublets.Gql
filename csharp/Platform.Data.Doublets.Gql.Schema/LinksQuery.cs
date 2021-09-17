@@ -60,12 +60,12 @@ namespace Platform.Data.Doublets.Gql.Schema
     public class LinksQuery : ObjectGraphType
     {
         public static readonly QueryArguments Arguments = new QueryArguments(
+                    new QueryArgument<ListGraphType<LinksColumnType>> { Name = "distinct_on" },
                     new QueryArgument<LongGraphType> { Name = "limit" },
-                    new QueryArgument<LinksBooleanExpressionInputType> { Name = "where" },
-                    new QueryArgument<LinksOrderByInputType> { Name = "order_by" },
                     new QueryArgument<LongGraphType> { Name = "offset" },
-                    new QueryArgument<ListGraphType<LinksColumnType>> { Name = "distinct_on" }
-                );
+                    new QueryArgument<LinksOrderByInputType> { Name = "order_by" },
+                    new QueryArgument<LinksBooleanExpressionInputType> { Name = "where" }
+        );
         public LinksQuery(ILinks<ulong> links) => Field<ListGraphType<LinksType>>("links",
                 arguments: Arguments,
                 resolve: context =>

@@ -101,14 +101,14 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     {
         public LinksType()
         {
-            Field(o => o.id);
-            Field(o => o.from_id);
             Field(o => o.from, nullable: true, type: typeof(LinksType)).Resolve(ResolveFrom);
+            Field<LongGraphType>("from_id");
+            Field(o => o.id, nullable: false, type: typeof(LongGraphType));
             Field(o => o.to, nullable: true, type: typeof(LinksType)).Resolve(ResolveTo);
-            Field(o => o.to_id, nullable: true);
+            Field<LongGraphType>("to_id");
             Field(o => o.type, nullable: true, type: typeof(LinksType)).Resolve(ResolveType);
-            Field(o => o.type_id, nullable: true);
-            Field<ListGraphType<LinksType>>("in",null, LinksQuery.Arguments, ResolveIn, null);
+            Field<LongGraphType>("type_id");
+            Field<ListGraphType<LinksType>>("in", null, LinksQuery.Arguments, ResolveIn, null);
             Field<ListGraphType<LinksType>>("out", null, LinksQuery.Arguments, ResolveOut, null);
             Field<LinksAggregateType>("in_aggregate", null, LinksQuery.Arguments, ResolveInAggregate, null);
             Field<LinksAggregateType>("out_aggregate", null, LinksQuery.Arguments, ResolveOutAggregate, null);

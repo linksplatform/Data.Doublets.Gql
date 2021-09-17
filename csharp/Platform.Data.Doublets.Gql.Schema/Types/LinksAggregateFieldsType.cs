@@ -9,17 +9,17 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     /// aggregate fields of "links"
     /// """
     /// type links_aggregate_fields {
-    ///   avg: links_avg_fields
-    ///   count(columns: [links_select_column!], distinct: Boolean): Int
-    ///   max: links_max_fields
-    ///   min: links_min_fields
-    ///   stddev: links_stddev_fields
-    ///   stddev_pop: links_stddev_pop_fields
-    ///   stddev_samp: links_stddev_samp_fields
-    ///   sum: links_sum_fields
-    ///   var_pop: links_var_pop_fields
-    ///   var_samp: links_var_samp_fields
-    ///   variance: links_variance_fields
+    ///  avg: links_avg_fields
+    ///  count(columns: [links_select_column!], distinct: Boolean): Int
+    ///  max: links_max_fields
+    ///  min: links_min_fields
+    ///  stddev: links_stddev_fields
+    ///  stddev_pop: links_stddev_pop_fields
+    ///  stddev_samp: links_stddev_samp_fields
+    ///  sum: links_sum_fields
+    ///  var_pop: links_var_pop_fields
+    ///  var_samp: links_var_samp_fields
+    ///  variance: links_variance_fields
     /// }
     /// </remarks>
     internal class LinksAggregateFieldsType : ObjectGraphType<LinksAggregateFields>
@@ -28,8 +28,8 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
         {
             Field(x => x.avg, nullable: true, type: typeof(LinksAggregateFloatFieldsType));
             Field<IntGraphType>("count", null,
-                new QueryArguments() {new QueryArgument<ListGraphType<LinksColumnType>> { Name = "columns" },
-                new QueryArgument<BooleanGraphType>{ Name = "distinct"}
+                new QueryArguments {new QueryArgument<ListGraphType<LinksColumnType>> { Name = "columns" },
+                new QueryArgument<BooleanGraphType>{ Name = "distinct" }
                 }, ResolveCount, null);
             Field(x => x.max, nullable: true, type: typeof(LinksAggregateBigIntFieldsType));
             Field(x => x.min, nullable: true, type: typeof(LinksAggregateBigIntFieldsType));

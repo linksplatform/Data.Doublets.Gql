@@ -24,7 +24,8 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     {
         public LinksAggregateOrderByInputType()
         {
-            Field(x => x._avg, nullable: true, type: typeof(LinksAggregateOrderByInputType));
+            Field(x => x.avg, nullable: true, type: typeof(LinksAggregateOrderByInputType));
+            Field(x => x.count, nullable: true, type: typeof(OrderByEnumType));
             Field(x => x.max, nullable: true, type: typeof(LinksAggregateOrderByInputType));
             Field(x => x.min, nullable: true, type: typeof(LinksAggregateOrderByInputType));
             Field(x => x.stddev, nullable: true, type: typeof(LinksAggregateOrderByInputType));
