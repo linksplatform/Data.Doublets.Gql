@@ -7,6 +7,15 @@ using System.Threading.Tasks;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
+    /// <remarks>
+    /// """
+    /// input type for inserting array relation for remote table "links"
+    /// """
+    /// input links_arr_rel_insert_input {
+    ///   data: [links_insert_input!]!
+    ///   on_conflict: links_on_conflict
+    /// }
+    /// </remarks>
     class LinksArrRelInsertInputType : InputObjectGraphType<LinksArrRelInsert>
     {
         public LinksArrRelInsertInputType()

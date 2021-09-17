@@ -33,7 +33,7 @@ namespace Platform.Data.Doublets.Gql.Server
         public void ConfigureServices(IServiceCollection services) => services
                 .AddRouting()
                 .AddSingleton<ILinks<ulong>>(sp => Data.CreateLinks())
-                .AddSingleton<LinkSchema>()
+                .AddSingleton<LinksSchema>()
                 .AddGraphQL((options, provider) =>
                 {
                     options.EnableMetrics = Environment.IsDevelopment();
@@ -45,7 +45,7 @@ namespace Platform.Data.Doublets.Gql.Server
                 .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = Environment.IsDevelopment())
                 .AddWebSockets()
                 .AddDataLoader()
-                .AddGraphTypes(typeof(LinkSchema));
+                .AddGraphTypes(typeof(LinksSchema));
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
@@ -61,8 +61,8 @@ namespace Platform.Data.Doublets.Gql.Server
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGraphQLWebSockets<LinkSchema>();
-                endpoints.MapGraphQL<LinkSchema, GraphQLHttpMiddlewareWithLogs<LinkSchema>>();
+                endpoints.MapGraphQLWebSockets<LinksSchema>();
+                endpoints.MapGraphQL<LinksSchema, GraphQLHttpMiddlewareWithLogs<LinksSchema>>();
 
                 endpoints.MapGraphQLPlayground(new PlaygroundOptions
                 {

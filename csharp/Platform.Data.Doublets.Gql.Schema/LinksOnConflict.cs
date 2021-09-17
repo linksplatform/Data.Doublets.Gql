@@ -13,6 +13,6 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
 
         public List<LinksColumn> update_columns { get; set; }
 
-        public LinkBooleanExpression where { get; set; }
+        public LinksBooleanExpression where { get; set; }
     }
 }
