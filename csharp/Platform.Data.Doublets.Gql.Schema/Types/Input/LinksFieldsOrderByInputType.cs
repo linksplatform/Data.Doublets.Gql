@@ -4,9 +4,7 @@ using Platform.Data.Doublets.Gql.Schema.Types.Input;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
-    internal class LinksFieldsOrderByType : InputObjectGraphType<LinksFieldsOrderBy>
-    {
-        /// <remarks>
+            /// <remarks>
         /// """
         /// order by max() on columns of table "links"
         /// """
@@ -117,6 +115,8 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
         ///     type_id: order_by
         /// }
         /// </remarks>
+    internal class LinksFieldsOrderByType : InputObjectGraphType<LinksFieldsOrderBy>
+    {
         public LinksFieldsOrderByType()
         {
             Field(x => x.id, nullable: true, type: typeof(OrderByEnumType));
