@@ -105,9 +105,9 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     ///     type_id: order_by
     /// }
     /// </remarks>
-    internal class LinksFieldsOrderByType : InputObjectGraphType<LinksFieldsOrderBy>
+    internal class LinksFieldsOrderByInputType : InputObjectGraphType<LinksFieldsOrderBy>
     {
-        public LinksFieldsOrderByType()
+        public LinksFieldsOrderByInputType()
         {
             Field(x => x.id, nullable: true, type: typeof(OrderByEnumType));
             Field(x => x.from_id, nullable: true, type: typeof(OrderByEnumType));
