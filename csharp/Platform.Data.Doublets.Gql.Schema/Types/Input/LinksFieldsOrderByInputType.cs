@@ -6,6 +6,29 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
 {
     internal class LinksFieldsOrderByType : InputObjectGraphType<LinksFieldsOrderBy>
     {
+        /// <remarks>
+        /// """
+        /// order by max() on columns of table "links"
+        /// """
+        /// input links_max_order_by {
+        ///   from_id: order_by
+        ///   id: order_by
+        ///   to_id: order_by
+        ///   type_id: order_by
+        /// }
+        ///
+        /// """
+        /// order by min() on columns of table "links"
+        /// """
+        /// input links_min_order_by {
+        ///   from_id: order_by
+        ///   id: order_by
+        ///   to_id: order_by
+        ///   type_id: order_by
+        /// }
+        ///
+
+        /// </remarks>
         public LinksFieldsOrderByType()
         {
             Field(x => x.id, nullable: true, type: typeof(OrderByEnumType));

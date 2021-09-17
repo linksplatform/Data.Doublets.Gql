@@ -7,6 +7,71 @@ using System.Linq;
 
 namespace Platform.Data.Doublets.Gql.Schema
 {
+    /// <remarks>
+    /// """mutation root"""
+    /// type mutation_root {
+    ///   """
+    ///   delete data from the table: "links"
+    ///   """
+    ///   delete_links(
+    ///     """filter the rows which have to be deleted"""
+    ///     where: links_bool_exp!
+    ///   ): links_mutation_response
+    ///
+    ///   """
+    ///   delete single row from the table: "links"
+    ///   """
+    ///   delete_links_by_pk(id: bigint!): links
+    ///
+    ///   """
+    ///   insert data into the table: "links"
+    ///   """
+    ///   insert_links(
+    ///     """the rows to be inserted"""
+    ///     objects: [links_insert_input!]!
+    ///
+    ///     """on conflict condition"""
+    ///     on_conflict: links_on_conflict
+    ///   ): links_mutation_response
+    ///
+    ///   """
+    ///   insert a single row into the table: "links"
+    ///   """
+    ///   insert_links_one(
+    ///     """the row to be inserted"""
+    ///     object: links_insert_input!
+    ///
+    ///     """on conflict condition"""
+    ///     on_conflict: links_on_conflict
+    ///   ): links
+    ///
+    ///   """
+    ///   update data of the table: "links"
+    ///   """
+    ///   update_links(
+    ///     """increments the integer columns with given value of the filtered values"""
+    ///     _inc: links_inc_input
+    ///
+    ///     """sets the columns of the filtered rows to the given values"""
+    ///     _set: links_set_input
+    ///
+    ///     """filter the rows which have to be updated"""
+    ///     where: links_bool_exp!
+    ///   ): links_mutation_response
+    ///
+    ///   """
+    ///   update single row of the table: "links"
+    ///   """
+    ///   update_links_by_pk(
+    ///     """increments the integer columns with given value of the filtered values"""
+    ///     _inc: links_inc_input
+    ///
+    ///     """sets the columns of the filtered rows to the given values"""
+    ///     _set: links_set_input
+    ///     pk_columns: links_pk_columns_input!
+    ///   ): links
+    /// }
+    /// </remarks>
     public class LinkMutation : ObjectGraphType<object>
     {
         public LinkMutation(ILinks<ulong> links)
