@@ -11,22 +11,6 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     ///   type_id: Float
     /// }
     ///
-    /// """aggregate max on columns"""
-    /// type links_max_fields {
-    ///   from_id: bigint
-    ///   id: bigint
-    ///   to_id: bigint
-    ///   type_id: bigint
-    /// }
-    /// 
-    /// """aggregate min on columns"""
-    /// type links_min_fields {
-    ///   from_id: bigint
-    ///   id: bigint
-    ///   to_id: bigint
-    ///   type_id: bigint
-    /// }
-    ///
     /// """aggregate stddev on columns"""
     /// type links_stddev_fields {
     ///   from_id: Float
@@ -73,14 +57,6 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     ///     id: Float
     ///     to_id: Float
     ///     type_id: Float
-    /// }
-    ///
-    /// """aggregate sum on columns"""
-    /// type links_sum_fields {
-    ///   from_id: bigint
-    ///   id: bigint
-    ///   to_id: bigint
-    ///   type_id: bigint
     /// }
     /// </remarks>
     internal class LinksAggregateFloatFieldsType : ObjectGraphType<LinksAggregateFloatFields>

@@ -24,16 +24,6 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     ///     to_id: order_by
     ///     type_id: order_by
     /// }
-    /// 
-    /// """
-    /// order by max() on columns of table "links"
-    /// """
-    /// input links_max_order_by {
-    ///   from_id: order_by
-    ///   id: order_by
-    ///   to_id: order_by
-    ///   type_id: order_by
-    /// }
     ///
     /// """
     /// order by min() on columns of table "links"
