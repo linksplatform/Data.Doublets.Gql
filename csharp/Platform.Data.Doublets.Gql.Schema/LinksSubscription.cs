@@ -52,11 +52,11 @@ namespace Platform.Data.Doublets.Gql.Schema
     /// </remarks>
     internal class LinksSubscription : ObjectGraphType
     {
-        public LinksSubscription(ILinks<ulong> links) => Field<ListGraphType<LinkType>>("links",
-        arguments: LinkQuery.Arguments,
+        public LinksSubscription(ILinks<ulong> links) => Field<ListGraphType<LinksType>>("links",
+        arguments: LinksQuery.Arguments,
         resolve: context =>
         {
-            return LinkQuery.GetLinks(context, links);
+            return LinksQuery.GetLinks(context, links);
         });
     }
 }

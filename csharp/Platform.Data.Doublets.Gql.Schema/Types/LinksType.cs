@@ -97,29 +97,29 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     ///   type_id: bigint!
     /// }
     /// </remarks>
-    public class LinkType : ObjectGraphType<Link>
+    public class LinksType : ObjectGraphType<Link>
     {
-        public LinkType()
+        public LinksType()
         {
             Field(o => o.id);
             Field(o => o.from_id);
-            Field(o => o.from, nullable: true, type: typeof(LinkType)).Resolve(ResolveFrom);
-            Field(o => o.to, nullable: true, type: typeof(LinkType)).Resolve(ResolveTo);
+            Field(o => o.from, nullable: true, type: typeof(LinksType)).Resolve(ResolveFrom);
+            Field(o => o.to, nullable: true, type: typeof(LinksType)).Resolve(ResolveTo);
             Field(o => o.to_id, nullable: true);
-            Field(o => o.type, nullable: true, type: typeof(LinkType)).Resolve(ResolveType);
+            Field(o => o.type, nullable: true, type: typeof(LinksType)).Resolve(ResolveType);
             Field(o => o.type_id, nullable: true);
-            Field<ListGraphType<LinkType>>("in",null, LinkQuery.Arguments, ResolveIn, null);
-            Field<ListGraphType<LinkType>>("out", null, LinkQuery.Arguments, ResolveOut, null);
-            Field<LinksAggregateType>("in_aggregate", null, LinkQuery.Arguments, ResolveInAggregate, null);
-            Field<LinksAggregateType>("out_aggregate", null, LinkQuery.Arguments, ResolveOutAggregate, null);
+            Field<ListGraphType<LinksType>>("in",null, LinksQuery.Arguments, ResolveIn, null);
+            Field<ListGraphType<LinksType>>("out", null, LinksQuery.Arguments, ResolveOut, null);
+            Field<LinksAggregateType>("in_aggregate", null, LinksQuery.Arguments, ResolveInAggregate, null);
+            Field<LinksAggregateType>("out_aggregate", null, LinksQuery.Arguments, ResolveOutAggregate, null);
         }
         private LinksAggregateType ResolveInAggregate(IResolveFieldContext<Link> context) => new();
 
         private LinksAggregateType ResolveOutAggregate(IResolveFieldContext<Link> context) => new();
 
-        private List<Link> ResolveIn(IResolveFieldContext<Link> context) => LinkQuery.GetLinks(context, null, context.Source.id).ToList();
+        private List<Link> ResolveIn(IResolveFieldContext<Link> context) => LinksQuery.GetLinks(context, null, context.Source.id).ToList();
 
-        private List<Link> ResolveOut(IResolveFieldContext<Link> context) => LinkQuery.GetLinks(context, context.Source.id, null).ToList();
+        private List<Link> ResolveOut(IResolveFieldContext<Link> context) => LinksQuery.GetLinks(context, context.Source.id, null).ToList();
 
         private Link ResolveFrom(IResolveFieldContext<Link> context) => context.Source.@from ?? GetLinkOrDefault(context, context.Source.from_id);
 
