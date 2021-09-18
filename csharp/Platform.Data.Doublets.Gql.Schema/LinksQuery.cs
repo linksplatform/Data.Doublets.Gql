@@ -1,7 +1,6 @@
 ﻿using GraphQL;
 using GraphQL.Types;
 using Microsoft.Extensions.DependencyInjection;
-using Platform.Data.Doublets;
 using Platform.Data.Doublets.Gql.Schema.Types;
 using Platform.Data.Doublets.Gql.Schema.Types.Input;
 using System;
@@ -60,7 +59,7 @@ namespace Platform.Data.Doublets.Gql.Schema
     /// </remarks>
     public class LinksQuery : ObjectGraphType
     {
-        public static readonly QueryArguments Arguments = new QueryArguments(
+        public static readonly QueryArguments Arguments = new (
                     new QueryArgument<ListGraphType<LinksColumnEnumType>> { Name = "distinct_on" },
                     new QueryArgument<LongGraphType> { Name = "limit" },
                     new QueryArgument<LongGraphType> { Name = "offset" },
@@ -82,11 +81,11 @@ namespace Platform.Data.Doublets.Gql.Schema
             if (context.HasArgument("where"))
             {
                 var where = context.GetArgument<LinksBooleanExpression>("where");
-                if(where?.from_id._eq != null && forceFromId != null && where?.from_id._eq != forceFromId)
+                if(where?.from_id._eq != null && forceFromId != null && where.from_id._eq != forceFromId)
                 {
                     return new List<Link>();
                 }
-                if (where?.to_id._eq != null && forceToId != null && where?.to_id._eq != forceToId)
+                if (where?.to_id._eq != null && forceToId != null && where.to_id._eq != forceToId)
                 {
                     return new List<Link>();
                 }

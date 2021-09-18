@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Platform.Data.Doublets.Gql.Schema
 {
@@ -24,13 +20,13 @@ namespace Platform.Data.Doublets.Gql.Schema
 
         public LinksBooleanExpression @in { get; set; }
 
-        public LinksBooleanExpression @type_id { get; set; }
+        public LinksBooleanExpression type_id { get; set; }
 
         public LinksBooleanExpression @out { get; set; }
 
-        public LinksBooleanExpression @to { get; set; }
+        public LinksBooleanExpression to { get; set; }
 
-        public LinksBooleanExpression @type { get; set; }
+        public LinksBooleanExpression type { get; set; }
 
     }
 }

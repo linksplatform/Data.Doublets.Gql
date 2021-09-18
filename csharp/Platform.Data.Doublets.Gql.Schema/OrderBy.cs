@@ -1,5 +1,4 @@
-﻿
-namespace Platform.Data.Doublets.Gql.Schema
+﻿namespace Platform.Data.Doublets.Gql.Schema
 {
     public enum order_by
     {

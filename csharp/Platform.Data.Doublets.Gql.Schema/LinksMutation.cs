@@ -139,8 +139,8 @@ namespace Platform.Data.Doublets.Gql.Schema
         }
         public static Link InsertLink(object service, Link link)
         {
-            var Links = (ILinks<ulong>)service;
-            var create = Links.GetOrCreate((ulong)link.from_id, (ulong)link.to_id);
+            var links = (ILinks<ulong>)service;
+            var create = links.GetOrCreate((ulong)link.from_id, (ulong)link.to_id);
             return LinksType.GetLinkOrDefault(service, (long)create);
         }
     }

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Platform.Data.Doublets.Gql.Schema.Types;
 
-namespace Platform.Data.Doublets.Gql.Schema.Types
+namespace Platform.Data.Doublets.Gql.Schema
 {
     class LinksArrRelInsert
     {
