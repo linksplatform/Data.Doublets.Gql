@@ -18,7 +18,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     /// </remarks>
     class LinksConstraintEnumType : EnumerationGraphType<links_constraint>
     {
-        public LinksConstraintEnumType() => Name = "LinksConstraintEnum";
+        public LinksConstraintEnumType() => Name = "links_constraint";
     }
 }
 

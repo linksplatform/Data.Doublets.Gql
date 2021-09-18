@@ -28,7 +28,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
         {
             Field(x => x.avg, nullable: true, type: typeof(LinksAggregateFloatFieldsType));
             Field<IntGraphType>("count", null,
-                new QueryArguments {new QueryArgument<ListGraphType<LinksColumnType>> { Name = "columns" },
+                new QueryArguments {new QueryArgument<ListGraphType<LinksColumnEnumType>> { Name = "columns" },
                 new QueryArgument<BooleanGraphType>{ Name = "distinct" }
                 }, ResolveCount, null);
             Field(x => x.max, nullable: true, type: typeof(LinksAggregateBigIntFieldsType));
