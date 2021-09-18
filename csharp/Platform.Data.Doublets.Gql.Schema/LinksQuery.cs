@@ -7,6 +7,7 @@ using Platform.Data.Doublets.Gql.Schema.Types.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Platform.Data.Doublets.Gql.Schema.Types.Enum;
 
 namespace Platform.Data.Doublets.Gql.Schema
 {

@@ -1,6 +1,6 @@
 ﻿using GraphQL.Types;
 
-namespace Platform.Data.Doublets.Gql.Schema
+namespace Platform.Data.Doublets.Gql.Schema.Types.Enum
 {
     public class LinksColumnEnumType : EnumerationGraphType<LinksColumn>
     {
