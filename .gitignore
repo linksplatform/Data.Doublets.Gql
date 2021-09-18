@@ -349,6 +349,9 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
+# Intellij IDE
+.idea/
+
 # Doublets storage files
 db.links
 db.links.index
