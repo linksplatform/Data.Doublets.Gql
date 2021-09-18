@@ -8,8 +8,8 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     /// aggregated selection of "links"
     /// """
     /// type links_aggregate {
-    ///  from_idaggregate: links_aggregate_fields
-    ///  from_idnodes: [links!]!
+    ///   from_idaggregate: links_aggregate_fields
+    ///   from_idnodes: [links!]!
     /// }
     /// </remarks>
     internal class LinksAggregateType : ObjectGraphType<LinksAggregate>

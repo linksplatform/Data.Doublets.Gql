@@ -12,8 +12,8 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     /// unique or primary key constraints on table "links"
     /// """
     /// enum links_constraint {
-    ///   """unique or primary key constraint"""
-    ///   links_pkey
+    ///    """unique or primary key constraint"""
+    ///    links_pkey
     /// }
     /// </remarks>
     class LinksConstraintEnumType : EnumerationGraphType<links_constraint>

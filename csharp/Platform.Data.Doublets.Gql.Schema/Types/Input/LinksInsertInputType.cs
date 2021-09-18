@@ -12,15 +12,15 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     /// input type for inserting data into table "links"
     /// """
     /// input links_insert_input {
-    ///  from: links_obj_rel_insert_input
-    ///  from_id: bigint
-    ///  id: bigint
-    ///  in: links_arr_rel_insert_input
-    ///  out: links_arr_rel_insert_input
-    ///  to: links_obj_rel_insert_input
-    ///  to_id: bigint
-    ///  type: links_obj_rel_insert_input
-    ///  type_id: bigint
+    ///   from: links_obj_rel_insert_input
+    ///   from_id: bigint
+    ///   id: bigint
+    ///   in: links_arr_rel_insert_input
+    ///   out: links_arr_rel_insert_input
+    ///   to: links_obj_rel_insert_input
+    ///   to_id: bigint
+    ///   type: links_obj_rel_insert_input
+    ///   type_id: bigint
     /// }
     /// </remarks>
     class LinksInsertInputType : InputObjectGraphType<LinksInsert>

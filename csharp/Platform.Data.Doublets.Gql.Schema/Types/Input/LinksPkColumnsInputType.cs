@@ -12,7 +12,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     /// primary key columns input for table: "links"
     /// """
     /// input links_pk_columns_input {
-    ///  id: bigint!
+    ///   id: bigint!
     /// }
     /// </remarks>
     class LinksPkColumnsInputType : InputObjectGraphType
