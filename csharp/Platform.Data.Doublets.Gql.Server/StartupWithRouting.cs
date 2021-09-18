@@ -10,9 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Platform.Data.Doublets.Gql.Schema;
-using Platform.Data.Doublets.Memory;
-using Platform.Data.Doublets.Memory.United.Generic;
-using Platform.Memory;
 using System.Collections.Generic;
 
 namespace Platform.Data.Doublets.Gql.Server

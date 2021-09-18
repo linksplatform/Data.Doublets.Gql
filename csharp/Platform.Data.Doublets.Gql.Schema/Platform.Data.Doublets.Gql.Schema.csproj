@@ -5,7 +5,7 @@
     <AssemblyName>Platform.Data.Doublets.Gql.Schema</AssemblyName>
     <RootNamespace>Platform.Data.Doublets.Gql.Schema</RootNamespace>
     <IsPackable>false</IsPackable>
-    <NoWarn>$(NoWarn);1591;1794</NoWarn>
+    <NoWarn>$(NoWarn),1591,1794</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
