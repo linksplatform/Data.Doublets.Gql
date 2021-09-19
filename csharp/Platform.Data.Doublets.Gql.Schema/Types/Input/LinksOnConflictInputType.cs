@@ -23,7 +23,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         public LinksOnConflictInputType()
         {
             Field<LinksConstraintEnumType>("constraint");
-            Field<ListGraphType<LinksColumnEnumType>>("update_columns");
+            Field<ListGraphType<LinksUpdateColumnType>>("update_columns");
             Field(x => x.where, nullable: true, type: typeof(LinksBooleanExpressionInputType));
         }
     }

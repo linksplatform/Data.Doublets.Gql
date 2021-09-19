@@ -101,6 +101,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     {
         public LinksType()
         {
+            Name = "links";
             Field(o => o.from, nullable: true, type: typeof(LinksType)).Resolve(ResolveFrom);
             Field<LongGraphType>("from_id");
             Field(o => o.id, nullable: false, type: typeof(LongGraphType));

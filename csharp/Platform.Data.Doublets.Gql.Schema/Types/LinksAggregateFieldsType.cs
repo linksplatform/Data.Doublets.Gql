@@ -27,20 +27,21 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     {
         public LinksAggregateFieldsType()
         {
-            Field(x => x.avg, nullable: true, type: typeof(LinksAggregateFloatFieldsType));
+            Name = "links_aggregate_fields";
+            Field(x => x.avg, nullable: true, type: typeof(LinksAggregateFloatAvgFieldsType));
             Field<IntGraphType>("count", null,
-                new QueryArguments {new QueryArgument<ListGraphType<LinksColumnEnumType>> { Name = "columns" },
+                new QueryArguments {new QueryArgument<ListGraphType<LinksSelectColumnEnumType>> { Name = "columns" },
                 new QueryArgument<BooleanGraphType>{ Name = "distinct" }
                 }, ResolveCount, null);
             Field(x => x.max, nullable: true, type: typeof(LinksAggregateBigIntFieldsType));
             Field(x => x.min, nullable: true, type: typeof(LinksAggregateBigIntFieldsType));
-            Field(x => x.stddev, nullable: true, type: typeof(LinksAggregateFloatFieldsType));
-            Field(x => x.stddev_pop, nullable: true, type: typeof(LinksAggregateFloatFieldsType));
-            Field(x => x.stddev_samp, nullable: true, type: typeof(LinksAggregateFloatFieldsType));
+            Field(x => x.stddev, nullable: true, type: typeof(LinksAggregateFloatStddevFieldsType));
+            Field(x => x.stddev_pop, nullable: true, type: typeof(LinksAggregateFloatStdDevPopFieldsType));
+            Field(x => x.stddev_samp, nullable: true, type: typeof(LinksAggregateFloatStdDevSampFieldsType));
             Field(x => x.sum, nullable: true, type: typeof(LinksAggregateBigIntFieldsType));
-            Field(x => x.var_pop, nullable: true, type: typeof(LinksAggregateFloatFieldsType));
-            Field(x => x.var_samp, nullable: true, type: typeof(LinksAggregateFloatFieldsType));
-            Field(x => x.variance, nullable: true, type: typeof(LinksAggregateFloatFieldsType));
+            Field(x => x.var_pop, nullable: true, type: typeof(LinksAggregateFloatVarPopFieldsType));
+            Field(x => x.var_samp, nullable: true, type: typeof(LinksAggregateFloatVarSampFieldsType));
+            Field(x => x.variance, nullable: true, type: typeof(LinksAggregateFloatVarianceFieldsType));
         }
 
         private object ResolveCount(IResolveFieldContext<object> arg) => 0 ;
