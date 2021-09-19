@@ -22,6 +22,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     {
         public LongComparisonExpressionInputType()
         {
+            Name = "bigint_comparison_exp";
             Field(x => x._eq, nullable: true, type: typeof(LongGraphType));
             Field(x => x._gt, nullable:  true, type: typeof(LongGraphType));
             Field(x => x._gte, nullable:true, type: typeof(LongGraphType));

@@ -26,7 +26,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     {
         public LinksBooleanExpressionInputType()
         {
-
+            Name = "links_bool_exp";
             Field(x => x._and, nullable: true,type: typeof(ListGraphType<LinksBooleanExpressionInputType>));
             Field(x => x._not, nullable: true, type: typeof(LinksBooleanExpressionInputType));
             Field(x => x._or, nullable: true, type: typeof(ListGraphType<LinksBooleanExpressionInputType>));

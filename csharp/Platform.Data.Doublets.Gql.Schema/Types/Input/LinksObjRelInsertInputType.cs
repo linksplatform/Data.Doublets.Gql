@@ -21,6 +21,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     {
         public LinksObjRelInsertInputType()
         {
+            Name = "links_obj_rel_insert_input";
             Field<LinksInsertInputType>("data");
             Field(x => x.on_conflict, nullable: true, type: typeof(LinksOnConflictInputType));
         }

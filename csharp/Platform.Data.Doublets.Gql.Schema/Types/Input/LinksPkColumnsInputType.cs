@@ -19,6 +19,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     {
         public LinksPkColumnsInputType()
         {
+            Name = "links_pk_columns_input";
             Field<LongGraphType>("id");
         }
     }

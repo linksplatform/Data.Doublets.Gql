@@ -20,6 +20,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     {
         public LinksArrRelInsertInputType()
         {
+            Name = "links_arr_rel_insert_input";
             Field<ListGraphType<LinksInsertInputType>>("data");
             Field(x => x.on_conflict, nullable: true, type: typeof(LinksOnConflictInputType));
         }

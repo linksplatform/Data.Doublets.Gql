@@ -22,6 +22,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     {
         public LinksIncInputType()
         {
+            Name = "links_inc_input";
             Field(x => x.id, nullable: true, type: typeof(LongGraphType));
             Field(x => x.from_id, nullable: true, type: typeof(LongGraphType));
             Field(x => x.to_id, nullable: true, type: typeof(LongGraphType));
