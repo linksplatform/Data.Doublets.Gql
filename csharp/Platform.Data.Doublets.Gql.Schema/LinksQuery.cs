@@ -66,12 +66,13 @@ namespace Platform.Data.Doublets.Gql.Schema
                     new QueryArgument<LinksOrderByInputType> { Name = "order_by" },
                     new QueryArgument<LinksBooleanExpressionInputType> { Name = "where" }
         );
-        public LinksQuery(ILinks<ulong> links) => Field<ListGraphType<LinksType>>("links",
+        public LinksQuery(ILinks<ulong> links)
+        {
+            Name = "query_root";
+            Field<ListGraphType<LinksType>>("links",
                 arguments: Arguments,
-                resolve: context =>
-                {
-                    return GetLinks(context, links);
-                });
+                resolve: context => { return GetLinks(context, links); });
+        }
 
         public static IEnumerable<Link> GetLinks(IResolveFieldContext<object> context, long? forceFromId = null, long? forceToId = null) => GetLinks(context, context.RequestServices.GetService<ILinks<ulong>>(), forceFromId, forceToId);
         public static IEnumerable<Link> GetLinks(IResolveFieldContext<object> context, ILinks<ulong> links, long? forceFromId = null, long? forceToId = null)

@@ -76,7 +76,7 @@ namespace Platform.Data.Doublets.Gql.Schema
     {
         public LinksMutation(ILinks<ulong> links)
         {
-            Name = "links_mutation";
+            Name = "mutation_root";
             Field<LinksMutationResponseType>("insert_links_one",
                 arguments: new QueryArguments(
                     new QueryArgument<LinksInputType> { Name = "object" }
