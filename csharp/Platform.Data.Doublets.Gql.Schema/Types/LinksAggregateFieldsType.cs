@@ -33,12 +33,12 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
                 new QueryArguments {new QueryArgument<ListGraphType<LinksSelectColumnEnumType>> { Name = "columns" },
                 new QueryArgument<BooleanGraphType>{ Name = "distinct" }
                 }, ResolveCount, null);
-            Field(x => x.max, nullable: true, type: typeof(LinksAggregateBigIntFieldsType));
-            Field(x => x.min, nullable: true, type: typeof(LinksAggregateBigIntFieldsType));
+            Field(x => x.max, nullable: true, type: typeof(LinksAggregateBigIntMaxFieldsType));
+            Field(x => x.min, nullable: true, type: typeof(LinksAggregateBigIntMinFieldsType));
             Field(x => x.stddev, nullable: true, type: typeof(LinksAggregateFloatStddevFieldsType));
             Field(x => x.stddev_pop, nullable: true, type: typeof(LinksAggregateFloatStdDevPopFieldsType));
             Field(x => x.stddev_samp, nullable: true, type: typeof(LinksAggregateFloatStdDevSampFieldsType));
-            Field(x => x.sum, nullable: true, type: typeof(LinksAggregateBigIntFieldsType));
+            Field(x => x.sum, nullable: true, type: typeof(LinksAggregateBigIntSumFieldsType));
             Field(x => x.var_pop, nullable: true, type: typeof(LinksAggregateFloatVarPopFieldsType));
             Field(x => x.var_samp, nullable: true, type: typeof(LinksAggregateFloatVarSampFieldsType));
             Field(x => x.variance, nullable: true, type: typeof(LinksAggregateFloatVarianceFieldsType));
