@@ -18,7 +18,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Enum
     ///   type_id
     /// }
     /// </remarks>
-    class LinksUpdateColumnEnumType : LinksColumnEnumType
+public class LinksUpdateColumnEnumType : LinksColumnEnumType
     {
         public LinksUpdateColumnEnumType() : base("links_update_column") { }
     }

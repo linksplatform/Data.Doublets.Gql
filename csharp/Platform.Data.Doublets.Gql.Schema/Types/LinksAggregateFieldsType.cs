@@ -23,7 +23,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     ///   variance: links_variance_fields
     /// }
     /// </remarks>
-    internal class LinksAggregateFieldsType : ObjectGraphType<LinksAggregateFields>
+    public class LinksAggregateFieldsType : ObjectGraphType<LinksAggregateFields>
     {
         public LinksAggregateFieldsType()
         {

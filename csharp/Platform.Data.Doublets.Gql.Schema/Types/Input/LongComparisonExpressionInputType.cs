@@ -18,7 +18,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     ///   _nin: [bigint!]
     /// }
     /// </remarks>
-    internal class LongComparisonExpressionInputType : InputObjectGraphType<LongComparisonExpression>
+    public class LongComparisonExpressionInputType : InputObjectGraphType<LongComparisonExpression>
     {
         public LongComparisonExpressionInputType()
         {

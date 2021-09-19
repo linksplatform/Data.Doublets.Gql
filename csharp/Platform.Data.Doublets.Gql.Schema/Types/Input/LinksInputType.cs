@@ -2,7 +2,7 @@
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    internal class LinksInputType : InputObjectGraphType<Link>
+    public class LinksInputType : InputObjectGraphType<Link>
     {
         public LinksInputType()
         {

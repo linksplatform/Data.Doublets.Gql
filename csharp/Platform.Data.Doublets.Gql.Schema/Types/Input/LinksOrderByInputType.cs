@@ -19,7 +19,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     ///   type_id: order_by
     /// }
     /// </remarks>
-    internal class LinksOrderByInputType : InputObjectGraphType<LinksOrderBy>
+    public class LinksOrderByInputType : InputObjectGraphType<LinksOrderBy>
     {
         public LinksOrderByInputType()
         {

@@ -24,7 +24,7 @@ namespace Platform.Data.Doublets.Gql.Schema
     ///   desc_nulls_last
     /// }
     /// </remarks>
-    internal class OrderByEnumType : EnumerationGraphType<order_by>
+    public class OrderByEnumType : EnumerationGraphType<order_by>
     {
         public OrderByEnumType() => Name = "order_by";
     }

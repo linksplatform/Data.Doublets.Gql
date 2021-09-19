@@ -14,7 +14,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     ///   returning: [links!]!
     /// }
     /// </remarks>
-    internal class LinksMutationResponseType : ObjectGraphType
+    public class LinksMutationResponseType : ObjectGraphType
     {
         public LinksMutationResponseType()
         {

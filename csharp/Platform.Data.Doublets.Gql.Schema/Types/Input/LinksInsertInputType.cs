@@ -23,7 +23,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     ///   type_id: bigint
     /// }
     /// </remarks>
-    class LinksInsertInputType : InputObjectGraphType<LinksInsert>
+public class LinksInsertInputType : InputObjectGraphType<LinksInsert>
     {
         public LinksInsertInputType()
         {

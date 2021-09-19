@@ -1,6 +1,6 @@
 ﻿namespace Platform.Data.Doublets.Gql.Schema
 {
-    internal class LinksOrderBy
+    public class LinksOrderBy
     {
         public LinksOrderBy from { get; set; }
 

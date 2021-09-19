@@ -50,7 +50,7 @@ namespace Platform.Data.Doublets.Gql.Schema
     ///   links_by_pk(id: bigint!): links
     /// }
     /// </remarks>
-    internal class LinksSubscription : ObjectGraphType
+    public class LinksSubscription : ObjectGraphType
     {
         public LinksSubscription(ILinks<ulong> links)
         {

@@ -2,7 +2,7 @@
 
 namespace Platform.Data.Doublets.Gql.Schema
 {
-    class LinksAggregateOrderBy
+public class LinksAggregateOrderBy
     {
         public LinksFieldsOrderBy avg { get; set; }
 

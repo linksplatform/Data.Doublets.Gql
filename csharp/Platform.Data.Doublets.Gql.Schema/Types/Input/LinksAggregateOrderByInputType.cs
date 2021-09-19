@@ -20,7 +20,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     ///   variance: links_variance_order_by
     /// }
     /// </remarks>
-    internal class LinksAggregateOrderByInputType : InputObjectGraphType<LinksAggregateOrderBy>
+    public class LinksAggregateOrderByInputType : InputObjectGraphType<LinksAggregateOrderBy>
     {
         public LinksAggregateOrderByInputType()
         {

@@ -1,8 +1,6 @@
-﻿using Platform.Data.Doublets.Gql.Schema.Types;
-
-namespace Platform.Data.Doublets.Gql.Schema
+﻿namespace Platform.Data.Doublets.Gql.Schema
 {
-    class LinksInsert
+    public class LinksInsert
     {
         public LinksObjRelInsert from { get; set; }
 

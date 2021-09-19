@@ -15,7 +15,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     ///   id: bigint!
     /// }
     /// </remarks>
-    class LinksPkColumnsInputType : InputObjectGraphType
+public class LinksPkColumnsInputType : InputObjectGraphType
     {
         public LinksPkColumnsInputType()
         {

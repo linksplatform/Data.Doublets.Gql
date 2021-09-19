@@ -12,7 +12,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     ///   nodes: [links!]!
     /// }
     /// </remarks>
-    internal class LinksAggregateType : ObjectGraphType<LinksAggregate>
+    public class LinksAggregateType : ObjectGraphType<LinksAggregate>
     {
         public LinksAggregateType()
         {

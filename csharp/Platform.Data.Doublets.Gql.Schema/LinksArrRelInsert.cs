@@ -3,7 +3,7 @@ using Platform.Data.Doublets.Gql.Schema.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema
 {
-    class LinksArrRelInsert
+public class LinksArrRelInsert
     {
         public List<LinksArrRelInsert> data { get; set; }
 

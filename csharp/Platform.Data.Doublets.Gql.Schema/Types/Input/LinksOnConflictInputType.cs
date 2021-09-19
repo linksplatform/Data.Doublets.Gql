@@ -18,7 +18,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     ///   where: links_bool_exp
     /// }
     /// </remarks>
-    class LinksOnConflictInputType : InputObjectGraphType<LinksOnConflict>
+public class LinksOnConflictInputType : InputObjectGraphType<LinksOnConflict>
     {
         public LinksOnConflictInputType()
         {
