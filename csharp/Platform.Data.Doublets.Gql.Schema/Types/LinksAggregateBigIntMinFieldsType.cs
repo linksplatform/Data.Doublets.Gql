@@ -13,9 +13,8 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     /// </remarks>
     public class LinksAggregateBigIntMinFieldsType : LinksAggregateBigIntFieldsType
     {
-        public LinksAggregateBigIntMinFieldsType()
+        public LinksAggregateBigIntMinFieldsType() : base("links_min_fields")
         {
-            Name = "links_min_fields";
             Field<LongGraphType>("id");
             Field<LongGraphType>("from_id");
             Field<LongGraphType>("to_id");

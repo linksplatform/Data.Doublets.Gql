@@ -13,9 +13,8 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     /// </remarks>
     public class LinksFieldsMinOrderByInputType : LinksFieldsOrderByInputType
     {
-        public LinksFieldsMinOrderByInputType()
+        public LinksFieldsMinOrderByInputType() : base("links_min_order_by")
         {
-            Name = "links_min_order_by";
             Field(x => x.id, nullable: true, type: typeof(OrderByEnumType));
             Field(x => x.from_id, nullable: true, type: typeof(OrderByEnumType));
             Field(x => x.to_id, nullable: true, type: typeof(OrderByEnumType));

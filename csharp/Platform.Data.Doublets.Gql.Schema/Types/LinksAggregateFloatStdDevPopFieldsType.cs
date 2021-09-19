@@ -13,9 +13,8 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     /// </remarks>
     public class LinksAggregateFloatStdDevPopFieldsType : LinksAggregateFloatFieldsType
     {
-        public LinksAggregateFloatStdDevPopFieldsType()
+        public LinksAggregateFloatStdDevPopFieldsType() : base("links_stddev_pop_fields")
         {
-            Name = "links_stddev_pop_fields";
             Field(x => x.id, nullable: true, type: typeof(FloatGraphType));
             Field(x => x.from_id, nullable: true, type: typeof(FloatGraphType));
             Field(x => x.to_id, nullable: true, type: typeof(FloatGraphType));

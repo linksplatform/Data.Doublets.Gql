@@ -20,6 +20,6 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Enum
     /// </remarks>
     class LinksUpdateColumnEnumType : LinksColumnEnumType
     {
-        public LinksUpdateColumnEnumType() => Name = "links_update_column";
+        public LinksUpdateColumnEnumType() : base("links_update_column") { }
     }
 }

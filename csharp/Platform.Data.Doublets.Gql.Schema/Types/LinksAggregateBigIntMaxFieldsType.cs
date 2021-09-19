@@ -13,9 +13,8 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     /// </remarks>
     public class LinksAggregateBigIntMaxFieldsType : LinksAggregateBigIntFieldsType
     {
-        public LinksAggregateBigIntMaxFieldsType()
+        public LinksAggregateBigIntMaxFieldsType() : base("links_max_fields")
         {
-            Name = "links_max_fields";
             Field<LongGraphType>("id");
             Field<LongGraphType>("from_id");
             Field<LongGraphType>("to_id");

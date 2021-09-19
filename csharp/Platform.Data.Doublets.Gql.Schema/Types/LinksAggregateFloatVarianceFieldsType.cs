@@ -13,9 +13,8 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     /// </remarks>
     public class LinksAggregateFloatVarianceFieldsType : LinksAggregateFloatFieldsType
     {
-        public LinksAggregateFloatVarianceFieldsType()
+        public LinksAggregateFloatVarianceFieldsType() : base("links_variance_fields")
         {
-            Name = "links_variance_fields";
             Field(x => x.id, nullable: true, type: typeof(FloatGraphType));
             Field(x => x.from_id, nullable: true, type: typeof(FloatGraphType));
             Field(x => x.to_id, nullable: true, type: typeof(FloatGraphType));
