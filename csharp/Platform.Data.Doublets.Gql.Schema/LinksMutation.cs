@@ -102,7 +102,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                 resolve: context => "");
             Field<LinksMutationResponseType>("insert_links",
                 arguments: new QueryArguments(
-                    new QueryArgument<ListGraphType<LinksInsertInputType>> { Name = "objects" },
+                    new QueryArgument<NonNullGraphType<ListGraphType<NonNullGraphType<LinksInsertInputType>>>> { Name = "objects" },
                     new QueryArgument<LinksOnConflictInputType> { Name = "on_conflict" }
                 ),
                 resolve: context =>
