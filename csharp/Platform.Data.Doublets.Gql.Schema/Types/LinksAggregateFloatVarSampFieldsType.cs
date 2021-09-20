@@ -15,8 +15,8 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     {
         public LinksAggregateFloatVarSampFieldsType() : base("links_var_samp_fields")
         {
-            Field(x => x.id, nullable: true, type: typeof(FloatGraphType));
             Field(x => x.from_id, nullable: true, type: typeof(FloatGraphType));
+            Field(x => x.id, nullable: true, type: typeof(FloatGraphType));
             Field(x => x.to_id, nullable: true, type: typeof(FloatGraphType));
             Field(x => x.type_id, nullable: true, type: typeof(FloatGraphType));
         }
