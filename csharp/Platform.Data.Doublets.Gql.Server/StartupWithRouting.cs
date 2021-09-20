@@ -29,7 +29,7 @@ namespace Platform.Data.Doublets.Gql.Server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) => services
                 .AddRouting()
-                .AddSingleton<ILinks<ulong>>(sp => Data.CreateLinks())
+                .AddSingleton(sp => Data.CreateLinks())
                 .AddSingleton<LinksSchema>()
                 .AddGraphQL((options, provider) =>
                 {
