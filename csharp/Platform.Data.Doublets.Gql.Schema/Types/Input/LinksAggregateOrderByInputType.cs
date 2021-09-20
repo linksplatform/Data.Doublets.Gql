@@ -25,17 +25,17 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         public LinksAggregateOrderByInputType()
         {
             Name = "links_aggregate_order_by";
-            Field(x => x.avg, nullable: true, type: typeof(LinksAggregateOrderByInputType));
+            Field(x => x.avg, nullable: true, type: typeof(LinksFieldsAvgOrderByInputType));
             Field(x => x.count, nullable: true, type: typeof(OrderByEnumType));
-            Field(x => x.max, nullable: true, type: typeof(LinksAggregateOrderByInputType));
-            Field(x => x.min, nullable: true, type: typeof(LinksAggregateOrderByInputType));
-            Field(x => x.stddev, nullable: true, type: typeof(LinksAggregateOrderByInputType));
-            Field(x => x.stddev_pop, nullable: true, type: typeof(LinksAggregateOrderByInputType));
-            Field(x => x.stddev_samp, nullable: true, type: typeof(LinksAggregateOrderByInputType));
-            Field(x => x.sum, nullable: true, type: typeof(LinksAggregateOrderByInputType));
-            Field(x => x.var_pop, nullable: true, type: typeof(LinksAggregateOrderByInputType));
-            Field(x => x.var_samp, nullable: true, type: typeof(LinksAggregateOrderByInputType));
-            Field(x => x.variance, nullable: true, type: typeof(LinksAggregateOrderByInputType));
+            Field(x => x.max, nullable: true, type: typeof(LinksFieldsMaxOrderByInputType));
+            Field(x => x.min, nullable: true, type: typeof(LinksFieldsMinOrderByInputType));
+            Field(x => x.stddev, nullable: true, type: typeof(LinksFieldsStdDevOrderByInputType));
+            Field(x => x.stddev_pop, nullable: true, type: typeof(LinksFieldsStdDevPopOrderByInputType));
+            Field(x => x.stddev_samp, nullable: true, type: typeof(LinksFieldsStdDevSampOrderByInputType));
+            Field(x => x.sum, nullable: true, type: typeof(LinksFieldsSumOrderByInputType));
+            Field(x => x.var_pop, nullable: true, type: typeof(LinksFieldsVarPopOrderByInputType));
+            Field(x => x.var_samp, nullable: true, type: typeof(LinksFieldsVarSampOrderByInputType));
+            Field(x => x.variance, nullable: true, type: typeof(LinksFieldsVarianceOrderByInputType));
         }
     }
 }
