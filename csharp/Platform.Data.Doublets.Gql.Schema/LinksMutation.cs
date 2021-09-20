@@ -97,10 +97,7 @@ namespace Platform.Data.Doublets.Gql.Schema
             Field<LinksType>("delete_links_by_pk",
                 arguments: new QueryArguments
                 {
-                    new QueryArgument<NonNullGraphType<LongGraphType>>
-                    {
-                        Name = "id"
-                    },
+                    new QueryArgument<NonNullGraphType<LongGraphType>>{ Name = "id" },
                 },
                 resolve: context => "");
             Field<LinksMutationResponseType>("insert_links",
