@@ -15,8 +15,8 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     {
         public LinksAggregateBigIntMinFieldsType() : base("links_min_fields")
         {
-            Field<LongGraphType>("id");
             Field<LongGraphType>("from_id");
+            Field<LongGraphType>("id");
             Field<LongGraphType>("to_id");
             Field<LongGraphType>("type_id");
         }
