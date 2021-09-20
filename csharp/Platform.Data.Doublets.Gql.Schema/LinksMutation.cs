@@ -77,34 +77,6 @@ namespace Platform.Data.Doublets.Gql.Schema
         public LinksMutation(ILinks<ulong> links)
         {
             Name = "mutation_root";
-            Field<LinksMutationResponseType>("insert_links_one",
-                arguments: new QueryArguments(
-                    new QueryArgument<LinksInsertInputType> { Name = "object" },
-                    new QueryArgument<LinksOnConflictInputType> { Name = "on_conflict" }
-                ),
-                resolve: context =>
-                {
-                    return new LinksMutationResponse()
-                    {
-                        returning = new List<Link>() { InsertLink(links, context.GetArgument<Link>("object")) },
-                        affected_rows = 1
-                    };
-                });
-            Field<LinksMutationResponseType>("insert_links",
-                arguments: new QueryArguments(
-                    new QueryArgument<ListGraphType<LinksInsertInputType>> { Name = "objects" },
-                    new QueryArgument<LinksOnConflictInputType> { Name = "on_conflict" }
-                ),
-                resolve: context =>
-                {
-                    var response = new LinksMutationResponse { returning = new List<Link>() };
-                    foreach (var link in context.GetArgument<List<Link>>("objects"))
-                    {
-                        response.returning.Add(InsertLink(links, link));
-                    }
-                    response.affected_rows = response.returning.Count;
-                    return response;
-                });
             Field<LinksMutationResponseType>("delete_links",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<LinksBooleanExpressionInputType>> { Name = "where" }
@@ -131,6 +103,34 @@ namespace Platform.Data.Doublets.Gql.Schema
                     },
                 },
                 resolve: context => "");
+            Field<LinksMutationResponseType>("insert_links",
+                arguments: new QueryArguments(
+                    new QueryArgument<ListGraphType<LinksInsertInputType>> { Name = "objects" },
+                    new QueryArgument<LinksOnConflictInputType> { Name = "on_conflict" }
+                ),
+                resolve: context =>
+                {
+                    var response = new LinksMutationResponse { returning = new List<Link>() };
+                    foreach (var link in context.GetArgument<List<Link>>("objects"))
+                    {
+                        response.returning.Add(InsertLink(links, link));
+                    }
+                    response.affected_rows = response.returning.Count;
+                    return response;
+                });
+            Field<LinksMutationResponseType>("insert_links_one",
+                arguments: new QueryArguments(
+                    new QueryArgument<LinksInsertInputType> { Name = "object" },
+                    new QueryArgument<LinksOnConflictInputType> { Name = "on_conflict" }
+                ),
+                resolve: context =>
+                {
+                    return new LinksMutationResponse()
+                    {
+                        returning = new List<Link>() { InsertLink(links, context.GetArgument<Link>("object")) },
+                        affected_rows = 1
+                    };
+                });
             Field<LinksMutationResponseType>("update_links",
                 arguments: new QueryArguments(
                     new QueryArgument<LinksIncInputType> { Name = "_inc" },
