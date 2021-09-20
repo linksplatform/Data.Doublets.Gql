@@ -132,7 +132,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                 arguments: new QueryArguments(
                     new QueryArgument<LinksIncInputType> { Name = "_inc" },
                     new QueryArgument<LinksSetInputType> { Name = "_set" },
-                    new QueryArgument<LinksBooleanExpressionInputType> { Name = "where" }
+                    new QueryArgument<NonNullGraphType<LinksBooleanExpressionInputType>> { Name = "where" }
                 ),
                 resolve: context =>
                 {
