@@ -2,8 +2,8 @@
 
   <PropertyGroup>
 	  <TargetFramework>net5</TargetFramework>
-	  <AssemblyName>Gql.Samples.Server</AssemblyName>
-    <RootNamespace>Gql.Samples.Server</RootNamespace>
+	  <AssemblyName>Platform.Data.Doublets.Gql.Server</AssemblyName>
+    <RootNamespace>Platform.Data.Doublets.Gql.Server</RootNamespace>
     <IsPackable>false</IsPackable>
     <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
