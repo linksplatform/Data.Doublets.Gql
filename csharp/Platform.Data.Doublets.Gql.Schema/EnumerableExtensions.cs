@@ -1,6 +1,7 @@
 ﻿using Platform.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Platform.Data.Doublets.Gql.Schema
 {
@@ -34,9 +35,10 @@ namespace Platform.Data.Doublets.Gql.Schema
         /// </remarks>
         public static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IEqualityComparer<TKey> comparer)
         {
-            Ensure.Always.ArgumentNotNull(source);
+            var sourceArray = source as TSource[] ?? source.ToArray();
+            Ensure.Always.ArgumentNotNull(sourceArray);
             Ensure.Always.ArgumentNotNull(keySelector);
-            return DistinctByIterator(source, keySelector, comparer);
+            return DistinctByIterator(sourceArray, keySelector, comparer);
         }
 
         private static IEnumerable<TSource> DistinctByIterator<TSource, TKey>(IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IEqualityComparer<TKey> comparer)
