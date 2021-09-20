@@ -1,7 +1,6 @@
 ﻿using GraphQL;
 using GraphQL.Types;
 using Platform.Data.Doublets.Gql.Schema.Types.Enum;
-using Platform.Data.Doublets.Gql.Schema.Types.Input;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
@@ -32,7 +31,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
             Field<IntGraphType>("count", null,
                 new QueryArguments {new QueryArgument<ListGraphType<LinksSelectColumnEnumType>> { Name = "columns" },
                 new QueryArgument<BooleanGraphType>{ Name = "distinct" }
-                }, ResolveCount, null);
+                }, ResolveCount);
             Field(x => x.max, nullable: true, type: typeof(LinksAggregateBigIntMaxFieldsType));
             Field(x => x.min, nullable: true, type: typeof(LinksAggregateBigIntMinFieldsType));
             Field(x => x.stddev, nullable: true, type: typeof(LinksAggregateFloatStddevFieldsType));
