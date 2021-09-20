@@ -120,7 +120,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
 
         private List<Link> ResolveIn(IResolveFieldContext<Link> context) => LinksQuery.GetLinks(context, null, context.Source.id).ToList();
 
-        private List<Link> ResolveOut(IResolveFieldContext<Link> context) => LinksQuery.GetLinks(context, context.Source.id, null).ToList();
+        private List<Link> ResolveOut(IResolveFieldContext<Link> context) => LinksQuery.GetLinks(context, context.Source.id).ToList();
 
         private Link ResolveFrom(IResolveFieldContext<Link> context) => context.Source.@from ?? GetLinkOrDefault(context, context.Source.from_id);
 
