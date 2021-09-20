@@ -107,7 +107,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                 });
             Field<LinksMutationResponseType>("delete_links",
                 arguments: new QueryArguments(
-                    new QueryArgument<LinksBooleanExpressionInputType> { Name = "where" }
+                    new QueryArgument<NonNullGraphType<LinksBooleanExpressionInputType>> { Name = "where" }
                 ),
                 resolve: context =>
                 {
