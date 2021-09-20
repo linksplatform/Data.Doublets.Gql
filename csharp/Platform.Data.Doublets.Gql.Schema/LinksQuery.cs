@@ -61,9 +61,9 @@ namespace Platform.Data.Doublets.Gql.Schema
     {
         public static readonly QueryArguments Arguments = new (
                     new QueryArgument<ListGraphType<LinksSelectColumnEnumType>> { Name = "distinct_on" },
-                    new QueryArgument<LongGraphType> { Name = "limit" },
-                    new QueryArgument<LongGraphType> { Name = "offset" },
-                    new QueryArgument<LinksOrderByInputType> { Name = "order_by" },
+                    new QueryArgument<IntGraphType> { Name = "limit" },
+                    new QueryArgument<IntGraphType> { Name = "offset" },
+                    new QueryArgument<ListGraphType<LinksOrderByInputType>> { Name = "order_by" },
                     new QueryArgument<LinksBooleanExpressionInputType> { Name = "where" }
         );
         public LinksQuery(ILinks<ulong> links)
