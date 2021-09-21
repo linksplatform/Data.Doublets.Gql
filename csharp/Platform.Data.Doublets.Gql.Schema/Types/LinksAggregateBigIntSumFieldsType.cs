@@ -13,12 +13,6 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     /// </remarks>
     public class LinksAggregateBigIntSumFieldsType : LinksAggregateBigIntFieldsType
     {
-        public LinksAggregateBigIntSumFieldsType() : base("links_sum_fields")
-        {
-            Field<LongGraphType>("from_id");
-            Field<LongGraphType>("id");
-            Field<LongGraphType>("to_id");
-            Field<LongGraphType>("type_id");
-        }
+        public LinksAggregateBigIntSumFieldsType() : base("links_sum_fields") {}
     }
 }

@@ -13,12 +13,6 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     /// </remarks>
     public class LinksFieldsStdDevSampOrderByInputType : LinksFieldsOrderByInputType
     {
-        public LinksFieldsStdDevSampOrderByInputType() : base("links_stddev_samp_order_by")
-        {
-            Field(x => x.from_id, nullable: true, type: typeof(OrderByEnumType));
-            Field(x => x.id, nullable: true, type: typeof(OrderByEnumType));
-            Field(x => x.to_id, nullable: true, type: typeof(OrderByEnumType));
-            Field(x => x.type_id, nullable: true, type: typeof(OrderByEnumType));
-        }
+        public LinksFieldsStdDevSampOrderByInputType() : base("links_stddev_samp_order_by") {}
     }
 }

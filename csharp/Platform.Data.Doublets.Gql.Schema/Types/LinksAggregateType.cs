@@ -2,7 +2,6 @@
 
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
-    using MappedType = LinksAggregate;
     /// <remarks>
     /// """
     /// aggregated selection of "links"
@@ -12,13 +11,13 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     ///   nodes: [links!]!
     /// }
     /// </remarks>
-    public class LinksAggregateType : ObjectGraphType<MappedType>
+    public class LinksAggregateType : ObjectGraphType<LinksAggregate>
     {
         public LinksAggregateType()
         {
             Name = "links_aggregate";
             Field(x => x.aggregate, nullable: true, type: typeof(LinksAggregateFieldsType));
-            Field<ListGraphType<LinksType>>(nameof(MappedType.nodes));
+            Field<ListGraphType<LinksType>>("nodes");
         }
     }
 }

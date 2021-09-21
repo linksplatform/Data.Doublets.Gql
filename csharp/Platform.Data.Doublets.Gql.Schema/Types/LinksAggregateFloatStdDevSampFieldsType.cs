@@ -13,12 +13,6 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     /// </remarks>
     public class LinksAggregateFloatStdDevSampFieldsType : LinksAggregateFloatFieldsType
     {
-        public LinksAggregateFloatStdDevSampFieldsType() : base("links_stddev_samp_fields")
-        {
-            Field(x => x.from_id, nullable: true, type: typeof(FloatGraphType));
-            Field(x => x.id, nullable: true, type: typeof(FloatGraphType));
-            Field(x => x.to_id, nullable: true, type: typeof(FloatGraphType));
-            Field(x => x.type_id, nullable: true, type: typeof(FloatGraphType));
-        }
+        public LinksAggregateFloatStdDevSampFieldsType() : base("links_stddev_samp_fields") {}
     }
 }
