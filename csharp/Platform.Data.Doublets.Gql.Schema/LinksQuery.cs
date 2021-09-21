@@ -83,8 +83,8 @@ namespace Platform.Data.Doublets.Gql.Schema
             );
         }
 
-        public static IEnumerable<Link> GetLinks(IResolveFieldContext<object> context, long? forceFromId = null, long? forceToId = null) => GetLinks(context, context.RequestServices.GetService<ILinks<ulong>>(), forceFromId, forceToId);
-        public static IEnumerable<Link> GetLinks(IResolveFieldContext<object> context, ILinks<ulong> links, long? forceFromId = null, long? forceToId = null)
+        public static IEnumerable<Links> GetLinks(IResolveFieldContext<object> context, long? forceFromId = null, long? forceToId = null) => GetLinks(context, context.RequestServices.GetService<ILinks<ulong>>(), forceFromId, forceToId);
+        public static IEnumerable<Links> GetLinks(IResolveFieldContext<object> context, ILinks<ulong> links, long? forceFromId = null, long? forceToId = null)
         {
             var any = links.Constants.Any;
             Link<ulong> query = new(index: any, source: any, target: any);
@@ -93,15 +93,15 @@ namespace Platform.Data.Doublets.Gql.Schema
                 var where = context.GetArgument<LinksBooleanExpression>("where");
                 if(where?.from_id._eq != null && forceFromId != null && where.from_id._eq != forceFromId)
                 {
-                    return new List<Link>();
+                    return new List<Links>();
                 }
                 if (where?.to_id._eq != null && forceToId != null && where.to_id._eq != forceToId)
                 {
-                    return new List<Link>();
+                    return new List<Links>();
                 }
                 query = new Link<ulong>(index: (ulong?)where?.id?._eq ?? any, source: (ulong?)forceFromId ?? (ulong?)where?.from_id?._eq ?? any, target: (ulong?)forceToId ?? (ulong?)where?.to_id?._eq ?? any);
             }
-            var allLinks = links.All(query).Select(l => new Link(l));
+            var allLinks = links.All(query).Select(l => new Links(l));
             if (context.HasArgument("order_by"))
             {
                 GetSelectorAndOrderByValue(context.GetArgument<LinksOrderBy>("order_by"), out var selector, out var orderByValue);
@@ -125,7 +125,7 @@ namespace Platform.Data.Doublets.Gql.Schema
             return allLinks;
         }
 
-        private static Func<Link, long> GetSortSelectorAndOrderByValue(LinksColumn distinct)
+        private static Func<Links, long> GetSortSelectorAndOrderByValue(LinksColumn distinct)
         {
             switch (distinct)
             {
@@ -140,7 +140,7 @@ namespace Platform.Data.Doublets.Gql.Schema
             }
         }
 
-        private static void GetSelectorAndOrderByValue(LinksOrderBy orderBy, out Func<Link, long> selector, out order_by? orderByValue)
+        private static void GetSelectorAndOrderByValue(LinksOrderBy orderBy, out Func<Links, long> selector, out order_by? orderByValue)
         {
             orderByValue = orderBy.from_id;
             if (orderByValue != null)

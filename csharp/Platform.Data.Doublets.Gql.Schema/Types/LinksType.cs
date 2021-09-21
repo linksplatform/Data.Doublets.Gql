@@ -97,7 +97,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     ///   type_id: bigint!
     /// }
     /// </remarks>
-    public class LinksType : ObjectGraphType<Link>
+    public class LinksType : ObjectGraphType<Links>
     {
         public LinksType()
         {
@@ -114,24 +114,24 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
             Field(o => o.type, nullable: true, type: typeof(LinksType)).Resolve(ResolveType);
             Field<LongGraphType>("type_id");
         }
-        private LinksAggregateType ResolveInAggregate(IResolveFieldContext<Link> context) => new();
+        private LinksAggregateType ResolveInAggregate(IResolveFieldContext<Links> context) => new();
 
-        private LinksAggregateType ResolveOutAggregate(IResolveFieldContext<Link> context) => new();
+        private LinksAggregateType ResolveOutAggregate(IResolveFieldContext<Links> context) => new();
 
-        private List<Link> ResolveIn(IResolveFieldContext<Link> context) => LinksQuery.GetLinks(context, null, context.Source.id).ToList();
+        private List<Links> ResolveIn(IResolveFieldContext<Links> context) => LinksQuery.GetLinks(context, null, context.Source.id).ToList();
 
-        private List<Link> ResolveOut(IResolveFieldContext<Link> context) => LinksQuery.GetLinks(context, context.Source.id).ToList();
+        private List<Links> ResolveOut(IResolveFieldContext<Links> context) => LinksQuery.GetLinks(context, context.Source.id).ToList();
 
-        private Link ResolveFrom(IResolveFieldContext<Link> context) => context.Source.@from ?? GetLinkOrDefault(context, context.Source.from_id);
+        private Links ResolveFrom(IResolveFieldContext<Links> context) => context.Source.@from ?? GetLinkOrDefault(context, context.Source.from_id);
 
-        private Link ResolveTo(IResolveFieldContext<Link> context) => context.Source.to ?? GetLinkOrDefault(context, context.Source.to_id);
+        private Links ResolveTo(IResolveFieldContext<Links> context) => context.Source.to ?? GetLinkOrDefault(context, context.Source.to_id);
 
-        private Link ResolveType(IResolveFieldContext<Link> context) => context.Source.type ?? GetLinkOrDefault(context, context.Source.type_id);
+        private Links ResolveType(IResolveFieldContext<Links> context) => context.Source.type ?? GetLinkOrDefault(context, context.Source.type_id);
 
-        public static Link GetLinkOrDefault(IResolveFieldContext<Link> context, long linkId) => GetLinkOrDefault(context.RequestServices.GetService<ILinks<ulong>>(), (linkId));
+        public static Links GetLinkOrDefault(IResolveFieldContext<Links> context, long linkId) => GetLinkOrDefault(context.RequestServices.GetService<ILinks<ulong>>(), (linkId));
 
-        public static Link GetLinkOrDefault(object service, long linkId) => GetLinkOrDefault((ILinks<ulong>)service, (ulong)linkId);
+        public static Links GetLinkOrDefault(object service, long linkId) => GetLinkOrDefault((ILinks<ulong>)service, (ulong)linkId);
 
-        public static Link GetLinkOrDefault(ILinks<ulong> links, ulong link) => links.Exists(link) ? new Link(links.GetLink(link)) : null;
+        public static Links GetLinkOrDefault(ILinks<ulong> links, ulong link) => links.Exists(link) ? new Links(links.GetLink(link)) : null;
     }
 }

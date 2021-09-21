@@ -107,8 +107,8 @@ namespace Platform.Data.Doublets.Gql.Schema
                 ),
                 resolve: context =>
                 {
-                    var response = new LinksMutationResponse { returning = new List<Link>() };
-                    foreach (var link in context.GetArgument<List<Link>>("objects"))
+                    var response = new LinksMutationResponse { returning = new List<Links>() };
+                    foreach (var link in context.GetArgument<List<Links>>("objects"))
                     {
                         response.returning.Add(InsertLink(links, link));
                     }
@@ -124,7 +124,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                 {
                     return new LinksMutationResponse()
                     {
-                        returning = new List<Link>() { InsertLink(links, context.GetArgument<Link>("object")) },
+                        returning = new List<Links>() { InsertLink(links, context.GetArgument<Links>("object")) },
                         affected_rows = 1
                     };
                 });
@@ -136,12 +136,12 @@ namespace Platform.Data.Doublets.Gql.Schema
                 ),
                 resolve: context =>
                 {
-                    var set = context.GetArgument<Link>("_set");
-                    var response = new LinksMutationResponse { returning = new List<Link>() };
+                    var set = context.GetArgument<Links>("_set");
+                    var response = new LinksMutationResponse { returning = new List<Links>() };
                     foreach (var link in LinksQuery.GetLinks(context, links))
                     {
                         var updatedLink = links.UpdateOrCreateOrGet((ulong)link.from_id, (ulong)link.to_id, (ulong)set.from_id, (ulong)set.to_id);
-                        response.returning.Add(new Link(links.GetLink(updatedLink)));
+                        response.returning.Add(new Links(links.GetLink(updatedLink)));
                     }
                     response.affected_rows = response.returning.Count;
                     return response;
@@ -155,10 +155,10 @@ namespace Platform.Data.Doublets.Gql.Schema
                 resolve: (context) => ""
             );
         }
-        public static Link InsertLink(object service, Link link)
+        public static Links InsertLink(object service, Links links)
         {
-            var links = (ILinks<ulong>)service;
-            var create = links.GetOrCreate((ulong)link.from_id, (ulong)link.to_id);
+            var link = (ILinks<ulong>)service;
+            var create = link.GetOrCreate((ulong)links.from_id, (ulong)links.to_id);
             return LinksType.GetLinkOrDefault(service, (long)create);
         }
     }

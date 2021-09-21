@@ -6,6 +6,6 @@ namespace Platform.Data.Doublets.Gql.Schema
     {
         public int affected_rows { get; set; }
 
-        public List<Link> returning { get; set; }
+        public List<Links> returning { get; set; }
     }
 }

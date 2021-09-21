@@ -2,25 +2,25 @@ using System.Collections.Generic;
 
 namespace Platform.Data.Doublets.Gql.Schema
 {
-    public class Link
+    public class Links
     {
         public long id { get; set; }
 
-        public Link from { get; set; }
+        public Links from { get; set; }
 
         public long from_id { get; set; }
 
-        public Link to { get; set; }
+        public Links to { get; set; }
 
         public long to_id { get; set; }
 
-        public Link type { get; set; }
+        public Links type { get; set; }
 
         public long type_id { get; set; }
 
-        public Link() { }
+        public Links() { }
 
-        public Link(IList<ulong> links)
+        public Links(IList<ulong> links)
         {
             if (links is {Count: 3})
             {

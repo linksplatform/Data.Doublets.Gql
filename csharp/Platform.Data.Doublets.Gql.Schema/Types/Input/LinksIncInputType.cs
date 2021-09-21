@@ -13,7 +13,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     ///   type_id: bigint
     /// }
     /// </remarks>
-public class LinksIncInputType : InputObjectGraphType<Link>
+public class LinksIncInputType : InputObjectGraphType<Links>
     {
         public LinksIncInputType()
         {
