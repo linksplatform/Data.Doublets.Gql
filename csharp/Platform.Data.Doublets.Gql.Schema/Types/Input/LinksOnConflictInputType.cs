@@ -3,6 +3,8 @@ using Platform.Data.Doublets.Gql.Schema.Types.Enum;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
+    using MappedType = LinksOnConflict;
+
     /// <remarks>
     ///     """
     ///     on conflict condition type for table "links"
@@ -13,13 +15,13 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     ///     where: links_bool_exp
     ///     }
     /// </remarks>
-    public class LinksOnConflictInputType : InputObjectGraphType<LinksOnConflict>
+    public class LinksOnConflictInputType : InputObjectGraphType<MappedType>
     {
         public LinksOnConflictInputType()
         {
             Name = "links_on_conflict";
-            Field<LinksConstraintEnumType>("constraint");
-            Field<ListGraphType<LinksUpdateColumnEnumType>>("update_columns");
+            Field<LinksConstraintEnumType>(nameof(MappedType.constraint));
+            Field<ListGraphType<LinksUpdateColumnEnumType>>(nameof(MappedType.update_columns));
             Field(x => x.where, true, typeof(LinksBooleanExpressionInputType));
         }
     }

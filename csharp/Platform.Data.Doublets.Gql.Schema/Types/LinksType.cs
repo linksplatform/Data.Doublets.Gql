@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
+    using MappedType = Links;
+
     /// <remarks>
     ///     """
     ///     columns and relationships of "links"
@@ -75,22 +77,22 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     ///     type_id: bigint!
     ///     }
     /// </remarks>
-    public class LinksType : ObjectGraphType<Links>
+    public class LinksType : ObjectGraphType<MappedType>
     {
         public LinksType()
         {
             Name = "links";
             Field(o => o.from, true, typeof(LinksType)).Resolve(ResolveFrom);
-            Field<LongGraphType>("from_id");
-            Field<LongGraphType>("id");
+            Field<LongGraphType>(nameof(MappedType.from_id));
+            Field<LongGraphType>(nameof(MappedType.id));
             Field<ListGraphType<LinksType>>("in", null, LinksQuery.Arguments, ResolveIn);
             Field<LinksAggregateType>("in_aggregate", null, LinksQuery.Arguments, ResolveInAggregate);
             Field<ListGraphType<LinksType>>("out", null, LinksQuery.Arguments, ResolveOut);
             Field<LinksAggregateType>("out_aggregate", null, LinksQuery.Arguments, ResolveOutAggregate);
             Field(o => o.to, true, typeof(LinksType)).Resolve(ResolveTo);
-            Field<LongGraphType>("to_id");
+            Field<LongGraphType>(nameof(MappedType.to_id));
             Field(o => o.type, true, typeof(LinksType)).Resolve(ResolveType);
-            Field<LongGraphType>("type_id");
+            Field<LongGraphType>(nameof(MappedType.type_id));
         }
 
         private LinksAggregateType ResolveInAggregate(IResolveFieldContext<Links> context)
