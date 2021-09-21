@@ -84,6 +84,11 @@ namespace Platform.Data.Doublets.Gql.Schema
                 ),
                 resolve: context => ""
             );
+            Field<LinksType>("links_by_pk",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<LongGraphType>> { Name = "id" }
+                )
+            );
         }
 
         public static IEnumerable<Link> GetLinks(IResolveFieldContext<object> context, long? forceFromId = null, long? forceToId = null) => GetLinks(context, context.RequestServices.GetService<ILinks<ulong>>(), forceFromId, forceToId);
