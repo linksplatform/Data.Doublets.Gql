@@ -76,7 +76,11 @@ namespace Platform.Data.Doublets.Gql.Schema
                 arguments: new QueryArguments
                 (
                     new QueryArgument<ListGraphType<NonNullGraphType<LinksSelectColumnEnumType>>>
-                        { Name = "distinct_on" }
+                        { Name = "distinct_on" },
+                    new QueryArgument<IntGraphType> { Name = "limit" },
+                    new QueryArgument<IntGraphType> { Name = "offset" },
+                    new QueryArgument<ListGraphType<NonNullGraphType<LinksOrderByInputType>>> { Name = "order_by" },
+                    new QueryArgument<LinksBooleanExpressionInputType> { Name = "where" }
                 ),
                 resolve: context => ""
             );
