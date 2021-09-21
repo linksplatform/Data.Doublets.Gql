@@ -72,6 +72,14 @@ namespace Platform.Data.Doublets.Gql.Schema
             Field<NonNullGraphType<ListGraphType<NonNullGraphType<LinksType>>>>("links",
                 arguments: Arguments,
                 resolve: context => { return GetLinks(context, links); });
+            Field<NonNullGraphType<LinksAggregateType>>("links_aggregate",
+                arguments: new QueryArguments
+                (
+                    new QueryArgument<ListGraphType<NonNullGraphType<LinksSelectColumnEnumType>>>
+                        { Name = "distinct_on" }
+                ),
+                resolve: context => ""
+            );
         }
 
         public static IEnumerable<Link> GetLinks(IResolveFieldContext<object> context, long? forceFromId = null, long? forceToId = null) => GetLinks(context, context.RequestServices.GetService<ILinks<ulong>>(), forceFromId, forceToId);
