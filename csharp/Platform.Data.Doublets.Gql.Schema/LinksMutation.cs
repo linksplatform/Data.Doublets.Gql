@@ -150,7 +150,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                 arguments: new QueryArguments(
                     new QueryArgument<LinksIncInputType> { Name = "_inc" },
                     new QueryArgument<LinksSetInputType> { Name = "_set" },
-                    new QueryArgument<LinksPkColumnsInputType> { Name = "pk_columns" }
+                    new QueryArgument<NonNullGraphType<LinksPkColumnsInputType>> { Name = "pk_columns" }
                 ),
                 resolve: (context) => ""
             );
