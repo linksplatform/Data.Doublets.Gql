@@ -58,6 +58,10 @@ namespace Platform.Data.Doublets.Gql.Schema
             Field<NonNullGraphType<ListGraphType<NonNullGraphType<LinksType>>>>("links",
                 arguments: LinksQuery.Arguments,
                 resolve: context => { return LinksQuery.GetLinks(context, links); });
+            Field<NonNullGraphType<LinksAggregateType>>("links_aggregate",
+                arguments: LinksQuery.Arguments,
+                resolve: context => ""
+            );
         }
     }
 }
