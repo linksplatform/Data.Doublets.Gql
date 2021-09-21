@@ -62,6 +62,11 @@ namespace Platform.Data.Doublets.Gql.Schema
                 arguments: LinksQuery.Arguments,
                 resolve: context => ""
             );
+            Field<LinksType>("links_by_pk",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<LongGraphType>> { Name = "id" }
+                )
+            );
         }
     }
 }
