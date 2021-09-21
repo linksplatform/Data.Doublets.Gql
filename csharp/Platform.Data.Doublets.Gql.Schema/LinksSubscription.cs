@@ -55,7 +55,7 @@ namespace Platform.Data.Doublets.Gql.Schema
         public LinksSubscription(ILinks<ulong> links)
         {
             Name = "subscription_root";
-            Field<ListGraphType<LinksType>>("links",
+            Field<NonNullGraphType<ListGraphType<NonNullGraphType<LinksType>>>>("links",
                 arguments: LinksQuery.Arguments,
                 resolve: context => { return LinksQuery.GetLinks(context, links); });
         }
