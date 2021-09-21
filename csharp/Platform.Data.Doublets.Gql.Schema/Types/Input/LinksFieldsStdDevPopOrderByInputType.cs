@@ -5,10 +5,10 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     ///     order by stddev_pop() on columns of table "links"
     ///     """
     ///     input links_stddev_pop_order_by {
-    ///     from_id: order_by
-    ///     id: order_by
-    ///     to_id: order_by
-    ///     type_id: order_by
+    ///     from_id: OrderBy
+    ///     id: OrderBy
+    ///     to_id: OrderBy
+    ///     type_id: OrderBy
     ///     }
     /// </remarks>
     public class LinksFieldsStdDevPopOrderByInputType : LinksFieldsOrderByInputType

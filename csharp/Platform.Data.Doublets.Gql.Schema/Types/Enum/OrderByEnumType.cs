@@ -4,7 +4,7 @@ namespace Platform.Data.Doublets.Gql.Schema
 {
     /// <remarks>
     ///     """column ordering options"""
-    ///     enum order_by {
+    ///     enum OrderBy {
     ///     """in the ascending order, nulls last"""
     ///     asc
     ///     """in the ascending order, nulls first"""
@@ -19,11 +19,11 @@ namespace Platform.Data.Doublets.Gql.Schema
     ///     desc_nulls_last
     ///     }
     /// </remarks>
-    public class OrderByEnumType : EnumerationGraphType<order_by>
+    public class OrderByEnumType : EnumerationGraphType<OrderBy>
     {
         public OrderByEnumType()
         {
-            Name = "order_by";
+            Name = "OrderBy";
         }
     }
 }

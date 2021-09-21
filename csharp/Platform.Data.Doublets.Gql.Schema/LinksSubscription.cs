@@ -14,10 +14,10 @@ namespace Platform.Data.Doublets.Gql.Schema
     ///     distinct_on: [links_select_column!]
     ///     """limit the number of rows returned"""
     ///     limit: Int
-    ///     """skip the first n rows. Use only with order_by"""
+    ///     """skip the first n rows. Use only with OrderBy"""
     ///     offset: Int
     ///     """sort the rows by one or more columns"""
-    ///     order_by: [links_order_by!]
+    ///     OrderBy: [links_order_by!]
     ///     """filter the rows returned"""
     ///     where: links_bool_exp
     ///     ): [links!]!
@@ -29,10 +29,10 @@ namespace Platform.Data.Doublets.Gql.Schema
     ///     distinct_on: [links_select_column!]
     ///     """limit the number of rows returned"""
     ///     limit: Int
-    ///     """skip the first n rows. Use only with order_by"""
+    ///     """skip the first n rows. Use only with OrderBy"""
     ///     offset: Int
     ///     """sort the rows by one or more columns"""
-    ///     order_by: [links_order_by!]
+    ///     OrderBy: [links_order_by!]
     ///     """filter the rows returned"""
     ///     where: links_bool_exp
     ///     ): links_aggregate!

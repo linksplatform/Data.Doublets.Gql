@@ -8,7 +8,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     ///     """
     ///     input links_aggregate_order_by {
     ///     avg: links_avg_order_by
-    ///     count: order_by
+    ///     count: OrderBy
     ///     max: links_max_order_by
     ///     min: links_min_order_by
     ///     stddev: links_stddev_order_by

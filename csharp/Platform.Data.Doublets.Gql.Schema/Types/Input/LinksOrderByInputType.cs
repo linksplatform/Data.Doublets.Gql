@@ -10,14 +10,14 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     ///     """
     ///     input links_order_by {
     ///     from: links_order_by
-    ///     from_id: order_by
-    ///     id: order_by
+    ///     from_id: OrderBy
+    ///     id: OrderBy
     ///     in_aggregate: links_aggregate_order_by
     ///     out_aggregate: links_aggregate_order_by
     ///     to: links_order_by
-    ///     to_id: order_by
+    ///     to_id: OrderBy
     ///     type: links_order_by
-    ///     type_id: order_by
+    ///     type_id: OrderBy
     ///     }
     /// </remarks>
     public class LinksOrderByInputType : InputObjectGraphType<MappedType>
