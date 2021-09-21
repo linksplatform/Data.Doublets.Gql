@@ -60,16 +60,16 @@ namespace Platform.Data.Doublets.Gql.Schema
     public class LinksQuery : ObjectGraphType
     {
         public static readonly QueryArguments Arguments = new (
-                    new QueryArgument<ListGraphType<LinksSelectColumnEnumType>> { Name = "distinct_on" },
+                    new QueryArgument<NonNullGraphType<ListGraphType<NonNullGraphType<LinksSelectColumnEnumType>>>> { Name = "distinct_on" },
                     new QueryArgument<IntGraphType> { Name = "limit" },
                     new QueryArgument<IntGraphType> { Name = "offset" },
-                    new QueryArgument<ListGraphType<LinksOrderByInputType>> { Name = "order_by" },
+                    new QueryArgument<ListGraphType<NonNullGraphType<LinksOrderByInputType>>> { Name = "order_by" },
                     new QueryArgument<LinksBooleanExpressionInputType> { Name = "where" }
         );
         public LinksQuery(ILinks<ulong> links)
         {
             Name = "query_root";
-            Field<ListGraphType<LinksType>>("links",
+            Field<NonNullGraphType<ListGraphType<NonNullGraphType<LinksType>>>>("links",
                 arguments: Arguments,
                 resolve: context => { return GetLinks(context, links); });
         }
@@ -156,4 +156,3 @@ namespace Platform.Data.Doublets.Gql.Schema
         }
     }
 }
-
