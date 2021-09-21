@@ -27,6 +27,5 @@ namespace Platform.Data.Doublets.Gql.Schema
         public LinksBooleanExpression to { get; set; }
 
         public LinksBooleanExpression type { get; set; }
-
     }
 }

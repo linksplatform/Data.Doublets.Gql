@@ -1,9 +1,9 @@
+using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Platform.IO;
 using Serilog;
 using Serilog.Events;
-using System;
 
 namespace Platform.Data.Doublets.Gql.Server
 {
@@ -21,11 +21,9 @@ namespace Platform.Data.Doublets.Gql.Server
             try
             {
                 Log.Information("Starting host");
-                var dbFileName = ConsoleHelpers.GetOrReadArgument(0, $"Document name (default: {Data.DefaultDatabaseFileName})", args);
-                if (!string.IsNullOrWhiteSpace(dbFileName))
-                {
-                    Data.DefaultDatabaseFileName = dbFileName;
-                }
+                var dbFileName = ConsoleHelpers.GetOrReadArgument(0,
+                    $"Document name (default: {Data.DefaultDatabaseFileName})", args);
+                if (!string.IsNullOrWhiteSpace(dbFileName)) Data.DefaultDatabaseFileName = dbFileName;
                 CreateHostBuilder(args).Build().Run();
                 return 0;
             }
@@ -40,12 +38,15 @@ namespace Platform.Data.Doublets.Gql.Server
             }
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder
                         .UseSerilog()
                         .UseStartup<Startup>();
                 });
+        }
     }
 }

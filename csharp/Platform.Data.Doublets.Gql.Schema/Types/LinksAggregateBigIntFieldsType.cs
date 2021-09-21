@@ -4,7 +4,13 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
 {
     public class LinksAggregateBigIntFieldsType : ObjectGraphType
     {
-        public LinksAggregateBigIntFieldsType() {}
-        public LinksAggregateBigIntFieldsType(string name) => Name = name;
+        public LinksAggregateBigIntFieldsType()
+        {
+        }
+
+        public LinksAggregateBigIntFieldsType(string name)
+        {
+            Name = name;
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Platform.Data.Doublets.Gql.Schema
 {
-public class LinksArrRelInsert
+    public class LinksArrRelInsert
     {
         public List<LinksArrRelInsert> data { get; set; }
 
