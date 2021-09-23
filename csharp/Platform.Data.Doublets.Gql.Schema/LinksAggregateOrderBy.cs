@@ -4,7 +4,7 @@
     {
         public LinksFieldsOrderBy avg { get; set; }
 
-        public OrderBy? count { get; set; }
+        public order_by? count { get; set; }
 
         public LinksFieldsOrderBy max { get; set; }
 

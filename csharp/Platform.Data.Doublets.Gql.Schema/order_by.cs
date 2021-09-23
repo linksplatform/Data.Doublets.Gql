@@ -7,6 +7,6 @@
         asc_nulls_last,
         desc,
         desc_nulls_first,
-        desc_nulls_lasr
+        desc_nulls_last
     }
 }

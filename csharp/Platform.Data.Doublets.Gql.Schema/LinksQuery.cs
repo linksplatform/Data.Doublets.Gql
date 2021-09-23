@@ -21,10 +21,10 @@ namespace Platform.Data.Doublets.Gql.Schema
     ///     distinct_on: [links_select_column!]
     ///     """limit the number of rows returned"""
     ///     limit: Int
-    ///     """skip the first n rows. Use only with OrderBy"""
+    ///     """skip the first n rows. Use only with order_by"""
     ///     offset: Int
     ///     """sort the rows by one or more columns"""
-    ///     OrderBy: [links_order_by!]
+    ///     order_by: [links_order_by!]
     ///     """filter the rows returned"""
     ///     where: links_bool_exp
     ///     ): [links!]!
@@ -36,10 +36,10 @@ namespace Platform.Data.Doublets.Gql.Schema
     ///     distinct_on: [links_select_column!]
     ///     """limit the number of rows returned"""
     ///     limit: Int
-    ///     """skip the first n rows. Use only with OrderBy"""
+    ///     """skip the first n rows. Use only with order_by"""
     ///     offset: Int
     ///     """sort the rows by one or more columns"""
-    ///     OrderBy: [links_order_by!]
+    ///     order_by: [links_order_by!]
     ///     """filter the rows returned"""
     ///     where: links_bool_exp
     ///     ): links_aggregate!
@@ -54,7 +54,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                 { Name = "distinct_on" },
             new QueryArgument<IntGraphType> { Name = "limit" },
             new QueryArgument<IntGraphType> { Name = "offset" },
-            new QueryArgument<ListGraphType<NonNullGraphType<LinksOrderByInputType>>> { Name = "OrderBy" },
+            new QueryArgument<ListGraphType<NonNullGraphType<LinksOrderByInputType>>> { Name = "order_by" },
             new QueryArgument<LinksBooleanExpressionInputType> { Name = "where" }
         );
 
@@ -99,11 +99,11 @@ namespace Platform.Data.Doublets.Gql.Schema
             }
 
             var allLinks = links.All(query).Select(l => new Links(l));
-            if (context.HasArgument("OrderBy"))
+            if (context.HasArgument("order_by"))
             {
-                GetSelectorAndOrderByValue(context.GetArgument<LinksOrderBy>("OrderBy"), out var selector,
+                GetSelectorAndOrderByValue(context.GetArgument<LinksOrderBy>("order_by"), out var selector,
                     out var orderByValue);
-                allLinks = orderByValue == OrderBy.asc
+                allLinks = orderByValue == order_by.asc
                     ? allLinks.OrderBy(selector)
                     : allLinks.OrderByDescending(selector);
             }
@@ -145,7 +145,7 @@ namespace Platform.Data.Doublets.Gql.Schema
         }
 
         private static void GetSelectorAndOrderByValue(LinksOrderBy orderBy, out Func<Links, long> selector,
-            out OrderBy? orderByValue)
+            out order_by? orderByValue)
         {
             orderByValue = orderBy.from_id;
             if (orderByValue != null)
