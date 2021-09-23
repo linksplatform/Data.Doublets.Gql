@@ -1,6 +1,6 @@
 ﻿namespace Platform.Data.Doublets.Gql.Schema
 {
-    public enum OrderBy
+    public enum order_by
     {
         asc,
         asc_nulls_first,
