@@ -13,6 +13,10 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Enum
     /// </remarks>
     public class LinksConstraintEnumType : EnumerationGraphType<links_constraint>
     {
+        protected override string ChangeEnumCase(string value)
+        {
+            return value.ToSnakeCase();
+        }
         public LinksConstraintEnumType()
         {
             Name = "links_constraint";
