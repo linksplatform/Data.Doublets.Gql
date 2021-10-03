@@ -352,3 +352,11 @@ MigrationBackup/
 # Doublets storage files
 db.links
 db.links.index
+
+# Schemas
+schema.graphql
+schema.json
+
+# JetBrains Rider
+.idea/
+*.sln.iml
