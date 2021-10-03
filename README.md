@@ -144,11 +144,9 @@ dotnet run -f net5 -c Release db.links --urls http://0.0.0.0:29018
 ```gql
 mutation {
   insert_links_one(object: { from_id: 1, to_id: 1 }) {
-    returning {
-      id
-      from_id
-      to_id
-    }
+    id
+    from_id
+    to_id
   }
 }
 ```

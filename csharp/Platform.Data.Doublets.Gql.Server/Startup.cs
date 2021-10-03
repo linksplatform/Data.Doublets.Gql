@@ -32,7 +32,7 @@ namespace Platform.Data.Doublets.Gql.Server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) => services
                 .AddSingleton<ILinks<ulong>>(sp => Data.CreateLinks())
-                .AddSingleton<LinkSchema>()
+                .AddSingleton<LinksSchema>()
                 .AddGraphQL((options, provider) =>
                 {
                     options.EnableMetrics = Environment.IsDevelopment();
@@ -43,7 +43,7 @@ namespace Platform.Data.Doublets.Gql.Server
                 .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = Environment.IsDevelopment())
                 .AddWebSockets()
                 .AddDataLoader()
-                .AddGraphTypes(typeof(LinkSchema));
+                .AddGraphTypes(typeof(LinksSchema));
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
@@ -55,8 +55,8 @@ namespace Platform.Data.Doublets.Gql.Server
 
             app.UseWebSockets();
 
-            app.UseGraphQLWebSockets<LinkSchema>();
-            app.UseGraphQL<LinkSchema, GraphQLHttpMiddlewareWithLogs<LinkSchema>>();
+            app.UseGraphQLWebSockets<LinksSchema>();
+            app.UseGraphQL<LinksSchema, GraphQLHttpMiddlewareWithLogs<LinksSchema>>();
 
             app.UseGraphQLPlayground(new PlaygroundOptions
             {
