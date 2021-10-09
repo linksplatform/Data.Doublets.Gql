@@ -31,7 +31,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
             Field<IntGraphType>("count", null,
                 new QueryArguments
                 {
-                    new QueryArgument<ListGraphType<LinksSelectColumnEnumType>> { Name = "columns" },
+                    new QueryArgument<ListGraphType<NonNullGraphType<LinksSelectColumnEnumType>>> { Name = "columns" },
                     new QueryArgument<BooleanGraphType> { Name = "distinct" }
                 }, ResolveCount);
             Field(x => x.max, true, typeof(LinksAggregateBigIntMaxFieldsType));
