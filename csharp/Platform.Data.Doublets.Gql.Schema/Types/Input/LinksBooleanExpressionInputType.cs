@@ -27,6 +27,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         {
             Name = "links_bool_exp";
             Field(x => x._and, true, typeof(ListGraphType<LinksBooleanExpressionInputType>));
+            Field(x => x._by_group, nullable: true, type: typeof(MaterializedPathBooleanExpressionInputType));
             Field(x => x._not, true, typeof(LinksBooleanExpressionInputType));
             Field(x => x._or, true, typeof(ListGraphType<LinksBooleanExpressionInputType>));
             Field(x => x.from, true, typeof(LinksBooleanExpressionInputType));
