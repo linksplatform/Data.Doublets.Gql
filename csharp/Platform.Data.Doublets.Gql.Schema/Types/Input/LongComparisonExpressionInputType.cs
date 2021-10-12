@@ -26,12 +26,12 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
             Field(x => x._eq, true, typeof(LongGraphType));
             Field(x => x._gt, true, typeof(LongGraphType));
             Field(x => x._gte, true, typeof(LongGraphType));
-            Field<ListGraphType<LongGraphType>>("_in");
+            Field(x => x._in, true, typeof(ListGraphType<NonNullGraphType<LongGraphType>>));
             Field(x => x._is_null, true, typeof(BooleanGraphType));
             Field(x => x._lt, true, typeof(LongGraphType));
             Field(x => x._lte, true, typeof(LongGraphType));
             Field(x => x._neq, true, typeof(LongGraphType));
-            Field<ListGraphType<LongGraphType>>("_nin");
+            Field(x => x._nin, true, typeof(ListGraphType<NonNullGraphType<LongGraphType>>));
         }
     }
 }
