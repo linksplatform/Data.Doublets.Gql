@@ -36,7 +36,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
             Field(x => x._and, nullable: true, type: typeof(ListGraphType<MaterializedPathBooleanExpressionInputType>));
             Field(x => x._not, nullable: true, type: typeof(MaterializedPathBooleanExpressionInputType));
             Field(x => x._or, nullable: true, type: typeof(ListGraphType<MaterializedPathBooleanExpressionInputType>));
-            Field(x => x.by_group, nullable: true, type: typeof(LinksBooleanExpression));
+            Field(x => x.by_group, nullable: true, type: typeof(LinksBooleanExpressionInputType));
             Field(x => x.by_item, nullable: true, type: typeof(MaterializedPathBooleanExpressionInputType));
             Field(x => x.by_path_item, nullable: true, type: typeof(MaterializedPathBooleanExpressionInputType));
             Field(x => x.by_position, nullable: true, type: typeof(MaterializedPathBooleanExpressionInputType));
