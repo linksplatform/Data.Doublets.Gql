@@ -10,7 +10,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     /// """
     /// input bool_exp_on_conflict {
     ///   constraint: bool_exp_constraint!
-    ///   update_columns: [bool_exp_update_column!]!
+    ///   update_columns: [bool_exp_constraint!]!
     ///   where: bool_exp_bool_exp
     /// } 
     /// </remarks>
@@ -19,6 +19,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         public BooleanExpressionOnConflictInputType()
         {
             Name = "bool_exp_on_conflict";
+            Description = "on conflict condition type for table \"bool_exp\"";
             Field<BooleanExpressionOnConflictInputType>(nameof(MappedType.constraint));
             Field<ListGraphType<NonNullGraphType<BooleanExpressionUpdateColumnEnumType>>>(
                 nameof(MappedType.update_columns));
