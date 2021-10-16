@@ -2,13 +2,11 @@ using GraphQL.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Enum
 {
-    public class NumberConstraintEnumType : EnumerationGraphType<NumberConstraint>
+    public class NumberConstraintEnumType : BaseEnumType<NumberConstraint>
     {
-        protected override string ChangeEnumCase(string value)
+        public NumberConstraintEnumType() : base("number_constraint", "unique or primary key constraints on table \"number\"")
         {
-            return value.ToSnakeCase();
+
         }
-        public NumberConstraintEnumType(){}
-        public NumberConstraintEnumType(string name) => Name = name;
     }
 }

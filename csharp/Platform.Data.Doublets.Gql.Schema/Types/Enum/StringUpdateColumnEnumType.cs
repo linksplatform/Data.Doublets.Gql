@@ -2,14 +2,11 @@ using GraphQL.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Enum
 {
-    public class StringUpdateColumnEnumType : EnumerationGraphType<StringUpdateColumn>
+    public class StringUpdateColumnEnumType : BaseEnumType<StringUpdateColumn>
     {
-        protected override string ChangeEnumCase(string value)
+        public StringUpdateColumnEnumType() : base("string_update_column", "update columns of table \"string\"")
         {
-            return value.ToSnakeCase();
-        }
 
-        public StringUpdateColumnEnumType(){}
-        public StringUpdateColumnEnumType(string name) => Name = name;
+        }
     }
 }

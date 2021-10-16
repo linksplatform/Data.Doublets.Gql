@@ -1,20 +1,44 @@
-﻿using GraphQL.Types;
-
-namespace Platform.Data.Doublets.Gql.Schema.Types.Enum
+﻿namespace Platform.Data.Doublets.Gql.Schema.Types.Enum
 {
-    public class LinksColumnEnumType : EnumerationGraphType<LinksColumn>
+    /// <remarks>
+    ///     """
+    ///     update columns of table "links"
+    ///     """
+    ///     enum links_update_column {
+    ///     """column name"""
+    ///     from_id
+    ///     """column name"""
+    ///     id
+    ///     """column name"""
+    ///     to_id
+    ///     """column name"""
+    ///     type_id
+    ///     }
+    ///
+    ///     """
+    ///     select columns of table "links"
+    ///     """
+    ///     enum LinksColumn {
+    ///     """column name"""
+    ///     from_id
+    ///     """column name"""
+    ///     id
+    ///     """column name"""
+    ///     to_id
+    ///     """column name"""
+    ///     type_id
+    ///     }
+    /// </remarks>
+    public class LinksColumnEnumType : BaseEnumType<LinksColumn>
     {
-        protected override string ChangeEnumCase(string value)
+        public LinksColumnEnumType(string name) : base(name)
         {
-            return value.ToSnakeCase();
-        }
-        public LinksColumnEnumType()
-        {
+
         }
 
-        public LinksColumnEnumType(string name)
+        public LinksColumnEnumType(string name, string description) : base(name, description)
         {
-            Name = name;
+
         }
     }
 }

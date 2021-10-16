@@ -1,15 +1,7 @@
-using GraphQL.Types;
-
 namespace Platform.Data.Doublets.Gql.Schema.Types.Enum
 {
-    public class BooleanExpressionUpdateColumnEnumType : EnumerationGraphType<BooleanExpressionUpdateColumn>
+    public class BooleanExpressionUpdateColumnEnumType : BaseEnumType<BooleanExpressionUpdateColumn>
     {
-        protected override string ChangeEnumCase(string value)
-        {
-            return value.ToSnakeCase();
-        }
-
-        public BooleanExpressionUpdateColumnEnumType(){}
-        public BooleanExpressionUpdateColumnEnumType(string name) => Name = name;
+        public BooleanExpressionUpdateColumnEnumType() : base("bool_exp_update_column", "update columns of table \"bool_exp\""){}
     }
 }
