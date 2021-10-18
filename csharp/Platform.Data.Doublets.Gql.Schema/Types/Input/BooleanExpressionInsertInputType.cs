@@ -21,7 +21,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
             Name = "bool_exp_insert_input";
             Field(x => x.gql, nullable: true, type: typeof(StringGraphType));
             Field(x => x.id, nullable: true, type: typeof(LongGraphType));
-            Field(x => x.link, nullable: true, type: typeof(LinksArrRelInsertInputType));
+            Field(x => x.link, nullable: true, type: typeof(LinksArrayRelationshipInsertInputType));
             Field(x => x.link_id, nullable: true, type: typeof(LongGraphType));
             Field(x => x.sql, nullable: true, type: typeof(StringGraphType));
         }
