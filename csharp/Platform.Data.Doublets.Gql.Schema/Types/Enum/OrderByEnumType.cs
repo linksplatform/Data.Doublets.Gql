@@ -4,7 +4,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Enum
 {
     /// <remarks>
     ///     """column ordering options"""
-    ///     enum OrderBy {
+    ///     enum order_by {
     ///     """in the ascending order, nulls last"""
     ///     asc
     ///     """in the ascending order, nulls first"""
