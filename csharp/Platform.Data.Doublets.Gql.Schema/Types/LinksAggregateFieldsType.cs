@@ -4,13 +4,14 @@ using Platform.Data.Doublets.Gql.Schema.Types.Enum;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
+    using MappedType = LinksAggregateFields;
     /// <remarks>
     ///     """
     ///     aggregate fields of "links"
     ///     """
     ///     type links_aggregate_fields {
     ///     avg: links_avg_fields
-    ///     count(columns: [links_select_column!], distinct: Boolean): Int
+    ///     count(columns: [LinksColumn!], distinct: Boolean): Int
     ///     max: links_max_fields
     ///     min: links_min_fields
     ///     stddev: links_stddev_fields
@@ -22,13 +23,13 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     ///     variance: links_variance_fields
     ///     }
     /// </remarks>
-    public class LinksAggregateFieldsType : ObjectGraphType<LinksAggregateFields>
+    public class LinksAggregateFieldsType : ObjectGraphType<MappedType>
     {
         public LinksAggregateFieldsType()
         {
             Name = "links_aggregate_fields";
             Field(x => x.avg, true, typeof(LinksAggregateFloatAvgFieldsType));
-            Field<IntGraphType>("count", null,
+            Field<IntGraphType>(nameof(MappedType.count), null,
                 new QueryArguments
                 {
                     new QueryArgument<ListGraphType<NonNullGraphType<LinksSelectColumnEnumType>>> { Name = "columns" },
