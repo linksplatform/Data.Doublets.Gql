@@ -10,17 +10,17 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     ///     aggregate fields of "links"
     ///     """
     ///     type links_aggregate_fields {
-    ///     avg: links_avg_fields
-    ///     count(columns: [LinksColumn!], distinct: Boolean): Int
-    ///     max: links_max_fields
-    ///     min: links_min_fields
-    ///     stddev: links_stddev_fields
-    ///     stddev_pop: links_stddev_pop_fields
-    ///     stddev_samp: links_stddev_samp_fields
-    ///     sum: links_sum_fields
-    ///     var_pop: links_var_pop_fields
-    ///     var_samp: links_var_samp_fields
-    ///     variance: links_variance_fields
+    ///         avg: links_avg_fields
+    ///         count(columns: [links_select_column!], distinct: Boolean): Int
+    ///         max: links_max_fields
+    ///         min: links_min_fields
+    ///         stddev: links_stddev_fields
+    ///         stddev_pop: links_stddev_pop_fields
+    ///         stddev_samp: links_stddev_samp_fields
+    ///         sum: links_sum_fields
+    ///         var_pop: links_var_pop_fields
+    ///         var_samp: links_var_samp_fields
+    ///         variance: links_variance_fields
     ///     }
     /// </remarks>
     public class LinksAggregateFieldsType : ObjectGraphType<MappedType>
