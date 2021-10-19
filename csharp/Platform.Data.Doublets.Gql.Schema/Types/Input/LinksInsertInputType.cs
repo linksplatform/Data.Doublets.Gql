@@ -36,8 +36,6 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
             Field(x => x._by_path_item, true, typeof(MaterializedPathArrayRelationshipInsertInputType));
             Field(x => x._by_root, true, typeof(MaterializedPathArrayRelationshipInsertInputType));
             Field(x => x.bool_exp, true, typeof(BooleanExpressionObjectRelationshipInsertInputType));
-            Field(x => x._by_group, true, typeof(MaterializedPathArrayRelationshipInsertInputType));
-            Field(x => x.from, true, typeof(LinksObjRelInsertInputType));
             Field(x => x.from, true, typeof(LinksObjRelInsertInputType));
             Field(x => x.from_id, true, typeof(LongGraphType));
             Field(x => x.id, true, typeof(LongGraphType));
