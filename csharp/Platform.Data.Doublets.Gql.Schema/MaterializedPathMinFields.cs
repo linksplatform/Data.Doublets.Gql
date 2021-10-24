@@ -1,9 +1,9 @@
 namespace Platform.Data.Doublets.Gql.Schema
 {
-    public class MaterializedPathMinOrderBy
+    public class MaterializedPathMinFields
     {
 #nullable enable
-        public OrderBy? gpoup_id { get; set; }
+        public OrderBy? group_id { get; set; }
         public OrderBy? id { get; set; }
         public OrderBy? insert_category { get; set; }
         public OrderBy? item_id { get; set; }
