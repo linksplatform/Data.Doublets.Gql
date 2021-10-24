@@ -26,9 +26,12 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
             Description = "order by max() on columns of table \"mp\"";
             Field(x => x.gpoup_id, nullable: true, type: typeof(OrderByEnumType));
             Field(x => x.id, nullable: true, type: typeof(OrderByEnumType));
+            Field(x => x.insert_category, nullable: true, type: typeof(OrderByEnumType));
             Field(x => x.item_id, nullable: true, type: typeof(OrderByEnumType));
             Field(x => x.path_item_depth, nullable: true, type: typeof(OrderByEnumType));
             Field(x => x.path_item_id, nullable: true, type: typeof(OrderByEnumType));
+            Field(x => x.path_item_id, nullable: true, type: typeof(OrderByEnumType));
+            Field(x => x.position_id, nullable: true, type: typeof(OrderByEnumType));
             Field(x => x.root_id, nullable: true, type: typeof(OrderByEnumType));
         }
     }
