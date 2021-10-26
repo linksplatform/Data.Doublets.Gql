@@ -101,7 +101,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                     response.affected_rows = response.returning.Count;
                     return response;
                 });
-            Field<LinksType>("insert_links_one",
+            Field<LinksMutationResponseType>("insert_links_one",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<LinksInsertInputType>> { Name = "object" },
                     new QueryArgument<LinksOnConflictInputType> { Name = "on_conflict" }
@@ -110,7 +110,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                 {
                     return new LinksMutationResponse
                     {
-                        returning = new List<Links> { InsertLink(links, context.GetArgument<Links>("object")) },
+                        returning = new List<Links> { InsertLink(links, context.GetArgument<LinksInsert>("object")) },
                         affected_rows = 1
                     };
                 });
@@ -148,6 +148,12 @@ namespace Platform.Data.Doublets.Gql.Schema
         {
             var link = (ILinks<ulong>)service;
             var create = link.GetOrCreate((ulong)links.from_id, (ulong)links.to_id);
+            return LinksType.GetLinkOrDefault(service, (long)create);
+        }
+        public static Links InsertLink(object service, LinksInsert linksInsert)
+        {
+            var link = (ILinks<ulong>)service;
+            var create = link.GetOrCreate((ulong)linksInsert.from_id, (ulong)linksInsert.to_id);
             return LinksType.GetLinkOrDefault(service, (long)create);
         }
     }

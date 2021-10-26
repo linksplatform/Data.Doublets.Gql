@@ -11,7 +11,7 @@ namespace Platform.Data.Doublets.Gql.Schema
     ///     """
     ///     links(
     ///     """distinct select on columns"""
-    ///     distinct_on: [links_select_column!]
+    ///     distinct_on: [LinksColumn!]
     ///     """limit the number of rows returned"""
     ///     limit: Int
     ///     """skip the first n rows. Use only with order_by"""
@@ -26,7 +26,7 @@ namespace Platform.Data.Doublets.Gql.Schema
     ///     """
     ///     links_aggregate(
     ///     """distinct select on columns"""
-    ///     distinct_on: [links_select_column!]
+    ///     distinct_on: [LinksColumn!]
     ///     """limit the number of rows returned"""
     ///     limit: Int
     ///     """skip the first n rows. Use only with order_by"""

@@ -18,7 +18,7 @@ namespace Platform.Data.Doublets.Gql.Schema
     ///     """
     ///     links(
     ///     """distinct select on columns"""
-    ///     distinct_on: [links_select_column!]
+    ///     distinct_on: [LinksColumn!]
     ///     """limit the number of rows returned"""
     ///     limit: Int
     ///     """skip the first n rows. Use only with order_by"""
@@ -33,7 +33,7 @@ namespace Platform.Data.Doublets.Gql.Schema
     ///     """
     ///     links_aggregate(
     ///     """distinct select on columns"""
-    ///     distinct_on: [links_select_column!]
+    ///     distinct_on: [LinksColumn!]
     ///     """limit the number of rows returned"""
     ///     limit: Int
     ///     """skip the first n rows. Use only with order_by"""
@@ -54,7 +54,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                 { Name = "distinct_on" },
             new QueryArgument<IntGraphType> { Name = "limit" },
             new QueryArgument<IntGraphType> { Name = "offset" },
-            new QueryArgument<ListGraphType<NonNullGraphType<LinksOrderByInputType>>> { Name = "order_by" },
+            new QueryArgument<ListGraphType<NonNullGraphType<LinksOrderByInputType>>> { Name = "OrderBy" },
             new QueryArgument<LinksBooleanExpressionInputType> { Name = "where" }
         );
 
@@ -99,11 +99,11 @@ namespace Platform.Data.Doublets.Gql.Schema
             }
 
             var allLinks = links.All(query).Select(l => new Links(l));
-            if (context.HasArgument("order_by"))
+            if (context.HasArgument("OrderBy"))
             {
-                GetSelectorAndOrderByValue(context.GetArgument<LinksOrderBy>("order_by"), out var selector,
+                GetSelectorAndOrderByValue(context.GetArgument<LinksOrderBy>("OrderBy"), out var selector,
                     out var orderByValue);
-                allLinks = orderByValue == order_by.asc
+                allLinks = orderByValue == OrderBy.asc
                     ? allLinks.OrderBy(selector)
                     : allLinks.OrderByDescending(selector);
             }
@@ -134,30 +134,30 @@ namespace Platform.Data.Doublets.Gql.Schema
             switch (distinct)
             {
                 case LinksColumn.from_id:
-                    return x => x.from_id;
+                    return x => (long)x.from_id;
                 case LinksColumn.type_id:
                     return x => x.type_id;
                 case LinksColumn.to_id:
-                    return x => x.to_id;
+                    return x => (long)x.to_id;
                 default:
                     return x => x.id;
             }
         }
 
         private static void GetSelectorAndOrderByValue(LinksOrderBy orderBy, out Func<Links, long> selector,
-            out order_by? orderByValue)
+            out OrderBy? orderByValue)
         {
             orderByValue = orderBy.from_id;
             if (orderByValue != null)
             {
-                selector = l => l.from_id;
+                selector = l => (long)l.from_id;
                 return;
             }
 
             orderByValue = orderBy.to_id;
             if (orderByValue != null)
             {
-                selector = l => l.to_id;
+                selector = l => (long)l.to_id;
                 return;
             }
 
