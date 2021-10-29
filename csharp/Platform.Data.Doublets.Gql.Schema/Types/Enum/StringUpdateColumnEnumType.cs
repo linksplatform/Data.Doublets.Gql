@@ -1,5 +1,3 @@
-using GraphQL.Types;
-
 namespace Platform.Data.Doublets.Gql.Schema.Types.Enum
 {
     public class StringUpdateColumnEnumType : BaseEnumType<StringUpdateColumn>

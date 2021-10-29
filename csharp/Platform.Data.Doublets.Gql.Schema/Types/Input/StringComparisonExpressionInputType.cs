@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using GraphQL.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
