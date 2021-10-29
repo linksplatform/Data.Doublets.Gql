@@ -19,7 +19,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         {
             Name = "links_obj_rel_insert_input";
             Field<LinksInsertInputType>(nameof(MappedType.data));
-            Field(x => x.on_conflict, true, typeof(LinksOnConflictInputType));
+            Field<LinksOnConflictInputType>(nameof(MappedType.on_conflict));
         }
     }
 }

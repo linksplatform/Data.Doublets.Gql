@@ -2,6 +2,8 @@
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
+    using MappedType = Links;
+
     /// <remarks>
     ///     """
     ///     input type for incrementing integer column in table "links"
@@ -13,15 +15,15 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     ///     type_id: bigint
     ///     }
     /// </remarks>
-    public class LinksIncInputType : InputObjectGraphType<Links>
+    public class LinksIncInputType : InputObjectGraphType<MappedType>
     {
         public LinksIncInputType()
         {
             Name = "links_inc_input";
-            Field(x => x.id, true, typeof(LongGraphType));
-            Field(x => x.from_id, true, typeof(LongGraphType));
-            Field(x => x.to_id, true, typeof(LongGraphType));
-            Field(x => x.type_id, true, typeof(LongGraphType));
+            Field<LongGraphType>(nameof(MappedType.id));
+            Field<LongGraphType>(nameof(MappedType.from_id));
+            Field<LongGraphType>(nameof(MappedType.to_id));
+            Field<LongGraphType>(nameof(MappedType.type_id));
         }
     }
 }

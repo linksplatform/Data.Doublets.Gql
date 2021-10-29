@@ -2,6 +2,8 @@
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
+    using MappedType = LinksInsert;
+
     /// <remarks>
     /// """
     /// input type for inserting data into table "links"
@@ -25,28 +27,28 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     ///   type_id: bigint
     /// }
     /// </remarks>
-    public class LinksInsertInputType : InputObjectGraphType<LinksInsert>
+    public class LinksInsertInputType : InputObjectGraphType<MappedType>
     {
         public LinksInsertInputType()
         {
             Name = "links_insert_input";
             Description = "input type for inserting data into table \"links\"";
-            Field(x => x._by_group, true, typeof(MaterializedPathArrayRelationshipInsertInputType));
-            Field(x => x._by_item, true, typeof(MaterializedPathArrayRelationshipInsertInputType));
-            Field(x => x._by_path_item, true, typeof(MaterializedPathArrayRelationshipInsertInputType));
-            Field(x => x._by_root, true, typeof(MaterializedPathArrayRelationshipInsertInputType));
-            Field(x => x.bool_exp, true, typeof(BooleanExpressionObjectRelationshipInsertInputType));
-            Field(x => x.from, true, typeof(LinksObjRelInsertInputType));
-            Field(x => x.from_id, true, typeof(LongGraphType));
-            Field(x => x.id, true, typeof(LongGraphType));
-            Field(x => x.@in, true, typeof(LinksArrayRelationshipInsertInputType));
-            Field(x => x.number, true, typeof(NumberObjectRelationshipInsertInputType));
-            Field(x => x.@out, true, typeof(LinksArrayRelationshipInsertInputType));
-            Field(x => x.@string, true, typeof(StringObjectRelationshipInsertInputType));
-            Field(x => x.to, true, typeof(LinksObjRelInsertInputType));
-            Field(x => x.to_id, true, typeof(LongGraphType));
-            Field(x => x.type, true, typeof(LinksObjRelInsertInputType));
-            Field(x => x.type_id, true, typeof(LongGraphType));
+            Field<MaterializedPathArrayRelationshipInsertInputType>(nameof(MappedType._by_group));
+            Field<MaterializedPathArrayRelationshipInsertInputType>(nameof(MappedType._by_item));
+            Field<MaterializedPathArrayRelationshipInsertInputType>(nameof(MappedType._by_path_item));
+            Field<MaterializedPathArrayRelationshipInsertInputType>(nameof(MappedType._by_root));
+            Field<BooleanExpressionObjectRelationshipInsertInputType>(nameof(MappedType.bool_exp));
+            Field<LinksObjRelInsertInputType>(nameof(MappedType.from));
+            Field<LongGraphType>(nameof(MappedType.from_id));
+            Field<LongGraphType>(nameof(MappedType.id));
+            Field<LinksArrayRelationshipInsertInputType>(nameof(MappedType.@in));
+            Field<NumberObjectRelationshipInsertInputType>(nameof(MappedType.number));
+            Field<LinksArrayRelationshipInsertInputType>(nameof(MappedType.@out));
+            Field<StringObjectRelationshipInsertInputType>(nameof(MappedType.@string));
+            Field<LinksObjRelInsertInputType>(nameof(MappedType.to));
+            Field<LongGraphType>(nameof(MappedType.to_id));
+            Field<LinksObjRelInsertInputType>(nameof(MappedType.type));
+            Field<LongGraphType>(nameof(MappedType.type_id));
         }
     }
 }

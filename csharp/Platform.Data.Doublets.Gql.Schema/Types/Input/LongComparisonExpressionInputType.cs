@@ -2,6 +2,7 @@
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
+    using MappedType = LongComparisonExpression;
     /// <remarks>
     ///     """
     ///     expression to compare columns of type bigint. All fields are combined with logical 'AND'.
@@ -18,20 +19,20 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     ///     _nin: [bigint!]
     ///     }
     /// </remarks>
-    public class LongComparisonExpressionInputType : InputObjectGraphType<LongComparisonExpression>
+    public class LongComparisonExpressionInputType : InputObjectGraphType<MappedType>
     {
         public LongComparisonExpressionInputType()
         {
             Name = "bigint_comparison_exp";
-            Field(x => x._eq, true, typeof(LongGraphType));
-            Field(x => x._gt, true, typeof(LongGraphType));
-            Field(x => x._gte, true, typeof(LongGraphType));
-            Field(x => x._in, true, typeof(ListGraphType<NonNullGraphType<LongGraphType>>));
-            Field(x => x._is_null, true, typeof(BooleanGraphType));
-            Field(x => x._lt, true, typeof(LongGraphType));
-            Field(x => x._lte, true, typeof(LongGraphType));
-            Field(x => x._neq, true, typeof(LongGraphType));
-            Field(x => x._nin, true, typeof(ListGraphType<NonNullGraphType<LongGraphType>>));
+            Field<LongGraphType>(nameof(MappedType._eq));
+            Field<LongGraphType>(nameof(MappedType._gt));
+            Field<LongGraphType>(nameof(MappedType._gte));
+            Field<ListGraphType<NonNullGraphType<LongGraphType>>>(nameof(MappedType._in));
+            Field<BooleanGraphType>(nameof(MappedType._is_null));
+            Field<LongGraphType>(nameof(MappedType._lt));
+            Field<LongGraphType>(nameof(MappedType._lte));
+            Field<LongGraphType>(nameof(MappedType._neq));
+            Field<ListGraphType<NonNullGraphType<LongGraphType>>>(nameof(MappedType._nin));
         }
     }
 }

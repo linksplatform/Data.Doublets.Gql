@@ -2,6 +2,7 @@ using GraphQL.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
+    using MappedType = LinksInsert;
     /// <remarks>
     ///     """
     ///     input type for updating data in table "links"
@@ -13,15 +14,15 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     ///     type_id: bigint
     ///     }
     /// </remarks>
-    public class LinksSetInputType : InputObjectGraphType<LinksSet>
+    public class LinksSetInputType : InputObjectGraphType<MappedType>
     {
         public LinksSetInputType()
         {
             Name = "links_set_input";
-            Field(x => x.from_id, true, typeof(LongGraphType));
-            Field(x => x.id, true, typeof(LongGraphType));
-            Field(x => x.to_id, true, typeof(LongGraphType));
-            Field(x => x.type_id, true, typeof(LongGraphType));
+            Field<LongGraphType>(nameof(MappedType.from_id));
+            Field<LongGraphType>(nameof(MappedType.id));
+            Field<LongGraphType>(nameof(MappedType.to_id));
+            Field<LongGraphType>(nameof(MappedType.type_id));
         }
     }
 }

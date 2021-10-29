@@ -2,6 +2,8 @@
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
+    using MappedType = LinksBooleanExpression;
+
     /// <remarks>
     ///     """
     ///     Boolean expression to filter rows from the table "links". All fields are combined with a logical 'AND'.
@@ -21,24 +23,24 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     ///     type_id: bigint_comparison_exp
     ///     }
     /// </remarks>
-    public class LinksBooleanExpressionInputType : InputObjectGraphType<LinksBooleanExpression>
+    public class LinksBooleanExpressionInputType : InputObjectGraphType<MappedType>
     {
         public LinksBooleanExpressionInputType()
         {
             Name = "links_bool_exp";
-            Field(x => x._and, true, typeof(ListGraphType<LinksBooleanExpressionInputType>));
+            Field<ListGraphType<LinksBooleanExpressionInputType>>(nameof(MappedType._and));
             Field(x => x._by_group, nullable: true, type: typeof(MaterializedPathBooleanExpressionInputType));
-            Field(x => x._not, true, typeof(LinksBooleanExpressionInputType));
-            Field(x => x._or, true, typeof(ListGraphType<LinksBooleanExpressionInputType>));
-            Field(x => x.from, true, typeof(LinksBooleanExpressionInputType));
-            Field(x => x.from_id, true, typeof(LongComparisonExpressionInputType));
-            Field(x => x.id, true, typeof(LongComparisonExpressionInputType));
-            Field(x => x.@in, true, typeof(LinksBooleanExpressionInputType));
-            Field(x => x.@out, true, typeof(LinksBooleanExpressionInputType));
-            Field(x => x.to, true, typeof(LinksBooleanExpressionInputType));
-            Field(x => x.to_id, true, typeof(LongComparisonExpressionInputType));
-            Field(x => x.type, true, typeof(LinksBooleanExpressionInputType));
-            Field(x => x.type_id, true, typeof(LongComparisonExpressionInputType));
+            Field<LinksBooleanExpressionInputType>(nameof(MappedType._not));
+            Field<ListGraphType<LinksBooleanExpressionInputType>>(nameof(MappedType._or));
+            Field<LinksBooleanExpressionInputType>(nameof(MappedType.from));
+            Field<LongComparisonExpressionInputType>(nameof(MappedType.from_id));
+            Field<LongComparisonExpressionInputType>(nameof(MappedType.id));
+            Field<LinksBooleanExpressionInputType>(nameof(MappedType.@in));
+            Field<LinksBooleanExpressionInputType>(nameof(MappedType.@out));
+            Field<LinksBooleanExpressionInputType>(nameof(MappedType.to));
+            Field<LongComparisonExpressionInputType>(nameof(MappedType.to_id));
+            Field<LinksBooleanExpressionInputType>(nameof(MappedType.type));
+            Field<LongComparisonExpressionInputType>(nameof(MappedType.type_id));
         }
     }
 }
