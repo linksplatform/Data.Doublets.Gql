@@ -2,7 +2,6 @@
 {
     public class MaterializedPathOrderBy
     {
-#nullable enable
         public LinksOrderBy? by_group { get; set; }
         public MPAO? by_item { get; set; }
         public MaterializedPathBooleanExpression? by_path_item { get; set; }

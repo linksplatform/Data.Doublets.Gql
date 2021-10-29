@@ -4,7 +4,6 @@ namespace Platform.Data.Doublets.Gql.Schema
 {
     public class LinksInsert
     {
-#nullable enable
         public MaterializedPathArrayRelationshipInsert? _by_group { get; set; }
         public MaterializedPathArrayRelationshipInsert? _by_item { get; set; }
         public MaterializedPathArrayRelationshipInsert? _by_path_item { get; set; }

@@ -4,7 +4,6 @@ namespace Platform.Data.Doublets.Gql.Schema
 {
     public class StringComparisonExpression
     {
-#nullable enable
         public string _eq { get; set; }
         public string _gt { get; set; }
         public string _gte { get; set; }

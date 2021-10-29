@@ -4,7 +4,6 @@ namespace Platform.Data.Doublets.Gql.Schema
 {
     public class LinksBooleanExpression
     {
-#nullable enable
         public List<LinksBooleanExpression>? _and { get; set; }
         public LinksBooleanExpression? _by_group { get; set; }
         public LinksBooleanExpression? _by_item { get; set; }

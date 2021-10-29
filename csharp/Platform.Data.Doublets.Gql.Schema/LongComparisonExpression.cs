@@ -4,7 +4,6 @@ namespace Platform.Data.Doublets.Gql.Schema
 {
     public class LongComparisonExpression
     {
-#nullable enable
         public long? _eq { get; set; }
 
         public long? _gt { get; set; }

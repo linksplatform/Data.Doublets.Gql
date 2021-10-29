@@ -2,7 +2,6 @@
 {
     public class LinksAggregateFields
     {
-#nullable enable
         public LinksAggregateFloatFields? avg { get; set; }
 
         public int? count { get; set; }

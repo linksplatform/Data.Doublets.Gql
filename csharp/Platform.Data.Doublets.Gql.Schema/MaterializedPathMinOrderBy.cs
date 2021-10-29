@@ -2,7 +2,6 @@ namespace Platform.Data.Doublets.Gql.Schema
 {
     public class MaterializedPathMinOrderBy
     {
-#nullable enable
         public OrderBy? gpoup_id { get; set; }
         public OrderBy? id { get; set; }
         public OrderBy? insert_category { get; set; }

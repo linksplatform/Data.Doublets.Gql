@@ -4,7 +4,6 @@ namespace Platform.Data.Doublets.Gql.Schema
 {
     public class MaterializedPathBooleanExpression
     {
-#nullable enable
         public List<MaterializedPathBooleanExpression>? _and { get; set; }
         public MaterializedPathBooleanExpression? _not { get; set; }
         public List<MaterializedPathBooleanExpression>? _or { get; set; }

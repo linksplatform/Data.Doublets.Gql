@@ -4,7 +4,6 @@ namespace Platform.Data.Doublets.Gql.Schema
 {
     public class DoubleComparisonExpression
     {
-#nullable enable
         public double? _eq { get; set; }
         public double? _gt { get; set; }
         public double? _gte { get; set; }

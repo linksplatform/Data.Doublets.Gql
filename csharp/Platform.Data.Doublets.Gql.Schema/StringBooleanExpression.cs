@@ -4,7 +4,6 @@ namespace Platform.Data.Doublets.Gql.Schema
 {
     public class StringBooleanExpression
     {
-#nullable enable
         public List<StringBooleanExpression?>? _and { get; set; }
         public StringBooleanExpression? _not { get; set; }
         public List<StringBooleanExpression?>? _or { get; set; }
