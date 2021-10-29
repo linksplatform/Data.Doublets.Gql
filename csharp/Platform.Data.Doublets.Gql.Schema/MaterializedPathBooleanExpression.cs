@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Platform.Data.Doublets.Gql.Schema.Types.Input;
 
 namespace Platform.Data.Doublets.Gql.Schema
 {

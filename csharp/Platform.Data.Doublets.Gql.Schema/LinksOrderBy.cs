@@ -4,6 +4,7 @@ namespace Platform.Data.Doublets.Gql.Schema
 {
     public class LinksOrderBy
     {
+#nullable enable
         public LinksOrderBy? from { get; set; }
         public OrderBy? from_id { get; set; }
         public OrderBy? id { get; set; }

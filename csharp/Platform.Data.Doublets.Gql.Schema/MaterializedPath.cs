@@ -15,13 +15,13 @@ namespace Platform.Data.Doublets.Gql.Schema
         public MaterializedPathAggregate by_root_aggregate { get; set; }
         public long? group_id { get; set; }
         public long id { get; set; }
-        public string? insert_category { get; set; }
+        public string insert_category { get; set; }
         public Links? item { get; set; }
         public long? item_id { get; set; }
         public Links? path_item { get; set; }
         public long? path_item_depth { get; set; }
         public long? path_item_id { get; set; }
-        public string? position_id { get; set; }
+        public string position_id { get; set; }
         public Links? root { get; set; }
         public long? root_id { get; set; }
     }

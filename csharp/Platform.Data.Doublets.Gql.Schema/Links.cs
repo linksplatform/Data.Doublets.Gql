@@ -14,6 +14,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                 to_id = (long)links[i];
             }
         }
+#nullable enable
 
         // public MPA? _by_root_aggregate { get; set; }
         public BooleanExpression? bool_exp { get; set; }
@@ -25,7 +26,7 @@ namespace Platform.Data.Doublets.Gql.Schema
         public Number? number { get; set; }
         public List<Links> @out { get; set; }
         public LinksAggregate out_aggregate { get; set; }
-        public string? @string { get; set; }
+        public string @string { get; set; }
         public Links? to { get; set; }
         public long? to_id { get; set; }
         public Links? type { get; set; }
