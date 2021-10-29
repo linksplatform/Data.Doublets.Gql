@@ -20,7 +20,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         {
             Name = "bool_exp_on_conflict";
             Description = "on conflict condition type for table \"bool_exp\"";
-            Field<BooleanExpressionOnConflictInputType>(nameof(MappedType.constraint));
+            Field<NonNullGraphType<BooleanExpressionOnConflictInputType>>(nameof(MappedType.constraint));
             Field<ListGraphType<NonNullGraphType<BooleanExpressionUpdateColumnEnumType>>>(
                 nameof(MappedType.update_columns));
             Field(x => x.where, nullable: true, type: typeof(BooleanExpressionBooleanExpressionInputType));

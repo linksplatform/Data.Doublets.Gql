@@ -17,7 +17,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         public NumberObjectRelationshipInsertInputType()
         {
             Name = "number_obj_rel_insert_input";
-            Field<NumberInsertInputType>(nameof(MappedType.data));
+            Field<NonNullGraphType<NumberInsertInputType>>(nameof(MappedType.data));
             Field(x => x.on_conflict, nullable: true, type: typeof(NumberOnConflictInputType));
         }
     }

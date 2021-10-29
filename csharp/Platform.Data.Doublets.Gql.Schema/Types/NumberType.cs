@@ -58,7 +58,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
         {
             Name = "number";
             Description = "columns and relationships of \"number\"";
-            Field<LongGraphType>(nameof(MappedType.id));
+            Field<NonNullGraphType<LongGraphType>>(nameof(MappedType.id));
             Field<ListGraphType<LinksType>>(nameof(MappedType.link), arguments: new QueryArguments
             {
                 new QueryArgument<NonNullGraphType<ListGraphType<NonNullGraphType<LinksType>>>>
