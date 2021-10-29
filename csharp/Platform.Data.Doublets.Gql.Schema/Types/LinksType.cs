@@ -304,12 +304,12 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
 
         private Links ResolveType(IResolveFieldContext<Links> context)
         {
-            return context.Source.type ?? GetLinkOrDefault(context, context.Source.type_id);
+            return context.Source.type ?? GetLinkOrDefault(context, (long?)context.Source.type_id);
         }
 
-        public static Links GetLinkOrDefault(IResolveFieldContext<Links> context, long linkId)
+        public static Links GetLinkOrDefault(IResolveFieldContext<Links> context, long? linkId)
         {
-            return GetLinkOrDefault(context.RequestServices.GetService<ILinks<ulong>>(), linkId);
+            return linkId != null ?GetLinkOrDefault(context.RequestServices.GetService<ILinks<ulong>>(), (ulong)linkId) : default;
         }
 
         public static Links GetLinkOrDefault(object service, long linkId)
