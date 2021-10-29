@@ -58,7 +58,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
             Name = "bool_exp";
             Description = "columns and relationships of \"bool_exp\"";
             Field(x => x.gql, nullable: true, type: typeof(StringGraphType));
-            Field<LongGraphType>("id");
+            Field<NonNullGraphType<LongGraphType>>("id");
             Field<NonNullGraphType<ListGraphType<NonNullGraphType<LinksType>>>>("link", arguments: new QueryArguments
             {
                 new QueryArgument<ListGraphType<NonNullGraphType<LinksSelectColumnEnumType>>> { Name = "distinct_on", Description = "distinct select on columns"},

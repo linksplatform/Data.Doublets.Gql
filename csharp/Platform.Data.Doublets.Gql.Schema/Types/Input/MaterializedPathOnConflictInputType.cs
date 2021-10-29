@@ -19,8 +19,8 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         {
             Name = "mp_on_conflict";
             Description = "on conflict condition type for table \"mp\"";
-            Field<MaterializedPathConstraintEnumType>("constraint");
-            Field<ListGraphType<NonNullGraphType<MaterializedPathUpdateColumnEnumType>>>("update_columns");
+            Field<NonNullGraphType<MaterializedPathConstraintEnumType>>("constraint");
+            Field<NonNullGraphType<ListGraphType<NonNullGraphType<MaterializedPathUpdateColumnEnumType>>>>("update_columns");
             Field(x => x.where, nullable: true, type: typeof(MaterializedPathBooleanExpressionInputType));
         }
     }

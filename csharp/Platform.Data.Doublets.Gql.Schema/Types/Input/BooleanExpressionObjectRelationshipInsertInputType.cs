@@ -16,7 +16,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         public BooleanExpressionObjectRelationshipInsertInputType()
         {
             Name = "bool_exp_obj_rel_insert_input";
-            Field<BooleanExpressionInsertInputType>(nameof(BooleanExpressionObjectRelationshipInsert.data));
+            Field<NonNullGraphType<BooleanExpressionInsertInputType>>(nameof(BooleanExpressionObjectRelationshipInsert.data));
             Field(x => x.on_conflict, nullable: true, type: typeof(BooleanExpressionOnConflictInputType));
         }
     }

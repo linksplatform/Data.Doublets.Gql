@@ -260,16 +260,16 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
             Description = "columns and relationships of \"links\"";
             // Field(o => o.)
             Field(o => o.from, true, typeof(LinksType)).Resolve(ResolveFrom);
-            Field<LongGraphType>(nameof(MappedType.from_id));
-            Field<LongGraphType>(nameof(MappedType.id));
-            Field<ListGraphType<LinksType>>("in", null, LinksQuery.Arguments, ResolveIn);
-            Field<LinksAggregateType>("in_aggregate", null, LinksQuery.Arguments, ResolveInAggregate);
-            Field<ListGraphType<LinksType>>("out", null, LinksQuery.Arguments, ResolveOut);
-            Field<LinksAggregateType>("out_aggregate", null, LinksQuery.Arguments, ResolveOutAggregate);
+            Field<NonNullGraphType<LongGraphType>>(nameof(MappedType.from_id));
+            Field<NonNullGraphType<LongGraphType>>(nameof(MappedType.id));
+            Field<NonNullGraphType<ListGraphType<LinksType>>>("in", null, LinksQuery.Arguments, ResolveIn);
+            Field<NonNullGraphType<LinksAggregateType>>("in_aggregate", null, LinksQuery.Arguments, ResolveInAggregate);
+            Field<NonNullGraphType<ListGraphType<LinksType>>>("out", null, LinksQuery.Arguments, ResolveOut);
+            Field<NonNullGraphType<LinksAggregateType>>("out_aggregate", null, LinksQuery.Arguments, ResolveOutAggregate);
             Field(o => o.to, true, typeof(LinksType)).Resolve(ResolveTo);
-            Field<LongGraphType>(nameof(MappedType.to_id));
+            Field<NonNullGraphType<LongGraphType>>(nameof(MappedType.to_id));
             Field(o => o.type, true, typeof(LinksType)).Resolve(ResolveType);
-            Field<LongGraphType>(nameof(MappedType.type_id));
+            Field<NonNullGraphType<LongGraphType>>(nameof(MappedType.type_id));
         }
 
         private LinksAggregateType ResolveInAggregate(IResolveFieldContext<Links> context)
