@@ -4,6 +4,10 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
 {
     public class MaterializedPathFieldsType : ObjectGraphType<MaterializedPathFields>
     {
+        public MaterializedPathFieldsType()
+        {
+
+        }
         public MaterializedPathFieldsType(string name, string description = default)
         {
             Name = name;

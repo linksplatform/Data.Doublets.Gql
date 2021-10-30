@@ -18,7 +18,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     ///   root_id: order_by
     /// }
     /// </remarks>
-    public class MaterializedPathMaxOrderByInputType : ObjectGraphType<MaterializedPathMaxOrderBy>
+    public class MaterializedPathMaxOrderByInputType : InputObjectGraphType<MaterializedPathMaxOrderBy>
     {
         public MaterializedPathMaxOrderByInputType()
         {

@@ -2,7 +2,7 @@
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    public class MaterializedPathOrderByInputType : ObjectGraphType<MaterializedPathOrderBy>
+    public class MaterializedPathOrderByInputType : InputObjectGraphType<MaterializedPathOrderBy>
     {
         public MaterializedPathOrderByInputType()
         {

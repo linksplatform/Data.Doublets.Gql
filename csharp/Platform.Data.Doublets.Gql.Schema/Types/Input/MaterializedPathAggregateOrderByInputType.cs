@@ -2,7 +2,7 @@
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    public class MaterializedPathAggregateOrderByInputType : ObjectGraphType<MaterializedPathAggregateOrderBy>
+    public class MaterializedPathAggregateOrderByInputType : InputObjectGraphType<MaterializedPathAggregateOrderBy>
     {
         Name = "links_aggregate_fields";
         Field<LinksAggregateFloatAvgFieldsType>(nameof(MappedType.avg));

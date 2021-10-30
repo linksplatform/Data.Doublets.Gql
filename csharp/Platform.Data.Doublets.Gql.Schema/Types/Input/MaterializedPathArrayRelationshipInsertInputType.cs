@@ -11,7 +11,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
     ///   on_conflict: mp_on_conflict
     /// }
     /// </remarks>
-    public class MaterializedPathArrayRelationshipInsertInputType : ObjectGraphType<MaterializedPathArrayRelationshipInsert>
+    public class MaterializedPathArrayRelationshipInsertInputType : InputObjectGraphType<MaterializedPathArrayRelationshipInsert>
     {
         public MaterializedPathArrayRelationshipInsertInputType()
         {

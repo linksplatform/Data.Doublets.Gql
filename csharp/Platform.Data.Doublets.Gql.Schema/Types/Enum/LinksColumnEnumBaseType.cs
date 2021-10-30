@@ -31,6 +31,10 @@
     /// </remarks>
     public class LinksColumnEnumBaseType : BaseEnumType<LinksColumn>
     {
+        public LinksColumnEnumBaseType() : base(default)
+        {
+
+        }
         public LinksColumnEnumBaseType(string name) : base(name)
         {
 
