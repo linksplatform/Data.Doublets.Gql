@@ -21,7 +21,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         {
             Name = "links_on_conflict";
             Field<NonNullGraphType<LinksConstraintEnumType>>(nameof(MappedType.constraint));
-            Field<NonNullGraphType<ListGraphType<LinksUpdateColumnEnumType>>>(nameof(MappedType.update_columns));
+            Field<NonNullGraphType<ListGraphType<LinksUpdateColumnEnumBaseType>>>(nameof(MappedType.update_columns));
             Field<LinksBooleanExpressionInputType>(nameof(MappedType.where));
         }
     }

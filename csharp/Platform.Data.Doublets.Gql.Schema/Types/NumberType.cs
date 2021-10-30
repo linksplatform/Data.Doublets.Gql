@@ -70,7 +70,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
             });
             Field<LinksAggregateType>(nameof(MappedType.link_aggregate), arguments: new QueryArguments
             {
-                new QueryArgument<ListGraphType<NonNullGraphType<LinksSelectColumnEnumType>>> { Name = "distinct_on" },
+                new QueryArgument<ListGraphType<NonNullGraphType<LinksSelectColumnEnumBaseType>>> { Name = "distinct_on" },
                 new QueryArgument<IntGraphType> { Name = "limit" },
                 new QueryArgument<IntGraphType> { Name = "offset" },
                 new QueryArgument<ListGraphType<NonNullGraphType<LinksOrderByInputType>>> { Name = "order_by" },

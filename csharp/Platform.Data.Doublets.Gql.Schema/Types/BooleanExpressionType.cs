@@ -61,7 +61,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
             Field<NonNullGraphType<LongGraphType>>("id");
             Field<NonNullGraphType<ListGraphType<NonNullGraphType<LinksType>>>>("link", arguments: new QueryArguments
             {
-                new QueryArgument<ListGraphType<NonNullGraphType<LinksSelectColumnEnumType>>> { Name = "distinct_on", Description = "distinct select on columns"},
+                new QueryArgument<ListGraphType<NonNullGraphType<LinksSelectColumnEnumBaseType>>> { Name = "distinct_on", Description = "distinct select on columns"},
                 new QueryArgument<IntGraphType>{Name = "limit", Description = "limit the number of rows returned"},
                 new QueryArgument<IntGraphType>{Name = "offset", Description = "skip the first n rows. Use only with order_by"},
                 new QueryArgument<ListGraphType<NonNullGraphType<LinksOrderByInputType>>>{Name = "order_by", Description = "sort the rows by one or more columns"},

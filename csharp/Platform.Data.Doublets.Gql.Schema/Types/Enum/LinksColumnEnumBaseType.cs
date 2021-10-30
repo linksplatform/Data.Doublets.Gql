@@ -29,14 +29,14 @@
     ///     type_id
     ///     }
     /// </remarks>
-    public class LinksColumnEnumType : BaseEnumType<LinksColumn>
+    public class LinksColumnEnumBaseType : BaseEnumType<LinksColumn>
     {
-        public LinksColumnEnumType(string name) : base(name)
+        public LinksColumnEnumBaseType(string name) : base(name)
         {
 
         }
 
-        public LinksColumnEnumType(string name, string description) : base(name, description)
+        public LinksColumnEnumBaseType(string name, string description) : base(name, description)
         {
 
         }
