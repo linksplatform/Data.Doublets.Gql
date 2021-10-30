@@ -37,7 +37,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
             Field(x => x.link_id, nullable: true,
                 type: typeof(LongComparisonExpressionInputType));
             Field(x => x.sql, nullable: true,
-                type: typeof(StringComparisonExpression));
+                type: typeof(StringComparisonExpressionInputType));
 
         }
     }
