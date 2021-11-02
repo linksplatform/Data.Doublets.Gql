@@ -284,7 +284,7 @@ namespace Platform.Data.Doublets.Gql.Schema
             var allLinks = links.All(query).Select(l => new Links(l));
             if (context.HasArgument("order_by"))
             {
-                GetSelectorAndOrderByValue(context.GetArgument<LinksOrderBy>("order_by"), out var selector,
+                GetSelectorAndOrderByValue(context.GetArgument<List<LinksOrderBy>>("order_by").Single(), out var selector,
                     out var orderByValue);
                 allLinks = orderByValue == OrderBy.asc
                     ? allLinks.OrderBy(selector)

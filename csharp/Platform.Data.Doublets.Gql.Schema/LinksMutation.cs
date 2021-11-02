@@ -96,7 +96,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                 resolve: context =>
                 {
                     var response = new LinksMutationResponse { returning = new List<Links>() };
-                    foreach (var link in context.GetArgument<List<Links>>("objects"))
+                    foreach (var link in context.GetArgument<List<LinksInsert>>("objects"))
                         response.returning.Add(InsertLink(links, link));
                     response.affected_rows = response.returning.Count;
                     return response;
@@ -122,7 +122,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                 ),
                 resolve: context =>
                 {
-                    var set = context.GetArgument<Links>("_set");
+                    var set = context.GetArgument<LinksSet>("_set");
                     var response = new LinksMutationResponse { returning = new List<Links>() };
                     foreach (var link in LinksQuery.GetLinks(context, links))
                     {
