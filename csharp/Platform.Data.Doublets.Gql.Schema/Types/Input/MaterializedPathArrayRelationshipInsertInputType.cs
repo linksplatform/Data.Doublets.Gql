@@ -17,7 +17,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         {
             Name = "mp_arr_rel_insert_input";
             Description = "input type for inserting array relation for remote table \"mp\"";
-            Field<NonNullGraphType<ListGraphType<NonNullGraphType<MaterializedPathArrayRelationshipInsertInputType>>>>("data");
+            Field<NonNullGraphType<ListGraphType<NonNullGraphType<MaterializedPathInsertInputType>>>>("data");
             Field(x => x.on_conflict, nullable: true, type: typeof(MaterializedPathOnConflictInputType));
         }
     }
