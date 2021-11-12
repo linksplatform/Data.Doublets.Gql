@@ -78,7 +78,11 @@ namespace Platform.Data.Doublets.Gql.Schema
                         returning = LinksQuery.GetLinks(context, links).ToList()
                     };
                     response.affected_rows = response.returning.Count;
-                    foreach (var linkToDelete in response.returning) links.Delete((ulong)linkToDelete.id);
+                    foreach (var linkToDelete in response.returning)
+                    {
+                        links.Delete((ulong)linkToDelete.id);
+                    }
+
                     return response;
                 });
             Field<LinksType>("delete_links_by_pk",
@@ -97,7 +101,10 @@ namespace Platform.Data.Doublets.Gql.Schema
                 {
                     var response = new LinksMutationResponse { returning = new List<Links>() };
                     foreach (var link in context.GetArgument<List<LinksInsert>>("objects"))
+                    {
                         response.returning.Add(InsertLink(links, link));
+                    }
+
                     response.affected_rows = response.returning.Count;
                     return response;
                 });
@@ -143,6 +150,7 @@ namespace Platform.Data.Doublets.Gql.Schema
             var create = link.GetOrCreate((ulong)links.from_id, (ulong)links.to_id);
             return LinksType.GetLinkOrDefault(service, (long)create);
         }
+
         public static Links InsertLink(object service, LinksInsert linksInsert)
         {
             var link = (ILinks<ulong>)service;

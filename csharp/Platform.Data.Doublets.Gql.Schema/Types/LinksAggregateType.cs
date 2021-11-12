@@ -3,6 +3,7 @@
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
     using MappedType = LinksAggregate;
+
     /// <remarks>
     ///     """
     ///     aggregated selection of "links"

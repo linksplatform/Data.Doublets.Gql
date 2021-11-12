@@ -3,6 +3,7 @@
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
     using MappedType = LinksArrayRelationshipInsert;
+
     /// <remarks>
     ///     """
     ///     input type for inserting array relation for remote table "links"

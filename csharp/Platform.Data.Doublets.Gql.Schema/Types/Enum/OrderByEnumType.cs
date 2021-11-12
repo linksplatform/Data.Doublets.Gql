@@ -21,7 +21,6 @@
     {
         public OrderByEnumType() : base("order_by", "column ordering options")
         {
-
         }
     }
 }

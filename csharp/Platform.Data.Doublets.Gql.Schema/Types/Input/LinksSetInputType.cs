@@ -3,6 +3,7 @@ using GraphQL.Types;
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
     using MappedType = LinksSet;
+
     /// <remarks>
     ///     """
     ///     input type for updating data in table "links"

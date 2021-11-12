@@ -14,7 +14,6 @@
     ///     """column name"""
     ///     type_id
     ///     }
-    ///
     ///     """
     ///     select columns of table "links"
     ///     """
@@ -33,16 +32,14 @@
     {
         public LinksColumnEnumBaseType() : base(default)
         {
-
         }
+
         public LinksColumnEnumBaseType(string name) : base(name)
         {
-
         }
 
         public LinksColumnEnumBaseType(string name, string description) : base(name, description)
         {
-
         }
     }
 }

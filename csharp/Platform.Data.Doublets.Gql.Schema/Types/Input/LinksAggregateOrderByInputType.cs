@@ -4,6 +4,7 @@ using Platform.Data.Doublets.Gql.Schema.Types.Enum;
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
     using MappedType = LinksAggregateOrderBy;
+
     /// <remarks>
     ///     """
     ///     order by aggregate values of table "links"

@@ -3,6 +3,7 @@
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
     using MappedType = LongComparisonExpression;
+
     /// <remarks>
     ///     """
     ///     expression to compare columns of type bigint. All fields are combined with logical 'AND'.

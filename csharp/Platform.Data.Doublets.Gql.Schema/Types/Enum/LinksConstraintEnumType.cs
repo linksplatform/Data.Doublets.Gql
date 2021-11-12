@@ -2,9 +2,9 @@
 {
     public class LinksConstraintEnumType : BaseEnumType<LinksConstraint>
     {
-        public LinksConstraintEnumType() : base("links_constraint", "unique or primary key constraints on table \"links\"")
+        public LinksConstraintEnumType() : base("links_constraint",
+            "unique or primary key constraints on table \"links\"")
         {
-
         }
     }
 }
