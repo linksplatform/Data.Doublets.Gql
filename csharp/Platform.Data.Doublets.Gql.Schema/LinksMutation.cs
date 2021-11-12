@@ -101,7 +101,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                     response.affected_rows = response.returning.Count;
                     return response;
                 });
-            Field<LinksMutationResponseType>("insert_links_one",
+            Field<LinksType>("insert_links_one",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<LinksInsertInputType>> { Name = "object" },
                     new QueryArgument<LinksOnConflictInputType> { Name = "on_conflict" }

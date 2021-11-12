@@ -19,7 +19,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
         {
             Name = "links_mutation_response";
             Field<NonNullGraphType<IntGraphType>>("affected_rows");
-            Field<NonNullGraphType<ListGraphType<LinksType>>>("returning");
+            Field<NonNullGraphType<ListGraphType<NonNullGraphType<LinksType>>>>("returning");
         }
     }
 }
