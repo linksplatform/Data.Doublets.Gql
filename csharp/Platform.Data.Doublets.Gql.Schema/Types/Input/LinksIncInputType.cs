@@ -1,21 +1,25 @@
 ﻿using GraphQL.Types;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
     using MappedType = Links;
-
     /// <remarks>
-    ///     """
-    ///     input type for incrementing integer column in table "links"
-    ///     """
-    ///     input links_inc_input {
-    ///     from_id: bigint
-    ///     id: bigint
-    ///     to_id: bigint
-    ///     type_id: bigint
-    ///     }
+    /// """
+    /// input type for incrementing integer column in table "links"
+    /// """
+    /// input links_inc_input {
+    ///   from_id: bigint
+    ///   id: bigint
+    ///   to_id: bigint
+    ///   type_id: bigint
+    /// }
     /// </remarks>
-    public class LinksIncInputType : InputObjectGraphType<MappedType>
+    class LinksIncInputType : InputObjectGraphType<MappedType>
     {
         public LinksIncInputType()
         {
