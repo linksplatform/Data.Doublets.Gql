@@ -15,7 +15,6 @@ namespace Platform.Data.Doublets.Gql.Schema
             }
         }
 
-        // public MPA? _by_root_aggregate { get; set; }
         public BooleanExpression bool_exp { get; set; }
         public Links? from { get; set; }
         public long? from_id { get; set; }

@@ -204,10 +204,14 @@ namespace Platform.Data.Doublets.Gql.Schema
             );
         }
 
-        public static IEnumerable<Links> GetLinks(IResolveFieldContext<object> context, long? forceFromId = null,
-            long? forceToId = null)
+        public static IEnumerable<Links> GetLinks(IResolveFieldContext<object> context)
         {
-            return GetLinks(context, context.RequestServices.GetService<ILinks<ulong>>(), forceFromId, forceToId);
+            return GetLinks(context, context.RequestServices.GetService<ILinks<ulong>>(), null, null);
+        }
+
+        public static IEnumerable<Links> GetLinks(IResolveFieldContext<object> context, long? forceFromId)
+        {
+            return GetLinks(context, context.RequestServices.GetService<ILinks<ulong>>(), forceFromId, null);
         }
 
         public static IEnumerable<Links> GetLinks(IResolveFieldContext<object> context, ILinks<ulong> links,
