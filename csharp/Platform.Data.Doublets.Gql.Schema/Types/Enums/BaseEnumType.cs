@@ -1,6 +1,6 @@
 using GraphQL.Types;
 
-namespace Platform.Data.Doublets.Gql.Schema.Types.Enum
+namespace Platform.Data.Doublets.Gql.Schema.Types.Enums
 {
     public class BaseEnumType<T> : EnumerationGraphType<T> where T : System.Enum
     {

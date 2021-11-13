@@ -1,4 +1,4 @@
-namespace Platform.Data.Doublets.Gql.Schema.Types.Enum
+namespace Platform.Data.Doublets.Gql.Schema.Types.Enums
 {
     public class MaterializedPathUpdateColumnEnumType : BaseEnumType<MaterializedPathUpdateColumn>
     {

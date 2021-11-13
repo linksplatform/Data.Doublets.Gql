@@ -1,36 +1,39 @@
 using System;
 using System.Text;
 
-public static class StringExtensions
+namespace Platform.Data.Doublets.Gql.Schema
 {
-    internal static string ToSnakeCase(this string text)
+    public static class StringExtensions
     {
-        if (text == null)
+        internal static string ToSnakeCase(this string text)
         {
-            throw new ArgumentNullException(nameof(text));
-        }
-
-        if (text.Length < 2)
-        {
-            return text;
-        }
-
-        var sb = new StringBuilder();
-        sb.Append(char.ToLowerInvariant(text[0]));
-        for (var i = 1; i < text.Length; ++i)
-        {
-            var c = text[i];
-            if (char.IsUpper(c))
+            if (text == null)
             {
-                sb.Append('_');
-                sb.Append(char.ToLowerInvariant(c));
+                throw new ArgumentNullException(nameof(text));
             }
-            else
-            {
-                sb.Append(c);
-            }
-        }
 
-        return sb.ToString();
+            if (text.Length < 2)
+            {
+                return text;
+            }
+
+            var sb = new StringBuilder();
+            sb.Append(char.ToLowerInvariant(text[0]));
+            for (var i = 1; i < text.Length; ++i)
+            {
+                var c = text[i];
+                if (char.IsUpper(c))
+                {
+                    sb.Append('_');
+                    sb.Append(char.ToLowerInvariant(c));
+                }
+                else
+                {
+                    sb.Append(c);
+                }
+            }
+
+            return sb.ToString();
+        }
     }
 }

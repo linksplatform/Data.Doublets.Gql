@@ -5,7 +5,7 @@ using GraphQL;
 using GraphQL.Types;
 using Microsoft.Extensions.DependencyInjection;
 using Platform.Data.Doublets.Gql.Schema.Types;
-using Platform.Data.Doublets.Gql.Schema.Types.Enum;
+using Platform.Data.Doublets.Gql.Schema.Types.Enums;
 using Platform.Data.Doublets.Gql.Schema.Types.Input;
 
 namespace Platform.Data.Doublets.Gql.Schema

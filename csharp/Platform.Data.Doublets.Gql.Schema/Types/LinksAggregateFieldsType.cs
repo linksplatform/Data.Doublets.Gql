@@ -1,6 +1,6 @@
 ﻿using GraphQL;
 using GraphQL.Types;
-using Platform.Data.Doublets.Gql.Schema.Types.Enum;
+using Platform.Data.Doublets.Gql.Schema.Types.Enums;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
