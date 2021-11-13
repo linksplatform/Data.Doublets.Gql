@@ -3,7 +3,16 @@ using Platform.Data.Doublets.Gql.Schema.Types.Enums;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-
+    /// <remarks>
+    ///     """
+    ///     on conflict condition type for table "mp"
+    ///     """
+    ///     input mp_on_conflict {
+    ///     constraint: mp_constraint!
+    ///     update_columns: [mp_update_column!]!
+    ///     where: mp_bool_exp
+    ///     }
+    /// </remarks>
     public class MaterializedPathOnConflictInputType : InputObjectGraphType<MaterializedPathOnConflict>
     {
         public MaterializedPathOnConflictInputType()

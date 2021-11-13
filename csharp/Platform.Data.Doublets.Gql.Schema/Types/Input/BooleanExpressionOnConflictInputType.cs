@@ -5,6 +5,16 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
     using MappedType = BooleanExpressionOnConflict;
 
+    /// <remarks>
+    ///     """
+    ///     on conflict condition type for table "bool_exp"
+    ///     """
+    ///     input bool_exp_on_conflict {
+    ///     constraint: bool_exp_constraint!
+    ///     update_columns: [bool_exp_constraint!]!
+    ///     where: bool_exp_bool_exp
+    ///     }
+    /// </remarks>
     public class BooleanExpressionOnConflictInputType : InputObjectGraphType<MappedType>
     {
         public BooleanExpressionOnConflictInputType()

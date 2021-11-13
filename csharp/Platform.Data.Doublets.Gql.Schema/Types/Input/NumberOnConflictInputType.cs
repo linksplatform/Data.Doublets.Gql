@@ -5,6 +5,16 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
     using MappedType = NumberOnConflict;
 
+    /// <remarks>
+    ///     """
+    ///     on conflict condition type for table "number"
+    ///     """
+    ///     input number_on_conflict {
+    ///     constraint: number_constraint!
+    ///     update_columns: [number_update_column!]!
+    ///     where: number_bool_exp
+    ///     }
+    /// </remarks>
     public class NumberOnConflictInputType : InputObjectGraphType<MappedType>
     {
         public NumberOnConflictInputType()

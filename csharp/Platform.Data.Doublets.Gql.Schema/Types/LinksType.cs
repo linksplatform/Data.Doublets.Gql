@@ -223,7 +223,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
 
         private List<Links> ResolveIn(IResolveFieldContext<Links> context)
         {
-            return LinksQuery.GetLinks(context, context.RequestServices.GetService<ILinks<ulong>>(), context.Source.id).ToList();
+            return LinksQuery.GetLinks(context, null, context.Source.id).ToList();
         }
 
         private List<Links> ResolveOut(IResolveFieldContext<Links> context)
