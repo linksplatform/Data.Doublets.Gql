@@ -9,9 +9,9 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     ///     type_id: bigint
     ///     }
     /// </remarks>
-    public class LinksAggregateBigIntMaxFieldsBaseType : LinksAggregateBigIntFieldsBaseType
+    public class LinksAggregateBigIntMaxFieldsType : LinksAggregateBigIntFieldsType
     {
-        public LinksAggregateBigIntMaxFieldsBaseType() : base("links_max_fields")
+        public LinksAggregateBigIntMaxFieldsType() : base("links_max_fields")
         {
         }
     }

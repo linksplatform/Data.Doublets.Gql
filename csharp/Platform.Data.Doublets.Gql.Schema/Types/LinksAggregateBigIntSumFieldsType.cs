@@ -9,9 +9,9 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     ///     type_id: bigint
     ///     }
     /// </remarks>
-    public class LinksAggregateBigIntSumFieldsBaseType : LinksAggregateBigIntFieldsBaseType
+    public class LinksAggregateBigIntSumFieldsType : LinksAggregateBigIntFieldsType
     {
-        public LinksAggregateBigIntSumFieldsBaseType() : base("links_sum_fields")
+        public LinksAggregateBigIntSumFieldsType() : base("links_sum_fields")
         {
         }
     }

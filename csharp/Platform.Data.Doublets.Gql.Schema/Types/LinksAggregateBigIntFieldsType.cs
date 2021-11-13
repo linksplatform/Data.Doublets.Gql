@@ -27,9 +27,9 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     ///     type_id: bigint
     ///     }
     /// </remarks>
-    public class LinksAggregateBigIntFieldsBaseType : ObjectGraphType<MappedType>
+    public class LinksAggregateBigIntFieldsType : ObjectGraphType<MappedType>
     {
-        public LinksAggregateBigIntFieldsBaseType(string name)
+        public LinksAggregateBigIntFieldsType(string name)
         {
             Name = name;
             Field<LongGraphType>(nameof(MappedType.id));
