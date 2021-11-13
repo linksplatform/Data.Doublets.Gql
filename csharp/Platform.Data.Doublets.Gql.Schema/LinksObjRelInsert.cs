@@ -2,8 +2,8 @@
 {
     public class LinksObjRelInsert
     {
-        public LinksObjRelInsert data { get; set; }
+        public LinksObjRelInsert data;
 
-        public LinksOnConflict on_conflict { get; set; }
+        public LinksOnConflict on_conflict;
     }
 }

@@ -5,10 +5,10 @@ namespace Platform.Data.Doublets.Gql.Schema
 {
     public class LinksOnConflict
     {
-        public LinksConstraint constraint { get; set; }
+        public LinksConstraint constraint;
 
-        public List<LinksColumn> update_columns { get; set; }
+        public List<LinksColumn> update_columns;
 
-        public LinksBooleanExpression where { get; set; }
+        public LinksBooleanExpression where;
     }
 }

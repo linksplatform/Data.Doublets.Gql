@@ -2,21 +2,21 @@
 {
     public class LinksInsert
     {
-        public MaterializedPathArrayRelationshipInsert _by_group { get; set; }
-        public MaterializedPathArrayRelationshipInsert _by_item { get; set; }
-        public MaterializedPathArrayRelationshipInsert _by_path_item { get; set; }
-        public MaterializedPathArrayRelationshipInsert _by_root { get; set; }
-        public BooleanExpressionObjectRelationshipInsert bool_exp { get; set; }
-        public LinksObjRelInsert from { get; set; }
-        public long? from_id { get; set; }
-        public long? id { get; set; }
-        public LinksArrayRelationshipInsert @in { get; set; }
-        public NumberObjectRelationshipInsert number { get; set; }
-        public LinksArrayRelationshipInsert @out { get; set; }
-        public StringObjectRelationshipInsert @string { get; set; }
-        public LinksObjRelInsert to { get; set; }
-        public long? to_id { get; set; }
-        public LinksObjRelInsert type { get; set; }
-        public long? type_id { get; set; }
+        public MaterializedPathArrayRelationshipInsert _by_group;
+        public MaterializedPathArrayRelationshipInsert _by_item;
+        public MaterializedPathArrayRelationshipInsert _by_path_item;
+        public MaterializedPathArrayRelationshipInsert _by_root;
+        public BooleanExpressionObjectRelationshipInsert bool_exp;
+        public LinksObjRelInsert from;
+        public long? from_id;
+        public long? id;
+        public LinksArrayRelationshipInsert @in;
+        public NumberObjectRelationshipInsert number;
+        public LinksArrayRelationshipInsert @out;
+        public StringObjectRelationshipInsert @string;
+        public LinksObjRelInsert to;
+        public long? to_id;
+        public LinksObjRelInsert type;
+        public long? type_id;
     }
 }

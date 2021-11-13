@@ -4,14 +4,14 @@ namespace Platform.Data.Doublets.Gql.Schema
 {
     public class DoubleComparisonExpression
     {
-        public double? _eq { get; set; }
-        public double? _gt { get; set; }
-        public double? _gte { get; set; }
-        public List<double> _in { get; set; }
-        public bool? _is_null { get; set; }
-        public double? _lt { get; set; }
-        public double? _lte { get; set; }
-        public bool? _neq { get; set; }
-        public List<double> _nin { get; set; }
+        public double? _eq;
+        public double? _gt;
+        public double? _gte;
+        public List<double> _in;
+        public bool? _is_null;
+        public double? _lt;
+        public double? _lte;
+        public bool? _neq;
+        public List<double> _nin;
     }
 }

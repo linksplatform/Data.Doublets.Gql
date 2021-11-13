@@ -2,9 +2,9 @@
 {
     public class LinksAggregateFloatFields
     {
-        public float? id { get; set; }
-        public float? from_id { get; set; }
-        public float? to_id { get; set; }
-        public float? type_id { get; set; }
+        public float? id;
+        public float? from_id;
+        public float? to_id;
+        public float? type_id;
     }
 }

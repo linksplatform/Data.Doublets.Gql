@@ -5,8 +5,8 @@ namespace Platform.Data.Doublets.Gql.Schema
 {
     public class MaterializedPathOnConflict
     {
-        public MaterializedPathConstraint constraint { get; set; }
-        public List<MaterializedPathUpdateColumn> update_columns { get; set; }
-        public MaterializedPathBooleanExpression where { get; set; }
+        public MaterializedPathConstraint constraint;
+        public List<MaterializedPathUpdateColumn> update_columns;
+        public MaterializedPathBooleanExpression where;
     }
 }
