@@ -4,13 +4,13 @@ namespace Platform.Data.Doublets.Gql.Schema
 {
     public class BooleanExpressionBooleanExpression
     {
-        public List<BooleanExpressionBooleanExpression> _and;
-        public BooleanExpressionBooleanExpression _not;
-        public List<BooleanExpressionBooleanExpression> _or;
-        public StringComparisonExpression gql;
-        public LongComparisonExpression id;
-        public LinksBooleanExpression link;
-        public LongComparisonExpression link_id;
-        public StringComparisonExpression sql;
+        public List<BooleanExpressionBooleanExpression> _and { get; set; }
+        public BooleanExpressionBooleanExpression _not { get; set; }
+        public List<BooleanExpressionBooleanExpression> _or { get; set; }
+        public StringComparisonExpression gql { get; set; }
+        public LongComparisonExpression id { get; set; }
+        public LinksBooleanExpression link { get; set; }
+        public LongComparisonExpression link_id { get; set; }
+        public StringComparisonExpression sql { get; set; }
     }
 }

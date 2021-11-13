@@ -4,22 +4,22 @@ namespace Platform.Data.Doublets.Gql.Schema
 {
     public class LongComparisonExpression
     {
-        public long? _eq;
+        public long? _eq { get; set; }
 
-        public long? _gt;
+        public long? _gt { get; set; }
 
-        public long? _gte;
+        public long? _gte { get; set; }
 
-        public List<long> _in;
+        public List<long> _in { get; set; }
 
-        public bool? _is_null;
+        public bool? _is_null { get; set; }
 
-        public long? _lt;
+        public long? _lt { get; set; }
 
-        public long? _lte;
+        public long? _lte { get; set; }
 
-        public long? _neq;
+        public long? _neq { get; set; }
 
-        public List<long> _nin;
+        public List<long> _nin { get; set; }
     }
 }

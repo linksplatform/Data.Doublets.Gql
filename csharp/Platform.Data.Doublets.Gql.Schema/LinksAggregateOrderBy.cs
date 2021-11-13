@@ -4,26 +4,26 @@ namespace Platform.Data.Doublets.Gql.Schema
 {
     public class LinksAggregateOrderBy
     {
-        public LinksFieldsOrderBy avg;
+        public LinksFieldsOrderBy avg { get; set; }
 
-        public OrderBy? count;
+        public OrderBy? count { get; set; }
 
-        public LinksFieldsOrderBy max;
+        public LinksFieldsOrderBy max { get; set; }
 
-        public LinksFieldsOrderBy min;
+        public LinksFieldsOrderBy min { get; set; }
 
-        public LinksFieldsOrderBy stddev;
+        public LinksFieldsOrderBy stddev { get; set; }
 
-        public LinksFieldsOrderBy stddev_pop;
+        public LinksFieldsOrderBy stddev_pop { get; set; }
 
-        public LinksFieldsOrderBy stddev_samp;
+        public LinksFieldsOrderBy stddev_samp { get; set; }
 
-        public LinksFieldsOrderBy sum;
+        public LinksFieldsOrderBy sum { get; set; }
 
-        public LinksFieldsOrderBy var_pop;
+        public LinksFieldsOrderBy var_pop { get; set; }
 
-        public LinksFieldsOrderBy var_samp;
+        public LinksFieldsOrderBy var_samp { get; set; }
 
-        public LinksFieldsOrderBy variance;
+        public LinksFieldsOrderBy variance { get; set; }
     }
 }

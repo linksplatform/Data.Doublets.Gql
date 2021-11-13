@@ -2,9 +2,9 @@
 {
     public class LinksAggregateBigIntFields
     {
-        public long id;
-        public long from_id;
-        public long to_id;
-        public long type_id;
+        public long id { get; set; }
+        public long from_id { get; set; }
+        public long to_id { get; set; }
+        public long type_id { get; set; }
     }
 }
