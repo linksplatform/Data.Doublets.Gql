@@ -4,20 +4,20 @@ namespace Platform.Data.Doublets.Gql.Schema
 {
     public class StringComparisonExpression
     {
-        public string _eq { get; set; }
-        public string _gt { get; set; }
-        public string _gte { get; set; }
-        public string _ilike { get; set; }
-        public List<string> _in { get; set; }
-        public bool? _is_null { get; set; }
-        public string _like { get; set; }
-        public string _lt { get; set; }
-        public string _lte { get; set; }
-        public string _neq { get; set; }
-        public string _nilike { get; set; }
-        public List<string> _nin { get; set; }
-        public string _nlike { get; set; }
-        public string _nsimilar { get; set; }
-        public string _similar { get; set; }
+        public string _eq;
+        public string _gt;
+        public string _gte;
+        public string _ilike;
+        public List<string> _in;
+        public bool? _is_null;
+        public string _like;
+        public string _lt;
+        public string _lte;
+        public string _neq;
+        public string _nilike;
+        public List<string> _nin;
+        public string _nlike;
+        public string _nsimilar;
+        public string _similar;
     }
 }
