@@ -29,6 +29,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     /// </remarks>
     public class LinksAggregateBigIntFieldsBaseType : ObjectGraphType<MappedType>
     {
+        public LinksAggregateBigIntFieldsBaseType(){}
         public LinksAggregateBigIntFieldsBaseType(string name)
         {
             Name = name;
