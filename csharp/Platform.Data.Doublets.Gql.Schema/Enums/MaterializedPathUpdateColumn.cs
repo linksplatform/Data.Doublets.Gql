@@ -1,28 +1,6 @@
 namespace Platform.Data.Doublets.Gql.Schema.Enums
 {
-    /// <remarks>
-    ///     """
-    ///     update columns of table "mp"
-    ///     """
-    ///     enum mp_update_column {
-    ///     """column name"""
-    ///     group_id
-    ///     """column name"""
-    ///     id
-    ///     """column name"""
-    ///     insert_category
-    ///     """column name"""
-    ///     item_id
-    ///     """column name"""
-    ///     path_item_depth
-    ///     """column name"""
-    ///     path_item_id
-    ///     """column name"""
-    ///     position_id
-    ///     """column name"""
-    ///     root_id
-    ///     }
-    /// </remarks>
+
     public enum MaterializedPathUpdateColumn
     {
         group_id,

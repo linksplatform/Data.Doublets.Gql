@@ -2,19 +2,7 @@ using GraphQL.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
-    /// <remarks>
-    ///     """aggregate max on columns"""
-    ///     type mp_min_fields {
-    ///     group_id: bigint
-    ///     id: bigint
-    ///     insert_category: String
-    ///     item_id: bigint
-    ///     path_item_depth: bigint
-    ///     path_item_id: bigint
-    ///     position_id: String
-    ///     root_id: bigint
-    ///     }
-    /// </remarks>
+
     public class MaterializedPathMinFieldsType : ObjectGraphType<MaterializedPathMinFields>
     {
         public MaterializedPathMinFieldsType()

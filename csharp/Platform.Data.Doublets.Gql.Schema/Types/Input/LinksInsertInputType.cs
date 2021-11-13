@@ -4,29 +4,6 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
     using MappedType = LinksInsert;
 
-    /// <remarks>
-    ///     """
-    ///     input type for inserting data into table "links"
-    ///     """
-    ///     input links_insert_input {
-    ///     _by_group: mp_arr_rel_insert_input
-    ///     _by_item: mp_arr_rel_insert_input
-    ///     _by_path_item: mp_arr_rel_insert_input
-    ///     _by_root: mp_arr_rel_insert_input
-    ///     bool_exp: bool_exp_obj_rel_insert_input
-    ///     from: links_obj_rel_insert_input
-    ///     from_id: bigint
-    ///     id: bigint
-    ///     in: links_arr_rel_insert_input
-    ///     number: number_obj_rel_insert_input
-    ///     out: links_arr_rel_insert_input
-    ///     string: string_obj_rel_insert_input
-    ///     to: links_obj_rel_insert_input
-    ///     to_id: bigint
-    ///     type: links_obj_rel_insert_input
-    ///     type_id: bigint
-    ///     }
-    /// </remarks>
     public class LinksInsertInputType : InputObjectGraphType<MappedType>
     {
         public LinksInsertInputType()

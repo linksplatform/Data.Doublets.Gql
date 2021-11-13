@@ -2,15 +2,7 @@ using GraphQL.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    /// <remarks>
-    ///     """
-    ///     input type for inserting array relation for remote table "mp"
-    ///     """
-    ///     input mp_arr_rel_insert_input {
-    ///     data: [mp_insert_input!]!
-    ///     on_conflict: mp_on_conflict
-    ///     }
-    /// </remarks>
+
     public class
         MaterializedPathArrayRelationshipInsertInputType : InputObjectGraphType<MaterializedPathArrayRelationshipInsert>
     {
