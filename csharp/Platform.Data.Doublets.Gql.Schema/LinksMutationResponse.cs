@@ -15,8 +15,8 @@ namespace Platform.Data.Doublets.Gql.Schema
     /// </remarks>
     public class LinksMutationResponse
     {
-        public int affected_rows;
+        public int affected_rows { get; set; }
 
-        public List<Links> returning;
+        public List<Links> returning { get; set; }
     }
 }

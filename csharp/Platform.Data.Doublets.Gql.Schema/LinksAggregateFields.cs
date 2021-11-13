@@ -2,26 +2,26 @@
 {
     public class LinksAggregateFields
     {
-        public LinksAggregateFloatFields avg;
+        public LinksAggregateFloatFields avg { get; set; }
 
-        public int? count;
+        public int? count { get; set; }
 
-        public LinksAggregateBigIntFields max;
+        public LinksAggregateBigIntFields max { get; set; }
 
-        public LinksAggregateFloatFields min;
+        public LinksAggregateFloatFields min { get; set; }
 
-        public LinksAggregateFloatFields stddev;
+        public LinksAggregateFloatFields stddev { get; set; }
 
-        public LinksAggregateFloatFields stddev_pop;
+        public LinksAggregateFloatFields stddev_pop { get; set; }
 
-        public LinksAggregateFloatFields stddev_samp;
+        public LinksAggregateFloatFields stddev_samp { get; set; }
 
-        public LinksAggregateBigIntFields sum;
+        public LinksAggregateBigIntFields sum { get; set; }
 
-        public LinksAggregateFloatFields var_pop;
+        public LinksAggregateFloatFields var_pop { get; set; }
 
-        public LinksAggregateFloatFields var_samp;
+        public LinksAggregateFloatFields var_samp { get; set; }
 
-        public LinksAggregateFloatFields variance;
+        public LinksAggregateFloatFields variance { get; set; }
     }
 }
