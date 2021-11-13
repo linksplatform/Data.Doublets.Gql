@@ -9,9 +9,9 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
     ///     type_id: bigint
     ///     }
     /// </remarks>
-    public class LinksAggregateBigIntMinFieldsType : LinksAggregateBigIntFieldsType
+    public class LinksAggregateBigIntMinFieldsBaseType : LinksAggregateBigIntFieldsBaseType
     {
-        public LinksAggregateBigIntMinFieldsType() : base("links_min_fields")
+        public LinksAggregateBigIntMinFieldsBaseType() : base("links_min_fields")
         {
         }
     }
