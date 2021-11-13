@@ -3,21 +3,6 @@ using Platform.Data.Doublets.Gql.Schema.Types.Enums;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    /// <remarks>
-    ///     """
-    ///     order by max() on columns of table "mp"
-    ///     """
-    ///     input mp_max_order_by {
-    ///     group_id: order_by
-    ///     id: order_by
-    ///     insert_category: order_by
-    ///     item_id: order_by
-    ///     path_item_depth: order_by
-    ///     path_item_id: order_by
-    ///     position_id: order_by
-    ///     root_id: order_by
-    ///     }
-    /// </remarks>
     public class MaterializedPathMaxOrderByInputType : InputObjectGraphType<MaterializedPathMaxOrderBy>
     {
         public MaterializedPathMaxOrderByInputType()

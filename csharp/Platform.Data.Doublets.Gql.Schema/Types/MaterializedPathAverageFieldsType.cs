@@ -2,17 +2,6 @@ using GraphQL.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
-    /// <remarks>
-    ///     """aggregate avg on columns"""
-    ///     type mp_avg_fields {
-    ///     group_id: Float
-    ///     id: Float
-    ///     item_id: Float
-    ///     path_item_depth: Float
-    ///     path_item_id: Float
-    ///     root_id: Float
-    ///     }
-    /// </remarks>
     public class MaterializedPathAverageFieldsType : ObjectGraphType<MaterializedPathAverageFields>
     {
         public MaterializedPathAverageFieldsType()
