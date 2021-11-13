@@ -1,4 +1,5 @@
-﻿using Platform.Data.Doublets.Gql.Schema.Types.Input;
+﻿using Platform.Data.Doublets.Gql.Schema.Enums;
+using Platform.Data.Doublets.Gql.Schema.Types.Input;
 
 namespace Platform.Data.Doublets.Gql.Schema
 {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Platform.Data.Doublets.Gql.Schema.Enums;
 
 namespace Platform.Data.Doublets.Gql.Schema
 {

@@ -1,4 +1,6 @@
-﻿namespace Platform.Data.Doublets.Gql.Schema.Types.Enums
+﻿using Platform.Data.Doublets.Gql.Schema.Enums;
+
+namespace Platform.Data.Doublets.Gql.Schema.Types.Enums
 {
     public class LinksConstraintEnumType : BaseEnumType<LinksConstraint>
     {

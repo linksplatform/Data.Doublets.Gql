@@ -1,4 +1,6 @@
-﻿namespace Platform.Data.Doublets.Gql.Schema
+﻿using Platform.Data.Doublets.Gql.Schema.Enums;
+
+namespace Platform.Data.Doublets.Gql.Schema
 {
     public class LinksAggregateOrderBy
     {
