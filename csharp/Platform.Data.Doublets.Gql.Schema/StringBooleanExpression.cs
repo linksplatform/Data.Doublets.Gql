@@ -4,7 +4,7 @@ namespace Platform.Data.Doublets.Gql.Schema
 {
     public class StringBooleanExpression
     {
-        public List<StringBooleanExpression>? _and { get; set; }
+        public List<StringBooleanExpression> _and { get; set; }
         public StringBooleanExpression _not { get; set; }
         public List<StringBooleanExpression> _or { get; set; }
         public LongComparisonExpression id { get; set; }
