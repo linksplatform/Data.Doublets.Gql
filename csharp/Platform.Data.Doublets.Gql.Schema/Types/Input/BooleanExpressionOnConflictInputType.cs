@@ -4,6 +4,7 @@ using Platform.Data.Doublets.Gql.Schema.Types.Enums;
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
     using MappedType = BooleanExpressionOnConflict;
+
     public class BooleanExpressionOnConflictInputType : InputObjectGraphType<MappedType>
     {
         public BooleanExpressionOnConflictInputType()

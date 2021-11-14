@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using Platform.Data.Doublets.Gql.Schema.Enums;
+using System.Collections.Generic;
 
 namespace Platform.Data.Doublets.Gql.Schema
 {

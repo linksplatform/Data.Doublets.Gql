@@ -26,6 +26,7 @@ namespace Platform.Data.Doublets.Gql.Server
                 {
                     Data.DefaultDatabaseFileName = dbFileName;
                 }
+
                 CreateHostBuilder(args).Build().Run();
                 return 0;
             }
@@ -41,11 +42,11 @@ namespace Platform.Data.Doublets.Gql.Server
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder
-                        .UseSerilog()
-                        .UseStartup<Startup>();
-                });
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder
+                    .UseSerilog()
+                    .UseStartup<Startup>();
+            });
     }
 }

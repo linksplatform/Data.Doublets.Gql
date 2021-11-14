@@ -6,7 +6,6 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Enums
     {
         public StringUpdateColumnEnumType() : base("string_update_column", "update columns of table \"string\"")
         {
-
         }
     }
 }

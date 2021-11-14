@@ -3,6 +3,7 @@
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
     using MappedType = LinksObjRelInsert;
+
     public class LinksObjRelInsertInputType : InputObjectGraphType<MappedType>
     {
         public LinksObjRelInsertInputType()

@@ -3,9 +3,11 @@
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
     using MappedType = LinksAggregateBigIntFields;
+
     public class LinksAggregateBigIntFieldsBaseType : ObjectGraphType<MappedType>
     {
-        public LinksAggregateBigIntFieldsBaseType(){}
+        public LinksAggregateBigIntFieldsBaseType() { }
+
         public LinksAggregateBigIntFieldsBaseType(string name)
         {
             Name = name;

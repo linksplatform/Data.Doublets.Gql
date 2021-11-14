@@ -1,14 +1,10 @@
 using GraphQL.Types;
+using System;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Enums
 {
-    public class BaseEnumType<T> : EnumerationGraphType<T> where T : System.Enum
+    public class BaseEnumType<T> : EnumerationGraphType<T> where T : Enum
     {
-        protected override string ChangeEnumCase(string value)
-        {
-            return value.ToSnakeCase();
-        }
-
         public BaseEnumType(string name) => Name = name;
 
         public BaseEnumType(string name, string description)
@@ -16,5 +12,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Enums
             Name = name;
             Description = description;
         }
+
+        protected override string ChangeEnumCase(string value) => value.ToSnakeCase();
     }
 }

@@ -8,6 +8,7 @@ namespace Platform.Data.Doublets.Gql.Schema
     internal static class EnumerableExtensions
     {
         private const int DefaultInternalSetCapacity = 7;
+
         /// <summary>Returns distinct elements from a sequence according to a specified key selector function.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
         /// <typeparam name="TKey">The type of key to distinguish elements by.</typeparam>
@@ -16,8 +17,17 @@ namespace Platform.Data.Doublets.Gql.Schema
         /// <returns>An <see cref="IEnumerable{T}" /> that contains distinct elements from the source sequence.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null" />.</exception>
         /// <remarks>
-        /// <para>This method is implemented by using deferred execution. The immediate return value is an object that stores all the information that is required to perform the action. The query represented by this method is not executed until the object is enumerated either by calling its `GetEnumerator` method directly or by using `foreach` in Visual C# or `For Each` in Visual Basic.</para>
-        /// <para>The <see cref="DistinctBy{TSource, TKey}(IEnumerable{TSource}, Func{TSource, TKey})" /> method returns an unordered sequence that contains no duplicate values. The default equality comparer, <see cref="EqualityComparer{T}.Default" />, is used to compare values.</para>
+        ///     <para>
+        ///         This method is implemented by using deferred execution. The immediate return value is an object that stores
+        ///         all the information that is required to perform the action. The query represented by this method is not
+        ///         executed until the object is enumerated either by calling its `GetEnumerator` method directly or by using
+        ///         `foreach` in Visual C# or `For Each` in Visual Basic.
+        ///     </para>
+        ///     <para>
+        ///         The <see cref="DistinctBy{TSource, TKey}(IEnumerable{TSource}, Func{TSource, TKey})" /> method returns an
+        ///         unordered sequence that contains no duplicate values. The default equality comparer,
+        ///         <see cref="EqualityComparer{T}.Default" />, is used to compare values.
+        ///     </para>
         /// </remarks>
         public static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector) => DistinctBy(source, keySelector, null);
 
@@ -30,8 +40,19 @@ namespace Platform.Data.Doublets.Gql.Schema
         /// <returns>An <see cref="IEnumerable{T}" /> that contains distinct elements from the source sequence.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null" />.</exception>
         /// <remarks>
-        /// <para>This method is implemented by using deferred execution. The immediate return value is an object that stores all the information that is required to perform the action. The query represented by this method is not executed until the object is enumerated either by calling its `GetEnumerator` method directly or by using `foreach` in Visual C# or `For Each` in Visual Basic.</para>
-        /// <para>The <see cref="DistinctBy{TSource, TKey}(IEnumerable{TSource}, Func{TSource, TKey}, IEqualityComparer{TKey}?)" /> method returns an unordered sequence that contains no duplicate values. If <paramref name="comparer" /> is <see langword="null" />, the default equality comparer, <see cref="EqualityComparer{T}.Default" />, is used to compare values.</para>
+        ///     <para>
+        ///         This method is implemented by using deferred execution. The immediate return value is an object that stores
+        ///         all the information that is required to perform the action. The query represented by this method is not
+        ///         executed until the object is enumerated either by calling its `GetEnumerator` method directly or by using
+        ///         `foreach` in Visual C# or `For Each` in Visual Basic.
+        ///     </para>
+        ///     <para>
+        ///         The
+        ///         <see cref="DistinctBy{TSource, TKey}(IEnumerable{TSource}, Func{TSource, TKey}, IEqualityComparer{TKey}?)" />
+        ///         method returns an unordered sequence that contains no duplicate values. If <paramref name="comparer" /> is
+        ///         <see langword="null" />, the default equality comparer, <see cref="EqualityComparer{T}.Default" />, is used to
+        ///         compare values.
+        ///     </para>
         /// </remarks>
         public static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IEqualityComparer<TKey> comparer)
         {
@@ -55,8 +76,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                     {
                         yield return element;
                     }
-                }
-                while (enumerator.MoveNext());
+                } while (enumerator.MoveNext());
             }
         }
     }

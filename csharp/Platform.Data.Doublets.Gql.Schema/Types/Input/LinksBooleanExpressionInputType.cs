@@ -3,13 +3,14 @@
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
     using MappedType = LinksBooleanExpression;
+
     public class LinksBooleanExpressionInputType : InputObjectGraphType<MappedType>
     {
         public LinksBooleanExpressionInputType()
         {
             Name = "links_bool_exp";
             Field<ListGraphType<LinksBooleanExpressionInputType>>(nameof(MappedType._and));
-            Field(x => x._by_group, nullable: true, type: typeof(MaterializedPathBooleanExpressionInputType));
+            Field(x => x._by_group, true, typeof(MaterializedPathBooleanExpressionInputType));
             Field<LinksBooleanExpressionInputType>(nameof(MappedType._not));
             Field<ListGraphType<LinksBooleanExpressionInputType>>(nameof(MappedType._or));
             Field<LinksBooleanExpressionInputType>(nameof(MappedType.from));

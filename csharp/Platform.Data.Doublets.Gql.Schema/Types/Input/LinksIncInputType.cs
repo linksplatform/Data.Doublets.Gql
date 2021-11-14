@@ -3,6 +3,7 @@
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
     using MappedType = Links;
+
     internal class LinksIncInputType : InputObjectGraphType<MappedType>
     {
         public LinksIncInputType()

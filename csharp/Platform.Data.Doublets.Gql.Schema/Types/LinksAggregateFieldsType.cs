@@ -5,6 +5,7 @@ using Platform.Data.Doublets.Gql.Schema.Types.Enums;
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
     using MappedType = LinksAggregateFields;
+
     public class LinksAggregateFieldsType : ObjectGraphType<MappedType>
     {
         public LinksAggregateFieldsType()
@@ -12,12 +13,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
             Name = "links_aggregate_fields";
             Field<LinksAggregateFloatAvgFieldsType>(nameof(MappedType.avg));
             Field<IntGraphType>(nameof(MappedType.count), null,
-                new QueryArguments
-                {
-                    new QueryArgument<ListGraphType<NonNullGraphType<LinksSelectColumnEnumBaseType>>>
-                        { Name = "columns" },
-                    new QueryArgument<BooleanGraphType> { Name = "distinct" }
-                }, ResolveCount);
+                new QueryArguments { new QueryArgument<ListGraphType<NonNullGraphType<LinksSelectColumnEnumBaseType>>> { Name = "columns" }, new QueryArgument<BooleanGraphType> { Name = "distinct" } }, ResolveCount);
             Field<LinksAggregateBigIntMaxFieldsType>(nameof(MappedType.max));
             Field<LinksAggregateBigIntMinFieldsType>(nameof(MappedType.min));
             Field<LinksAggregateFloatStddevFieldsType>(nameof(MappedType.stddev));
@@ -29,9 +25,6 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
             Field<LinksAggregateFloatVarianceFieldsType>(nameof(MappedType.variance));
         }
 
-        private object ResolveCount(IResolveFieldContext<object> arg)
-        {
-            return 0;
-        }
+        private object ResolveCount(IResolveFieldContext<object> arg) => 0;
     }
 }
