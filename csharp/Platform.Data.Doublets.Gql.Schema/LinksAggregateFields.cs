@@ -23,5 +23,6 @@
         public LinksAggregateFloatFields var_samp { get; set; }
 
         public LinksAggregateFloatFields variance { get; set; }
+
     }
 }

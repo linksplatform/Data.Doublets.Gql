@@ -1,10 +1,10 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using GraphQL.Server.Transports.AspNetCore;
 using GraphQL.Types;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Platform.Data.Doublets.Gql.Server
 {
@@ -18,28 +18,24 @@ namespace Platform.Data.Doublets.Gql.Server
             ILogger<GraphQLHttpMiddleware<TSchema>> logger,
             RequestDelegate next,
             IGraphQLRequestDeserializer requestDeserializer)
-            : base(next, requestDeserializer)
-        {
-            _logger = logger;
-        }
+            : base(next, requestDeserializer) => _logger = logger;
 
         protected override Task RequestExecutedAsync(in GraphQLRequestExecutionResult requestExecutionResult)
         {
             if (requestExecutionResult.Result.Errors != null)
             {
                 if (requestExecutionResult.IndexInBatch.HasValue)
-                    _logger.LogError(
-                        "GraphQL execution completed in {Elapsed} with error(s) in batch [{Index}]: {Errors}",
-                        requestExecutionResult.Elapsed, requestExecutionResult.IndexInBatch,
-                        requestExecutionResult.Result.Errors);
+                {
+                    _logger.LogError("GraphQL execution completed in {Elapsed} with error(s) in batch [{Index}]: {Errors}", requestExecutionResult.Elapsed, requestExecutionResult.IndexInBatch, requestExecutionResult.Result.Errors);
+                }
                 else
-                    _logger.LogError("GraphQL execution completed in {Elapsed} with error(s): {Errors}",
-                        requestExecutionResult.Elapsed, requestExecutionResult.Result.Errors);
+                {
+                    _logger.LogError("GraphQL execution completed in {Elapsed} with error(s): {Errors}", requestExecutionResult.Elapsed, requestExecutionResult.Result.Errors);
+                }
             }
             else
             {
-                _logger.LogInformation("GraphQL execution successfully completed in {Elapsed}",
-                    requestExecutionResult.Elapsed);
+                _logger.LogInformation("GraphQL execution successfully completed in {Elapsed}", requestExecutionResult.Elapsed);
             }
 
             return base.RequestExecutedAsync(requestExecutionResult);
@@ -48,8 +44,7 @@ namespace Platform.Data.Doublets.Gql.Server
         protected override CancellationToken GetCancellationToken(HttpContext context)
         {
             // custom CancellationToken example 
-            var cts = CancellationTokenSource.CreateLinkedTokenSource(base.GetCancellationToken(context),
-                new CancellationTokenSource(TimeSpan.FromSeconds(5)).Token);
+            var cts = CancellationTokenSource.CreateLinkedTokenSource(base.GetCancellationToken(context), new CancellationTokenSource(TimeSpan.FromSeconds(5)).Token);
             return cts.Token;
         }
     }

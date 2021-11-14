@@ -1,6 +1,6 @@
 namespace Platform.Data.Doublets.Gql.Schema
 {
-    public class LinksSet
+public class LinksSet
     {
         public long? from_id { get; set; }
 
