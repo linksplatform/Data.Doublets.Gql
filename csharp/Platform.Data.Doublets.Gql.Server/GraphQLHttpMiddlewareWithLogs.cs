@@ -28,17 +28,13 @@ namespace Platform.Data.Doublets.Gql.Server
             if (requestExecutionResult.Result.Errors != null)
             {
                 if (requestExecutionResult.IndexInBatch.HasValue)
-                {
                     _logger.LogError(
                         "GraphQL execution completed in {Elapsed} with error(s) in batch [{Index}]: {Errors}",
                         requestExecutionResult.Elapsed, requestExecutionResult.IndexInBatch,
                         requestExecutionResult.Result.Errors);
-                }
                 else
-                {
                     _logger.LogError("GraphQL execution completed in {Elapsed} with error(s): {Errors}",
                         requestExecutionResult.Elapsed, requestExecutionResult.Result.Errors);
-                }
             }
             else
             {

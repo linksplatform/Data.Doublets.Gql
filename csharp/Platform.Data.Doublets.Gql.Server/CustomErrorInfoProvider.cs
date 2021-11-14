@@ -36,7 +36,6 @@ namespace Platform.Data.Doublets.Gql.Server
             AuthorizationError.AppendFailureHeader(errorMessage, error.OperationType);
 
             foreach (var failedRequirement in error.AuthorizationResult.Failure.FailedRequirements)
-            {
                 switch (failedRequirement)
                 {
                     case MinimumAgeRequirement minimumAgeRequirement:
@@ -49,7 +48,6 @@ namespace Platform.Data.Doublets.Gql.Server
                         AuthorizationError.AppendFailureLine(errorMessage, failedRequirement);
                         break;
                 }
-            }
 
             return errorMessage.ToString();
         }

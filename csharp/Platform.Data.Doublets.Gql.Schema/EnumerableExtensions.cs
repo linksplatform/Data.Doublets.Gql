@@ -78,10 +78,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                 do
                 {
                     var element = enumerator.Current;
-                    if (set.Add(keySelector(element)))
-                    {
-                        yield return element;
-                    }
+                    if (set.Add(keySelector(element))) yield return element;
                 } while (enumerator.MoveNext());
             }
         }
