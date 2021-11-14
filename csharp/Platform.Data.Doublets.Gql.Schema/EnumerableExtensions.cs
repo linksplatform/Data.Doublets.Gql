@@ -30,10 +30,8 @@ namespace Platform.Data.Doublets.Gql.Schema
         ///     </para>
         /// </remarks>
         public static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> source,
-            Func<TSource, TKey> keySelector)
-        {
-            return DistinctBy(source, keySelector, null);
-        }
+            Func<TSource, TKey> keySelector) =>
+            DistinctBy(source, keySelector, null);
 
         /// <summary>Returns distinct elements from a sequence according to a specified key selector function.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>

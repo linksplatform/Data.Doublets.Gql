@@ -3,6 +3,7 @@
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
     using MappedType = LinksBooleanExpression;
+
     public class LinksBooleanExpressionInputType : InputObjectGraphType<MappedType>
     {
         public LinksBooleanExpressionInputType()

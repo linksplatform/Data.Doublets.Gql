@@ -180,8 +180,7 @@ namespace Platform.Data.Doublets.Gql.Schema
     public class LinksQuery : ObjectGraphType
     {
         public static readonly QueryArguments Arguments = new(
-            new QueryArgument<ListGraphType<NonNullGraphType<LinksSelectColumnEnumBaseType>>>
-                { Name = "distinct_on" },
+            new QueryArgument<ListGraphType<NonNullGraphType<LinksSelectColumnEnumBaseType>>> { Name = "distinct_on" },
             new QueryArgument<IntGraphType> { Name = "limit" },
             new QueryArgument<IntGraphType> { Name = "offset" },
             new QueryArgument<ListGraphType<NonNullGraphType<LinksOrderByInputType>>> { Name = "order_by" },
@@ -205,15 +204,11 @@ namespace Platform.Data.Doublets.Gql.Schema
             );
         }
 
-        public static IEnumerable<Links> GetLinks(IResolveFieldContext<object> context)
-        {
-            return GetLinks(context, context.RequestServices.GetService<ILinks<ulong>>());
-        }
+        public static IEnumerable<Links> GetLinks(IResolveFieldContext<object> context) =>
+            GetLinks(context, context.RequestServices.GetService<ILinks<ulong>>());
 
-        public static IEnumerable<Links> GetLinks(IResolveFieldContext<object> context, long? forceFromId)
-        {
-            return GetLinks(context, context.RequestServices.GetService<ILinks<ulong>>(), forceFromId);
-        }
+        public static IEnumerable<Links> GetLinks(IResolveFieldContext<object> context, long? forceFromId) =>
+            GetLinks(context, context.RequestServices.GetService<ILinks<ulong>>(), forceFromId);
 
         public static IEnumerable<Links> GetLinks(IResolveFieldContext<object> context, ILinks<ulong> links,
             long? forceFromId = null, long? forceToId = null)

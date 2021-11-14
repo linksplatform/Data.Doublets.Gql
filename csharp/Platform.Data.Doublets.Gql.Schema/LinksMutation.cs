@@ -86,15 +86,14 @@ namespace Platform.Data.Doublets.Gql.Schema
                     return response;
                 });
             Field<LinksType>("delete_links_by_pk",
-                arguments: new QueryArguments
-                {
-                    new QueryArgument<NonNullGraphType<LongGraphType>> { Name = "id" }
-                },
+                arguments: new QueryArguments { new QueryArgument<NonNullGraphType<LongGraphType>> { Name = "id" } },
                 resolve: context => "");
             Field<LinksMutationResponseType>("insert_links",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<ListGraphType<NonNullGraphType<LinksInsertInputType>>>>
-                        { Name = "objects" },
+                    {
+                        Name = "objects"
+                    },
                     new QueryArgument<LinksOnConflictInputType> { Name = "on_conflict" }
                 ),
                 resolve: context =>

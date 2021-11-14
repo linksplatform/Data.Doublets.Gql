@@ -3,6 +3,7 @@
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
     using MappedType = LongComparisonExpression;
+
     public class LongComparisonExpressionInputType : InputObjectGraphType<MappedType>
     {
         public LongComparisonExpressionInputType()

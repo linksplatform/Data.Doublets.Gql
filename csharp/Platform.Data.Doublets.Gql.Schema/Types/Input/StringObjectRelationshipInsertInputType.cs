@@ -3,6 +3,7 @@ using GraphQL.Types;
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
     using MappedType = StringObjectRelationshipInsert;
+
     public class StringObjectRelationshipInsertInputType : InputObjectGraphType<MappedType>
     {
         public StringObjectRelationshipInsertInputType()
