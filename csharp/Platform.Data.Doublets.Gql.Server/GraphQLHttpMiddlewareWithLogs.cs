@@ -18,8 +18,10 @@ namespace Platform.Data.Doublets.Gql.Server
             ILogger<GraphQLHttpMiddleware<TSchema>> logger,
             RequestDelegate next,
             IGraphQLRequestDeserializer requestDeserializer)
-            : base(next, requestDeserializer) =>
+            : base(next, requestDeserializer)
+        {
             _logger = logger;
+        }
 
         protected override Task RequestExecutedAsync(in GraphQLRequestExecutionResult requestExecutionResult)
         {

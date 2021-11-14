@@ -3,7 +3,6 @@
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
     using MappedType = LinksAggregate;
-
     public class LinksAggregateType : ObjectGraphType<MappedType>
     {
         public LinksAggregateType()

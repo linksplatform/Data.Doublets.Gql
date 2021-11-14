@@ -4,7 +4,6 @@ using Platform.Data.Doublets.Gql.Schema.Types.Enums;
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
     using MappedType = StringOnConflict;
-
     public class StringOnConflictInputType : InputObjectGraphType<MappedType>
     {
         public StringOnConflictInputType()

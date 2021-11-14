@@ -5,7 +5,6 @@ using Platform.Data.Doublets.Gql.Schema.Types.Enums;
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
     using MappedType = LinksAggregateFields;
-
     public class LinksAggregateFieldsType : ObjectGraphType<MappedType>
     {
         public LinksAggregateFieldsType()
@@ -16,9 +15,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
                 new QueryArguments
                 {
                     new QueryArgument<ListGraphType<NonNullGraphType<LinksSelectColumnEnumBaseType>>>
-                    {
-                        Name = "columns"
-                    },
+                        { Name = "columns" },
                     new QueryArgument<BooleanGraphType> { Name = "distinct" }
                 }, ResolveCount);
             Field<LinksAggregateBigIntMaxFieldsType>(nameof(MappedType.max));
@@ -32,6 +29,9 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
             Field<LinksAggregateFloatVarianceFieldsType>(nameof(MappedType.variance));
         }
 
-        private object ResolveCount(IResolveFieldContext<object> arg) => 0;
+        private object ResolveCount(IResolveFieldContext<object> arg)
+        {
+            return 0;
+        }
     }
 }

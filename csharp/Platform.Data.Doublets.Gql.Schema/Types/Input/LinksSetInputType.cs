@@ -3,7 +3,6 @@ using GraphQL.Types;
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
     using MappedType = LinksSet;
-
     public class LinksSetInputType : InputObjectGraphType<MappedType>
     {
         public LinksSetInputType()
