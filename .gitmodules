@@ -1,0 +1,3 @@
+[submodule "Settings"]
+	path = Settings
+	url = git@github.com:linksplatform/Settings.git
