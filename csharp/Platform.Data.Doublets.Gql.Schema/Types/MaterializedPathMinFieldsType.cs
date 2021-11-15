@@ -3,6 +3,7 @@ using GraphQL.Types;
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
     using MappedType = MaterializedPathMinFields;
+
     public class MaterializedPathMinFieldsType : ObjectGraphType<MappedType>
     {
         public MaterializedPathMinFieldsType()

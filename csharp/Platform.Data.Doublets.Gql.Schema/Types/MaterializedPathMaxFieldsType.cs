@@ -3,6 +3,7 @@ using GraphQL.Types;
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
     using MappedType = MaterializedPathMaxFields;
+
     public class MaterializedPathMaxFieldsType : ObjectGraphType<MappedType>
     {
         public MaterializedPathMaxFieldsType()

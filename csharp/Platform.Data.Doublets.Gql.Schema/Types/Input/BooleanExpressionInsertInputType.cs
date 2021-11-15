@@ -3,6 +3,7 @@ using GraphQL.Types;
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
     using MappedType = BooleanExpressionInsert;
+
     public class BooleanExpressionInsertInputType : InputObjectGraphType<MappedType>
     {
         public BooleanExpressionInsertInputType()

@@ -1,6 +1,7 @@
 ﻿namespace Platform.Data.Doublets.Gql.Schema.Types.Enums
 {
     using MappedType = LinksColumn;
+
     public class LinksColumnEnumBaseType : BaseEnumType<MappedType>
     {
         public LinksColumnEnumBaseType() : base(default)

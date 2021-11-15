@@ -3,6 +3,7 @@ using GraphQL.Types;
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
     using MappedType = DoubleComparisonExpression;
+
     public class DoubleComparisonExpressionInputType : InputObjectGraphType<MappedType>
     {
         public DoubleComparisonExpressionInputType()

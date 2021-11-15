@@ -3,6 +3,7 @@ using GraphQL.Types;
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
     using MappedType = MaterializedPathAverageFields;
+
     public class MaterializedPathAverageFieldsType : ObjectGraphType<MappedType>
     {
         public MaterializedPathAverageFieldsType()

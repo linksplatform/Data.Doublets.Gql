@@ -28,9 +28,9 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
             Field<NonNullGraphType<LongGraphType>>(nameof(MappedType.type_id));
         }
 
-        private LinksAggregateType ResolveInAggregate(IResolveFieldContext<Links> context) => new LinksAggregateType();
+        private LinksAggregateType ResolveInAggregate(IResolveFieldContext<Links> context) => new();
 
-        private LinksAggregateType ResolveOutAggregate(IResolveFieldContext<Links> context) => new LinksAggregateType();
+        private LinksAggregateType ResolveOutAggregate(IResolveFieldContext<Links> context) => new();
 
         private List<Links> ResolveIn(IResolveFieldContext<Links> context) => LinksQuery.GetLinks(context, null, context.Source.id).ToList();
 
