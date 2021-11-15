@@ -12,8 +12,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
             Name = "string_on_conflict";
             Description = "on conflict condition type for table \"string\"";
             Field<NonNullGraphType<StringConstraintEnumType>>(nameof(MappedType.constraint));
-            Field<NonNullGraphType<ListGraphType<NonNullGraphType<StringUpdateColumnEnumType>>>>(
-                nameof(MappedType.update_columns));
+            Field<NonNullGraphType<ListGraphType<NonNullGraphType<StringUpdateColumnEnumType>>>>(nameof(MappedType.update_columns));
             Field<StringBooleanExpressionInputType>(nameof(MappedType.where));
         }
     }

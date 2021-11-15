@@ -11,12 +11,7 @@ namespace Platform.Data.Doublets.Gql.Server
     {
         public static int Main(string[] args)
         {
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-                .Enrich.FromLogContext()
-                .WriteTo.Console()
-                .CreateLogger();
+            Log.Logger = new LoggerConfiguration().MinimumLevel.Debug().MinimumLevel.Override("Microsoft", LogEventLevel.Information).Enrich.FromLogContext().WriteTo.Console().CreateLogger();
             try
             {
                 Log.Information("Starting host");
@@ -39,12 +34,9 @@ namespace Platform.Data.Doublets.Gql.Server
             }
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder
-                    .UseSerilog()
-                    .UseStartup<Startup>();
-            });
+        public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webBuilder =>
+        {
+            webBuilder.UseSerilog().UseStartup<Startup>();
+        });
     }
 }

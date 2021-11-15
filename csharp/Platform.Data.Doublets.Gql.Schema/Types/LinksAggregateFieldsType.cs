@@ -12,8 +12,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
         {
             Name = "links_aggregate_fields";
             Field<LinksAggregateFloatAvgFieldsType>(nameof(MappedType.avg));
-            Field<IntGraphType>(nameof(MappedType.count), null,
-                new QueryArguments { new QueryArgument<ListGraphType<NonNullGraphType<LinksSelectColumnEnumBaseType>>> { Name = "columns" }, new QueryArgument<BooleanGraphType> { Name = "distinct" } }, ResolveCount);
+            Field<IntGraphType>(nameof(MappedType.count), null, new QueryArguments { new QueryArgument<ListGraphType<NonNullGraphType<LinksSelectColumnEnumBaseType>>> { Name = "columns" }, new QueryArgument<BooleanGraphType> { Name = "distinct" } }, ResolveCount);
             Field<LinksAggregateBigIntMaxFieldsType>(nameof(MappedType.max));
             Field<LinksAggregateBigIntMinFieldsType>(nameof(MappedType.min));
             Field<LinksAggregateFloatStddevFieldsType>(nameof(MappedType.stddev));

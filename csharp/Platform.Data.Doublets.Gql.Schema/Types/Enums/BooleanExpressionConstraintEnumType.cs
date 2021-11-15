@@ -6,8 +6,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Enums
 
     public class BooleanExpressionConstraintEnumType : BaseEnumType<MappedType>
     {
-        public BooleanExpressionConstraintEnumType() : base("bool_exp_constraint",
-            "unique or primary key constraints on table \"bool_exp\"")
+        public BooleanExpressionConstraintEnumType() : base("bool_exp_constraint", "unique or primary key constraints on table \"bool_exp\"")
         {
         }
     }

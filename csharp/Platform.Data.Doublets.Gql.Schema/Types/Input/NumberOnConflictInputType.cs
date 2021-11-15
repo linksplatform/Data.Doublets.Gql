@@ -11,8 +11,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         {
             Name = "number_on_conflict";
             Field<NonNullGraphType<NumberConstraintEnumType>>(nameof(MappedType.constraint));
-            Field<NonNullGraphType<ListGraphType<NonNullGraphType<NumberUpdateColumnEnumType>>>>(
-                nameof(MappedType.update_columns));
+            Field<NonNullGraphType<ListGraphType<NonNullGraphType<NumberUpdateColumnEnumType>>>>(nameof(MappedType.update_columns));
             Field<NumberBooleanExpressionInputType>(nameof(MappedType.where));
         }
     }

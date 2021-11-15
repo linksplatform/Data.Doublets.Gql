@@ -9,16 +9,11 @@ using System.Threading.Tasks;
 namespace Platform.Data.Doublets.Gql.Server
 {
     // Example of a custom GraphQL Middleware that sends execution result to Microsoft.Extensions.Logging API
-    public class GraphQLHttpMiddlewareWithLogs<TSchema> : GraphQLHttpMiddleware<TSchema>
-        where TSchema : ISchema
+    public class GraphQLHttpMiddlewareWithLogs<TSchema> : GraphQLHttpMiddleware<TSchema> where TSchema : ISchema
     {
         private readonly ILogger _logger;
 
-        public GraphQLHttpMiddlewareWithLogs(
-            ILogger<GraphQLHttpMiddleware<TSchema>> logger,
-            RequestDelegate next,
-            IGraphQLRequestDeserializer requestDeserializer)
-            : base(next, requestDeserializer) => _logger = logger;
+        public GraphQLHttpMiddlewareWithLogs(ILogger<GraphQLHttpMiddleware<TSchema>> logger, RequestDelegate next, IGraphQLRequestDeserializer requestDeserializer) : base(next, requestDeserializer) => _logger = logger;
 
         protected override Task RequestExecutedAsync(in GraphQLRequestExecutionResult requestExecutionResult)
         {
