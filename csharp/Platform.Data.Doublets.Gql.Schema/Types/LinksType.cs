@@ -14,7 +14,6 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
         {
             Name = "links";
             Description = "columns and relationships of \"links\"";
-            // Field(o => o.)
             Field(o => o.from, true, typeof(LinksType)).Resolve(ResolveFrom);
             Field<NonNullGraphType<LongGraphType>>(nameof(MappedType.from_id));
             Field<NonNullGraphType<LongGraphType>>(nameof(MappedType.id));
