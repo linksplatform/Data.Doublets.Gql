@@ -27,12 +27,21 @@ namespace Platform.Data.Doublets.Gql.Server
         public IWebHostEnvironment Environment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services) => services.AddRouting().AddSingleton(sp => Data.CreateLinks()).AddSingleton<LinksSchema>().AddGraphQL((options, provider) =>
-        {
-            options.EnableMetrics = Environment.IsDevelopment();
-            var logger = provider.GetRequiredService<ILogger<Startup>>();
-            options.UnhandledExceptionDelegate = ctx => logger.LogError("{Error} occurred", ctx.OriginalException.Message);
-        }).AddDefaultEndpointSelectorPolicy().AddSystemTextJson(deserializerSettings => { }, serializerSettings => { }).AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = Environment.IsDevelopment()).AddWebSockets().AddDataLoader().AddGraphTypes(typeof(LinksSchema));
+        public void ConfigureServices(IServiceCollection services) => services.AddRouting()
+            .AddSingleton(sp => Data.CreateLinks())
+            .AddSingleton<LinksSchema>()
+            .AddGraphQL((options, provider) =>
+            {
+                options.EnableMetrics = Environment.IsDevelopment();
+                var logger = provider.GetRequiredService<ILogger<Startup>>();
+                options.UnhandledExceptionDelegate = ctx => logger.LogError("{Error} occurred", ctx.OriginalException.Message);
+            })
+            .AddDefaultEndpointSelectorPolicy()
+            .AddSystemTextJson(deserializerSettings => { }, serializerSettings => { })
+            .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = Environment.IsDevelopment())
+            .AddWebSockets()
+            .AddDataLoader()
+            .AddGraphTypes(typeof(LinksSchema));
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
