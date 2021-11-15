@@ -17,7 +17,7 @@ namespace Platform.Data.Doublets.Gql.Schema
 
         public BooleanExpression bool_exp { get; set; }
 
-        public Links? from { get; set; }
+        public Links from { get; set; }
 
         public long? from_id { get; set; }
 
