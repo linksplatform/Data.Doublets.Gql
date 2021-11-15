@@ -13,7 +13,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
             Field<NonNullGraphType<NumberConstraintEnumType>>(nameof(MappedType.constraint));
             Field<NonNullGraphType<ListGraphType<NonNullGraphType<NumberUpdateColumnEnumType>>>>(
                 nameof(MappedType.update_columns));
-            Field(x => x.where, true, typeof(NumberBooleanExpressionInputType));
+            Field<NumberBooleanExpressionInputType>(nameof(MappedType.where));
         }
     }
 }

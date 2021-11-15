@@ -7,13 +7,13 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         public NumberBooleanExpressionInputType()
         {
             Name = "number_bool_exp";
-            Field(x => x._and, true, typeof(ListGraphType<NumberBooleanExpressionInputType>));
-            Field(x => x._not, true, typeof(NumberBooleanExpressionInputType));
-            Field(x => x._or, true, typeof(ListGraphType<NumberBooleanExpressionInputType>));
-            Field(x => x.id, true, typeof(LongComparisonExpressionInputType));
-            Field(x => x.link, true, typeof(LinksBooleanExpressionInputType));
-            Field(x => x.link_id, true, typeof(LongComparisonExpressionInputType));
-            Field(x => x.value, true, typeof(DoubleComparisonExpressionInputType));
+            Field<ListGraphType<NumberBooleanExpressionInputType>>(nameof(MappedType._and));
+            Field<NumberBooleanExpressionInputType>(nameof(MappedType._not));
+            Field<ListGraphType<NumberBooleanExpressionInputType>>(nameof(MappedType._or));
+            Field<LongComparisonExpressionInputType>(nameof(MappedType.id));
+            Field<LinksBooleanExpressionInputType>(nameof(MappedType.link));
+            Field<LongComparisonExpressionInputType>(nameof(MappedType.link_id));
+            Field<DoubleComparisonExpressionInputType>(nameof(MappedType.value));
         }
     }
 }

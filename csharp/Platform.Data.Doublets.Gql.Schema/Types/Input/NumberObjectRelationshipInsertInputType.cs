@@ -10,7 +10,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         {
             Name = "number_obj_rel_insert_input";
             Field<NonNullGraphType<NumberInsertInputType>>(nameof(MappedType.data));
-            Field(x => x.on_conflict, true, typeof(NumberOnConflictInputType));
+            Field<NumberOnConflictInputType>(nameof(MappedType.on_conflict));
         }
     }
 }

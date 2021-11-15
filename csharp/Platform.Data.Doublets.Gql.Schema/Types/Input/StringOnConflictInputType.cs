@@ -14,7 +14,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
             Field<NonNullGraphType<StringConstraintEnumType>>(nameof(MappedType.constraint));
             Field<NonNullGraphType<ListGraphType<NonNullGraphType<StringUpdateColumnEnumType>>>>(
                 nameof(MappedType.update_columns));
-            Field(x => x.where, true, typeof(StringBooleanExpressionInputType));
+            Field<StringBooleanExpressionInputType>(nameof(MappedType.where));
         }
     }
 }

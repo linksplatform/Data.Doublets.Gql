@@ -7,25 +7,25 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         public MaterializedPathBooleanExpressionInputType()
         {
             Name = "mp_bool_exp";
-            Field(x => x._and, true, typeof(ListGraphType<MaterializedPathBooleanExpressionInputType>));
-            Field(x => x._not, true, typeof(MaterializedPathBooleanExpressionInputType));
-            Field(x => x._or, true, typeof(ListGraphType<MaterializedPathBooleanExpressionInputType>));
-            Field(x => x.by_group, true, typeof(LinksBooleanExpressionInputType));
-            Field(x => x.by_item, true, typeof(MaterializedPathBooleanExpressionInputType));
-            Field(x => x.by_path_item, true, typeof(MaterializedPathBooleanExpressionInputType));
-            Field(x => x.by_position, true, typeof(MaterializedPathBooleanExpressionInputType));
-            Field(x => x.by_root, true, typeof(MaterializedPathBooleanExpressionInputType));
-            Field(x => x.group_id, true, typeof(LongComparisonExpressionInputType));
-            Field(x => x.id, true, typeof(LongComparisonExpressionInputType));
-            Field(x => x.insert_category, true, typeof(StringComparisonExpressionInputType));
-            Field(x => x.item, true, typeof(LinksBooleanExpressionInputType));
-            Field(x => x.item_id, true, typeof(LongComparisonExpressionInputType));
-            Field(x => x.path_item, true, typeof(LinksBooleanExpressionInputType));
-            Field(x => x.path_item_depth, true, typeof(LongComparisonExpressionInputType));
-            Field(x => x.path_item_id, true, typeof(LongComparisonExpressionInputType));
-            Field(x => x.position_id, true, typeof(StringComparisonExpressionInputType));
-            Field(x => x.root, true, typeof(LinksBooleanExpressionInputType));
-            Field(x => x.root_id, true, typeof(LongComparisonExpressionInputType));
+            Field<ListGraphType<MaterializedPathBooleanExpressionInputType>>(nameof(MappedType._and));
+            Field<MaterializedPathBooleanExpressionInputType>(nameof(MappedType._not));
+            Field<ListGraphType<MaterializedPathBooleanExpressionInputType>>(nameof(MappedType._or));
+            Field<LinksBooleanExpressionInputType>(nameof(MappedType.by_group));
+            Field<MaterializedPathBooleanExpressionInputType>(nameof(MappedType.by_item));
+            Field<MaterializedPathBooleanExpressionInputType>(nameof(MappedType.by_path_item));
+            Field<MaterializedPathBooleanExpressionInputType>(nameof(MappedType.by_position));
+            Field<MaterializedPathBooleanExpressionInputType>(nameof(MappedType.by_root));
+            Field<LongComparisonExpressionInputType>(nameof(MappedType.group_id));
+            Field<LongComparisonExpressionInputType>(nameof(MappedType.id));
+            Field<StringComparisonExpressionInputType>(nameof(MappedType.insert_category));
+            Field<LinksBooleanExpressionInputType>(nameof(MappedType.item));
+            Field<LongComparisonExpressionInputType>(nameof(MappedType.item_id));
+            Field<LinksBooleanExpressionInputType>(nameof(MappedType.path_item));
+            Field<LongComparisonExpressionInputType>(nameof(MappedType.path_item_depth));
+            Field<LongComparisonExpressionInputType>(nameof(MappedType.path_item_id));
+            Field<StringComparisonExpressionInputType>(nameof(MappedType.position_id));
+            Field<LinksBooleanExpressionInputType>(nameof(MappedType.root));
+            Field<LongComparisonExpressionInputType>(nameof(MappedType.root_id));
         }
     }
 }

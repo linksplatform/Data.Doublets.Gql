@@ -7,10 +7,10 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         public StringInsertInputType()
         {
             Name = "string_insert_input";
-            Field(x => x.id, true, typeof(LongGraphType));
-            Field(x => x.link, true, typeof(LinksArrayRelationshipInsertInputType));
-            Field(x => x.link_id, true, typeof(LongGraphType));
-            Field(x => x.value, true, typeof(StringGraphType));
+            Field<LongGraphType>(nameof(MappedType.id));
+            Field<LinksArrayRelationshipInsertInputType>(nameof(MappedType.link));
+            Field<LongGraphType>(nameof(MappedType.link_id));
+            Field<StringGraphType>(nameof(MappedType.value));
         }
     }
 }

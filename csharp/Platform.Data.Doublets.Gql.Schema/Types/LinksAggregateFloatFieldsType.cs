@@ -11,10 +11,10 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
         public LinksAggregateFloatFieldsType(string name)
         {
             Name = name;
-            Field(x => x.from_id, true, typeof(FloatGraphType));
-            Field(x => x.id, true, typeof(FloatGraphType));
-            Field(x => x.to_id, true, typeof(FloatGraphType));
-            Field(x => x.type_id, true, typeof(FloatGraphType));
+            Field<FloatGraphType>(nameof(MappedType.from_id));
+            Field<FloatGraphType>(nameof(MappedType.id));
+            Field<FloatGraphType>(nameof(MappedType.to_id));
+            Field<FloatGraphType>(nameof(MappedType.type_id));
         }
     }
 }

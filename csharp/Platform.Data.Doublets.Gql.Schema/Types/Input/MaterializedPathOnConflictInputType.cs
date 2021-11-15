@@ -12,7 +12,7 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
             Field<NonNullGraphType<MaterializedPathConstraintEnumType>>("constraint");
             Field<NonNullGraphType<ListGraphType<NonNullGraphType<MaterializedPathUpdateColumnEnumType>>>>(
                 "update_columns");
-            Field(x => x.where, true, typeof(MaterializedPathBooleanExpressionInputType));
+            Field<MaterializedPathBooleanExpressionInputType>(nameof(MappedType.where));
         }
     }
 }

@@ -9,15 +9,15 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         {
             Name = "mp_min_order_by";
             Description = "order by min() on columns of table \"mp\"";
-            Field(x => x.gpoup_id, true, typeof(OrderByEnumType));
-            Field(x => x.id, true, typeof(OrderByEnumType));
-            Field(x => x.insert_category, true, typeof(OrderByEnumType));
-            Field(x => x.item_id, true, typeof(OrderByEnumType));
-            Field(x => x.path_item_depth, true, typeof(OrderByEnumType));
-            Field(x => x.path_item_id, true, typeof(OrderByEnumType));
-            Field(x => x.path_item_id, true, typeof(OrderByEnumType));
-            Field(x => x.position_id, true, typeof(OrderByEnumType));
-            Field(x => x.root_id, true, typeof(OrderByEnumType));
+            Field<OrderByEnumType>(nameof(MappedType.gpoup_id));
+            Field<OrderByEnumType>(nameof(MappedType.id));
+            Field<OrderByEnumType>(nameof(MappedType.insert_category));
+            Field<OrderByEnumType>(nameof(MappedType.item_id));
+            Field<OrderByEnumType>(nameof(MappedType.path_item_depth));
+            Field<OrderByEnumType>(nameof(MappedType.path_item_id));
+            Field<OrderByEnumType>(nameof(MappedType.path_item_id));
+            Field<OrderByEnumType>(nameof(MappedType.position_id));
+            Field<OrderByEnumType>(nameof(MappedType.root_id));
         }
     }
 }

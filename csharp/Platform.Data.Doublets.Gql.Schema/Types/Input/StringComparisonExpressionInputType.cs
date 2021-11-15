@@ -7,21 +7,21 @@ namespace Platform.Data.Doublets.Gql.Schema.Types.Input
         public StringComparisonExpressionInputType()
         {
             Name = "String_comparison_exp";
-            Field(x => x._eq, true, typeof(StringGraphType));
-            Field(x => x._gt, true, typeof(StringGraphType));
-            Field(x => x._gte, true, typeof(StringGraphType));
-            Field(x => x._ilike, true, typeof(StringGraphType));
-            Field(x => x._in, true, typeof(ListGraphType<NonNullGraphType<StringGraphType>>));
-            Field(x => x._is_null, true, typeof(BooleanGraphType));
-            Field(x => x._like, true, typeof(StringGraphType));
-            Field(x => x._lt, true, typeof(StringGraphType));
-            Field(x => x._lte, true, typeof(StringGraphType));
-            Field(x => x._neq, true, typeof(StringGraphType));
-            Field(x => x._nilike, true, typeof(StringGraphType));
-            Field(x => x._nin, true, typeof(ListGraphType<NonNullGraphType<StringGraphType>>));
-            Field(x => x._nlike, true, typeof(StringGraphType));
-            Field(x => x._nsimilar, true, typeof(StringGraphType));
-            Field(x => x._similar, true, typeof(StringGraphType));
+            Field<StringGraphType>(nameof(MappedType._eq));
+            Field<StringGraphType>(nameof(MappedType._gt));
+            Field<StringGraphType>(nameof(MappedType._gte));
+            Field<StringGraphType>(nameof(MappedType._ilike));
+            Field<ListGraphType<NonNullGraphType<StringGraphType>>>(nameof(MappedType._in));
+            Field<BooleanGraphType>(nameof(MappedType._is_null));
+            Field<StringGraphType>(nameof(MappedType._like));
+            Field<StringGraphType>(nameof(MappedType._lt));
+            Field<StringGraphType>(nameof(MappedType._lte));
+            Field<StringGraphType>(nameof(MappedType._neq));
+            Field<StringGraphType>(nameof(MappedType._nilike));
+            Field<ListGraphType<NonNullGraphType<StringGraphType>>>(nameof(MappedType._nin));
+            Field<StringGraphType>(nameof(MappedType._nlike));
+            Field<StringGraphType>(nameof(MappedType._nsimilar));
+            Field<StringGraphType>(nameof(MappedType._similar));
         }
     }
 }
