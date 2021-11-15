@@ -2,9 +2,8 @@ using GraphQL.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    public class
-        BooleanExpressionObjectRelationshipInsertInputType : InputObjectGraphType<
-            BooleanExpressionObjectRelationshipInsert>
+    using MappedType = BooleanExpressionObjectRelationshipInsert;
+    public class BooleanExpressionObjectRelationshipInsertInputType : InputObjectGraphType<MappedType>
     {
         public BooleanExpressionObjectRelationshipInsertInputType()
         {

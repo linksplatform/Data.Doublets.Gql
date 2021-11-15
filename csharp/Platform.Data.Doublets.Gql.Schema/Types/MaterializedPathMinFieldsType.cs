@@ -2,7 +2,8 @@ using GraphQL.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
-    public class MaterializedPathMinFieldsType : ObjectGraphType<MaterializedPathMinFields>
+    using MappedType = MaterializedPathMinFields;
+    public class MaterializedPathMinFieldsType : ObjectGraphType<MappedType>
     {
         public MaterializedPathMinFieldsType()
         {
@@ -10,11 +11,11 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
             Description = "aggregate min on columns";
             Field<LongGraphType>(nameof(MappedType.group_id));
             Field<LongGraphType>(nameof(MappedType.id));
-            Field<string>(nameof(MappedType.insert_category));
+            Field<StringGraphType>(nameof(MappedType.insert_category));
             Field<LongGraphType>(nameof(MappedType.item_id));
             Field<LongGraphType>(nameof(MappedType.path_item_depth));
             Field<LongGraphType>(nameof(MappedType.path_item_id));
-            Field<string>(nameof(MappedType.position_id));
+            Field<StringGraphType>(nameof(MappedType.position_id));
             Field<LongGraphType>(nameof(MappedType.root_id));
         }
     }

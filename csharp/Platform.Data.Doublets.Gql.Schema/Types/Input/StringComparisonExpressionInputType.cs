@@ -2,7 +2,8 @@ using GraphQL.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    public class StringComparisonExpressionInputType : InputObjectGraphType<StringComparisonExpression>
+    using MappedType = StringComparisonExpression;
+    public class StringComparisonExpressionInputType : InputObjectGraphType<MappedType>
     {
         public StringComparisonExpressionInputType()
         {

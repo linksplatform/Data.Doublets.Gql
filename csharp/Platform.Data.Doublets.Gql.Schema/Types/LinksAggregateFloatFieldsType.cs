@@ -2,7 +2,8 @@
 
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
-    public class LinksAggregateFloatFieldsType : ObjectGraphType<LinksAggregateFloatFields>
+    using MappedType = LinksAggregateFloatFields;
+    public class LinksAggregateFloatFieldsType : ObjectGraphType<MappedType>
     {
         public LinksAggregateFloatFieldsType()
         {

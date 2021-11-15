@@ -2,7 +2,8 @@
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    internal class LinksArrRelInsertInputType : InputObjectGraphType<LinksArrayRelationshipInsert>
+    using MappedType = LinksArrayRelationshipInsert;
+    public class LinksArrRelInsertInputType : InputObjectGraphType<MappedType>
     {
         public LinksArrRelInsertInputType()
         {

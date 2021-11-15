@@ -3,7 +3,8 @@ using Platform.Data.Doublets.Gql.Schema.Types.Enums;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    public class MaterializedPathMaxOrderByInputType : InputObjectGraphType<MaterializedPathMaxOrderBy>
+    using MappedType = MaterializedPathMaxOrderBy;
+    public class MaterializedPathMaxOrderByInputType : InputObjectGraphType<MappedType>
     {
         public MaterializedPathMaxOrderByInputType()
         {

@@ -2,7 +2,8 @@ using GraphQL.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
-    public class MaterializedPathFieldsType : ObjectGraphType<MaterializedPathFields>
+    using MappedType = MaterializedPathFields;
+    public class MaterializedPathFieldsType : ObjectGraphType<MappedType>
     {
         public MaterializedPathFieldsType()
         {

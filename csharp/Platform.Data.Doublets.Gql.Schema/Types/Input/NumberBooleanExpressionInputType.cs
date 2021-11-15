@@ -2,7 +2,8 @@ using GraphQL.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    public class NumberBooleanExpressionInputType : InputObjectGraphType<NumberBooleanExpression>
+    using MappedType = NumberBooleanExpression;
+    public class NumberBooleanExpressionInputType : InputObjectGraphType<MappedType>
     {
         public NumberBooleanExpressionInputType()
         {

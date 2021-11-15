@@ -2,8 +2,8 @@ using GraphQL.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    public class
-        MaterializedPathArrayRelationshipInsertInputType : InputObjectGraphType<MaterializedPathArrayRelationshipInsert>
+    using MappedType = MaterializedPathArrayRelationshipInsert;
+    public class MaterializedPathArrayRelationshipInsertInputType : InputObjectGraphType<MappedType>
     {
         public MaterializedPathArrayRelationshipInsertInputType()
         {

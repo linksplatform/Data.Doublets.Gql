@@ -3,7 +3,8 @@ using Platform.Data.Doublets.Gql.Schema.Types.Enums;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    public class MaterializedPathMinOrderByInputType : InputObjectGraphType<MaterializedPathMinOrderBy>
+    using MappedType = MaterializedPathMinOrderBy;
+    public class MaterializedPathMinOrderByInputType : InputObjectGraphType<MappedType>
     {
         public MaterializedPathMinOrderByInputType()
         {

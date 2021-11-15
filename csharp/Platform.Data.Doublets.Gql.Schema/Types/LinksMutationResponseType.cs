@@ -2,7 +2,8 @@
 
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
-    public class LinksMutationResponseType : ObjectGraphType<LinksMutationResponse>
+    using MappedType = LinksMutationResponse;
+    public class LinksMutationResponseType : ObjectGraphType<MappedType>
     {
         public LinksMutationResponseType()
         {

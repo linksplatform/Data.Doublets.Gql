@@ -2,7 +2,8 @@
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Enums
 {
-    public class OrderByEnumType : BaseEnumType<OrderBy>
+    using MappedType = OrderBy;
+    public class OrderByEnumType : BaseEnumType<MappedType>
     {
         public OrderByEnumType() : base("order_by", "column ordering options")
         {

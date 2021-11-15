@@ -2,7 +2,8 @@ using GraphQL.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    public class DoubleComparisonExpressionInputType : InputObjectGraphType<DoubleComparisonExpression>
+    using MappedType = DoubleComparisonExpression;
+    public class DoubleComparisonExpressionInputType : InputObjectGraphType<MappedType>
     {
         public DoubleComparisonExpressionInputType()
         {

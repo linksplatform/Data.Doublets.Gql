@@ -3,7 +3,8 @@ using Platform.Data.Doublets.Gql.Schema.Types.Enums;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    public class LinksFieldsOrderByInputType : InputObjectGraphType<LinksFieldsOrderBy>
+    using MappedType = LinksFieldsOrderBy;
+    public class LinksFieldsOrderByInputType : InputObjectGraphType<MappedType>
     {
         public LinksFieldsOrderByInputType()
         {

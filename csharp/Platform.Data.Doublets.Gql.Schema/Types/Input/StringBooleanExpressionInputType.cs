@@ -2,7 +2,8 @@ using GraphQL.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    public class StringBooleanExpressionInputType : InputObjectGraphType<StringBooleanExpression>
+    using MappedType = StringBooleanExpression;
+    public class StringBooleanExpressionInputType : InputObjectGraphType<MappedType>
     {
         public StringBooleanExpressionInputType()
         {

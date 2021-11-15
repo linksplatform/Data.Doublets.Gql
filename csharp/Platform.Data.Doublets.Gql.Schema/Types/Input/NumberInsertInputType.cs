@@ -2,7 +2,8 @@ using GraphQL.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    public class NumberInsertInputType : InputObjectGraphType<NumberInsert>
+    using MappedType = NumberInsert;
+    public class NumberInsertInputType : InputObjectGraphType<MappedType>
     {
         public NumberInsertInputType()
         {

@@ -2,7 +2,8 @@ using GraphQL.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
-    public class MaterializedPathMaxFieldsType : ObjectGraphType<MaterializedPathMaxFields>
+    using MappedType = MaterializedPathMaxFields;
+    public class MaterializedPathMaxFieldsType : ObjectGraphType<MappedType>
     {
         public MaterializedPathMaxFieldsType()
         {
