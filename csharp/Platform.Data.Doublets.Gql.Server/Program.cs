@@ -17,7 +17,6 @@ namespace Platform.Data.Doublets.Gql.Server
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
                 .CreateLogger();
-
             try
             {
                 Log.Information("Starting host");
@@ -26,7 +25,6 @@ namespace Platform.Data.Doublets.Gql.Server
                 {
                     Data.DefaultDatabaseFileName = dbFileName;
                 }
-
                 CreateHostBuilder(args).Build().Run();
                 return 0;
             }

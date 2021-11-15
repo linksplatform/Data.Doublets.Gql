@@ -37,7 +37,6 @@ namespace Platform.Data.Doublets.Gql.Server
             {
                 _logger.LogInformation("GraphQL execution successfully completed in {Elapsed}", requestExecutionResult.Elapsed);
             }
-
             return base.RequestExecutedAsync(requestExecutionResult);
         }
 

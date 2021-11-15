@@ -24,7 +24,6 @@ namespace Platform.Data.Doublets.Gql.Schema
                     {
                         links.Delete((ulong)linkToDelete.id);
                     }
-
                     return response;
                 });
             Field<LinksType>("delete_links_by_pk",
@@ -42,7 +41,6 @@ namespace Platform.Data.Doublets.Gql.Schema
                     {
                         response.returning.Add(InsertLink(links, link));
                     }
-
                     response.affected_rows = response.returning.Count;
                     return response;
                 });
@@ -68,7 +66,6 @@ namespace Platform.Data.Doublets.Gql.Schema
                             (ulong)set.from_id, (ulong)set.to_id);
                         response.returning.Add(new Links(links.GetLink(updatedLink)));
                     }
-
                     response.affected_rows = response.returning.Count;
                     return response;
                 });

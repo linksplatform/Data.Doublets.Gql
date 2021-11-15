@@ -34,7 +34,6 @@ namespace Platform.Data.Doublets.Gql.Server
         {
             var errorMessage = new StringBuilder();
             AuthorizationError.AppendFailureHeader(errorMessage, error.OperationType);
-
             foreach (var failedRequirement in error.AuthorizationResult.Failure.FailedRequirements)
             {
                 switch (failedRequirement)
@@ -50,7 +49,6 @@ namespace Platform.Data.Doublets.Gql.Server
                         break;
                 }
             }
-
             return errorMessage.ToString();
         }
     }

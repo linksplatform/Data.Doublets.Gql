@@ -11,12 +11,10 @@ namespace Platform.Data.Doublets.Gql.Schema
             {
                 throw new ArgumentNullException(nameof(text));
             }
-
             if (text.Length < 2)
             {
                 return text;
             }
-
             var sb = new StringBuilder();
             sb.Append(char.ToLowerInvariant(text[0]));
             for (var i = 1; i < text.Length; ++i)
@@ -32,7 +30,6 @@ namespace Platform.Data.Doublets.Gql.Schema
                     sb.Append(c);
                 }
             }
-
             return sb.ToString();
         }
     }

@@ -65,7 +65,6 @@ namespace Platform.Data.Doublets.Gql.Schema
         private static IEnumerable<TSource> DistinctByIterator<TSource, TKey>(IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IEqualityComparer<TKey> comparer)
         {
             using var enumerator = source.GetEnumerator();
-
             if (enumerator.MoveNext())
             {
                 var set = new HashSet<TKey>(DefaultInternalSetCapacity, comparer);

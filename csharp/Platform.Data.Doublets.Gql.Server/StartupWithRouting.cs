@@ -51,16 +51,12 @@ namespace Platform.Data.Doublets.Gql.Server
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseWebSockets();
-
             app.UseRouting();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGraphQLWebSockets<LinksSchema>();
                 endpoints.MapGraphQL<LinksSchema, GraphQLHttpMiddlewareWithLogs<LinksSchema>>();
-
                 endpoints.MapGraphQLPlayground(new PlaygroundOptions
                 {
                     BetaUpdates = true,
@@ -80,11 +76,8 @@ namespace Platform.Data.Doublets.Gql.Server
                     SchemaPollingInterval = 5000,
                     Headers = new Dictionary<string, object> { ["MyHeader1"] = "MyValue", ["MyHeader2"] = 42 }
                 });
-
                 endpoints.MapGraphQLGraphiQL(new GraphiQLOptions { Headers = new Dictionary<string, string> { ["X-api-token"] = "130fh9823bd023hd892d0j238dh" } });
-
                 endpoints.MapGraphQLAltair(new AltairOptions { Headers = new Dictionary<string, string> { ["X-api-token"] = "130fh9823bd023hd892d0j238dh" } });
-
                 endpoints.MapGraphQLVoyager(new VoyagerOptions { Headers = new Dictionary<string, object> { ["MyHeader1"] = "MyValue", ["MyHeader2"] = 42 } });
             });
         }

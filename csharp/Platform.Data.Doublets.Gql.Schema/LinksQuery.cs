@@ -54,17 +54,14 @@ namespace Platform.Data.Doublets.Gql.Schema
                 {
                     return new List<Links>();
                 }
-
                 if (where?.to_id._eq != null && forceToId != null && where.to_id._eq != forceToId)
                 {
                     return new List<Links>();
                 }
-
                 query = new Link<ulong>((ulong?)where?.id?._eq ?? any,
                     (ulong?)forceFromId ?? (ulong?)where?.from_id?._eq ?? any,
                     (ulong?)forceToId ?? (ulong?)where?.to_id?._eq ?? any);
             }
-
             var allLinks = links.All(query).Select(l => new Links(l));
             if (context.HasArgument("order_by"))
             {
@@ -74,25 +71,21 @@ namespace Platform.Data.Doublets.Gql.Schema
                     ? allLinks.OrderBy(selector)
                     : allLinks.OrderByDescending(selector);
             }
-
             if (context.HasArgument("distinct"))
             {
                 var distinct = context.GetArgument<List<LinksColumn>>("distinct");
                 allLinks = allLinks.DistinctBy(GetSortSelectorAndOrderByValue(distinct.First()));
             }
-
             if (context.HasArgument("offset"))
             {
                 var offset = context.GetArgument<int>("offset");
                 allLinks = allLinks.Skip(offset);
             }
-
             if (context.HasArgument("limit"))
             {
                 var limit = context.GetArgument<long>("limit");
                 return allLinks.Take((int)limit);
             }
-
             return allLinks;
         }
 
@@ -120,21 +113,18 @@ namespace Platform.Data.Doublets.Gql.Schema
                 selector = l => (long)l.from_id;
                 return;
             }
-
             orderByValue = orderBy.to_id;
             if (orderByValue != null)
             {
                 selector = l => (long)l.to_id;
                 return;
             }
-
             orderByValue = orderBy.type_id;
             if (orderByValue != null)
             {
                 selector = l => l.type_id;
                 return;
             }
-
             orderByValue = orderBy.id;
             selector = l => l.id;
         }
