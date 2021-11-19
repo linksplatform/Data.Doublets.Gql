@@ -15,7 +15,7 @@ using TLink = System.UInt64;
 
 namespace Platform.Data.Doublets.Gql.Tests
 {
-    public class UnitTest1
+    public class QueryTests
     {
         /// <summary>
         /// <para>
@@ -142,7 +142,7 @@ namespace Platform.Data.Doublets.Gql.Tests
         }
         ")]
         [Theory]
-        public void QueryTest(string query)
+        public void QueryData(string query)
         {
             var links = CreateLinks();
             LinksSchema linksSchema = new (links, new DefaultServiceProvider());
