@@ -1,6 +1,6 @@
 # Data.Doublets.Gql
 
-If you need any help, you can ged it real-time on our official discord server: https://discord.gg/eEXJyjWv5e
+If you need any help, you can get it real-time on our official discord server: https://discord.gg/eEXJyjWv5e
 
 Comparison of theories:
 
