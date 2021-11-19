@@ -17,41 +17,14 @@ namespace Platform.Data.Doublets.Gql.Tests
 {
     public class QueryTests
     {
-        /// <summary>
-        /// <para>
-        /// Creates the links.
-        /// </para>
-        /// <para></para>
-        /// </summary>
-        /// <returns>
-        /// <para>A links of t link</para>
-        /// <para></para>
-        /// </returns>
         public static ILinks<TLink> CreateLinks() => CreateLinks<TLink>(new Platform.IO.TemporaryFile());
 
-        /// <summary>
-        /// <para>
-        /// Creates the links using the specified data db filename.
-        /// </para>
-        /// <para></para>
-        /// </summary>
-        /// <typeparam name="TLink">
-        /// <para>The link.</para>
-        /// <para></para>
-        /// </typeparam>
-        /// <param name="dataDBFilename">
-        /// <para>The data db filename.</para>
-        /// <para></para>
-        /// </param>
-        /// <returns>
-        /// <para>A links of t link</para>
-        /// <para></para>
-        /// </returns>
         public static ILinks<TLink> CreateLinks<TLink>(string dataDBFilename)
         {
             var linksConstants = new LinksConstants<TLink>(enableExternalReferencesSupport: true);
             return new UnitedMemoryLinks<TLink>(new FileMappedResizableDirectMemory(dataDBFilename), UnitedMemoryLinks<TLink>.DefaultLinksSizeStep, linksConstants, IndexTreeType.Default);
         }
+
         [InlineData(@"
         {
           links {
