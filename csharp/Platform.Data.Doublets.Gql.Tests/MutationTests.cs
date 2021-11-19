@@ -1,27 +1,26 @@
 using GraphQL;
 using GraphQL.SystemTextJson;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Xunit;
 using Platform.Data.Doublets.Gql.Schema;
-using Platform.Data.Doublets.Gql.Server;
 using Platform.Data.Doublets.Memory;
 using Platform.Data.Doublets.Memory.United.Generic;
+using Platform.IO;
 using Platform.Memory;
-using System;
-using System.Text.Json;
-using System.Threading.Tasks;
+using Xunit;
 using TLink = System.UInt64;
 
 namespace Platform.Data.Doublets.Gql.Tests
 {
     public class MutationTests
     {
-        public static ILinks<TLink> CreateLinks() => CreateLinks<TLink>(new Platform.IO.TemporaryFile());
+        public static ILinks<ulong> CreateLinks()
+        {
+            return CreateLinks<ulong>(new TemporaryFile());
+        }
 
         public static ILinks<TLink> CreateLinks<TLink>(string dataDBFilename)
         {
-            var linksConstants = new LinksConstants<TLink>(enableExternalReferencesSupport: true);
+            var linksConstants = new LinksConstants<TLink>(true);
             return new UnitedMemoryLinks<TLink>(new FileMappedResizableDirectMemory(dataDBFilename), UnitedMemoryLinks<TLink>.DefaultLinksSizeStep, linksConstants, IndexTreeType.Default);
         }
 
@@ -73,11 +72,8 @@ namespace Platform.Data.Doublets.Gql.Tests
         public void MutateData(string query)
         {
             var links = CreateLinks();
-            LinksSchema linksSchema = new (links, new DefaultServiceProvider());
-            var jsonTask = linksSchema.ExecuteAsync(_ =>
-                {
-                    _.Query = query;
-                });
+            LinksSchema linksSchema = new(links, new DefaultServiceProvider());
+            var jsonTask = linksSchema.ExecuteAsync(_ => { _.Query = query; });
             var response = JObject.Parse(jsonTask.Result);
             var error = response.ContainsKey("errors");
             Assert.False(error);
