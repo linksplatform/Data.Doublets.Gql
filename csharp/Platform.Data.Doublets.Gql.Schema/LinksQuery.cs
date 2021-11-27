@@ -25,7 +25,7 @@ namespace Platform.Data.Doublets.Gql.Schema
 
         public static IEnumerable<Links> GetLinks(IResolveFieldContext<object> context) => GetLinks(context, context.RequestServices.GetService<ILinks<ulong>>());
 
-        public static IEnumerable<Links> GetLinks(IResolveFieldContext<object> context, long? forceFromId) => GetLinks(context, context.RequestServices.GetService<ILinks<ulong>>(), forceFromId);
+        public static IEnumerable<Links> GetLinks(IResolveFieldContext<object> context, long? forceFromId, long? forceToId = null) => GetLinks(context, context.RequestServices.GetService<ILinks<ulong>>(), forceFromId, forceToId);
 
         public static IEnumerable<Links> GetLinks(IResolveFieldContext<object> context, ILinks<ulong> links, long? forceFromId = null, long? forceToId = null)
         {
