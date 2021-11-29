@@ -34,7 +34,7 @@ namespace Platform.Data.Doublets.Gql.Server
                 options.AddPolicy(name: MyAllowSpecificOrigins,
                     builder =>
                     {
-                        builder.WithOrigins("*").WithMethods("GET,HEAD,OPTIONS,POST,PUT").WithHeaders("Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+                        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
                     });
             })
             .AddSingleton(sp => Data.CreateLinks())
