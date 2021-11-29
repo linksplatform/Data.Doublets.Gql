@@ -16,6 +16,7 @@ namespace Platform.Data.Doublets.Gql.Server
 {
     public class StartupWithRouting
     {
+        public readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public StartupWithRouting(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
@@ -28,6 +29,14 @@ namespace Platform.Data.Doublets.Gql.Server
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) => services.AddRouting()
+            .AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    builder =>
+                    {
+                        builder.WithOrigins("*");
+                    });
+            })
             .AddSingleton(sp => Data.CreateLinks())
             .AddSingleton<LinksSchema>()
             .AddGraphQL((options, provider) =>
@@ -52,10 +61,11 @@ namespace Platform.Data.Doublets.Gql.Server
             }
             app.UseWebSockets();
             app.UseRouting();
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGraphQLWebSockets<LinksSchema>();
-                endpoints.MapGraphQL<LinksSchema, GraphQLHttpMiddlewareWithLogs<LinksSchema>>();
+                endpoints.MapGraphQL<LinksSchema, GraphQLHttpMiddlewareWithLogs<LinksSchema>>(pattern: "/v1/graphql");
                 endpoints.MapGraphQLPlayground(new PlaygroundOptions
                 {
                     BetaUpdates = true,
@@ -73,11 +83,11 @@ namespace Platform.Data.Doublets.Gql.Server
                     SchemaPollingEnabled = true,
                     SchemaPollingEndpointFilter = "*localhost*",
                     SchemaPollingInterval = 5000,
-                    Headers = new Dictionary<string, object> { ["MyHeader1"] = "MyValue", ["MyHeader2"] = 42 }
+                    Headers = new Dictionary<string, object> { ["MyHeader1"] = "MyValue", ["MyHeader2"] = 42 },
                 });
-                endpoints.MapGraphQLGraphiQL(new GraphiQLOptions { Headers = new Dictionary<string, string> { ["X-api-token"] = "130fh9823bd023hd892d0j238dh" } });
-                endpoints.MapGraphQLAltair(new AltairOptions { Headers = new Dictionary<string, string> { ["X-api-token"] = "130fh9823bd023hd892d0j238dh" } });
-                endpoints.MapGraphQLVoyager(new VoyagerOptions { Headers = new Dictionary<string, object> { ["MyHeader1"] = "MyValue", ["MyHeader2"] = 42 } });
+                endpoints.MapGraphQLGraphiQL(new GraphiQLOptions { Headers = new Dictionary<string, string> { ["X-api-token"] = "130fh9823bd023hd892d0j238dh" }, GraphQLEndPoint = "/v1/graphql"});
+                endpoints.MapGraphQLAltair(new AltairOptions { Headers = new Dictionary<string, string> { ["X-api-token"] = "130fh9823bd023hd892d0j238dh" }, GraphQLEndPoint = "/v1/graphql"});
+                endpoints.MapGraphQLVoyager(new VoyagerOptions { Headers = new Dictionary<string, object> { ["MyHeader1"] = "MyValue", ["MyHeader2"] = 42 }, GraphQLEndPoint = "/v1/graphql"});
             });
         }
     }
