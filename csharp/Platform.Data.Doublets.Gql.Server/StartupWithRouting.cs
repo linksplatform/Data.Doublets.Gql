@@ -34,7 +34,7 @@ namespace Platform.Data.Doublets.Gql.Server
                 options.AddPolicy(name: MyAllowSpecificOrigins,
                     builder =>
                     {
-                        builder.WithOrigins("*");
+                        builder.WithOrigins("*").WithMethods("GET,HEAD,OPTIONS,POST,PUT").WithHeaders("Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
                     });
             })
             .AddSingleton(sp => Data.CreateLinks())
@@ -83,7 +83,7 @@ namespace Platform.Data.Doublets.Gql.Server
                     SchemaPollingEnabled = true,
                     SchemaPollingEndpointFilter = "*localhost*",
                     SchemaPollingInterval = 5000,
-                    Headers = new Dictionary<string, object> { ["MyHeader1"] = "MyValue", ["MyHeader2"] = 42, ["Access-Control-Allow-Headers"] = "Authorization, Content-Type", ["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS" }
+                    Headers = new Dictionary<string, object> { ["MyHeader1"] = "MyValue", ["MyHeader2"] = 42}
                 });
                 endpoints.MapGraphQLGraphiQL(new GraphiQLOptions { Headers = new Dictionary<string, string> { ["X-api-token"] = "130fh9823bd023hd892d0j238dh" }, GraphQLEndPoint = "/v1/graphql"});
                 endpoints.MapGraphQLAltair(new AltairOptions { Headers = new Dictionary<string, string> { ["X-api-token"] = "130fh9823bd023hd892d0j238dh" }, GraphQLEndPoint = "/v1/graphql"});
