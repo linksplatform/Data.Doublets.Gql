@@ -83,7 +83,7 @@ namespace Platform.Data.Doublets.Gql.Server
                     SchemaPollingEnabled = true,
                     SchemaPollingEndpointFilter = "*localhost*",
                     SchemaPollingInterval = 5000,
-                    Headers = new Dictionary<string, object> { ["MyHeader1"] = "MyValue", ["MyHeader2"] = 42 },
+                    Headers = new Dictionary<string, object> { ["MyHeader1"] = "MyValue", ["MyHeader2"] = 42, ["Access-Control-Allow-Headers"] = "Authorization, Content-Type", ["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS" }
                 });
                 endpoints.MapGraphQLGraphiQL(new GraphiQLOptions { Headers = new Dictionary<string, string> { ["X-api-token"] = "130fh9823bd023hd892d0j238dh" }, GraphQLEndPoint = "/v1/graphql"});
                 endpoints.MapGraphQLAltair(new AltairOptions { Headers = new Dictionary<string, string> { ["X-api-token"] = "130fh9823bd023hd892d0j238dh" }, GraphQLEndPoint = "/v1/graphql"});
