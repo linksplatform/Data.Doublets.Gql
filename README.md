@@ -1,6 +1,6 @@
 # Data.Doublets.Gql
 
-If you need any help, you can get it real-time on our official discord server: https://discord.gg/eEXJyjWv5e
+If you need any help, you can ged it real-time on our official discord server: https://discord.gg/eEXJyjWv5e
 
 Comparison of theories:
 
@@ -60,8 +60,8 @@ dotnet run -f net5 -c Release db.links --urls http://0.0.0.0:29018
 {
   links(
     where: { id: { _eq: 1 }, from_id: { _eq: 1 }, to_id: { _eq: 1 } }
-    distinct_on: [from_id]
-    order_by: { id: asc }
+    distinct_on: [FROM_ID]
+    order_by: { id: ASC }
     offset: 0
     limit: 1
   ) {
@@ -96,8 +96,8 @@ dotnet run -f net5 -c Release db.links --urls http://0.0.0.0:29018
 {
   links(
     where: { id: { _eq: 1 }, from_id: { _eq: 1 }, to_id: { _eq: 1 } }
-    distinct_on: [from_id]
-    order_by: { id: asc }
+    distinct_on: [FROM_ID]
+    order_by: { id: ASC }
     offset: 0
     limit: 1
   ) {
@@ -110,8 +110,8 @@ dotnet run -f net5 -c Release db.links --urls http://0.0.0.0:29018
     }
     out(
       where: { from_id: { _eq: 1 }, to_id: { _eq: 1 } }
-      distinct_on: [from_id]
-      order_by: { id: asc }
+      distinct_on: [FROM_ID]
+      order_by: { id: ASC }
       offset: 0
       limit: 1
     ) {
@@ -127,8 +127,8 @@ dotnet run -f net5 -c Release db.links --urls http://0.0.0.0:29018
     }
     in(
       where: { from_id: { _eq: 1 }, to_id: { _eq: 1 } }
-      distinct_on: [from_id]
-      order_by: { id: asc }
+      distinct_on: [FROM_ID]
+      order_by: { id: ASC }
       offset: 0
       limit: 1
     ) {
@@ -144,11 +144,9 @@ dotnet run -f net5 -c Release db.links --urls http://0.0.0.0:29018
 ```gql
 mutation {
   insert_links_one(object: {from_id: 1, to_id: 1}) {
-    returning{
-      id
-    	from_id
-    	to_id
-    }
+    id
+    from_id
+    to_id
   }
 }
 ```
