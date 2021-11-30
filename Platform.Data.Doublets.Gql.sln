@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Platform.Data.Doublets.Gql.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Platform.Data.Doublets.Gql.Server", "csharp\Platform.Data.Doublets.Gql.Server\Platform.Data.Doublets.Gql.Server.csproj", "{AD25F601-3E53-444E-83BF-9CCD765D8D7B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Data.Doublets.Gql.Tests", "csharp\Platform.Data.Doublets.Gql.Tests\Platform.Data.Doublets.Gql.Tests.csproj", "{57D0E771-0C07-461A-922C-36A5303DC023}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AD25F601-3E53-444E-83BF-9CCD765D8D7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD25F601-3E53-444E-83BF-9CCD765D8D7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD25F601-3E53-444E-83BF-9CCD765D8D7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57D0E771-0C07-461A-922C-36A5303DC023}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57D0E771-0C07-461A-922C-36A5303DC023}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57D0E771-0C07-461A-922C-36A5303DC023}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57D0E771-0C07-461A-922C-36A5303DC023}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
