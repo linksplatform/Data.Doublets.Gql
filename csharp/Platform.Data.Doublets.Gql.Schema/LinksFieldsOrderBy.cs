@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Platform.Data.Doublets.Gql.Schema.Enums;
 
-namespace Platform.Data.Doublets.Gql.Schema.Types
+namespace Platform.Data.Doublets.Gql.Schema
 {
     public class LinksFieldsOrderBy
     {
-        public order_by? id { get; set; }
+        public OrderBy? id { get; set; }
 
-        public order_by? from_id { get; set; }
+        public OrderBy? from_id { get; set; }
 
-        public order_by? to_id { get; set; }
+        public OrderBy? to_id { get; set; }
 
-        public order_by? type_id { get; set; }
+        public OrderBy? type_id { get; set; }
     }
 }

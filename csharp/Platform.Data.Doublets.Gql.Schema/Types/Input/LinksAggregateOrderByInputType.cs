@@ -1,39 +1,26 @@
 ﻿using GraphQL.Types;
+using Platform.Data.Doublets.Gql.Schema.Types.Enums;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    /// <remarks>
-    /// """
-    /// order by aggregate values of table "links"
-    /// """
-    /// input links_aggregate_order_by {
-    ///   avg: links_avg_order_by
-    ///   count: order_by
-    ///   max: links_max_order_by
-    ///   min: links_min_order_by
-    ///   stddev: links_stddev_order_by
-    ///   stddev_pop: links_stddev_pop_order_by
-    ///   stddev_samp: links_stddev_samp_order_by
-    ///   sum: links_sum_order_by
-    ///   var_pop: links_var_pop_order_by
-    ///   var_samp: links_var_samp_order_by
-    ///   variance: links_variance_order_by
-    /// }
-    /// </remarks>
-    internal class LinksAggregateOrderByInputType : InputObjectGraphType<LinksAggregateOrderBy>
+    using MappedType = LinksAggregateOrderBy;
+
+    public class LinksAggregateOrderByInputType : InputObjectGraphType<MappedType>
     {
         public LinksAggregateOrderByInputType()
         {
-            Field(x => x._avg, nullable: true, type: typeof(LinksAggregateOrderByInputType));
-            Field(x => x.max, nullable: true, type: typeof(LinksAggregateOrderByInputType));
-            Field(x => x.min, nullable: true, type: typeof(LinksAggregateOrderByInputType));
-            Field(x => x.stddev, nullable: true, type: typeof(LinksAggregateOrderByInputType));
-            Field(x => x.stddev_pop, nullable: true, type: typeof(LinksAggregateOrderByInputType));
-            Field(x => x.stddev_samp, nullable: true, type: typeof(LinksAggregateOrderByInputType));
-            Field(x => x.sum, nullable: true, type: typeof(LinksAggregateOrderByInputType));
-            Field(x => x.var_pop, nullable: true, type: typeof(LinksAggregateOrderByInputType));
-            Field(x => x.var_samp, nullable: true, type: typeof(LinksAggregateOrderByInputType));
-            Field(x => x.variance, nullable: true, type: typeof(LinksAggregateOrderByInputType));
+            Name = "links_aggregate_order_by";
+            Field<LinksFieldsAvgOrderByInputType>(nameof(MappedType.avg));
+            Field<OrderByEnumType>(nameof(MappedType.count));
+            Field<LinksFieldsMaxOrderByInputType>(nameof(MappedType.max));
+            Field<LinksFieldsMinOrderByInputType>(nameof(MappedType.min));
+            Field<LinksFieldsStdDevOrderByInputType>(nameof(MappedType.stddev));
+            Field<LinksFieldsStdDevPopOrderByInputType>(nameof(MappedType.stddev_pop));
+            Field<LinksFieldsStdDevSampOrderByInputType>(nameof(MappedType.stddev_samp));
+            Field<LinksFieldsSumOrderByInputType>(nameof(MappedType.sum));
+            Field<LinksFieldsVarPopOrderByInputType>(nameof(MappedType.var_pop));
+            Field<LinksFieldsVarSampOrderByInputType>(nameof(MappedType.var_samp));
+            Field<LinksFieldsVarianceOrderByInputType>(nameof(MappedType.variance));
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 
-
 namespace Platform.Data.Doublets.Gql.Schema
 {
     public class LongComparisonExpression
@@ -24,4 +23,3 @@ namespace Platform.Data.Doublets.Gql.Schema
         public List<long> _nin { get; set; }
     }
 }
-

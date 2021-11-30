@@ -1,15 +1,12 @@
 ﻿using GraphQL.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Platform.Data.Doublets.Gql.Schema.Enums;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
-    class LinksConstraintEnumType : EnumerationGraphType<links_constraint>
+    using MappedType = LinksConstraint;
+
+    public class LinksConstraintEnumType : EnumerationGraphType<MappedType>
     {
         public LinksConstraintEnumType() => Name = "LinksConstraintEnum";
     }
 }
-

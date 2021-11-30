@@ -13,10 +13,7 @@ namespace Platform.Data.Doublets.Gql.Tests
 {
     public class QueryTests
     {
-        public static ILinks<ulong> CreateLinks()
-        {
-            return CreateLinks<ulong>(new TemporaryFile());
-        }
+        public static ILinks<ulong> CreateLinks() => CreateLinks<ulong>(new TemporaryFile());
 
         public static ILinks<TLink> CreateLinks<TLink>(string dataDBFilename)
         {

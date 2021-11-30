@@ -1,17 +1,13 @@
-﻿using GraphQL.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using GraphQL.Types;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    class LinksPkColumnsInputType : InputObjectGraphType
+    public class LinksPkColumnsInputType : InputObjectGraphType
     {
         public LinksPkColumnsInputType()
         {
-            Field<LongGraphType>("id");
+            Name = "links_pk_columns_input";
+            Field<NonNullGraphType<LongGraphType>>("id");
         }
     }
 }

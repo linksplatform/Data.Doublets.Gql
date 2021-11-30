@@ -1,25 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Platform.Data.Doublets.Gql.Schema.Enums;
+using Platform.Data.Doublets.Gql.Schema.Types.Input;
 
 namespace Platform.Data.Doublets.Gql.Schema
 {
-    internal class LinksOrderBy
+    public class LinksOrderBy
     {
         public LinksOrderBy from { get; set; }
 
-        public order_by? from_id { get; set; }
+        public OrderBy? from_id { get; set; }
 
-        public order_by? id { get; set; }
+        public OrderBy? id { get; set; }
+
+        public LinksAggregateOrderByInputType in_aggregate { get; set; }
+
+        public LinksAggregateOrderByInputType out_aggregate { get; set; }
 
         public LinksOrderBy to { get; set; }
 
-        public order_by? to_id { get; set; }
+        public OrderBy? to_id { get; set; }
 
         public LinksOrderBy type { get; set; }
 
-        public order_by? type_id { get; set; }
+        public OrderBy? type_id { get; set; }
     }
 }

@@ -1,16 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	  <TargetFramework>net6</TargetFramework>
-	  <AssemblyName>Gql.Samples.Schemas.Link</AssemblyName>
-    <RootNamespace>Gql.Samples.Schemas.Link</RootNamespace>
-    <IsPackable>false</IsPackable>
-    <NoWarn>$(NoWarn);1591</NoWarn>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net6</TargetFramework>
+        <AssemblyName>Platform.Data.Doublets.Gql.Schema</AssemblyName>
+        <RootNamespace>Platform.Data.Doublets.Gql.Schema</RootNamespace>
+        <IsPackable>false</IsPackable>
+        <NoWarn>$(NoWarn),1591</NoWarn>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Platform.Data.Doublets" Version="0.6.10" />   
-    <PackageReference Include="GraphQL.Server.Transports.Subscriptions.Abstractions" Version="5.0.2" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Platform.Data.Doublets" Version="0.6.10"/>
+        <PackageReference Include="GraphQL.Server.Transports.Subscriptions.Abstractions" Version="5.0.2"/>
+    </ItemGroup>
 
 </Project>

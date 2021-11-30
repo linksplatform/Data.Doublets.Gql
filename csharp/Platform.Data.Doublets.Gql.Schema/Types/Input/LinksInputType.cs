@@ -2,14 +2,16 @@
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    internal class LinksInputType : InputObjectGraphType<Link>
+    using MappedType = Links;
+
+    public class LinksInputType : InputObjectGraphType<MappedType>
     {
         public LinksInputType()
         {
-            Field(x => x.id, nullable: true, type: typeof(LongGraphType));
-            Field(x => x.from_id, nullable: true, type: typeof(LongGraphType));
-            Field(x => x.to_id, nullable: true, type: typeof(LongGraphType));
-            Field(x => x.type_id, nullable: true, type: typeof(LongGraphType));
+            Field<LongGraphType>(nameof(MappedType.id));
+            Field<LongGraphType>(nameof(MappedType.from_id));
+            Field<LongGraphType>(nameof(MappedType.to_id));
+            Field<LongGraphType>(nameof(MappedType.type_id));
         }
     }
 }

@@ -2,24 +2,15 @@
 
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
-    /// <remarks>
-    /// """
-    /// response of any mutation on the table "links"
-    /// """
-    /// type links_mutation_response {
-    ///   """number of affected rows by the mutation"""
-    ///   affected_rows: Int!
-    ///
-    ///   """data of the affected rows by the mutation"""
-    ///   returning: [links!]!
-    /// }
-    /// </remarks>
-    internal class LinksMutationResponseType : ObjectGraphType
+    using MappedType = LinksMutationResponse;
+
+    public class LinksMutationResponseType : ObjectGraphType<MappedType>
     {
         public LinksMutationResponseType()
         {
-            Field<IntGraphType>("affected_rows");
-            Field<ListGraphType<LinksType>>("returning");
+            Name = "links_mutation_response";
+            Field<NonNullGraphType<IntGraphType>>("affected_rows");
+            Field<NonNullGraphType<ListGraphType<NonNullGraphType<LinksType>>>>("returning");
         }
     }
 }

@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace Platform.Data.Doublets.Gql.Schema.Types
+namespace Platform.Data.Doublets.Gql.Schema
 {
     public class LinksAggregate
     {
         public LinksAggregateFields aggregate { get; set; }
+
+        public List<Links> nodes { get; set; }
     }
 }

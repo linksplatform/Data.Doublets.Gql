@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Platform.Data.Doublets.Gql.Schema.Enums;
 
-namespace Platform.Data.Doublets.Gql.Schema.Types
+namespace Platform.Data.Doublets.Gql.Schema
 {
-    class LinksAggregateOrderBy
+    public class LinksAggregateOrderBy
     {
-        public LinksFieldsOrderBy _avg { get; set; }
+        public LinksFieldsOrderBy avg { get; set; }
 
-        public order_by? count { get; set; }
+        public OrderBy? count { get; set; }
 
         public LinksFieldsOrderBy max { get; set; }
 
@@ -26,9 +22,8 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
 
         public LinksFieldsOrderBy var_pop { get; set; }
 
-        public LinksFieldsOrderBy var_samp { get; set; } 
+        public LinksFieldsOrderBy var_samp { get; set; }
 
         public LinksFieldsOrderBy variance { get; set; }
-
     }
 }

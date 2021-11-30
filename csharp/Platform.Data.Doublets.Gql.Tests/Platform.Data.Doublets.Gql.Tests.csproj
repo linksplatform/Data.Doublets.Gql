@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net6</TargetFramework>
 
         <IsPackable>false</IsPackable>
     </PropertyGroup>
@@ -20,8 +20,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Platform.Data.Doublets.Gql.Schema\Platform.Data.Doublets.Gql.Schema.csproj"/>
-        <ProjectReference Include="..\Platform.Data.Doublets.Gql.Server\Platform.Data.Doublets.Gql.Server.csproj"/>
+        <ProjectReference Include="../Platform.Data.Doublets.Gql.Schema\Platform.Data.Doublets.Gql.Schema.csproj"/>
+        <ProjectReference Include="../Platform.Data.Doublets.Gql.Server\Platform.Data.Doublets.Gql.Server.csproj"/>
     </ItemGroup>
 
 </Project>

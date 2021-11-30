@@ -1,15 +1,11 @@
-﻿using Platform.Data.Doublets.Gql.Schema.Types.Input;
-using System;
+﻿using Platform.Data.Doublets.Gql.Schema.Enums;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Platform.Data.Doublets.Gql.Schema.Types
+namespace Platform.Data.Doublets.Gql.Schema
 {
     public class LinksOnConflict
     {
-        public links_constraint constraint { get; set; }
+        public LinksConstraint constraint { get; set; }
 
         public List<LinksColumn> update_columns { get; set; }
 

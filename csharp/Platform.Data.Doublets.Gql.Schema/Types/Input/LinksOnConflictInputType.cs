@@ -1,19 +1,18 @@
-﻿using GraphQL.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using GraphQL.Types;
+using Platform.Data.Doublets.Gql.Schema.Types.Enums;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types.Input
 {
-    class LinksOnConflictInputType : InputObjectGraphType<LinksOnConflict>
+    using MappedType = LinksOnConflict;
+
+    public class LinksOnConflictInputType : InputObjectGraphType<MappedType>
     {
         public LinksOnConflictInputType()
         {
-            Field<LinksConstraintEnumType>("constraint");
-            Field<ListGraphType<LinksColumnType>>("update_columns");
-            Field(x => x.where, nullable: true, type: typeof(LinksBooleanExpressionInputType));
+            Name = "links_on_conflict";
+            Field<NonNullGraphType<LinksConstraintEnumType>>(nameof(MappedType.constraint));
+            Field<NonNullGraphType<ListGraphType<NonNullGraphType<LinksUpdateColumnEnumBaseType>>>>(nameof(MappedType.update_columns));
+            Field<LinksBooleanExpressionInputType>(nameof(MappedType.where));
         }
     }
 }

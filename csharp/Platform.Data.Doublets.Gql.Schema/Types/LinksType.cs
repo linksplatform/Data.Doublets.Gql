@@ -6,131 +6,45 @@ using System.Linq;
 
 namespace Platform.Data.Doublets.Gql.Schema.Types
 {
-    /// <remarks>
-    /// """
-    /// columns and relationships of "links"
-    /// """
-    /// type links {
-    ///   """An object relationship"""
-    ///   from: links
-    ///   from_id: bigint!
-    ///   id: bigint!
-    ///
-    ///   """An array relationship"""
-    ///   in(
-    ///     """distinct select on columns"""
-    ///     distinct_on: [links_select_column!]
-    ///
-    ///     """limit the number of rows returned"""
-    ///     limit: Int
-    ///
-    ///     """skip the first n rows. Use only with order_by"""
-    ///     offset: Int
-    ///
-    ///     """sort the rows by one or more columns"""
-    ///     order_by: [links_order_by!]
-    ///
-    ///     """filter the rows returned"""
-    ///     where: links_bool_exp
-    ///   ): [links!]!
-    ///
-    ///   """An aggregated array relationship"""
-    ///   in_aggregate(
-    ///     """distinct select on columns"""
-    ///     distinct_on: [links_select_column!]
-    ///
-    ///     """limit the number of rows returned"""
-    ///     limit: Int
-    ///
-    ///     """skip the first n rows. Use only with order_by"""
-    ///     offset: Int
-    ///
-    ///     """sort the rows by one or more columns"""
-    ///     order_by: [links_order_by!]
-    ///
-    ///     """filter the rows returned"""
-    ///     where: links_bool_exp
-    ///   ): links_aggregate!
-    ///
-    ///   """An array relationship"""
-    ///   out(
-    ///     """distinct select on columns"""
-    ///     distinct_on: [links_select_column!]
-    ///
-    ///     """limit the number of rows returned"""
-    ///     limit: Int
-    ///
-    ///     """skip the first n rows. Use only with order_by"""
-    ///     offset: Int
-    ///
-    ///     """sort the rows by one or more columns"""
-    ///     order_by: [links_order_by!]
-    ///
-    ///     """filter the rows returned"""
-    ///     where: links_bool_exp
-    ///   ): [links!]!
-    ///
-    ///   """An aggregated array relationship"""
-    ///   out_aggregate(
-    ///     """distinct select on columns"""
-    ///     distinct_on: [links_select_column!]
-    ///
-    ///     """limit the number of rows returned"""
-    ///     limit: Int
-    ///
-    ///     """skip the first n rows. Use only with order_by"""
-    ///     offset: Int
-    ///
-    ///     """sort the rows by one or more columns"""
-    ///     order_by: [links_order_by!]
-    ///
-    ///     """filter the rows returned"""
-    ///     where: links_bool_exp
-    ///   ): links_aggregate!
-    ///
-    ///   """An object relationship"""
-    ///   to: links
-    ///   to_id: bigint!
-    ///
-    ///   """An object relationship"""
-    ///   type: links
-    ///   type_id: bigint!
-    /// }
-    /// </remarks>
-    public class LinksType : ObjectGraphType<Link>
+    using MappedType = Links;
+
+    public class LinksType : ObjectGraphType<MappedType>
     {
         public LinksType()
         {
-            Field(o => o.id);
-            Field(o => o.from_id);
-            Field(o => o.from, nullable: true, type: typeof(LinksType)).Resolve(ResolveFrom);
-            Field(o => o.to, nullable: true, type: typeof(LinksType)).Resolve(ResolveTo);
-            Field(o => o.to_id, nullable: true);
-            Field(o => o.type, nullable: true, type: typeof(LinksType)).Resolve(ResolveType);
-            Field(o => o.type_id, nullable: true);
-            Field<ListGraphType<LinksType>>("in",null, LinksQuery.Arguments, ResolveIn, null);
-            Field<ListGraphType<LinksType>>("out", null, LinksQuery.Arguments, ResolveOut, null);
-            Field<LinksAggregateType>("in_aggregate", null, LinksQuery.Arguments, ResolveInAggregate, null);
-            Field<LinksAggregateType>("out_aggregate", null, LinksQuery.Arguments, ResolveOutAggregate, null);
+            Name = "links";
+            Description = "columns and relationships of \"links\"";
+            Field(o => o.from, true, typeof(LinksType)).Resolve(ResolveFrom);
+            Field<NonNullGraphType<LongGraphType>>(nameof(MappedType.from_id));
+            Field<NonNullGraphType<LongGraphType>>(nameof(MappedType.id));
+            Field<NonNullGraphType<ListGraphType<NonNullGraphType<LinksType>>>>(nameof(MappedType.@in), null, LinksQuery.Arguments, ResolveIn);
+            Field<NonNullGraphType<LinksAggregateType>>(nameof(MappedType.in_aggregate), null, LinksQuery.Arguments, ResolveInAggregate);
+            Field<NonNullGraphType<ListGraphType<NonNullGraphType<LinksType>>>>(nameof(MappedType.@out), null, LinksQuery.Arguments, ResolveOut);
+            Field<NonNullGraphType<LinksAggregateType>>(nameof(MappedType.out_aggregate), null, LinksQuery.Arguments, ResolveOutAggregate);
+            Field(o => o.to, true, typeof(LinksType)).Resolve(ResolveTo);
+            Field<NonNullGraphType<LongGraphType>>(nameof(MappedType.to_id));
+            Field(o => o.type, true, typeof(LinksType)).Resolve(ResolveType);
+            Field<NonNullGraphType<LongGraphType>>(nameof(MappedType.type_id));
         }
-        private LinksAggregateType ResolveInAggregate(IResolveFieldContext<Link> context) => new();
 
-        private LinksAggregateType ResolveOutAggregate(IResolveFieldContext<Link> context) => new();
+        private LinksAggregateType ResolveInAggregate(IResolveFieldContext<Links> context) => new();
 
-        private List<Link> ResolveIn(IResolveFieldContext<Link> context) => LinksQuery.GetLinks(context, null, context.Source.id).ToList();
+        private LinksAggregateType ResolveOutAggregate(IResolveFieldContext<Links> context) => new();
 
-        private List<Link> ResolveOut(IResolveFieldContext<Link> context) => LinksQuery.GetLinks(context, context.Source.id, null).ToList();
+        private List<Links> ResolveIn(IResolveFieldContext<Links> context) => LinksQuery.GetLinks(context, null, context.Source.id).ToList();
 
-        private Link ResolveFrom(IResolveFieldContext<Link> context) => context.Source.@from ?? GetLinkOrDefault(context, context.Source.from_id);
+        private List<Links> ResolveOut(IResolveFieldContext<Links> context) => LinksQuery.GetLinks(context, context.Source.id).ToList();
 
-        private Link ResolveTo(IResolveFieldContext<Link> context) => context.Source.to ?? GetLinkOrDefault(context, context.Source.to_id);
+        private Links ResolveFrom(IResolveFieldContext<Links> context) => context.Source.from ?? GetLinkOrDefault(context, context.Source.from_id);
 
-        private Link ResolveType(IResolveFieldContext<Link> context) => context.Source.type ?? GetLinkOrDefault(context, context.Source.type_id);
+        private Links ResolveTo(IResolveFieldContext<Links> context) => context.Source.to ?? GetLinkOrDefault(context, context.Source.to_id);
 
-        public static Link GetLinkOrDefault(IResolveFieldContext<Link> context, long linkId) => GetLinkOrDefault(context.RequestServices.GetService<ILinks<ulong>>(), (linkId));
+        private Links ResolveType(IResolveFieldContext<Links> context) => context.Source.type ?? GetLinkOrDefault(context, (long?)context.Source.type_id);
 
-        public static Link GetLinkOrDefault(object service, long linkId) => GetLinkOrDefault((ILinks<ulong>)service, (ulong)linkId);
+        public static Links GetLinkOrDefault(IResolveFieldContext<Links> context, long? linkId) => linkId != null ? GetLinkOrDefault(context.RequestServices.GetService<ILinks<ulong>>(), (ulong)linkId) : default;
 
-        public static Link GetLinkOrDefault(ILinks<ulong> links, ulong link) => links.Exists(link) ? new Link(links.GetLink(link)) : null;
+        public static Links GetLinkOrDefault(object service, long linkId) => GetLinkOrDefault((ILinks<ulong>)service, (ulong)linkId);
+
+        public static Links GetLinkOrDefault(ILinks<ulong> links, ulong link) => links.Exists(link) ? new Links(links.GetLink(link)) : null;
     }
 }
