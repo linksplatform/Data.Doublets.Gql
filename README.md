@@ -14,9 +14,11 @@ If you are lucky (our server is up) you can test our GraphQL server online using
 * http://linksplatform.ddns.net:29018/ui/altair
 * http://linksplatform.ddns.net:29018/ui/voyager
 
+Routes: `/v1/graphql`
+
 You can use this URL to access the GraphQL server directly from code, browser or any GraphQL client like [Insomnia](https://insomnia.rest/).
 ```
-http://linksplatform.ddns.net:29018/graphql
+http://linksplatform.ddns.net:29018/v1/graphql
 ```
 
 ## Start locally
