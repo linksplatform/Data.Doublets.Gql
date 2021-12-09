@@ -34,11 +34,11 @@ namespace Platform.Data.Doublets.Gql.Schema
             if (context.HasArgument("where"))
             {
                 var where = context.GetArgument<LinksBooleanExpression>("where");
-                if (where?.from_id._eq != null && forceFromId != null && where.from_id._eq != forceFromId)
+                if (where?.from_id?._eq != null && forceFromId != null && where.from_id._eq != forceFromId)
                 {
                     return new List<Links>();
                 }
-                if (where?.to_id._eq != null && forceToId != null && where.to_id._eq != forceToId)
+                if (where?.to_id?._eq != null && forceToId != null && where.to_id._eq != forceToId)
                 {
                     return new List<Links>();
                 }
