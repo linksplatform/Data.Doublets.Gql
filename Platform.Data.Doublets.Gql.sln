@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Platform.Data.Doublets.Gql.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Data.Doublets.Gql.Tests", "csharp\Platform.Data.Doublets.Gql.Tests\Platform.Data.Doublets.Gql.Tests.csproj", "{57D0E771-0C07-461A-922C-36A5303DC023}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Data.Doublets.Gql.Client", "Platform.Data.Doublets.Gql.Client\Platform.Data.Doublets.Gql.Client.csproj", "{67387C03-F227-4654-B9B7-EE748DF64DA2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Data.Doublets.Gql.Client", "csharp\Platform.Data.Doublets.Gql.Client\Platform.Data.Doublets.Gql.Client.csproj", "{67387C03-F227-4654-B9B7-EE748DF64DA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
