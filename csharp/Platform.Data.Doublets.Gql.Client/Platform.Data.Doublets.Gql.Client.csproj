@@ -7,11 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\csharp\Platform.Data.Doublets.Gql.Schema\Platform.Data.Doublets.Gql.Schema.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
       <PackageReference Include="GraphQL.Client" Version="4.0.1" />
+      <PackageReference Include="Platform.Data.Doublets" Version="0.6.10"/>
     </ItemGroup>
 
 </Project>

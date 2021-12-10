@@ -13,7 +13,7 @@ public class ClientTests
     public void CreateTest()
     {
         GraphQLHttpClient graphQlHttpClient = new("http://localhost:60341/v1/graphql", new NewtonsoftJsonSerializer());
-        LinksConstants<TLink> linksConstants = new LinksConstants<ulong>(true);
+        LinksConstants<TLink> linksConstants = new (true);
         LinksGqlAdapter<TLink> linksGqlAdapter = new LinksGqlAdapter<ulong>(graphQlHttpClient, linksConstants);
         var createdLink = linksGqlAdapter.Create(new List<ulong> { 1, 1 });
         Assert.Equal("(1: 1 1)", createdLink.ToString());
