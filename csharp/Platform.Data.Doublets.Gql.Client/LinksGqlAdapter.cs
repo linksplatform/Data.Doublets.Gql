@@ -1,6 +1,9 @@
 ﻿using GraphQL;
 using GraphQL.Client.Abstractions;
+using Newtonsoft.Json.Linq;
 using Platform.Collections;
+using Platform.Data.Doublets.Gql.Schema;
+using Platform.Data.Doublets.Gql.Schema.Types;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
@@ -37,7 +40,9 @@ namespace Platform.Data.Doublets.Gql.Client
                 OperationName = "CreateLink",
                 Variables = new { from_id = restrictions[0], to_id = restrictions[1] }
             };
-            var responseResult = _graphQlClient.SendMutationAsync<CountResponseType>(createLinkRequest).Result;
+            var response = _graphQlClient.SendMutationAsync<CreateResponseType>(createLinkRequest);
+            response.Wait();
+            var responseResult = response.Result;
             if (!responseResult.Errors.IsNullOrEmpty())
             {
                 foreach (var responseResultError in responseResult.Errors!)
@@ -45,7 +50,7 @@ namespace Platform.Data.Doublets.Gql.Client
                     throw new Exception(responseResultError.Message);
                 }
             }
-            return responseResult.Data.id;
+            return responseResult.Data.insert_links_one.id;
         }
 
         public TLink Update(IList<TLink> restrictions, IList<TLink> substitution) => throw new NotImplementedException();
@@ -55,11 +60,11 @@ namespace Platform.Data.Doublets.Gql.Client
         public LinksConstants<TLink> Constants { get; }
         public struct CreateResponseType
         {
-            public TLink id;
-        }
-        public struct CountResponseType
-        {
-            public TLink id;
+            public InsertLinksOne insert_links_one { get; set; }
+            public struct InsertLinksOne
+            {
+                public TLink id { get; set; }
+            }
         }
     }
 }
