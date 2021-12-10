@@ -27,13 +27,6 @@
     <ItemGroup>
         <ProjectReference Include="../Platform.Data.Doublets.Gql.Schema\Platform.Data.Doublets.Gql.Schema.csproj" />
         <ProjectReference Include="../Platform.Data.Doublets.Gql.Server\Platform.Data.Doublets.Gql.Server.csproj" />
-        <ProjectReference Include="..\..\Platform.Data.Doublets.Gql.Client\Platform.Data.Doublets.Gql.Client.csproj" />
+        <ProjectReference Include="../Platform.Data.Doublets.Gql.Client\Platform.Data.Doublets.Gql.Client.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="Platform.Data.Doublets.Gql.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>bin\Debug\net6\Platform.Data.Doublets.Gql.Client.dll</HintPath>
-      </Reference>
-    </ItemGroup>
-
 </Project>
