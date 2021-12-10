@@ -7,9 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="4.0.1" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
-        <PackageReference Include="xunit" Version="2.4.1" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4"/>
+        <PackageReference Include="xunit" Version="2.4.1"/>
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
@@ -18,22 +17,11 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="GraphQL.Client.Serializer.SystemTextJson" Version="4.0.1">
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-            <PrivateAssets>all</PrivateAssets>
-        </PackageReference>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="../Platform.Data.Doublets.Gql.Schema\Platform.Data.Doublets.Gql.Schema.csproj" />
-        <ProjectReference Include="../Platform.Data.Doublets.Gql.Server\Platform.Data.Doublets.Gql.Server.csproj" />
-        <ProjectReference Include="..\..\Platform.Data.Doublets.Gql.Client\Platform.Data.Doublets.Gql.Client.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="Platform.Data.Doublets.Gql.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>bin\Debug\net6\Platform.Data.Doublets.Gql.Client.dll</HintPath>
-      </Reference>
+        <ProjectReference Include="../Platform.Data.Doublets.Gql.Schema\Platform.Data.Doublets.Gql.Schema.csproj"/>
+        <ProjectReference Include="../Platform.Data.Doublets.Gql.Server\Platform.Data.Doublets.Gql.Server.csproj"/>
     </ItemGroup>
 
 </Project>
