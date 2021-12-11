@@ -13,6 +13,7 @@ namespace Platform.Data.Doublets.Gql.Client
 {
     public class LinksGqlAdapter<TLink> : ILinks<TLink>
     {
+        public IEqualityComparer<TLink> EqualityComparer = EqualityComparer<TLink>.Default;
         private IGraphQLClient _graphQlClient;
 
         public LinksGqlAdapter(IGraphQLClient graphQlClient, LinksConstants<TLink> linksConstants)
@@ -23,7 +24,29 @@ namespace Platform.Data.Doublets.Gql.Client
 
         public TLink Count(IList<TLink> restriction)
         {
-            throw new NotImplementedException();
+            var personAndFilmsRequest = new GraphQLRequest {
+                Query =@"
+                        query CountLinks ($id: Long, $from_id: Long, $to_id: Long) {
+                          links(where: { id: {_eq: $id}, from_id: {_eq: $from_id}, to_id: {_eq: $to_id} }) {
+                            id
+                          }
+                        }",
+                OperationName = "CountLinks",
+                Variables = new {
+                    id = restriction[Constants.IndexPart],
+                    from_id = restriction[Constants.SourcePart],
+                    to_id = restriction[Constants.TargetPart]
+                }
+            };
+            var responseResult = _graphQlClient.SendQueryAsync<CountResponseType>(personAndFilmsRequest).Result;
+            if (responseResult.Errors?.Length > 0)
+            {
+                foreach (var error in responseResult.Errors)
+                {
+                    throw new Exception(error.Message);
+                }
+            }
+            return (TLink)(object)responseResult.Data.links.Count;
         }
 
         public TLink Each(Func<IList<TLink>, TLink> handler, IList<TLink> restrictions) => throw new NotImplementedException();
@@ -106,11 +129,7 @@ namespace Platform.Data.Doublets.Gql.Client
         public LinksConstants<TLink> Constants { get; }
         public struct CreateResponseType
         {
-            public InsertLinksOne insert_links_one { get; set; }
-            public struct InsertLinksOne
-            {
-                public TLink id { get; set; }
-            }
+            public Link insert_links_one { get; set; }
         }
         public struct DeleteResponseType
         {
@@ -119,10 +138,15 @@ namespace Platform.Data.Doublets.Gql.Client
             {
                 public List<Link> returning { get; set; }
             }
-            public struct Link
-            {
-                public TLink id { get; set; }
-            }
+        }
+
+        public struct CountResponseType
+        {
+            public List<Link> links { get; set; }
+        }
+        public struct Link
+        {
+            public TLink id { get; set; }
         }
     }
 }
