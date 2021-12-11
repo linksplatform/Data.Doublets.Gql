@@ -8,7 +8,12 @@
 
     <ItemGroup>
       <PackageReference Include="GraphQL.Client" Version="4.0.1" />
-      <PackageReference Include="Platform.Data.Doublets" Version="0.6.10"/>
+      <PackageReference Include="Platform.Data.Doublets" Version="0.6.10" />
+      <PackageReference Include="Platform.Threading" Version="0.3.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Platform.Data.Doublets.Gql.Schema\Platform.Data.Doublets.Gql.Schema.csproj" />
     </ItemGroup>
 
 </Project>
