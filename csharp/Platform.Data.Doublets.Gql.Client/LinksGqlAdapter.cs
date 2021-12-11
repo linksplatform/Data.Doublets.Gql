@@ -7,8 +7,8 @@ namespace Platform.Data.Doublets.Gql.Client
 {
     public class LinksGqlAdapter<TLink> : ILinks<TLink>
     {
-        public IEqualityComparer<TLink> EqualityComparer = EqualityComparer<TLink>.Default;
-        private IGraphQLClient _graphQlClient;
+        private readonly IEqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
+        private readonly IGraphQLClient _graphQlClient;
 
         public LinksGqlAdapter(IGraphQLClient graphQlClient, LinksConstants<TLink> constants)
         {
@@ -18,7 +18,7 @@ namespace Platform.Data.Doublets.Gql.Client
 
         public TLink Count(IList<TLink> restriction)
         {
-            var personAndFilmsRequest = new GraphQLRequest {
+            var countRequest = new GraphQLRequest {
                 Query = @"
                         query CountLinks ($id: Long, $from_id: Long, $to_id: Long) {
                           links(where: { id: {_eq: $id}, from_id: {_eq: $from_id}, to_id: {_eq: $to_id} }) {
@@ -32,7 +32,7 @@ namespace Platform.Data.Doublets.Gql.Client
                     to_id = restriction[Constants.TargetPart]
                 }
             };
-            var responseResult = _graphQlClient.SendQueryAsync<CountLinksResponseType>(personAndFilmsRequest).Result;
+            var responseResult = _graphQlClient.SendQueryAsync<CountLinksResponseType>(countRequest).Result;
             if (responseResult.Errors?.Length > 0)
             {
                 foreach (var error in responseResult.Errors)
@@ -72,7 +72,7 @@ namespace Platform.Data.Doublets.Gql.Client
             foreach (var link in responseResult.Data.links)
             {
                 var handlerResult = handler(new Link<TLink>(link.id, link.from_id, link.to_id));
-                if (EqualityComparer.Equals(Constants.Break, handlerResult))
+                if (_equalityComparer.Equals(Constants.Break, handlerResult))
                 {
                     return handlerResult;
                 }
