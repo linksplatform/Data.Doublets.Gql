@@ -41,9 +41,7 @@ namespace Platform.Data.Doublets.Gql.Client
                 OperationName = "CreateLink",
                 Variables = new { from_id = restrictions[0], to_id = restrictions[1] }
             };
-            var response = _graphQlClient.SendMutationAsync<CreateResponseType>(createLinkRequest);
-            response.Wait();
-            var responseResult = response.Result;
+            var responseResult = _graphQlClient.SendMutationAsync<CreateResponseType>(createLinkRequest).AwaitResult();
             if (!responseResult.Errors.IsNullOrEmpty())
             {
                 foreach (var responseResultError in responseResult.Errors!)
