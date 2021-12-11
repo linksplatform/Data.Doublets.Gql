@@ -1,13 +1,7 @@
 ﻿using GraphQL;
 using GraphQL.Client.Abstractions;
-using Newtonsoft.Json.Linq;
 using Platform.Collections;
-using Platform.Data.Doublets.Gql.Schema;
-using Platform.Data.Doublets.Gql.Schema.Types;
 using Platform.Threading;
-using System;
-using System.Collections.Generic;
-using System.Numerics;
 
 namespace Platform.Data.Doublets.Gql.Client
 {
@@ -16,16 +10,16 @@ namespace Platform.Data.Doublets.Gql.Client
         public IEqualityComparer<TLink> EqualityComparer = EqualityComparer<TLink>.Default;
         private IGraphQLClient _graphQlClient;
 
-        public LinksGqlAdapter(IGraphQLClient graphQlClient, LinksConstants<TLink> linksConstants)
+        public LinksGqlAdapter(IGraphQLClient graphQlClient, LinksConstants<TLink> constants)
         {
             _graphQlClient = graphQlClient;
-            Constants = linksConstants;
+            Constants = constants;
         }
 
         public TLink Count(IList<TLink> restriction)
         {
             var personAndFilmsRequest = new GraphQLRequest {
-                Query =@"
+                Query = @"
                         query CountLinks ($id: Long, $from_id: Long, $to_id: Long) {
                           links(where: { id: {_eq: $id}, from_id: {_eq: $from_id}, to_id: {_eq: $to_id} }) {
                             id
@@ -38,7 +32,7 @@ namespace Platform.Data.Doublets.Gql.Client
                     to_id = restriction[Constants.TargetPart]
                 }
             };
-            var responseResult = _graphQlClient.SendQueryAsync<CountResponseType>(personAndFilmsRequest).Result;
+            var responseResult = _graphQlClient.SendQueryAsync<CountLinksResponseType>(personAndFilmsRequest).Result;
             if (responseResult.Errors?.Length > 0)
             {
                 foreach (var error in responseResult.Errors)
@@ -46,10 +40,45 @@ namespace Platform.Data.Doublets.Gql.Client
                     throw new Exception(error.Message);
                 }
             }
-            return (TLink)(object)responseResult.Data.links.Count;
+            return (TLink)(object)Convert.ToUInt64(responseResult.Data.links.Count);
         }
 
-        public TLink Each(Func<IList<TLink>, TLink> handler, IList<TLink> restrictions) => throw new NotImplementedException();
+        public TLink Each(Func<IList<TLink>, TLink> handler, IList<TLink> restrictions)
+        {
+            var personAndFilmsRequest = new GraphQLRequest {
+                Query = @"
+                        query GetLinks ($id: Long, $from_id: Long, $to_id: Long) {
+                          links(where: { id: {_eq: $id}, from_id: {_eq: $from_id}, to_id: {_eq: $to_id} }) {
+                            id
+                            from_id
+                            to_id
+                          }
+                        }",
+                OperationName = "GetLinks",
+                Variables = new {
+                    id = restrictions[Constants.IndexPart],
+                    from_id = restrictions[Constants.SourcePart],
+                    to_id = restrictions[Constants.TargetPart]
+                }
+            };
+            var responseResult = _graphQlClient.SendQueryAsync<GetLinksResponseType>(personAndFilmsRequest).Result;
+            if (responseResult.Errors?.Length > 0)
+            {
+                foreach (var error in responseResult.Errors)
+                {
+                    throw new Exception(error.Message);
+                }
+            }
+            foreach (var link in responseResult.Data.links)
+            {
+                var handlerResult = handler(new Link<TLink>(link.id, link.from_id, link.to_id));
+                if (EqualityComparer.Equals(Constants.Break, handlerResult))
+                {
+                    return handlerResult;
+                }
+            }
+            return Constants.Continue;
+        }
 
         public TLink Create(IList<TLink> restrictions)
         {
@@ -140,13 +169,21 @@ namespace Platform.Data.Doublets.Gql.Client
             }
         }
 
-        public struct CountResponseType
+        public struct CountLinksResponseType
         {
             public List<Link> links { get; set; }
         }
+
+        public struct GetLinksResponseType
+        {
+            public List<Link> links { get; set; }
+        }
+
         public struct Link
         {
             public TLink id { get; set; }
+            public TLink from_id { get; set; }
+            public TLink to_id { get; set; }
         }
     }
 }
