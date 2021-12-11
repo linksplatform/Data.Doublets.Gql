@@ -78,13 +78,48 @@ namespace Platform.Data.Doublets.Gql.Client
             return responseResult.Data.insert_links_one.id;
         }
 
-        public void Delete(IList<TLink> restrictions) => throw new NotImplementedException();
+        public void Delete(IList<TLink> restrictions)
+        {
+            var updateLinkRequest = new GraphQLRequest
+            {
+                Query = @"
+                        mutation DeleteLink ($from_id: Long!, $to_id: Long!){
+                          delete_links(where: { from_id: { _eq: $from_id }, to_id: { _eq: $to_id } }) {
+                            returning {
+                              id
+                            }
+                          }
+                        }",
+                OperationName = "DeleteLink",
+                Variables = new { from_id = restrictions[0], to_id = restrictions[1]}
+            };
+            var responseResult = _graphQlClient.SendMutationAsync<DeleteResponseType>(updateLinkRequest).AwaitResult();
+            if (!responseResult.Errors.IsNullOrEmpty())
+            {
+                foreach (var responseResultError in responseResult.Errors!)
+                {
+                    throw new Exception(responseResultError.Message);
+                }
+            }
+        }
 
         public LinksConstants<TLink> Constants { get; }
         public struct CreateResponseType
         {
             public InsertLinksOne insert_links_one { get; set; }
             public struct InsertLinksOne
+            {
+                public TLink id { get; set; }
+            }
+        }
+        public struct DeleteResponseType
+        {
+            public DeleteLinks delete_links { get; set; }
+            public struct DeleteLinks
+            {
+                public List<Link> returning { get; set; }
+            }
+            public struct Link
             {
                 public TLink id { get; set; }
             }
