@@ -130,20 +130,46 @@ namespace Platform.Data.Doublets.Gql.Client
             return responseResult.Data.insert_links_one.id;
         }
 
-        public void Delete(IList<TLink> restrictions)
+        public TLink Delete(IList<TLink> restrictions)
         {
-            var updateLinkRequest = new GraphQLRequest
+            var index = restrictions[0];
+            var source = restrictions[1];
+            var target = restrictions[2];
+            var isIndexNull = _equalityComparer.Equals(index, Constants.Null);
+            var isSourceNull = _equalityComparer.Equals(source, Constants.Null);
+            var isTargetNull = _equalityComparer.Equals(target, Constants.Null);
+            string query;
+            if (!isIndexNull)
             {
-                Query = @"
-                        mutation DeleteLink ($from_id: Long!, $to_id: Long!){
+                query = @"
+                        mutation DeleteLinkWithSourceAndTarget ($id: Long!){
+                          delete_links(where: {id: { _eq: $id } }) {
+                            returning {
+                              id
+                            }
+                          }
+                        }";
+            }
+            else if (!isSourceNull && !isTargetNull)
+            {
+                query = @"
+                        mutation DeleteLinkWithSourceAndTarget ($from_id: Long!, $to_id: Long!){
                           delete_links(where: { from_id: { _eq: $from_id }, to_id: { _eq: $to_id } }) {
                             returning {
                               id
                             }
                           }
-                        }",
+                        }";
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+            var updateLinkRequest = new GraphQLRequest
+            {
+                Query = query,
                 OperationName = "DeleteLink",
-                Variables = new { from_id = restrictions[0], to_id = restrictions[1]}
+                Variables = new { id = index ,from_id = source, to_id = target}
             };
             var responseResult = _graphQlClient.SendMutationAsync<DeleteResponseType>(updateLinkRequest).AwaitResult();
             if (!responseResult.Errors.IsNullOrEmpty())
@@ -153,6 +179,8 @@ namespace Platform.Data.Doublets.Gql.Client
                     throw new Exception(responseResultError.Message);
                 }
             }
+            // Use returning[0] cause right now it is not possible to return multiple links
+            return responseResult.Data.delete_links.returning[0].id;
         }
 
         public LinksConstants<TLink> Constants { get; }
