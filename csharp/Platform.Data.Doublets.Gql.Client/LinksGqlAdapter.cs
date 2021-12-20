@@ -138,6 +138,8 @@ namespace Platform.Data.Doublets.Gql.Client
             var isIndexNull = _equalityComparer.Equals(index, Constants.Null);
             var isSourceNull = _equalityComparer.Equals(source, Constants.Null);
             var isTargetNull = _equalityComparer.Equals(target, Constants.Null);
+            var isSourceAny = _equalityComparer.Equals(target, Constants.Any);
+            var isTargetAny = _equalityComparer.Equals(target, Constants.Any);
             string query;
             if (!isIndexNull)
             {
@@ -150,7 +152,7 @@ namespace Platform.Data.Doublets.Gql.Client
                           }
                         }";
             }
-            else if (!isSourceNull && !isTargetNull)
+            else if (!isSourceNull && !isTargetNull && !isSourceAny && !isTargetAny)
             {
                 query = @"
                         mutation DeleteLinkWithSourceAndTarget ($from_id: Long!, $to_id: Long!){
