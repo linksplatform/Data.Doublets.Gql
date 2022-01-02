@@ -105,18 +105,7 @@ namespace Platform.Data.Doublets.Gql.Client
             return responseResult.Data.insert_links_one.id;
         }
 
-        public TLink Create(IList<TLink> restrictions)
-        {
-            TLink result = default;
-            Create(restrictions, (before, after) =>
-            {
-                result = after[Constants.IndexPart];
-                return Constants.Continue;
-            });
-            return result;
-        }
-
-        public TLink Update(IList<TLink> restrictions, IList<TLink> substitution)
+        public TLink Update(IList<TLink> restrictions, IList<TLink> substitution, WriteHandler<TLink> handler)
         {
             var updateLinkRequest = new GraphQLRequest
             {
@@ -139,7 +128,18 @@ namespace Platform.Data.Doublets.Gql.Client
                     throw new Exception(responseResultError.Message);
                 }
             }
-            return responseResult.Data.insert_links_one.id;
+            return handler(restrictions, substitution);
+        }
+
+        public TLink Create(IList<TLink> restrictions)
+        {
+            TLink result = default;
+            Create(restrictions, (before, after) =>
+            {
+                result = after[Constants.IndexPart];
+                return Constants.Continue;
+            });
+            return result;
         }
 
         public TLink Delete(IList<TLink> restrictions)
