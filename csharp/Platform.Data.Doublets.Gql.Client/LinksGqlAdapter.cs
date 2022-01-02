@@ -131,6 +131,17 @@ namespace Platform.Data.Doublets.Gql.Client
             return handler(restrictions, substitution);
         }
 
+        public TLink Update(IList<TLink> restrictions, IList<TLink> substitution)
+        {
+            TLink result = default;
+            Update(restrictions, substitution, (_, after) =>
+            {
+                result = after[Constants.IndexPart];
+                return Constants.Continue;
+            });
+            return result;
+        }
+
         public TLink Create(IList<TLink> restrictions)
         {
             TLink result = default;
