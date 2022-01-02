@@ -42,7 +42,7 @@ namespace Platform.Data.Doublets.Gql.Client
             return (TLink)(object)Convert.ToUInt64(responseResult.Data.links.Count);
         }
 
-        public TLink Each(IList<TLink> restrictions, Func<IList<TLink>, TLink> handler)
+        public TLink Each(IList<TLink> restrictions, ReadHandler<TLink> handler)
         {
             var personAndFilmsRequest = new GraphQLRequest
             {
