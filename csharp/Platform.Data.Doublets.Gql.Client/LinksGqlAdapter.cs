@@ -76,7 +76,6 @@ namespace Platform.Data.Doublets.Gql.Client
             return Constants.Continue;
         }
 
-
         public TLink Create(IList<TLink> restrictions, WriteHandler<TLink> handler)
         {
             var createLinkRequest = new GraphQLRequest
@@ -131,10 +130,10 @@ namespace Platform.Data.Doublets.Gql.Client
             return handler(restrictions, substitution);
         }
 
-        public TLink Update(IList<TLink> restrictions, IList<TLink> substitution)
+        public TLink Create(IList<TLink> restrictions)
         {
             TLink result = default;
-            Update(restrictions, substitution, (_, after) =>
+            Create(restrictions, (before, after) =>
             {
                 result = after[Constants.IndexPart];
                 return Constants.Continue;
@@ -142,10 +141,10 @@ namespace Platform.Data.Doublets.Gql.Client
             return result;
         }
 
-        public TLink Create(IList<TLink> restrictions)
+        public TLink Update(IList<TLink> restrictions, IList<TLink> substitution)
         {
             TLink result = default;
-            Create(restrictions, (before, after) =>
+            Update(restrictions, substitution, (_, after) =>
             {
                 result = after[Constants.IndexPart];
                 return Constants.Continue;
