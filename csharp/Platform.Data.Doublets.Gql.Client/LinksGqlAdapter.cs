@@ -16,9 +16,12 @@ namespace Platform.Data.Doublets.Gql.Client
             Constants = constants;
         }
 
+        public LinksConstants<TLink> Constants { get; }
+
         public TLink Count(IList<TLink> restriction)
         {
-            var countRequest = new GraphQLRequest {
+            var countRequest = new GraphQLRequest
+            {
                 Query = @"
                         query CountLinks ($id: Long, $from_id: Long, $to_id: Long) {
                           links(where: { id: {_eq: $id}, from_id: {_eq: $from_id}, to_id: {_eq: $to_id} }) {
@@ -26,11 +29,7 @@ namespace Platform.Data.Doublets.Gql.Client
                           }
                         }",
                 OperationName = "CountLinks",
-                Variables = new {
-                    id = restriction[Constants.IndexPart],
-                    from_id = restriction[Constants.SourcePart],
-                    to_id = restriction[Constants.TargetPart]
-                }
+                Variables = new { id = restriction[Constants.IndexPart], from_id = restriction[Constants.SourcePart], to_id = restriction[Constants.TargetPart] }
             };
             var responseResult = _graphQlClient.SendQueryAsync<CountLinksResponseType>(countRequest).Result;
             if (responseResult.Errors?.Length > 0)
@@ -43,9 +42,10 @@ namespace Platform.Data.Doublets.Gql.Client
             return (TLink)(object)Convert.ToUInt64(responseResult.Data.links.Count);
         }
 
-        public TLink Each(Func<IList<TLink>, TLink> handler, IList<TLink> restrictions)
+        public TLink Each(IList<TLink> restrictions, Func<IList<TLink>, TLink> handler)
         {
-            var personAndFilmsRequest = new GraphQLRequest {
+            var personAndFilmsRequest = new GraphQLRequest
+            {
                 Query = @"
                         query GetLinks ($id: Long, $from_id: Long, $to_id: Long) {
                           links(where: { id: {_eq: $id}, from_id: {_eq: $from_id}, to_id: {_eq: $to_id} }) {
@@ -55,11 +55,7 @@ namespace Platform.Data.Doublets.Gql.Client
                           }
                         }",
                 OperationName = "GetLinks",
-                Variables = new {
-                    id = restrictions[Constants.IndexPart],
-                    from_id = restrictions[Constants.SourcePart],
-                    to_id = restrictions[Constants.TargetPart]
-                }
+                Variables = new { id = restrictions[Constants.IndexPart], from_id = restrictions[Constants.SourcePart], to_id = restrictions[Constants.TargetPart] }
             };
             var responseResult = _graphQlClient.SendQueryAsync<GetLinksResponseType>(personAndFilmsRequest).Result;
             if (responseResult.Errors?.Length > 0)
@@ -167,12 +163,7 @@ namespace Platform.Data.Doublets.Gql.Client
             {
                 throw new NotImplementedException();
             }
-            var updateLinkRequest = new GraphQLRequest
-            {
-                Query = query,
-                OperationName = "DeleteLink",
-                Variables = new { id = index ,from_id = source, to_id = target}
-            };
+            var updateLinkRequest = new GraphQLRequest { Query = query, OperationName = "DeleteLink", Variables = new { id = index, from_id = source, to_id = target } };
             var responseResult = _graphQlClient.SendMutationAsync<DeleteResponseType>(updateLinkRequest).AwaitResult();
             if (!responseResult.Errors.IsNullOrEmpty())
             {
@@ -185,14 +176,15 @@ namespace Platform.Data.Doublets.Gql.Client
             return responseResult.Data.delete_links.returning[0].id;
         }
 
-        public LinksConstants<TLink> Constants { get; }
         public struct CreateResponseType
         {
             public Link insert_links_one { get; set; }
         }
+
         public struct DeleteResponseType
         {
             public DeleteLinks delete_links { get; set; }
+
             public struct DeleteLinks
             {
                 public List<Link> returning { get; set; }
@@ -212,7 +204,9 @@ namespace Platform.Data.Doublets.Gql.Client
         public struct Link
         {
             public TLink id { get; set; }
+
             public TLink from_id { get; set; }
+
             public TLink to_id { get; set; }
         }
     }
