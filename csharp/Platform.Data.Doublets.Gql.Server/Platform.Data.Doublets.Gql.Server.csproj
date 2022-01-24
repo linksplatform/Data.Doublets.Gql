@@ -6,6 +6,7 @@
         <RootNamespace>Platform.Data.Doublets.Gql.Server</RootNamespace>
         <IsPackable>false</IsPackable>
         <NoWarn>$(NoWarn);1591</NoWarn>
+      <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
