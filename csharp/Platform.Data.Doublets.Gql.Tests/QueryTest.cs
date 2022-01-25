@@ -7,7 +7,7 @@ using Platform.Data.Doublets.Memory.United.Generic;
 using Platform.IO;
 using Platform.Memory;
 using Xunit;
-using TLink = System.UInt64;
+using TLinkAddress = System.UInt64;
 
 namespace Platform.Data.Doublets.Gql.Tests
 {
@@ -15,10 +15,10 @@ namespace Platform.Data.Doublets.Gql.Tests
     {
         public static ILinks<ulong> CreateLinks() => CreateLinks<ulong>(new TemporaryFile());
 
-        public static ILinks<TLink> CreateLinks<TLink>(string dataDBFilename)
+        public static ILinks<TLinkAddress> CreateLinks<TLinkAddress>(string dataDBFilename)
         {
-            var linksConstants = new LinksConstants<TLink>(true);
-            return new UnitedMemoryLinks<TLink>(new FileMappedResizableDirectMemory(dataDBFilename), UnitedMemoryLinks<TLink>.DefaultLinksSizeStep, linksConstants, IndexTreeType.Default);
+            var linksConstants = new LinksConstants<TLinkAddress>(true);
+            return new UnitedMemoryLinks<TLinkAddress>(new FileMappedResizableDirectMemory(dataDBFilename), UnitedMemoryLinks<TLinkAddress>.DefaultLinksSizeStep, linksConstants, IndexTreeType.Default);
         }
 
         [InlineData(@"
