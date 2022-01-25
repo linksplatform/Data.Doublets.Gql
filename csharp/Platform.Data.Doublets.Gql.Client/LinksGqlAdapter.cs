@@ -5,7 +5,7 @@ using Platform.Threading;
 
 namespace Platform.Data.Doublets.Gql.Client
 {
-    public class LinksGqlAdapter<TLink> : ILinks<TLink>
+    public class LinksGqlAdapter<TLink> : ILinks<TLink> where TLink : struct
     {
         private readonly IEqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
         private readonly IGraphQLClient _graphQlClient;
@@ -51,8 +51,8 @@ namespace Platform.Data.Doublets.Gql.Client
                 Query = @"
                         query GetLinks ($id: Long, $from_id: Long, $to_id: Long) {
                           links(where: { id: {_eq: $id}, from_id: {_eq: $from_id}, to_id: {_eq: $to_id} }) {
-                            id
-                            from_id
+                            id,
+                            from_id,
                             to_id
                           }
                         }",
@@ -87,7 +87,9 @@ namespace Platform.Data.Doublets.Gql.Client
                 Query = @"
                         mutation CreateLink ($from_id: Long!, $to_id: Long!) {
                           insert_links_one(object: {from_id: $from_id, to_id: $to_id}) {
-                            id
+                            id,
+                            from_id,
+                            to_id
                           }
                         }",
                 OperationName = "CreateLink",
@@ -118,7 +120,9 @@ namespace Platform.Data.Doublets.Gql.Client
                         mutation UpdateLink ($from_id: Long!, $to_id: Long!, $substitution_from_id: Long!, $substitution_to_id: Long!) {
                           update_links(_set: { from_id: $substitution_from_id, to_id: $substitution_to_id }, where: { from_id: { _eq: $from_id }, to_id: { _eq: $to_id } }) {
                             returning {
-                              id
+                            id,
+                            from_id,
+                            to_id
                             }
                           }
                         }",
@@ -133,10 +137,10 @@ namespace Platform.Data.Doublets.Gql.Client
                     throw new Exception(responseResultError.Message);
                 }
             }
-            return handler(restrictions, substitution);
+            return handler?.Invoke(restrictions, substitution) ?? Constants.Continue;
         }
 
-        public TLink Delete(IList<TLink>? restrictions)
+        public TLink Delete(IList<TLink>? restrictions, WriteHandler<TLink>? handler)
         {
             var restrictionLink = new Link<TLink>(restrictions);
             var isIndexNull = _equalityComparer.Equals(Constants.Null, restrictionLink.Index);
@@ -179,7 +183,7 @@ namespace Platform.Data.Doublets.Gql.Client
                 }
             }
             // Use returning[0] cause right now it is not possible to return multiple links
-            return responseResult.Data.delete_links.returning[0].id;
+            return handler?.Invoke((Link<TLink>)responseResult.Data.delete_links.returning[0], null);
         }
 
         public struct CreateResponseType
