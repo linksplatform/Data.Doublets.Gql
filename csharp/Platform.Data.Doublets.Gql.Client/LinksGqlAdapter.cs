@@ -20,6 +20,7 @@ namespace Platform.Data.Doublets.Gql.Client
 
         public TLink Count(IList<TLink>? restriction)
         {
+            var restrictionLink = new Link<TLink>(restriction);
             var countRequest = new GraphQLRequest
             {
                 Query = @"
@@ -29,7 +30,7 @@ namespace Platform.Data.Doublets.Gql.Client
                           }
                         }",
                 OperationName = "CountLinks",
-                Variables = new { id = restriction[Constants.IndexPart], from_id = restriction[Constants.SourcePart], to_id = restriction[Constants.TargetPart] }
+                Variables = new { id = restrictionLink.Index, from_id = restrictionLink.Source, to_id = restrictionLink.Target }
             };
             var responseResult = _graphQlClient.SendQueryAsync<CountLinksResponseType>(countRequest).Result;
             if (responseResult.Errors?.Length > 0)
@@ -44,6 +45,7 @@ namespace Platform.Data.Doublets.Gql.Client
 
         public TLink Each(IList<TLink>? restrictions, ReadHandler<TLink>? handler)
         {
+            var restricionLink = new Link<TLink>(restrictions);
             var personAndFilmsRequest = new GraphQLRequest
             {
                 Query = @"
@@ -55,7 +57,7 @@ namespace Platform.Data.Doublets.Gql.Client
                           }
                         }",
                 OperationName = "GetLinks",
-                Variables = new { id = restrictions[Constants.IndexPart], from_id = restrictions[Constants.SourcePart], to_id = restrictions[Constants.TargetPart] }
+                Variables = new { id = restricionLink.Index, from_id = restricionLink.Source, to_id = restricionLink.Target }
             };
             var responseResult = _graphQlClient.SendQueryAsync<GetLinksResponseType>(personAndFilmsRequest).Result;
             if (responseResult.Errors?.Length > 0)
@@ -76,8 +78,10 @@ namespace Platform.Data.Doublets.Gql.Client
             return Constants.Continue;
         }
 
+
         public TLink Create(IList<TLink>? restrictions, WriteHandler<TLink>? handler)
         {
+            var restrictionLink = new Link<TLink>(restrictions);
             var createLinkRequest = new GraphQLRequest
             {
                 Query = @"
@@ -87,7 +91,7 @@ namespace Platform.Data.Doublets.Gql.Client
                           }
                         }",
                 OperationName = "CreateLink",
-                Variables = new { from_id = restrictions[0], to_id = restrictions[1] }
+                Variables = new { from_id = restrictionLink.Source, to_id = restrictionLink.Target }
             };
             var responseResult = _graphQlClient.SendMutationAsync<CreateResponseType>(createLinkRequest).AwaitResult();
             if (!responseResult.Errors.IsNullOrEmpty())
@@ -106,6 +110,8 @@ namespace Platform.Data.Doublets.Gql.Client
 
         public TLink Update(IList<TLink>? restrictions, IList<TLink>? substitution, WriteHandler<TLink>? handler)
         {
+            var restrictionLink = new Link<TLink>(restrictions);
+            var substitutionLink = new Link<TLink>(substitution);
             var updateLinkRequest = new GraphQLRequest
             {
                 Query = @"
@@ -117,7 +123,7 @@ namespace Platform.Data.Doublets.Gql.Client
                           }
                         }",
                 OperationName = "UpdateLink",
-                Variables = new { from_id = restrictions[0], to_id = restrictions[1], substitution_from_id = substitution[0], substitution_to_id = substitution[1] }
+                Variables = new { from_id = restrictionLink.Source, to_id = restrictionLink.Target, substitution_from_id = substitutionLink.Source, substitution_to_id = substitutionLink.Target }
             };
             var responseResult = _graphQlClient.SendMutationAsync<CreateResponseType>(updateLinkRequest).AwaitResult();
             if (!responseResult.Errors.IsNullOrEmpty())
@@ -130,66 +136,40 @@ namespace Platform.Data.Doublets.Gql.Client
             return handler(restrictions, substitution);
         }
 
-        public TLink Create(IList<TLink>? restrictions)
-        {
-            TLink result = default;
-            Create(restrictions, (before, after) =>
-            {
-                result = after[Constants.IndexPart];
-                return Constants.Continue;
-            });
-            return result;
-        }
-
-        public TLink Update(IList<TLink>? restrictions, IList<TLink>? substitution)
-        {
-            TLink result = default;
-            Update(restrictions, substitution, (_, after) =>
-            {
-                result = after[Constants.IndexPart];
-                return Constants.Continue;
-            });
-            return result;
-        }
-
         public TLink Delete(IList<TLink>? restrictions)
         {
-            var index = restrictions[0];
-            var source = restrictions[1];
-            var target = restrictions[2];
-            var isIndexNull = _equalityComparer.Equals(index, Constants.Null);
-            var isSourceNull = _equalityComparer.Equals(source, Constants.Null);
-            var isTargetNull = _equalityComparer.Equals(target, Constants.Null);
-            var isSourceAny = _equalityComparer.Equals(target, Constants.Any);
-            var isTargetAny = _equalityComparer.Equals(target, Constants.Any);
+            var restrictionLink = new Link<TLink>(restrictions);
+            var isIndexNull = _equalityComparer.Equals(Constants.Null, restrictionLink.Index);
+            var isIndexAny = _equalityComparer.Equals(Constants.Null, restrictionLink.Index);
+            var isIndexDefault = _equalityComparer.Equals(default, restrictionLink.Index);
             string query;
-            if (!isIndexNull)
+            if (!isIndexNull && !isIndexAny && !isIndexDefault)
             {
                 query = @"
-                        mutation DeleteLinkWithSourceAndTarget ($id: Long!){
+                        mutation DeleteLink ($id: Long!){
                           delete_links(where: {id: { _eq: $id } }) {
                             returning {
-                              id
-                            }
-                          }
-                        }";
-            }
-            else if (!isSourceNull && !isTargetNull && !isSourceAny && !isTargetAny)
-            {
-                query = @"
-                        mutation DeleteLinkWithSourceAndTarget ($from_id: Long!, $to_id: Long!){
-                          delete_links(where: { from_id: { _eq: $from_id }, to_id: { _eq: $to_id } }) {
-                            returning {
-                              id
+                              id,
+                              from_id,
+                              to_id
                             }
                           }
                         }";
             }
             else
             {
-                throw new NotImplementedException();
+                query = @"
+                        mutation DeleteLinkWithSourceAndTarget ($from_id: Long!, $to_id: Long!){
+                          delete_links(where: { from_id: { _eq: $from_id }, to_id: { _eq: $to_id } }) {
+                            returning {
+                              id,
+                              from_id,
+                              to_id
+                            }
+                          }
+                        }";
             }
-            var updateLinkRequest = new GraphQLRequest { Query = query, OperationName = "DeleteLink", Variables = new { id = index, from_id = source, to_id = target } };
+            var updateLinkRequest = new GraphQLRequest { Query = query, OperationName = "DeleteLink", Variables = new { id = restrictionLink.Index, from_id = restrictionLink.Source, to_id = restrictionLink.Target } };
             var responseResult = _graphQlClient.SendMutationAsync<DeleteResponseType>(updateLinkRequest).AwaitResult();
             if (!responseResult.Errors.IsNullOrEmpty())
             {
