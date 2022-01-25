@@ -18,7 +18,7 @@ namespace Platform.Data.Doublets.Gql.Client
 
         public LinksConstants<TLink> Constants { get; }
 
-        public TLink Count(IList<TLink> restriction)
+        public TLink Count(IList<TLink>? restriction)
         {
             var countRequest = new GraphQLRequest
             {
@@ -42,7 +42,7 @@ namespace Platform.Data.Doublets.Gql.Client
             return (TLink)(object)Convert.ToUInt64(responseResult.Data.links.Count);
         }
 
-        public TLink Each(IList<TLink> restrictions, ReadHandler<TLink> handler)
+        public TLink Each(IList<TLink>? restrictions, ReadHandler<TLink>? handler)
         {
             var personAndFilmsRequest = new GraphQLRequest
             {
@@ -76,7 +76,7 @@ namespace Platform.Data.Doublets.Gql.Client
             return Constants.Continue;
         }
 
-        public TLink Create(IList<TLink> restrictions, WriteHandler<TLink> handler)
+        public TLink Create(IList<TLink>? restrictions, WriteHandler<TLink>? handler)
         {
             var createLinkRequest = new GraphQLRequest
             {
@@ -104,7 +104,7 @@ namespace Platform.Data.Doublets.Gql.Client
             return responseResult.Data.insert_links_one.id;
         }
 
-        public TLink Update(IList<TLink> restrictions, IList<TLink> substitution, WriteHandler<TLink> handler)
+        public TLink Update(IList<TLink>? restrictions, IList<TLink>? substitution, WriteHandler<TLink>? handler)
         {
             var updateLinkRequest = new GraphQLRequest
             {
@@ -130,7 +130,7 @@ namespace Platform.Data.Doublets.Gql.Client
             return handler(restrictions, substitution);
         }
 
-        public TLink Create(IList<TLink> restrictions)
+        public TLink Create(IList<TLink>? restrictions)
         {
             TLink result = default;
             Create(restrictions, (before, after) =>
@@ -141,7 +141,7 @@ namespace Platform.Data.Doublets.Gql.Client
             return result;
         }
 
-        public TLink Update(IList<TLink> restrictions, IList<TLink> substitution)
+        public TLink Update(IList<TLink>? restrictions, IList<TLink>? substitution)
         {
             TLink result = default;
             Update(restrictions, substitution, (_, after) =>
@@ -152,7 +152,7 @@ namespace Platform.Data.Doublets.Gql.Client
             return result;
         }
 
-        public TLink Delete(IList<TLink> restrictions)
+        public TLink Delete(IList<TLink>? restrictions)
         {
             var index = restrictions[0];
             var source = restrictions[1];
