@@ -63,8 +63,8 @@ dotnet run -f net5 -c Release db.links --urls http://0.0.0.0:29018
 {
   links(
     where: { id: { _eq: 1 }, from_id: { _eq: 1 }, to_id: { _eq: 1 } }
-    distinct_on: [FROM_ID]
-    order_by: { id: ASC }
+    distinct_on: [from_id]
+    order_by: { id: asc }
     offset: 0
     limit: 1
   ) {
@@ -99,8 +99,8 @@ dotnet run -f net5 -c Release db.links --urls http://0.0.0.0:29018
 {
   links(
     where: { id: { _eq: 1 }, from_id: { _eq: 1 }, to_id: { _eq: 1 } }
-    distinct_on: [FROM_ID]
-    order_by: { id: ASC }
+    distinct_on: [from_id]
+    order_by: { id: asc }
     offset: 0
     limit: 1
   ) {
@@ -113,8 +113,8 @@ dotnet run -f net5 -c Release db.links --urls http://0.0.0.0:29018
     }
     out(
       where: { from_id: { _eq: 1 }, to_id: { _eq: 1 } }
-      distinct_on: [FROM_ID]
-      order_by: { id: ASC }
+      distinct_on: [from_id]
+      order_by: { id: asc }
       offset: 0
       limit: 1
     ) {
@@ -130,8 +130,8 @@ dotnet run -f net5 -c Release db.links --urls http://0.0.0.0:29018
     }
     in(
       where: { from_id: { _eq: 1 }, to_id: { _eq: 1 } }
-      distinct_on: [FROM_ID]
-      order_by: { id: ASC }
+      distinct_on: [from_id]
+      order_by: { id: asc }
       offset: 0
       limit: 1
     ) {
