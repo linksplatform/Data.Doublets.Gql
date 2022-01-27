@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
 """Testing around GraphQlClient.
 """
-import unittest
-from sys import path
+from unittest import TestCase, main
 
-path.append('../')
-from linksgql import GraphQlClient, GraphQlQueryError
+from graphql import GraphQLError
+
+from __init__ import DeepClient
 
 
-class GraphQlClientTest(unittest.TestCase):
+class GraphQlClientTest(TestCase):
     """Provides GraphQl client testing.
     """
-    client = GraphQlClient("http://localhost:60341/v1/graphql")
+    client = DeepClient("http://localhost:60341/v1/graphql")
 
     def test_query(self):
-        """Test shows what happens on valide query.
+        """Test shows what happens on valid query.
         """
         response = self.client.query('''
             {
@@ -26,19 +26,22 @@ class GraphQlClientTest(unittest.TestCase):
             }''')
         print(response)
 
-    def test_query_error_handling(self):
-        """Test shows what happens on invalide query.
+    def test_failure_query(self):
+        """Test shows what happens on valid query.
         """
         try:
             response = self.client.query('''
                 {
                   links {
-                    a
+                    error
+                    from_id
+                    to_id
                   }
                 }''')
-        except GraphQlQueryError as e:
-            print('GraphQlQueryError: ', e)
+            print(response)
+        except GraphQLError as e:
+            print('error: ', e)
 
 
 if __name__ == '__main__':
-    unittest.main()
+    main()

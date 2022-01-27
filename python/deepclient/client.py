@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """This module provides working with GraphQlClient.
 """
-from typing import NoReturn
+from typing import NoReturn, Dict, Any
 
-from requests import Session
-from .exceptions import GraphQlQueryError
+from gql import Client, gql
+from gql.transport.aiohttp import AIOHTTPTransport
 
 
-class GraphQlClient:
+class DeepClient:
     """Provides working with GraphQl server.
     """
     def __init__(self, address: str) -> NoReturn:
@@ -16,14 +16,15 @@ class GraphQlClient:
         :param address: graphql server address.
         """
         self.address = address
-        self.session = Session()
+        self.client = Client(
+            transport=AIOHTTPTransport(url=self.address),
+            fetch_schema_from_transport=True
+        )
 
-    def query(self, q: str) -> dict:
+    def query(self, q: str) -> Dict[str, Any]:
         """Sends the query to GraphQl server.
 
         :param q: GraphQL query.
         """
-        response = self.session.post(self.address, json={'query': q}).json()
-        if "errors" in response:
-            raise GraphQlQueryError(response["errors"])
-        return response
+        return self.client.execute(gql(q))
+

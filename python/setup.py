@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="linksgql",
-    version="0.1.0",
+    name="deepclient",
+    version="0.1.2",
     author="Ethosa",
     author_email="social.ethosa@gmail.com",
     description="Data.Doublets.Gql",
@@ -22,7 +22,7 @@ setuptools.setup(
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
-        "License :: OSI Approved :: GNU Affero General Public License v3",
+        "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
         "Operating System :: OS Independent",
     ],
     project_urls={
@@ -31,6 +31,6 @@ setuptools.setup(
     },
     python_requires=">=3",
     install_requires=[
-        "graphene",  # GraphQL
+        'gql',
     ]
 )
