@@ -1,26 +1,29 @@
 ﻿using GraphQL;
 using GraphQL.Client.Abstractions;
-using Platform.Collections;
+using Platform.Delegates;
 using Platform.Threading;
 
 namespace Platform.Data.Doublets.Gql.Client
 {
-    public class LinksGqlAdapter<TLink> : ILinks<TLink> where TLink : struct
+    public class LinksGqlAdapter<TLinkAddress> : ILinks<TLinkAddress> where TLinkAddress : struct
     {
-        private readonly IEqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
+        private readonly IEqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
         private readonly IGraphQLClient _graphQlClient;
 
-        public LinksGqlAdapter(IGraphQLClient graphQlClient, LinksConstants<TLink> constants)
+        public LinksGqlAdapter(IGraphQLClient graphQlClient, LinksConstants<TLinkAddress> constants)
         {
             _graphQlClient = graphQlClient;
             Constants = constants;
         }
 
-        public LinksConstants<TLink> Constants { get; }
+        public LinksConstants<TLinkAddress> Constants { get; }
 
-        public TLink Count(IList<TLink>? restriction)
+        public TLinkAddress Count(IList<TLinkAddress>? restriction)
         {
-            var restrictionLink = new Link<TLink>(restriction);
+            var restrictionLink = new Link<TLinkAddress>(restriction);
+            TLinkAddress? index = _equalityComparer.Equals(default, restrictionLink.Index) ? null : restrictionLink.Index;
+            TLinkAddress? source = _equalityComparer.Equals(default, restrictionLink.Source) ? null : restrictionLink.Source;
+            TLinkAddress? target = _equalityComparer.Equals(default, restrictionLink.Target) ? null : restrictionLink.Target;
             var countRequest = new GraphQLRequest
             {
                 Query = @"
@@ -30,22 +33,22 @@ namespace Platform.Data.Doublets.Gql.Client
                           }
                         }",
                 OperationName = "CountLinks",
-                Variables = new { id = restrictionLink.Index, from_id = restrictionLink.Source, to_id = restrictionLink.Target }
+                Variables = new { id = index, from_id = source, to_id = target }
             };
             var responseResult = _graphQlClient.SendQueryAsync<CountLinksResponseType>(countRequest).Result;
-            if (responseResult.Errors?.Length > 0)
+            if (responseResult.Errors != null)
             {
                 foreach (var error in responseResult.Errors)
                 {
                     throw new Exception(error.Message);
                 }
             }
-            return (TLink)(object)Convert.ToUInt64(responseResult.Data.links.Count);
+            return (TLinkAddress)(object)Convert.ToUInt64(responseResult.Data.links.Count);
         }
 
-        public TLink Each(IList<TLink>? restrictions, ReadHandler<TLink>? handler)
+        public TLinkAddress Each(IList<TLinkAddress>? restrictions, ReadHandler<TLinkAddress>? handler)
         {
-            var restricionLink = new Link<TLink>(restrictions);
+            var restrictionLink = new Link<TLinkAddress>(restrictions);
             var personAndFilmsRequest = new GraphQLRequest
             {
                 Query = @"
@@ -57,19 +60,20 @@ namespace Platform.Data.Doublets.Gql.Client
                           }
                         }",
                 OperationName = "GetLinks",
-                Variables = new { id = restricionLink.Index, from_id = restricionLink.Source, to_id = restricionLink.Target }
+                Variables = (GqlLink)restrictionLink
             };
-            var responseResult = _graphQlClient.SendQueryAsync<GetLinksResponseType>(personAndFilmsRequest).Result;
-            if (responseResult.Errors?.Length > 0)
+            var responseResult = _graphQlClient.SendQueryAsync<GqlLink[]>(personAndFilmsRequest).Result;
+            if (responseResult.Errors != null)
             {
                 foreach (var error in responseResult.Errors)
                 {
                     throw new Exception(error.Message);
                 }
             }
-            foreach (var link in responseResult.Data.links)
+            for (var i = 0; i < responseResult.Data.Length; i++)
             {
-                var handlerResult = handler(new Link<TLink>(link.id, link.from_id, link.to_id));
+                var link = responseResult.Data[i];
+                var handlerResult = handler(new Link<TLinkAddress>(link.id, link.from_id, link.to_id));
                 if (_equalityComparer.Equals(Constants.Break, handlerResult))
                 {
                     return handlerResult;
@@ -79,103 +83,109 @@ namespace Platform.Data.Doublets.Gql.Client
         }
 
 
-        public TLink Create(IList<TLink>? restrictions, WriteHandler<TLink>? handler)
+        public TLinkAddress Create(IList<TLinkAddress>? substitution, WriteHandler<TLinkAddress>? handler)
         {
-            var restrictionLink = new Link<TLink>(restrictions);
+            var substitutionLink = new Link<TLinkAddress>(substitution);
             var createLinkRequest = new GraphQLRequest
             {
                 Query = @"
                         mutation CreateLink ($from_id: Long!, $to_id: Long!) {
                           insert_links_one(object: {from_id: $from_id, to_id: $to_id}) {
-                            id,
-                            from_id,
-                            to_id
+                              id,
+                              from_id
+                              to_id
                           }
                         }",
                 OperationName = "CreateLink",
-                Variables = new { from_id = restrictionLink.Source, to_id = restrictionLink.Target }
+                Variables = (GqlLink)substitutionLink
             };
             var responseResult = _graphQlClient.SendMutationAsync<CreateResponseType>(createLinkRequest).AwaitResult();
-            if (!responseResult.Errors.IsNullOrEmpty())
+            if (responseResult.Errors != null)
             {
                 foreach (var responseResultError in responseResult.Errors!)
                 {
                     throw new Exception(responseResultError.Message);
                 }
             }
-            var id = responseResult.Data.insert_links_one.id;
-            var fromId = responseResult.Data.insert_links_one.from_id;
-            var toId = responseResult.Data.insert_links_one.to_id;
-            handler(Link<TLink>.Null, new Link<TLink>(id, fromId, toId));
-            return responseResult.Data.insert_links_one.id;
+            return handler?.Invoke(null, (Link<TLinkAddress>)responseResult.Data.insert_links_one) ?? Constants.Continue;
         }
 
-        public TLink Update(IList<TLink>? restrictions, IList<TLink>? substitution, WriteHandler<TLink>? handler)
+        public TLinkAddress Update(IList<TLinkAddress>? restriction, IList<TLinkAddress>? substitution, WriteHandler<TLinkAddress>? handler)
         {
-            var restrictionLink = new Link<TLink>(restrictions);
-            var substitutionLink = new Link<TLink>(substitution);
-            var updateLinkRequest = new GraphQLRequest
-            {
-                Query = @"
+            var restrictionLink = new Link<TLinkAddress>(restriction);
+            var substitutionLink = new Link<TLinkAddress>(substitution);
+            var query = _equalityComparer.Equals(default, restrictionLink.Index)
+                ? @"
                         mutation UpdateLink ($from_id: Long!, $to_id: Long!, $substitution_from_id: Long!, $substitution_to_id: Long!) {
                           update_links(_set: { from_id: $substitution_from_id, to_id: $substitution_to_id }, where: { from_id: { _eq: $from_id }, to_id: { _eq: $to_id } }) {
                             returning {
-                            id,
-                            from_id,
-                            to_id
+                              id,
+                              from_id
+                              to_id
                             }
                           }
-                        }",
+                        }"
+                : @"
+                        mutation UpdateLink ($id: Long!, $substitution_from_id: Long!, $substitution_to_id: Long!) {
+                          update_links(_set: { id: $id, from_id: $substitution_from_id, to_id: $substitution_to_id }, where: { id: { _eq: $id } }) {
+                            returning {
+                              id,
+                              from_id
+                              to_id
+                            }
+                          }
+                        }";
+            var updateLinkRequest = new GraphQLRequest
+            {
+                Query = query,
                 OperationName = "UpdateLink",
-                Variables = new { from_id = restrictionLink.Source, to_id = restrictionLink.Target, substitution_from_id = substitutionLink.Source, substitution_to_id = substitutionLink.Target }
+                Variables = new
+                {
+                    id = restrictionLink.Index,
+                    from_id = restrictionLink.Source,
+                    to_id = restrictionLink.Target,
+                    substitution_from_id = substitutionLink.Source,
+                    substitution_to_id = substitutionLink.Target
+                }
             };
-            var responseResult = _graphQlClient.SendMutationAsync<CreateResponseType>(updateLinkRequest).AwaitResult();
-            if (!responseResult.Errors.IsNullOrEmpty())
+            var responseResult = _graphQlClient.SendMutationAsync<UpdateResponseType>(updateLinkRequest).AwaitResult();
+            if (responseResult.Errors != null)
             {
                 foreach (var responseResultError in responseResult.Errors!)
                 {
                     throw new Exception(responseResultError.Message);
                 }
             }
-            return handler?.Invoke(restrictions, substitution) ?? Constants.Continue;
+            return handler?.Invoke(restriction, (Link<TLinkAddress>)responseResult.Data.update_links.returning.First()) ?? Constants.Continue;
         }
 
-        public TLink Delete(IList<TLink>? restrictions, WriteHandler<TLink>? handler)
+        public TLinkAddress Delete(IList<TLinkAddress>? restriction, WriteHandler<TLinkAddress>? handler)
         {
-            var restrictionLink = new Link<TLink>(restrictions);
-            var isIndexNull = _equalityComparer.Equals(Constants.Null, restrictionLink.Index);
-            var isIndexAny = _equalityComparer.Equals(Constants.Null, restrictionLink.Index);
-            var isIndexDefault = _equalityComparer.Equals(default, restrictionLink.Index);
-            string query;
-            if (!isIndexNull && !isIndexAny && !isIndexDefault)
-            {
-                query = @"
+            var restrictionLink = new Link<TLinkAddress>(restriction);
+            var query = _equalityComparer.Equals(default, restrictionLink.Index)
+                ? @"
+                        mutation DeleteLink ($from_id: Long!, $to_id: Long!){
+                          delete_links(where: { from_id: { _eq: $from_id }, to_id: { _eq: $to_id } }) {
+                            returning {
+                              id,
+                              from_id
+                              to_id
+                            }
+                          }
+                        }"
+                : @"
                         mutation DeleteLink ($id: Long!){
                           delete_links(where: {id: { _eq: $id } }) {
                             returning {
                               id,
-                              from_id,
+                              from_id
                               to_id
                             }
                           }
                         }";
-            }
-            else
-            {
-                query = @"
-                        mutation DeleteLinkWithSourceAndTarget ($from_id: Long!, $to_id: Long!){
-                          delete_links(where: { from_id: { _eq: $from_id }, to_id: { _eq: $to_id } }) {
-                            returning {
-                              id,
-                              from_id,
-                              to_id
-                            }
-                          }
-                        }";
-            }
-            var updateLinkRequest = new GraphQLRequest { Query = query, OperationName = "DeleteLink", Variables = new { id = restrictionLink.Index, from_id = restrictionLink.Source, to_id = restrictionLink.Target } };
+            var updateLinkRequest = new GraphQLRequest { Query = query, OperationName = "DeleteLink", Variables = (GqlLink)restrictionLink };
             var responseResult = _graphQlClient.SendMutationAsync<DeleteResponseType>(updateLinkRequest).AwaitResult();
-            if (!responseResult.Errors.IsNullOrEmpty())
+            if (responseResult.Errors != null)
             {
                 foreach (var responseResultError in responseResult.Errors!)
                 {
@@ -183,41 +193,82 @@ namespace Platform.Data.Doublets.Gql.Client
                 }
             }
             // Use returning[0] cause right now it is not possible to return multiple links
-            return handler?.Invoke((Link<TLink>)responseResult.Data.delete_links.returning[0], null);
+            return handler?.Invoke((Link<TLinkAddress>)responseResult.Data.delete_links.returning[0], null) ?? Constants.Continue;
         }
 
-        public struct CreateResponseType
+        private struct GqlLink
         {
-            public Link insert_links_one { get; set; }
+            public TLinkAddress id;
+            public TLinkAddress from_id;
+            public TLinkAddress to_id;
+            public static implicit operator Link<TLinkAddress>(GqlLink gqlLink) => new(gqlLink.id, gqlLink.from_id, gqlLink.to_id);
+
+            public static implicit operator GqlLink(Link<TLinkAddress> link) => new() { id = link.Index, from_id = link.Source, to_id = link.Target };
+            // public Link(params TLinkAddress[] values) => SetValues(values, out Index, out Source, out Target);
+            // public Link(IList<TLinkAddress> values) => SetValues(values, out Index, out Source, out Target);
+            // public Link(object other)
+            // {
+            //     if (other is Link<TLinkAddress> otherLink)
+            //     {
+            //         SetValues(ref otherLink, out Index, out Source, out Target);
+            //     }
+            //     else if(other is IList<TLinkAddress> otherList)
+            //     {
+            //         SetValues(otherList, out Index, out Source, out Target);
+            //     }
+            //     else
+            //     {
+            //         throw new NotSupportedException();
+            //     }
+            // }
+            // public Link(ref Link<TLinkAddress> other) => SetValues(ref other, out Index, out Source, out Target);
+            // public Link(TLinkAddress index, TLinkAddress source, TLinkAddress target)
+            // {
+            //     Index = index;
+            //     Source = source;
+            //     Target = target;
+            // }
+            // private static void SetValues(ref Link<TLinkAddress> other, out TLinkAddress index, out TLinkAddress source, out TLinkAddress target)
+            // {
+            //     index = other.Index;
+            //     source = other.Source;
+            //     target = other.Target;
+            // }
         }
 
-        public struct DeleteResponseType
+        private struct CreateResponseType
+        {
+            public GqlLink insert_links_one { get; set; }
+        }
+
+        private struct UpdateResponseType
+        {
+            public UpdateLinks update_links { get; set; }
+
+            public struct UpdateLinks
+            {
+                public List<GqlLink> returning { get; set; }
+            }
+        }
+
+        private struct DeleteResponseType
         {
             public DeleteLinks delete_links { get; set; }
 
             public struct DeleteLinks
             {
-                public List<Link> returning { get; set; }
+                public List<GqlLink> returning { get; set; }
             }
         }
 
-        public struct CountLinksResponseType
+        private struct CountLinksResponseType
         {
-            public List<Link> links { get; set; }
+            public List<GqlLink> links { get; set; }
         }
 
-        public struct GetLinksResponseType
+        private struct GetLinksResponseType
         {
-            public List<Link> links { get; set; }
-        }
-
-        public struct Link
-        {
-            public TLink id { get; set; }
-
-            public TLink from_id { get; set; }
-
-            public TLink to_id { get; set; }
+            public List<GqlLink> links { get; set; }
         }
     }
 }
