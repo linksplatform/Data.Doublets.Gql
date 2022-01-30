@@ -40,7 +40,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                 var response = new LinksMutationResponse { returning = new List<Links>() };
                 foreach (var link in LinksQuery.GetLinks(context, links))
                 {
-                    var updatedLink = links.UpdateOrCreateOrGet((ulong)link.from_id, (ulong)link.to_id, (ulong)set.from_id, (ulong)set.to_id);
+                    var updatedLink = links.Update((ulong)link.from_id, (ulong)link.to_id, (ulong)set.from_id, (ulong)set.to_id);
                     response.returning.Add(new Links(links.GetLink(updatedLink)));
                 }
                 response.affected_rows = response.returning.Count;
