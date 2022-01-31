@@ -1,6 +1,7 @@
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.Newtonsoft;
 using Platform.Data.Doublets.Gql.Client;
+using Platform.Data.Doublets.Gql.Server;
 using Xunit;
 using TLinkAddress = System.UInt64;
 
@@ -14,6 +15,7 @@ public class ClientTests
 
     public ClientTests()
     {
+        Program.Main(new[] { "db.links" });
         GraphQLHttpClient graphQlHttpClient = new("http://localhost:60341/v1/graphql", new NewtonsoftJsonSerializer());
         _linksConstants = new LinksConstants<ulong>(true);
         _linksGqlAdapter = new LinksGqlAdapter<ulong>(graphQlHttpClient, _linksConstants);
