@@ -2,8 +2,8 @@
 
     <PropertyGroup>
         <TargetFrameworks>net5;net6</TargetFrameworks>
-        <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
