@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFrameworkss>net5;net6</TargetFrameworkss>
+        <TargetFrameworks>net5;net6</TargetFrameworks>
         <AssemblyName>Platform.Data.Doublets.Gql.Server</AssemblyName>
         <RootNamespace>Platform.Data.Doublets.Gql.Server</RootNamespace>
         <IsPackable>false</IsPackable>
