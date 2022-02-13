@@ -15,7 +15,7 @@ namespace Platform.Data.Doublets.Gql.Tests
     {
         public static ILinks<ulong> CreateLinks() => CreateLinks<ulong>(new TemporaryFile());
 
-        public static ILinks<TLinkAddress> CreateLinks<TLinkAddress>(string dataDBFilename) where TLinkAddress : struct
+        public static ILinks<TLinkAddress> CreateLinks<TLinkAddress>(string dataDBFilename)
         {
             var linksConstants = new LinksConstants<TLinkAddress>(true);
             return new UnitedMemoryLinks<TLinkAddress>(new FileMappedResizableDirectMemory(dataDBFilename), UnitedMemoryLinks<TLinkAddress>.DefaultLinksSizeStep, linksConstants, IndexTreeType.Default);
