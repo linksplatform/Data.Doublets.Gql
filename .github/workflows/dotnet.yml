@@ -20,7 +20,7 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore -f net5
+      run: dotnet restore
     - name: Build
       run: dotnet build --no-restore -f net5
     - name: Test
