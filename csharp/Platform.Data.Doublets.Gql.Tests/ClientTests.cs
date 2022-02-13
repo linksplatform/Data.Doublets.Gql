@@ -21,33 +21,24 @@ public class ClientTests
 {
     private readonly ulong _any;
     private readonly LinksGqlAdapter<ulong> _linksGqlAdapter;
-
-
-    public ClientTests()
-    {
-        var linksConstants = new LinksConstants<TLinkAddress>(enableExternalReferencesSupport: true);
-        _linksGqlAdapter = new LinksGqlAdapter<TLinkAddress>(new GraphQLHttpClient("http://localhost:60341/v1/graphql", new NewtonsoftJsonSerializer()), linksConstants);
-        var processInfo = new ProcessStartInfo();
-        processInfo.FileName = "dotnet";
-        processInfo.Arguments = $"run db.links";
-        processInfo.WorkingDirectory = Path.GetDirectoryName(Assembly.GetAssembly(typeof(Server.Program)).Location);
-        processInfo.UseShellExecute = false;
-        var a = Process.Start(processInfo);
-    }
+    private readonly Process? _serverProcess;
 
     private void TestCud()
     {
+        var graphQlClient = new GraphQLHttpClient(new Uri("http://localhost:60341/v1/graphql"), new NewtonsoftJsonSerializer());
+        var linksGqlAdapter = new LinksGqlAdapter<TLinkAddress>(graphQlClient, new LinksConstants<TLinkAddress>(true));
+
         ulong linksAmount = 5;
         // Create
         for (ulong i = 1; i <= linksAmount; i++)
         {
             ulong one = 1;
             // Create
-            var createdLink = _linksGqlAdapter.CreateAndUpdate(one, i);
+            var createdLink = linksGqlAdapter.CreateAndUpdate(one, i);
             // Count
             Assert.Equal(i, createdLink);
-            Assert.Equal(i, _linksGqlAdapter.Count());
-            Assert.Equal(i, _linksGqlAdapter.Count(one, _any));
+            Assert.Equal(i, linksGqlAdapter.Count());
+            Assert.Equal(i, linksGqlAdapter.Count(one, _any));
         }
     }
 
