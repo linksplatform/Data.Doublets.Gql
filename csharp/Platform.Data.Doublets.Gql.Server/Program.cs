@@ -9,7 +9,7 @@ namespace Platform.Data.Doublets.Gql.Server
 {
     public class Program
     {
-        public static int Main(string[] args)
+        public static int Main(params string[] args)
         {
             Log.Logger = new LoggerConfiguration().MinimumLevel.Debug().MinimumLevel.Override("Microsoft", LogEventLevel.Information).Enrich.FromLogContext().WriteTo.Console().CreateLogger();
             try
