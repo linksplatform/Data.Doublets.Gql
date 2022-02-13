@@ -1,7 +1,17 @@
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.Newtonsoft;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 using Platform.Data.Doublets.Gql.Client;
 using Platform.Data.Doublets.Gql.Server;
+using Platform.Data.Doublets.Memory;
+using Platform.Data.Doublets.Memory.United.Generic;
+using Platform.Memory;
+using Serilog;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 using Xunit;
 using TLinkAddress = System.UInt64;
 
@@ -10,16 +20,19 @@ namespace Platform.Data.Doublets.Gql.Tests;
 public class ClientTests
 {
     private readonly ulong _any;
-    private readonly LinksConstants<ulong> _linksConstants;
     private readonly LinksGqlAdapter<ulong> _linksGqlAdapter;
+
 
     public ClientTests()
     {
-        Server.Program.Main(new[] { "db.links" });
-        GraphQLHttpClient graphQlHttpClient = new("http://localhost:60341/v1/graphql", new NewtonsoftJsonSerializer());
-        _linksConstants = new LinksConstants<ulong>(true);
-        _linksGqlAdapter = new LinksGqlAdapter<ulong>(graphQlHttpClient, _linksConstants);
-        _any = _linksConstants.Any;
+        var linksConstants = new LinksConstants<TLinkAddress>(enableExternalReferencesSupport: true);
+        _linksGqlAdapter = new LinksGqlAdapter<TLinkAddress>(new GraphQLHttpClient("http://localhost:60341/v1/graphql", new NewtonsoftJsonSerializer()), linksConstants);
+        var processInfo = new ProcessStartInfo();
+        processInfo.FileName = "dotnet";
+        processInfo.Arguments = $"run db.links";
+        processInfo.WorkingDirectory = Path.GetDirectoryName(Assembly.GetAssembly(typeof(Server.Program)).Location);
+        processInfo.UseShellExecute = false;
+        var a = Process.Start(processInfo);
     }
 
     private void TestCud()
@@ -50,7 +63,7 @@ public class ClientTests
         _linksGqlAdapter.Each(link =>
         {
             Assert.Equal(++eachIterations, _linksGqlAdapter.GetTarget(link));
-            return _linksConstants.Break;
+            return _linksGqlAdapter.Constants.Break;
         }, new Link<ulong>(_any, _any, _any));
         Assert.Equal(count, eachIterations);
     }
