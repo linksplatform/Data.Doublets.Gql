@@ -2,6 +2,9 @@
 using GraphQL.Client.Abstractions;
 using Platform.Delegates;
 using Platform.Threading;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Platform.Data.Doublets.Gql.Client
 {
