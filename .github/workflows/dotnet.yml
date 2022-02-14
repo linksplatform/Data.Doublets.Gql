@@ -25,3 +25,5 @@ jobs:
       run: dotnet build --no-restore -f net5
     - name: Test
       run: dotnet test --no-build --verbosity normal -f net5
+    - name: TempStep
+      run: dotnet --version
