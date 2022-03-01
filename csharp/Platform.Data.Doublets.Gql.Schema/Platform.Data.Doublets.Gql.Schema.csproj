@@ -11,7 +11,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Platform.Data.Doublets" Version="0.13.0" />
+        <PackageReference Include="Platform.Data.Doublets" Version="0.13.2" />
         <PackageReference Include="GraphQL.Server.Transports.Subscriptions.Abstractions" Version="5.0.2" />
     </ItemGroup>
 

@@ -8,8 +8,7 @@
 
     <ItemGroup>
         <PackageReference Include="GraphQL.Client" Version="4.0.1" />
-        <PackageReference Include="Platform.Data.Doublets" Version="0.13.0" />
-        <PackageReference Include="Platform.Threading" Version="0.3.0" />
+        <PackageReference Include="Platform.Data.Doublets" Version="0.13.2" />
     </ItemGroup>
 
 
