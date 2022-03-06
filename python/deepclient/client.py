@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """This module provides working with GraphQlClient.
 """
-from typing import NoReturn, Dict, Any, Optional, overload
+from typing import NoReturn, Dict, Any, Optional, overload, List, Union
 
 from gql import Client, gql
 from gql.transport.aiohttp import AIOHTTPTransport
@@ -35,10 +35,38 @@ class DeepClient:
 
     def select(
             self,
-            _id: int
+            _id: Union[int, List[int]]
     ) -> Dict[str, Any]:
         """Selects Link from Links DB"""
-        return self.query('{ links { id } }')
+        where = ''
+        if isinstance(_id, int):
+            where = '(where: {id: {_eq: %s}})' % (_id,)
+        elif isinstance(_id, list):
+            where = '(where: {id: {_in: %s}})' % (_id,)
+        return self.query('''
+            {
+                links %s
+                { id type_id from_id to_id }
+            }''' % (where,))
+
+    def select_by_type_id(
+            self,
+            _id: Union[int, List[int]]
+    ) -> Dict[str, Any]:
+        """Selects Link from Links DB by type_id
+
+        :param _id: type_id
+        """
+        where = ''
+        if isinstance(_id, int):
+            where = '(where: {type_id: {_eq: %s}})' % (_id,)
+        elif isinstance(_id, list):
+            where = '(where: {type_id: {_in: %s}})' % (_id,)
+        return self.query('''
+            {
+                links %s
+                { id type_id from_id to_id }
+            }''' % (_id,))
 
     @overload
     def insert(

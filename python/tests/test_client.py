@@ -16,7 +16,7 @@ class GraphQlClientTest(TestCase):
         }
     )
 
-    def test_query(self):
+    def test_1_query(self):
         """Test shows what happens on valid query."""
         response = self.client.query('''
             query MyQuery {
@@ -26,8 +26,8 @@ class GraphQlClientTest(TestCase):
             }''')
         print(response)
 
-    def test_query_failure(self):
-        """Test shows what happens on valid query."""
+    def test_2_query_failure(self):
+        """Test shows what happens on invalid query."""
         try:
             self.client.query('''
                 query MyQuery {
@@ -37,6 +37,13 @@ class GraphQlClientTest(TestCase):
                 }''')
         except GraphQLError as e:
             print('error: ', e)
+
+    def test_3_select(self):
+        print(self.client.select(75))
+        print(self.client.select([1, 2]))
+
+    def test_4_select(self):
+        print(self.client.select_by_type_id(1))
 
 
 if __name__ == '__main__':
