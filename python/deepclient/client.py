@@ -85,7 +85,7 @@ class DeepClient:
         elif isinstance(value, list):
             where = '(where: {%s: {_in: %s}})' % (key, value)
         else:
-            raise DeepClientError('_id param should be int or list of int, but got %s.' % type(_id))
+            raise DeepClientError('_id param should be int or list of int, but got %s.' % type(value))
         return self.query(
             '{ links %s { id type_id from_id to_id %s } }' % (where, ' '.join(args)))
 
