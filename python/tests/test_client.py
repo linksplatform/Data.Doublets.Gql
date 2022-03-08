@@ -65,7 +65,10 @@ class GraphQlClientTest(TestCase):
             response = self.client.insert_one(1, "DeepClientTestType")
             print(response)
         else:
-            response = self.client.insert_one(response['links'][0]['type_id'], "Hello, world!")
+            response = self.client.insert_one(
+                response['links'][0]['id'],
+                {"text": "Hello, world!"},
+                to_id=100, from_id=10)
             print(response)
 
 

@@ -24,6 +24,17 @@ class DeepClient:
             transport=AIOHTTPTransport(url=self.address, headers=headers)
         )
 
+    @staticmethod
+    def convert_to_query(value: Any) -> str:
+        if isinstance(value, str):
+            return 'string: {data: {value: "%s"}}' % (value,)
+        elif isinstance(value, int | float):
+            return 'number: {data: {value: %s}}' % (value,)
+        elif isinstance(value, list | dict | bool):
+            return 'object: {data: {value: %s}}' % (value,)
+        elif value:
+            raise DeepClientError('failure to convert %s type' % type(value))
+
     def query(
             self,
             q: str
@@ -65,12 +76,13 @@ class DeepClient:
         else:
             raise DeepClientError('_id param should be int or list of int, but got %s.' % type(_id))
         return self.query(
-            '{ links %s { id type_id from_id to_id } }' % (_id,))
+            '{ links %s { id type_id from_id to_id } }' % (where,))
 
     def insert_one(
             self,
             type_id: int,
-            value: Any
+            value: Optional[Any] = None,
+            **kwargs: Any
     ) -> Dict[str, Any]:
         """Inserts one link into Links DB.
 
@@ -78,18 +90,13 @@ class DeepClient:
         :param value: object to inserting."""
         if not isinstance(type_id, int):
             raise DeepClientError('type_id should be int, but got %s' % type(type_id))
-        obj = ''
-        if isinstance(value, str):
-            obj = 'string: {data: {value: "%s"}}' % (value,)
-        elif isinstance(value, int | float):
-            obj = 'number: {data: {value: %s}}' % (value,)
-        elif isinstance(value, list | dict | bool):
-            obj = 'object: {data: {value: %s}}' % (value,)
-        else:
-            raise DeepClientError('failure to convert %s type' % type(value))
+        kwargs['type_id'] = type_id
+        obj = DeepClient.convert_to_query(value)
+        if obj:
+            kwargs['object'] = obj
         data = '''
             mutation {
-              insert_links_one( object: { type_id: %s, %s } )
+              insert_links_one( object: { %s } )
               { id type_id from_id to_id}
-            }''' % (type_id, obj)
+            }''' % ','.join(['%s: %s' % (k, v) for k, v in kwargs.items()])
         return self.query(data)
