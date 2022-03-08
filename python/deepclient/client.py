@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-"""This module provides working with GraphQlClient.
-"""
-from typing import NoReturn, Dict, Any, Optional, overload, List, Union
+"""This module provides working with GraphQlClient."""
+from typing import NoReturn, Dict, Any, Optional, List, Union
 
 from gql import Client, gql
 from gql.transport.aiohttp import AIOHTTPTransport
+
+from python.deepclient.exceptions import DeepClientError
 
 
 class DeepClient:
@@ -43,11 +44,10 @@ class DeepClient:
             where = '(where: {id: {_eq: %s}})' % (_id,)
         elif isinstance(_id, list):
             where = '(where: {id: {_in: %s}})' % (_id,)
-        return self.query('''
-            {
-                links %s
-                { id type_id from_id to_id }
-            }''' % (where,))
+        else:
+            raise DeepClientError('_id param should be int or list of int, but got %s.' % type(_id))
+        return self.query(
+            '{ links %s { id type_id from_id to_id } }' % (where,))
 
     def select_by_type_id(
             self,
@@ -62,18 +62,34 @@ class DeepClient:
             where = '(where: {type_id: {_eq: %s}})' % (_id,)
         elif isinstance(_id, list):
             where = '(where: {type_id: {_in: %s}})' % (_id,)
-        return self.query('''
-            {
-                links %s
-                { id type_id from_id to_id }
-            }''' % (_id,))
+        else:
+            raise DeepClientError('_id param should be int or list of int, but got %s.' % type(_id))
+        return self.query(
+            '{ links %s { id type_id from_id to_id } }' % (_id,))
 
-    @overload
-    def insert(
+    def insert_one(
             self,
-            from_id: int,
-            to_id: int,
+            type_id: int,
             value: Any
     ) -> Dict[str, Any]:
-        pass
+        """Inserts one link into Links DB.
 
+        :param type_id: unique type ID.
+        :param value: object to inserting."""
+        if not isinstance(type_id, int):
+            raise DeepClientError('type_id should be int, but got %s' % type(type_id))
+        obj = ''
+        if isinstance(value, str):
+            obj = 'string: {data: {value: "%s"}}' % (value,)
+        elif isinstance(value, int | float):
+            obj = 'number: {data: {value: %s}}' % (value,)
+        elif isinstance(value, list | dict | bool):
+            obj = 'object: {data: {value: %s}}' % (value,)
+        else:
+            raise DeepClientError('failure to convert %s type' % type(value))
+        data = '''
+            mutation {
+              insert_links_one( object: { type_id: %s, %s } )
+              { id type_id from_id to_id}
+            }''' % (type_id, obj)
+        return self.query(data)

@@ -45,6 +45,29 @@ class GraphQlClientTest(TestCase):
     def test_4_select(self):
         print(self.client.select_by_type_id(1))
 
+    def test_5_deep_client_error(self):
+        self.client.select("invalid")
+        self.client.select_by_type_id("invalid")
+        self.client.insert_one('l', 50)
+
+    def test_6_create_new_type(self):
+        """Creates a new type if available"""
+        response = self.client.query('''
+            {
+                links(where: {
+                    type_id: {_eq: 1}
+                    string: {value: {_eq: "DeepClientTestType"}}
+                })
+                {id type_id}
+            }''')
+        print(response)
+        if len(response['links']) == 0:
+            response = self.client.insert_one(1, "DeepClientTestType")
+            print(response)
+        else:
+            response = self.client.insert_one(response['links'][0]['type_id'], "Hello, world!")
+            print(response)
+
 
 if __name__ == '__main__':
     main()
