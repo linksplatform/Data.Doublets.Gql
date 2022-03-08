@@ -47,9 +47,14 @@ class DeepClient:
 
     def select(
             self,
-            _id: Union[int, List[int]]
+            _id: Union[int, List[int]],
+            *args: str
     ) -> Dict[str, Any]:
-        """Selects Link from Links DB"""
+        """Selects Link from Links DB
+
+        :param _id: unique link ID.
+        :param args: optional fields.
+        """
         where = ''
         if isinstance(_id, int):
             where = '(where: {id: {_eq: %s}})' % (_id,)
@@ -58,25 +63,31 @@ class DeepClient:
         else:
             raise DeepClientError('_id param should be int or list of int, but got %s.' % type(_id))
         return self.query(
-            '{ links %s { id type_id from_id to_id } }' % (where,))
+            '{ links %s { id from_id to_id type_id %s } }' % (where, ' '.join(args)))
 
-    def select_by_type_id(
+    def select_by(
             self,
-            _id: Union[int, List[int]]
+            key: str,
+            value: Any,
+            *args: str
     ) -> Dict[str, Any]:
-        """Selects Link from Links DB by type_id
+        """Selects Link from Links DB by type_id, id, from_id, to_id, etc.
 
-        :param _id: type_id
+        :param key: what search
+        :param value: value to search
+        :param args: optional fields.
         """
         where = ''
-        if isinstance(_id, int):
-            where = '(where: {type_id: {_eq: %s}})' % (_id,)
-        elif isinstance(_id, list):
-            where = '(where: {type_id: {_in: %s}})' % (_id,)
+        if isinstance(value, int | float):
+            where = '(where: {%s: {_eq: %s}})' % (key, value)
+        elif isinstance(value, str):
+            where = '(where: {%s: {_eq: "%s"}})' % (key, value)
+        elif isinstance(value, list):
+            where = '(where: {%s: {_in: %s}})' % (key, value)
         else:
             raise DeepClientError('_id param should be int or list of int, but got %s.' % type(_id))
         return self.query(
-            '{ links %s { id type_id from_id to_id } }' % (where,))
+            '{ links %s { id type_id from_id to_id %s } }' % (where, ' '.join(args)))
 
     def insert_one(
             self,

@@ -43,11 +43,11 @@ class GraphQlClientTest(TestCase):
         print(self.client.select([1, 2]))
 
     def test_4_select(self):
-        print(self.client.select_by_type_id(1))
+        print(self.client.select_by("type_id", 1))
 
     def test_5_deep_client_error(self):
         self.client.select("invalid")
-        self.client.select_by_type_id("invalid")
+        self.client.select_by("type_id", "invalid")
         self.client.insert_one('l', 50)
 
     def test_6_create_new_type(self):
