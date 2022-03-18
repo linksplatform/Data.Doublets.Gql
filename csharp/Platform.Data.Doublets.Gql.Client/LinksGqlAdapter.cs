@@ -130,7 +130,7 @@ namespace Platform.Data.Doublets.Gql.Client
                         }"
                 : @"
                         mutation UpdateLink ($id: Long!, $substitution_from_id: Long!, $substitution_to_id: Long!) {
-                          update_links(_set: { id: $id, from_id: $substitution_from_id, to_id: $substitution_to_id }, where: { id: { _eq: $id } }) {
+                          update_links(_set: { from_id: $substitution_from_id, to_id: $substitution_to_id }, where: { id: { _eq: $id } }) {
                             returning {
                               id,
                               from_id
