@@ -12,20 +12,72 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 using Xunit;
 using TLinkAddress = System.UInt64;
 
 namespace Platform.Data.Doublets.Gql.Tests;
 
-public class ClientTests
+public class ClientTests : IDisposable
 {
     private readonly ulong _any;
     private readonly LinksGqlAdapter<ulong> _linksGqlAdapter;
-    private readonly Process? _serverProcess;
+    private Process? _serverProcess;
+    private const string EndPoint = "http://localhost:60341/v1/graphql";
+
+    public void Dispose()
+    {
+        _serverProcess?.CloseMainWindow();
+        _serverProcess?.Dispose();
+        // _serverProcess?.Kill();
+    }
+
+    private Process RunServer()
+    {
+        var currentAssemblyDirectory = Directory.GetCurrentDirectory();
+        var currentProjectDirectory = Path.GetFullPath(Path.Combine(currentAssemblyDirectory, "..", "..", ".."));
+        var serverProjectDirectory = Path.GetFullPath(Path.Combine(currentProjectDirectory, "..", "Platform.Data.Doublets.Gql.Server"));
+        var tempFilePath = IO.TemporaryFiles.UseNew();
+        var processStartInfo = new ProcessStartInfo { WorkingDirectory = serverProjectDirectory, FileName = "dotnet", Arguments = $"run -f net5 {tempFilePath}", UseShellExecute = true};
+        var process = Process.Start(processStartInfo);
+        return process;
+    }
+
+    private Uri GetEndPoint(Process process)
+    {
+        Uri endPoint;
+        while (true)
+        {
+            var standartOutput = process?.StandardOutput;
+            if(standartOutput == null)
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(1));
+                continue;
+            }
+            var processOutputLine = standartOutput.ReadLine();
+            if (string.IsNullOrEmpty(processOutputLine))
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(1));
+                continue;
+            }
+            if (processOutputLine.Contains("Unable to start"))
+            {
+                throw new Exception("Unable to start.");
+            }
+            if (processOutputLine.Contains("Now listening on: "))
+            {
+                var index = processOutputLine.IndexOf("Now listening on: ") + "Now listening on: ".Length;
+                var uriString = processOutputLine.Substring(index);
+                endPoint = new Uri(uriString);
+                return endPoint;
+            }
+        }
+    }
 
     private void TestCud()
     {
-        var graphQlClient = new GraphQLHttpClient(new Uri("http://localhost:60341/v1/graphql"), new NewtonsoftJsonSerializer());
+        // _serverProcess = RunServer();
+        var graphQlClient = new GraphQLHttpClient(EndPoint, new NewtonsoftJsonSerializer());
         var linksGqlAdapter = new LinksGqlAdapter<TLinkAddress>(graphQlClient, new LinksConstants<TLinkAddress>(true));
 
         ulong linksAmount = 5;
@@ -43,7 +95,11 @@ public class ClientTests
     }
 
     [Fact]
-    public void CudTest() => TestCud();
+    public void CudTest()
+    {
+
+        TestCud();
+    }
 
     [Fact]
     public void EachTest()
