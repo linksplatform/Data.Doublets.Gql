@@ -33,11 +33,9 @@ namespace Platform.Data.Doublets.Gql.Tests
             var jsonTask = linksSchema.ExecuteAsync(_ => { _.Query = @"
         mutation {
           insert_links_one(object: {from_id: 1, to_id: 1}) {
-            returning{
-              id
-    	        from_id
-    	        to_id
-            }
+            id
+    	    from_id
+    	    to_id
           }
         }
         "; });
@@ -104,6 +102,34 @@ namespace Platform.Data.Doublets.Gql.Tests
           }
         }
         "; });
+            var response = JObject.Parse(jsonTask.Result);
+            var error = response.ContainsKey("errors");
+            Assert.False(error);
+        }
+
+        [Fact]
+        public void CreateAndUpdateLink()
+        {
+            var links = CreateLinks();
+            LinksSchema linksSchema = new(links, new DefaultServiceProvider());
+            var jsonTask = linksSchema.ExecuteAsync(_ => { _.Query = @"
+            mutation {
+              insert_links_one(object: {from_id: 1, to_id: 1}) {
+                id
+                from_id
+                to_id
+              }
+            }
+            mutation {
+              update_links(_set: { from_id: 1, to_id: 1 }, where: { id: {_eq: 1} }) {
+                returning {
+                  id
+                  from_id
+                  to_id
+                }
+              }
+            }
+            "; });
             var response = JObject.Parse(jsonTask.Result);
             var error = response.ContainsKey("errors");
             Assert.False(error);
