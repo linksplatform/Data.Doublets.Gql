@@ -20,16 +20,23 @@ namespace Platform.Data.Doublets.Gql.Tests;
 
 public class ClientTests : IDisposable
 {
-    private readonly ulong _any;
-    private readonly LinksGqlAdapter<ulong> _linksGqlAdapter;
-    private Process? _serverProcess;
+    private readonly LinksConstants<TLinkAddress> _constants;
+    private readonly LinksGqlAdapter<TLinkAddress> _linksGqlAdapter;
+    private readonly Process _serverProcess;
     private const string EndPoint = "http://localhost:60341/v1/graphql";
+
+    public ClientTests()
+    {
+        _constants = new LinksConstants<TLinkAddress>(true);
+        var graphQlClient = new GraphQLHttpClient(EndPoint, new NewtonsoftJsonSerializer());
+        _linksGqlAdapter = new LinksGqlAdapter<TLinkAddress>(graphQlClient, _constants);
+        _serverProcess = RunServer();
+    }
 
     public void Dispose()
     {
-        _serverProcess?.CloseMainWindow();
-        _serverProcess?.Dispose();
-        // _serverProcess?.Kill();
+        _serverProcess.CloseMainWindow();
+        _serverProcess.Dispose();
     }
 
     private Process RunServer()
@@ -40,6 +47,10 @@ public class ClientTests : IDisposable
         var tempFilePath = IO.TemporaryFiles.UseNew();
         var processStartInfo = new ProcessStartInfo { WorkingDirectory = serverProjectDirectory, FileName = "dotnet", Arguments = $"run -f net5 {tempFilePath}", UseShellExecute = true};
         var process = Process.Start(processStartInfo);
+        if (null == process)
+        {
+            throw new Exception("Fail to start server process");
+        }
         return process;
     }
 
@@ -76,28 +87,23 @@ public class ClientTests : IDisposable
 
     private void TestCud()
     {
-        // _serverProcess = RunServer();
-        var graphQlClient = new GraphQLHttpClient(EndPoint, new NewtonsoftJsonSerializer());
-        var linksGqlAdapter = new LinksGqlAdapter<TLinkAddress>(graphQlClient, new LinksConstants<TLinkAddress>(true));
-
-        ulong linksAmount = 5;
+        TLinkAddress linksAmount = 5;
         // Create
-        for (ulong i = 1; i <= linksAmount; i++)
+        for (TLinkAddress i = 1; i <= linksAmount; i++)
         {
-            ulong one = 1;
+            TLinkAddress one = 1;
             // Create
-            var createdLink = linksGqlAdapter.CreateAndUpdate(one, i);
+            var createdLink = _linksGqlAdapter.CreateAndUpdate(one, i);
             // Count
             Assert.Equal(i, createdLink);
-            Assert.Equal(i, linksGqlAdapter.Count());
-            Assert.Equal(i, linksGqlAdapter.Count(one, _any));
+            Assert.Equal(i, _linksGqlAdapter.Count());
+            Assert.Equal(i, _linksGqlAdapter.Count(one, _constants.Any));
         }
     }
 
     [Fact]
     public void CudTest()
     {
-
         TestCud();
     }
 
@@ -106,12 +112,12 @@ public class ClientTests : IDisposable
     {
         TestCud();
         var count = _linksGqlAdapter.Count();
-        ulong eachIterations = 0;
+        TLinkAddress eachIterations = 0;
         _linksGqlAdapter.Each(link =>
         {
             Assert.Equal(++eachIterations, _linksGqlAdapter.GetTarget(link));
             return _linksGqlAdapter.Constants.Break;
-        }, new Link<ulong>(_any, _any, _any));
+        }, new Link<TLinkAddress>(_constants.Any, _constants.Any, _constants.Any));
         Assert.Equal(count, eachIterations);
     }
 }
