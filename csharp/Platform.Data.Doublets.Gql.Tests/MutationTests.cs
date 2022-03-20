@@ -21,7 +21,16 @@ namespace Platform.Data.Doublets.Gql.Tests
             return new UnitedMemoryLinks<TLinkAddress>(new FileMappedResizableDirectMemory(dataDBFilename), UnitedMemoryLinks<TLinkAddress>.DefaultLinksSizeStep, linksConstants, IndexTreeType.Default);
         }
 
-        [InlineData(@"
+        [InlineData()]
+        [InlineData()]
+        [InlineData()]
+        [InlineData()]
+        [Fact]
+        public void InsertLinksOne()
+        {
+            var links = CreateLinks();
+            LinksSchema linksSchema = new(links, new DefaultServiceProvider());
+            var jsonTask = linksSchema.ExecuteAsync(_ => { _.Query = @"
         mutation {
           insert_links_one(object: {from_id: 1, to_id: 1}) {
             returning{
@@ -31,8 +40,18 @@ namespace Platform.Data.Doublets.Gql.Tests
             }
           }
         }
-        ")]
-        [InlineData(@"
+        "; });
+            var response = JObject.Parse(jsonTask.Result);
+            var error = response.ContainsKey("errors");
+            Assert.False(error);
+        }
+
+        [Fact]
+        public void InsertLinks()
+        {
+            var links = CreateLinks();
+            LinksSchema linksSchema = new(links, new DefaultServiceProvider());
+            var jsonTask = linksSchema.ExecuteAsync(_ => { _.Query = @"
         mutation {
           insert_links(objects: [{ from_id: 1, to_id: 1 }, { from_id: 2, to_id: 2 }]) {
             returning {
@@ -42,8 +61,18 @@ namespace Platform.Data.Doublets.Gql.Tests
             }
           }
         }
-        ")]
-        [InlineData(@"
+        "; });
+            var response = JObject.Parse(jsonTask.Result);
+            var error = response.ContainsKey("errors");
+            Assert.False(error);
+        }
+
+        [Fact]
+        public void UpdateLinks()
+        {
+            var links = CreateLinks();
+            LinksSchema linksSchema = new(links, new DefaultServiceProvider());
+            var jsonTask = linksSchema.ExecuteAsync(_ => { _.Query = @"
         mutation {
           update_links(_set: { from_id: 1, to_id: 2 }, where: { from_id: { _eq: 2 }, to_id: { _eq: 2 } }) {
             returning {
@@ -53,8 +82,18 @@ namespace Platform.Data.Doublets.Gql.Tests
             }
           }
         }
-        ")]
-        [InlineData(@"
+        "; });
+            var response = JObject.Parse(jsonTask.Result);
+            var error = response.ContainsKey("errors");
+            Assert.False(error);
+        }
+
+        [Fact]
+        public void DeleteLinks()
+        {
+            var links = CreateLinks();
+            LinksSchema linksSchema = new(links, new DefaultServiceProvider());
+            var jsonTask = linksSchema.ExecuteAsync(_ => { _.Query = @"
         mutation {
           delete_links(where: { from_id: { _eq: 1 }, to_id: { _eq: 1 } }) {
             returning {
@@ -64,13 +103,7 @@ namespace Platform.Data.Doublets.Gql.Tests
             }
           }
         }
-        ")]
-        [Theory]
-        public void MutateData(string query)
-        {
-            var links = CreateLinks();
-            LinksSchema linksSchema = new(links, new DefaultServiceProvider());
-            var jsonTask = linksSchema.ExecuteAsync(_ => { _.Query = query; });
+        "; });
             var response = JObject.Parse(jsonTask.Result);
             var error = response.ContainsKey("errors");
             Assert.False(error);
