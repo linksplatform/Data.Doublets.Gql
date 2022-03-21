@@ -38,7 +38,7 @@ namespace Platform.Data.Doublets.Gql.Client
                 OperationName = "CountLinks",
                 Variables = new { id = index, from_id = source, to_id = target }
             };
-            var responseResult = _graphQlClient.SendQueryAsync<CountLinksResponseType>(countRequest).Result;
+            var responseResult = _graphQlClient.SendQueryAsync<CountLinksResponseType<TLinkAddress>>(countRequest).Result;
             if (responseResult.Errors != null)
             {
                 foreach (var error in responseResult.Errors)
@@ -63,9 +63,9 @@ namespace Platform.Data.Doublets.Gql.Client
                           }
                         }",
                 OperationName = "GetLinks",
-                Variables = (GqlLink)restrictionLink
+                Variables = (GqlLink<TLinkAddress>)restrictionLink
             };
-            var responseResult = _graphQlClient.SendQueryAsync<GqlLink[]>(personAndFilmsRequest).Result;
+            var responseResult = _graphQlClient.SendQueryAsync<GqlLink<TLinkAddress>[]>(personAndFilmsRequest).Result;
             if (responseResult.Errors != null)
             {
                 foreach (var error in responseResult.Errors)
@@ -100,9 +100,9 @@ namespace Platform.Data.Doublets.Gql.Client
                           }
                         }",
                 OperationName = "CreateLink",
-                Variables = (GqlLink)substitutionLink
+                Variables = (GqlLink<TLinkAddress>)substitutionLink
             };
-            var responseResult = _graphQlClient.SendMutationAsync<CreateResponseType>(createLinkRequest).AwaitResult();
+            dynamic responseResult = _graphQlClient.SendMutationAsync<object>(createLinkRequest).AwaitResult();
             if (responseResult.Errors != null)
             {
                 foreach (var responseResultError in responseResult.Errors!)
@@ -151,7 +151,7 @@ namespace Platform.Data.Doublets.Gql.Client
                     substitution_to_id = substitutionLink.Target
                 }
             };
-            var responseResult = _graphQlClient.SendMutationAsync<UpdateResponseType>(updateLinkRequest).AwaitResult();
+            var responseResult = _graphQlClient.SendMutationAsync<UpdateResponseType<TLinkAddress>>(updateLinkRequest).AwaitResult();
             if (responseResult.Errors != null)
             {
                 foreach (var responseResultError in responseResult.Errors!)
@@ -186,8 +186,8 @@ namespace Platform.Data.Doublets.Gql.Client
                             }
                           }
                         }";
-            var updateLinkRequest = new GraphQLRequest { Query = query, OperationName = "DeleteLink", Variables = (GqlLink)restrictionLink };
-            var responseResult = _graphQlClient.SendMutationAsync<DeleteResponseType>(updateLinkRequest).AwaitResult();
+            var updateLinkRequest = new GraphQLRequest { Query = query, OperationName = "DeleteLink", Variables = (GqlLink<TLinkAddress>)restrictionLink };
+            var responseResult = _graphQlClient.SendMutationAsync<DeleteResponseType<TLinkAddress>>(updateLinkRequest).AwaitResult();
             if (responseResult.Errors != null)
             {
                 foreach (var responseResultError in responseResult.Errors!)
@@ -198,80 +198,49 @@ namespace Platform.Data.Doublets.Gql.Client
             // Use returning[0] cause right now it is not possible to return multiple links
             return handler?.Invoke((Link<TLinkAddress>)responseResult.Data.delete_links.returning[0], null) ?? Constants.Continue;
         }
+    }
+    public struct GqlLink<TLinkAddress>
+    {
+        public TLinkAddress id;
+        public TLinkAddress from_id;
+        public TLinkAddress to_id;
+        public static implicit operator Link<TLinkAddress>(GqlLink<TLinkAddress> gqlLink) => new(gqlLink.id, gqlLink.from_id, gqlLink.to_id);
 
-        private struct GqlLink
+        public static implicit operator GqlLink<TLinkAddress>(Link<TLinkAddress> link) => new() { id = link.Index, from_id = link.Source, to_id = link.Target };
+    }
+
+    public struct CreateResponseType<TLinkAddress>
+    {
+        public GqlLink<TLinkAddress> insert_links_one { get; set; }
+    }
+
+    public struct UpdateResponseType<TLinkAddress>
+    {
+        public UpdateLinks update_links { get; set; }
+
+        public struct UpdateLinks
         {
-            public TLinkAddress id;
-            public TLinkAddress from_id;
-            public TLinkAddress to_id;
-            public static implicit operator Link<TLinkAddress>(GqlLink gqlLink) => new(gqlLink.id, gqlLink.from_id, gqlLink.to_id);
-
-            public static implicit operator GqlLink(Link<TLinkAddress> link) => new() { id = link.Index, from_id = link.Source, to_id = link.Target };
-            // public Link(params TLinkAddress[] values) => SetValues(values, out Index, out Source, out Target);
-            // public Link(IList<TLinkAddress> values) => SetValues(values, out Index, out Source, out Target);
-            // public Link(object other)
-            // {
-            //     if (other is Link<TLinkAddress> otherLink)
-            //     {
-            //         SetValues(ref otherLink, out Index, out Source, out Target);
-            //     }
-            //     else if(other is IList<TLinkAddress> otherList)
-            //     {
-            //         SetValues(otherList, out Index, out Source, out Target);
-            //     }
-            //     else
-            //     {
-            //         throw new NotSupportedException();
-            //     }
-            // }
-            // public Link(ref Link<TLinkAddress> other) => SetValues(ref other, out Index, out Source, out Target);
-            // public Link(TLinkAddress index, TLinkAddress source, TLinkAddress target)
-            // {
-            //     Index = index;
-            //     Source = source;
-            //     Target = target;
-            // }
-            // private static void SetValues(ref Link<TLinkAddress> other, out TLinkAddress index, out TLinkAddress source, out TLinkAddress target)
-            // {
-            //     index = other.Index;
-            //     source = other.Source;
-            //     target = other.Target;
-            // }
+            public List<GqlLink<TLinkAddress>> returning { get; set; }
         }
+    }
 
-        private struct CreateResponseType
+    public struct DeleteResponseType<TLinkAddress>
+    {
+        public DeleteLinks delete_links { get; set; }
+
+        public struct DeleteLinks
         {
-            public GqlLink insert_links_one { get; set; }
+            public List<GqlLink<TLinkAddress>> returning { get; set; }
         }
+    }
 
-        private struct UpdateResponseType
-        {
-            public UpdateLinks update_links { get; set; }
+    public struct CountLinksResponseType<TLinkAddress>
+    {
+        public List<GqlLink<TLinkAddress>> links { get; set; }
+    }
 
-            public struct UpdateLinks
-            {
-                public List<GqlLink> returning { get; set; }
-            }
-        }
-
-        private struct DeleteResponseType
-        {
-            public DeleteLinks delete_links { get; set; }
-
-            public struct DeleteLinks
-            {
-                public List<GqlLink> returning { get; set; }
-            }
-        }
-
-        private struct CountLinksResponseType
-        {
-            public List<GqlLink> links { get; set; }
-        }
-
-        private struct GetLinksResponseType
-        {
-            public List<GqlLink> links { get; set; }
-        }
+    public struct GetLinksResponseType<TLinkAddress>
+    {
+        public List<GqlLink<TLinkAddress>> links { get; set; }
     }
 }
