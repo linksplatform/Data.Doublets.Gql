@@ -23,14 +23,15 @@ public class ClientTests : IDisposable
     private readonly LinksConstants<TLinkAddress> _constants;
     private readonly LinksGqlAdapter<TLinkAddress> _linksGqlAdapter;
     private readonly Process _serverProcess;
-    private const string EndPoint = "http://localhost:60341/v1/graphql";
+    private readonly Uri _endPoint;
 
     public ClientTests()
     {
         _constants = new LinksConstants<TLinkAddress>(true);
-        var graphQlClient = new GraphQLHttpClient(EndPoint, new NewtonsoftJsonSerializer());
-        _linksGqlAdapter = new LinksGqlAdapter<TLinkAddress>(graphQlClient, _constants);
         _serverProcess = RunServer();
+        _endPoint = GetEndPoint(_serverProcess);
+        var graphQlClient = new GraphQLHttpClient(_endPoint, new NewtonsoftJsonSerializer());
+        _linksGqlAdapter = new LinksGqlAdapter<TLinkAddress>(graphQlClient, _constants);
     }
 
     public void Dispose()
@@ -45,7 +46,7 @@ public class ClientTests : IDisposable
         var currentProjectDirectory = Path.GetFullPath(Path.Combine(currentAssemblyDirectory, "..", "..", ".."));
         var serverProjectDirectory = Path.GetFullPath(Path.Combine(currentProjectDirectory, "..", "Platform.Data.Doublets.Gql.Server"));
         var tempFilePath = IO.TemporaryFiles.UseNew();
-        var processStartInfo = new ProcessStartInfo { WorkingDirectory = serverProjectDirectory, FileName = "dotnet", Arguments = $"run -f net5 {tempFilePath}", UseShellExecute = true};
+        var processStartInfo = new ProcessStartInfo { WorkingDirectory = serverProjectDirectory, FileName = "dotnet", Arguments = $"run -f net5 {tempFilePath}", RedirectStandardOutput = true};
         var process = Process.Start(processStartInfo);
         if (null == process)
         {
@@ -56,7 +57,6 @@ public class ClientTests : IDisposable
 
     private Uri GetEndPoint(Process process)
     {
-        Uri endPoint;
         while (true)
         {
             var standartOutput = process?.StandardOutput;
@@ -79,8 +79,7 @@ public class ClientTests : IDisposable
             {
                 var index = processOutputLine.IndexOf("Now listening on: ") + "Now listening on: ".Length;
                 var uriString = processOutputLine.Substring(index);
-                endPoint = new Uri(uriString);
-                return endPoint;
+                return new Uri($"{uriString}/v1/graphql");
             }
         }
     }
@@ -97,7 +96,13 @@ public class ClientTests : IDisposable
             // Count
             Assert.Equal(i, createdLink);
             Assert.Equal(i, _linksGqlAdapter.Count());
-            Assert.Equal(i, _linksGqlAdapter.Count(one, _constants.Any));
+            var allLinks = new Link<Link<TLinkAddress>>();
+            _linksGqlAdapter.Each(link =>
+            {
+                allLinks.Add(new Link<TLinkAddress>(link));
+                return _constants.Continue;
+            });
+            Assert.Equal(i, _linksGqlAdapter.Count(i, _constants.Any));
         }
     }
 
