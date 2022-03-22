@@ -110,7 +110,7 @@ namespace Platform.Data.Doublets.Gql.Tests
         }
 
         [Fact]
-        public void CreateAndUpdateLink()
+        public void CreateZeroZeroAndUpdateToOneOneById()
         {
             var links = CreateLinks();
             LinksSchema linksSchema = new(links, new DefaultServiceProvider());
@@ -129,6 +129,40 @@ namespace Platform.Data.Doublets.Gql.Tests
             jsonTask = linksSchema.ExecuteAsync(_ => { _.Query = @"
             mutation {
               update_links(_set: { from_id: 1, to_id: 1 }, where: { id: {_eq: 1} }) {
+                returning {
+                  id
+                  from_id
+                  to_id
+                }
+              }
+            }
+            "; });
+            jsonResponse = jsonTask.Result;
+            dynamic? responseObject = JsonConvert.DeserializeObject(jsonResponse);
+            Assert.False(JObject.Parse(jsonResponse).ContainsKey("errors"));
+            Assert.True(1 == Convert.ToInt32(responseObject?.data.update_links.returning[0].id));
+        }
+
+        [Fact]
+        public void CreateZeroZeroAndUpdateToOneOneBySourceAndTarget()
+        {
+            var links = CreateLinks();
+            LinksSchema linksSchema = new(links, new DefaultServiceProvider());
+            var jsonTask = linksSchema.ExecuteAsync(_ => { _.Query = @"
+            mutation {
+              insert_links_one(object: {from_id: 0, to_id: 0}) {
+                id
+                from_id
+                to_id
+              }
+            }
+            "; });
+            var jsonSerializer = new JsonSerializer();
+            var jsonResponse = jsonTask.Result;
+            Assert.False(JObject.Parse(jsonResponse).ContainsKey("errors"));
+            jsonTask = linksSchema.ExecuteAsync(_ => { _.Query = @"
+            mutation {
+              update_links(_set: { from_id: 1, to_id: 1 }, where: {from_id: {_eq: 0}, to_id: {_eq: 0} }) {
                 returning {
                   id
                   from_id
