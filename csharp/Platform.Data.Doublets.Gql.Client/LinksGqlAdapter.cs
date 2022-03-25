@@ -62,9 +62,17 @@ namespace Platform.Data.Doublets.Gql.Client
             var restrictionLink = new Link<TLinkAddress>(restrictions);
             var personAndFilmsRequest = new GraphQLRequest
             {
-                Query = @"
-                        query GetLinks ($id: Long, $from_id: Long, $to_id: Long) {
-                          links(where: { id: {_eq: $id}, from_id: {_eq: $from_id}, to_id: {_eq: $to_id} }) {
+                Query = (1 == restrictions?.Count) ? @"
+                        query GetLinks ($id: Long) {
+                          links(where: { id: {_eq: $id} }) {
+                            id,
+                            from_id,
+                            to_id
+                          }
+                        }"
+                :
+                @"query GetLinks ($from_id: Long, $to_id: Long) {
+                          links(where: { from_id: {_eq: $from_id}, to_id: {_eq: $to_id} }) {
                             id,
                             from_id,
                             to_id
