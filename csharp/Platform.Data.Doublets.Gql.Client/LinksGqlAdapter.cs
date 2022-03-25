@@ -29,9 +29,17 @@ namespace Platform.Data.Doublets.Gql.Client
             TLinkAddress? target = _equalityComparer.Equals(default, restrictionLink.Target) ? null : restrictionLink.Target;
             var countRequest = new GraphQLRequest
             {
-                Query = @"
-                        query CountLinks ($id: Long, $from_id: Long, $to_id: Long) {
-                          links(where: { id: {_eq: $id}, from_id: {_eq: $from_id}, to_id: {_eq: $to_id} }) {
+                Query = (1 == restriction.Count)
+                ? @"
+                        query CountLinks ($id: Long) {
+                          links(where: { id: {_eq: $id} }) {
+                            id
+                          }
+                        }"
+                :
+                @"
+                        query CountLinks ($from_id: Long, $to_id: Long) {
+                          links(where: { from_id: {_eq: $from_id}, to_id: {_eq: $to_id} }) {
                             id
                           }
                         }",
@@ -65,7 +73,7 @@ namespace Platform.Data.Doublets.Gql.Client
                 OperationName = "GetLinks",
                 Variables = (GqlLink<TLinkAddress>)restrictionLink
             };
-            var responseResult = _graphQlClient.SendQueryAsync<GqlLink<TLinkAddress>[]>(personAndFilmsRequest).Result;
+            dynamic responseResult = _graphQlClient.SendQueryAsync<object>(personAndFilmsRequest).Result;
             if (responseResult.Errors != null)
             {
                 foreach (var error in responseResult.Errors)
@@ -76,7 +84,7 @@ namespace Platform.Data.Doublets.Gql.Client
             for (var i = 0; i < responseResult.Data.Length; i++)
             {
                 var link = responseResult.Data[i];
-                var handlerResult = handler(new Link<TLinkAddress>(link.id, link.from_id, link.to_id));
+                var handlerResult = handler?.Invoke(new Link<TLinkAddress>(link.id, link.from_id, link.to_id)) ?? Constants.Continue;
                 if (_equalityComparer.Equals(Constants.Break, handlerResult))
                 {
                     return handlerResult;
@@ -102,7 +110,7 @@ namespace Platform.Data.Doublets.Gql.Client
                 OperationName = "CreateLink",
                 Variables = (GqlLink<TLinkAddress>)substitutionLink
             };
-            dynamic responseResult = _graphQlClient.SendMutationAsync<object>(createLinkRequest).AwaitResult();
+            var responseResult = _graphQlClient.SendMutationAsync<CreateResponseType<TLinkAddress>>(createLinkRequest).AwaitResult();
             if (responseResult.Errors != null)
             {
                 foreach (var responseResultError in responseResult.Errors!)
@@ -117,10 +125,10 @@ namespace Platform.Data.Doublets.Gql.Client
         {
             var restrictionLink = new Link<TLinkAddress>(restriction);
             var substitutionLink = new Link<TLinkAddress>(substitution);
-            var query = _equalityComparer.Equals(default, restrictionLink.Index)
+            var query = (1 == restriction?.Count)
                 ? @"
-                        mutation UpdateLink ($from_id: Long!, $to_id: Long!, $substitution_from_id: Long!, $substitution_to_id: Long!) {
-                          update_links(_set: { from_id: $substitution_from_id, to_id: $substitution_to_id }, where: { from_id: { _eq: $from_id }, to_id: { _eq: $to_id } }) {
+                        mutation UpdateLink ($id: Long!, $substitution_from_id: Long!, $substitution_to_id: Long!) {
+                          update_links(_set: { from_id: $substitution_from_id, to_id: $substitution_to_id }, where: { id: { _eq: $id } }) {
                             returning {
                               id,
                               from_id
@@ -128,9 +136,10 @@ namespace Platform.Data.Doublets.Gql.Client
                             }
                           }
                         }"
-                : @"
-                        mutation UpdateLink ($id: Long!, $substitution_from_id: Long!, $substitution_to_id: Long!) {
-                          update_links(_set: { from_id: $substitution_from_id, to_id: $substitution_to_id }, where: { id: { _eq: $id } }) {
+                :
+                @"
+                        mutation UpdateLink ($from_id: Long!, $to_id: Long!, $substitution_from_id: Long!, $substitution_to_id: Long!) {
+                          update_links(_set: { from_id: $substitution_from_id, to_id: $substitution_to_id }, where: { from_id: { _eq: $from_id }, to_id: { _eq: $to_id } }) {
                             returning {
                               id,
                               from_id
@@ -165,10 +174,10 @@ namespace Platform.Data.Doublets.Gql.Client
         public TLinkAddress Delete(IList<TLinkAddress>? restriction, WriteHandler<TLinkAddress>? handler)
         {
             var restrictionLink = new Link<TLinkAddress>(restriction);
-            var query = _equalityComparer.Equals(default, restrictionLink.Index)
+            var query = (1 == restriction?.Count)
                 ? @"
-                        mutation DeleteLink ($from_id: Long!, $to_id: Long!){
-                          delete_links(where: { from_id: { _eq: $from_id }, to_id: { _eq: $to_id } }) {
+                        mutation DeleteLink ($id: Long!){
+                          delete_links(where: {id: { _eq: $id } }) {
                             returning {
                               id,
                               from_id
@@ -176,9 +185,10 @@ namespace Platform.Data.Doublets.Gql.Client
                             }
                           }
                         }"
-                : @"
-                        mutation DeleteLink ($id: Long!){
-                          delete_links(where: {id: { _eq: $id } }) {
+                :
+                @"
+                        mutation DeleteLink ($from_id: Long!, $to_id: Long!){
+                          delete_links(where: { from_id: { _eq: $from_id }, to_id: { _eq: $to_id } }) {
                             returning {
                               id,
                               from_id
