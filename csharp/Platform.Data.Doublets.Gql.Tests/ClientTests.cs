@@ -24,6 +24,7 @@ public class ClientTests : IDisposable
     private readonly LinksGqlAdapter<TLinkAddress> _linksGqlAdapter;
     private readonly Process _serverProcess;
     private readonly Uri _endPoint;
+    public string TempFilePath = new IO.TemporaryFile();
 
     public ClientTests()
     {
@@ -36,8 +37,7 @@ public class ClientTests : IDisposable
 
     public void Dispose()
     {
-        _serverProcess.CloseMainWindow();
-        _serverProcess.Dispose();
+        _serverProcess.Kill(true);
     }
 
     private Process RunServer()
@@ -45,12 +45,11 @@ public class ClientTests : IDisposable
         var currentAssemblyDirectory = Directory.GetCurrentDirectory();
         var currentProjectDirectory = Path.GetFullPath(Path.Combine(currentAssemblyDirectory, "..", "..", ".."));
         var serverProjectDirectory = Path.GetFullPath(Path.Combine(currentProjectDirectory, "..", "Platform.Data.Doublets.Gql.Server"));
-        var tempFilePath = IO.TemporaryFiles.UseNew();
-        var processStartInfo = new ProcessStartInfo { WorkingDirectory = serverProjectDirectory, FileName = "dotnet", Arguments = $"run -f net5 {tempFilePath}", RedirectStandardOutput = true};
+        var processStartInfo = new ProcessStartInfo { WorkingDirectory = serverProjectDirectory, FileName = "dotnet", Arguments = $"run -f net5 {TempFilePath}", RedirectStandardOutput = true, RedirectStandardInput = true};
         var process = Process.Start(processStartInfo);
-        if (null == process)
+        if (null == process || process.HasExited)
         {
-            throw new Exception("Fail to start server process");
+            throw new Exception("Failed to start server process");
         }
         return process;
     }
