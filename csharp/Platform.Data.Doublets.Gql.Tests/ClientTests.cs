@@ -9,6 +9,7 @@ using Platform.Data.Doublets.Memory.United.Generic;
 using Platform.Memory;
 using Serilog;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -95,7 +96,7 @@ public class ClientTests : IDisposable
             // Count
             Assert.Equal(i, createdLink);
             Assert.Equal(i, _linksGqlAdapter.Count());
-            var allLinks = new Link<Link<TLinkAddress>>();
+            var allLinks = new List<Link<TLinkAddress>>();
             _linksGqlAdapter.Each(link =>
             {
                 allLinks.Add(new Link<TLinkAddress>(link));
@@ -120,7 +121,7 @@ public class ClientTests : IDisposable
         _linksGqlAdapter.Each(link =>
         {
             Assert.Equal(++eachIterations, _linksGqlAdapter.GetTarget(link));
-            return _linksGqlAdapter.Constants.Break;
+            return _linksGqlAdapter.Constants.Continue;
         }, new Link<TLinkAddress>(_constants.Any, _constants.Any, _constants.Any));
         Assert.Equal(count, eachIterations);
     }
