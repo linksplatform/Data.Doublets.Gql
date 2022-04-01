@@ -1,5 +1,6 @@
 ﻿using GraphQL;
 using GraphQL.Client.Abstractions;
+using Platform.Collections.Lists;
 using Platform.Delegates;
 using Platform.Threading;
 using System;
@@ -60,6 +61,9 @@ namespace Platform.Data.Doublets.Gql.Client
         public TLinkAddress Each(IList<TLinkAddress>? restrictions, ReadHandler<TLinkAddress>? handler)
         {
             var restrictionLink = new Link<TLinkAddress>(restrictions);
+            TLinkAddress? index = _equalityComparer.Equals(default, restrictionLink.Index) ? null : restrictionLink.Index;
+            TLinkAddress? source = _equalityComparer.Equals(default, restrictionLink.Source) ? null : restrictionLink.Source;
+            TLinkAddress? target = _equalityComparer.Equals(default, restrictionLink.Target) ? null : restrictionLink.Target;
             var personAndFilmsRequest = new GraphQLRequest
             {
                 Query = (1 == restrictions?.Count) ? @"
@@ -79,9 +83,9 @@ namespace Platform.Data.Doublets.Gql.Client
                           }
                         }",
                 OperationName = "GetLinks",
-                Variables = (GqlLink<TLinkAddress>)restrictionLink
+                Variables = new GqlLink<TLinkAddress?>{ id = index, from_id = source, to_id = target}
             };
-            dynamic responseResult = _graphQlClient.SendQueryAsync<object>(personAndFilmsRequest).Result;
+            var responseResult = _graphQlClient.SendQueryAsync<CountLinksResponseType<TLinkAddress>>(personAndFilmsRequest).Result;
             if (responseResult.Errors != null)
             {
                 foreach (var error in responseResult.Errors)
@@ -89,9 +93,9 @@ namespace Platform.Data.Doublets.Gql.Client
                     throw new Exception(error.Message);
                 }
             }
-            for (var i = 0; i < responseResult.Data.Length; i++)
+            for (var i = 0; i < responseResult.Data.links.Count; i++)
             {
-                var link = responseResult.Data[i];
+                var link = responseResult.Data.links[i];
                 var handlerResult = handler?.Invoke(new Link<TLinkAddress>(link.id, link.from_id, link.to_id)) ?? Constants.Continue;
                 if (_equalityComparer.Equals(Constants.Break, handlerResult))
                 {
