@@ -22,7 +22,7 @@ namespace Platform.Data.Doublets.Gql.Tests;
 public class ClientTests : IDisposable
 {
     private readonly LinksConstants<TLinkAddress> _constants;
-    private readonly LinksGqlAdapter<TLinkAddress> _linksGqlAdapter;
+    private readonly LinksGqlAdapter _linksGqlAdapter;
     private readonly Process _serverProcess;
     private readonly Uri _endPoint;
     public string TempFilePath = new IO.TemporaryFile();
@@ -33,7 +33,7 @@ public class ClientTests : IDisposable
         _serverProcess = TestExtensions.RunServer(TempFilePath);
         _endPoint = TestExtensions.GetEndPointFromServerProcess(_serverProcess);
         var graphQlClient = new GraphQLHttpClient(_endPoint, new NewtonsoftJsonSerializer());
-        _linksGqlAdapter = new LinksGqlAdapter<TLinkAddress>(graphQlClient, _constants);
+        _linksGqlAdapter = new LinksGqlAdapter(graphQlClient, _constants);
     }
 
     public void Dispose()
