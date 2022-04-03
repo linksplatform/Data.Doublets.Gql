@@ -30,8 +30,8 @@ public class ClientTests : IDisposable
     public ClientTests()
     {
         _constants = new LinksConstants<TLinkAddress>(true);
-        _serverProcess = RunServer();
-        _endPoint = GetEndPoint(_serverProcess);
+        _serverProcess = TestExtensions.RunServer(TempFilePath);
+        _endPoint = TestExtensions.GetEndPointFromServerProcess(_serverProcess);
         var graphQlClient = new GraphQLHttpClient(_endPoint, new NewtonsoftJsonSerializer());
         _linksGqlAdapter = new LinksGqlAdapter<TLinkAddress>(graphQlClient, _constants);
     }
