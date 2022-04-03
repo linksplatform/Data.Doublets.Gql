@@ -114,7 +114,7 @@ namespace Platform.Data.Doublets.Gql.Client
                           }
                         }",
                 OperationName = "CreateLink",
-                Variables = new GqlLink{ id = substitutionLink.Index != 0 ? (long)substitutionLink.Index : null , from_id = substitutionLink.Source != 0 ? (long)substitutionLink.Source : null, to_id = substitutionLink.Target != 0 ? (long)substitutionLink.Target : null}
+                Variables = new GqlLink{ id = substitutionLink.Index != 0 ? (long)substitutionLink.Index : null , from_id = (long)substitutionLink.Source, to_id = (long)substitutionLink.Target}
             };
             var responseResult = _graphQlClient.SendMutationAsync<CreateResponseType>(createLinkRequest).AwaitResult();
             if (responseResult.Errors != null)
@@ -162,8 +162,8 @@ namespace Platform.Data.Doublets.Gql.Client
                     id = (long?)(restrictionLink.Index != 0 ? (long)restrictionLink.Index : null),
                     from_id = (long?)(restrictionLink.Source != 0 ? (long)restrictionLink.Source : null),
                     to_id = (long?)(restrictionLink.Target != 0 ? (long)restrictionLink.Target : null),
-                    substitution_from_id = (long?)(substitutionLink.Target != 0 ? (long)substitutionLink.Target : null),
-                    substitution_to_id = (long?)(substitutionLink.Target != 0 ? (long)substitutionLink.Target : null)
+                    substitution_from_id = (long)substitutionLink.Source,
+                    substitution_to_id = (long)substitutionLink.Target
                 }
             };
             var responseResult = _graphQlClient.SendMutationAsync<UpdateResponseType>(updateLinkRequest).AwaitResult();
