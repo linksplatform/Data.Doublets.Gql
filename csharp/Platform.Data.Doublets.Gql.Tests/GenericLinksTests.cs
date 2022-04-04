@@ -50,7 +50,6 @@ public class GenericLinksTests : IDisposable
     }
     private void Using(Action<ILinks<ulong>> action)
     {
-        TestExtensions.RunServer(TempFilePath);
         var graphqlClient = new GraphQLHttpClient(EndPoint, new NewtonsoftJsonSerializer());
         var linksConstants = new LinksConstants<ulong>(true);
         var linksGqlStorage = new LinksGqlAdapter(graphqlClient, linksConstants);
