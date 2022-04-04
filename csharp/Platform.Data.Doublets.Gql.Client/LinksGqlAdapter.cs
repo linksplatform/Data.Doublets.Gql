@@ -85,31 +85,11 @@ namespace Platform.Data.Doublets.Gql.Client
 
         public ulong Create(IList<ulong>? substitution, WriteHandler<ulong>? handler)
         {
-            long? source;
-            long? target;
-            if (substitution == null)
-            {
-                source = 0;
-                target = 0;
-            }
-            else if (substitution.Count == 2)
-            {
-                source = (long)substitution[0];
-                target = (long)substitution[1];
-            }
-            else if (substitution.Count == 3)
-            {
-                source = (long)substitution[1];
-                target = (long)substitution[2];
-            }
-            else
-            {
-                throw new ArgumentException("Substitution is invalid.");
-            }
+            var substitutionLink = new GqlLink(substitution);
             var createLinkRequest = new GraphQLRequest
             {
                 Query = @"
-                        mutation CreateLink ($from_id: Long!, $to_id: Long!) {
+                        mutation CreateLink ($from_id: Long, $to_id: Long) {
                           insert_links_one(object: {from_id: $from_id, to_id: $to_id}) {
                               id,
                               from_id
@@ -117,7 +97,7 @@ namespace Platform.Data.Doublets.Gql.Client
                           }
                         }",
                 OperationName = "CreateLink",
-                Variables = new { from_id = source, to_id = target}
+                Variables = new { from_id = substitutionLink.from_id, to_id = substitutionLink.to_id}
             };
             var responseResult = _graphQlClient.SendMutationAsync<CreateResponseType>(createLinkRequest).AwaitResult();
             if (responseResult.Errors != null)
