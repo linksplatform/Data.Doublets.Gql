@@ -61,14 +61,14 @@ namespace Platform.Data.Doublets.Gql.Schema
         public static Links InsertLink(object service, Links links)
         {
             var link = (ILinks<ulong>)service;
-            var create = link.GetOrCreate((ulong)links.from_id, (ulong)links.to_id);
+            var create = link.GetOrCreate((ulong)(links.from_id ?? 0), (ulong)(links.to_id ?? 0));
             return LinksType.GetLinkOrDefault(service, (long)create);
         }
 
         public static Links InsertLink(object service, LinksInsert linksInsert)
         {
             var link = (ILinks<ulong>)service;
-            var create = link.GetOrCreate((ulong)linksInsert.from_id, (ulong)linksInsert.to_id);
+            var create = link.GetOrCreate((ulong)(linksInsert.from_id ?? 0), (ulong)(linksInsert.to_id ?? 0));
             return LinksType.GetLinkOrDefault(service, (long)create);
         }
     }
