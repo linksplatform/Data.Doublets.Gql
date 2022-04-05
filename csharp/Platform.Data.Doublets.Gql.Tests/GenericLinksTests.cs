@@ -15,7 +15,6 @@ namespace Platform.Data.Doublets.Gql.Tests;
 public class GenericLinksTests : IDisposable
 {
     public readonly string TempFilePath;
-    public readonly string TempFilePath1;
     public readonly Uri EndPoint;
     public readonly Process ServerProcess;
 
@@ -46,11 +45,10 @@ public class GenericLinksTests : IDisposable
     [Fact]
     public void MultipleRandomCreationsAndDeletionsTest()
     {
-        Using(links => links.DecorateWithAutomaticUniquenessAndUsagesResolution().TestMultipleRandomCreationsAndDeletions(100));
+        Using(links => links.DecorateWithAutomaticUniquenessAndUsagesResolution().TestMultipleRandomCreationsAndDeletions(10));
     }
     private void Using(Action<ILinks<ulong>> action)
     {
-        TestExtensions.RunServer(TempFilePath);
         var graphqlClient = new GraphQLHttpClient(EndPoint, new NewtonsoftJsonSerializer());
         var linksConstants = new LinksConstants<ulong>(true);
         var linksGqlStorage = new LinksGqlAdapter(graphqlClient, linksConstants);
