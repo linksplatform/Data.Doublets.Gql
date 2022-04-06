@@ -117,7 +117,7 @@ namespace Platform.Data.Doublets.Gql.Client
             var responseResult = _graphQlClient.SendMutationAsync<CreateResponseType>(createLinkRequest).AwaitResult();
             if (responseResult.Errors != null)
             {
-                foreach (var responseResultError in responseResult.Errors!)
+                foreach (var responseResultError in responseResult.Errors)
                 {
                     throw new Exception(responseResultError.Message);
                 }
