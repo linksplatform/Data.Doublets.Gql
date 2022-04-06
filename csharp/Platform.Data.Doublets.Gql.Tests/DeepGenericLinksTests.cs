@@ -96,6 +96,7 @@ public class DeepGenericLinksTests
             links.DecorateWithAutomaticUniquenessAndUsagesResolution().TestMultipleRandomCreationsAndDeletions(10);
         });
     }
+
     private void Using(Action<ILinks<TLinkAddress>> action)
     {
         var graphqlClient = new GraphQLHttpClient(EndPoint, new NewtonsoftJsonSerializer());
