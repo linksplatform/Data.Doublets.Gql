@@ -75,7 +75,7 @@ public class DeepGenericLinksTests
                     links.Delete(id);
                 }
             }
-            links.DecorateWithAutomaticUniquenessAndUsagesResolution().TestMultipleRandomCreationsAndDeletions(10);
+            links.TestMultipleRandomCreationsAndDeletions(10);
         });
     }
     private void Using(Action<ILinks<TLinkAddress>> action)
