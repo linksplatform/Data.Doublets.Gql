@@ -21,7 +21,7 @@ namespace Platform.Data.Doublets.Gql.Client
         private static readonly IEqualityComparer<ulong> _equalityComparer = EqualityComparer<ulong>.Default;
         private readonly IGraphQLClient _graphQlClient;
         public readonly ulong DoubletTypeId;
-        public static readonly string Token = "";
+        public readonly string Token;
 
         public DeepGqlAdapter(IGraphQLClient graphQlClient, LinksConstants<ulong> constants, string token)
         {
@@ -32,6 +32,7 @@ namespace Platform.Data.Doublets.Gql.Client
             {
                 DoubletTypeId = CreateDoubletType();
             }
+            Token = token;
         }
 
         public LinksConstants<ulong> Constants { get; }
@@ -39,7 +40,7 @@ namespace Platform.Data.Doublets.Gql.Client
         public ulong Count(IList<ulong>? restriction)
         {
             var restrictionLink = new GqlLink(restriction, Constants.Any); 
-            var countRequest = new DeepGqlRequest
+            var countRequest = new DeepGqlRequest(Token)
             {
                 Query = $@"
                         query CountLinks {{
@@ -64,7 +65,7 @@ namespace Platform.Data.Doublets.Gql.Client
         public ulong Each(IList<ulong>? restrictions, ReadHandler<ulong>? handler)
         {
             var restrictionLink = new GqlLink(restrictions, Constants.Any); 
-            var personAndFilmsRequest = new DeepGqlRequest
+            var personAndFilmsRequest = new DeepGqlRequest(Token)
             {
                 Query = $@"
                         query GetLinks {{
@@ -100,7 +101,7 @@ namespace Platform.Data.Doublets.Gql.Client
         public ulong Create(IList<ulong>? substitution, WriteHandler<ulong>? handler)
         {
             var substitutionLink = new GqlLink(substitution, Constants.Any); 
-            var createLinkRequest = new DeepGqlRequest
+            var createLinkRequest = new DeepGqlRequest(Token)
             {
                 Query = $@"
                         mutation CreateLink {{
@@ -128,7 +129,7 @@ namespace Platform.Data.Doublets.Gql.Client
         {
             var restrictionLink = new GqlLink(restriction, Constants.Any); 
             var substitutionLink = new GqlLink(substitution, Constants.Any); 
-            var updateLinkRequest = new DeepGqlRequest
+            var updateLinkRequest = new DeepGqlRequest(Token)
             {
                 Query = $@"
                         mutation UpdateLink {{
@@ -157,7 +158,7 @@ namespace Platform.Data.Doublets.Gql.Client
         public ulong Delete(IList<ulong>? restriction, WriteHandler<ulong>? handler)
         {
             var restrictionLink = new GqlLink(restriction, Constants.Any); 
-            var updateLinkRequest = new DeepGqlRequest { Query = $@"
+            var updateLinkRequest = new DeepGqlRequest(Token) { Query = $@"
                         mutation DeleteLink {{
                           delete_links(where: {{ {restrictionLink.ToGqlWhereArguments()} type_id: {{ _eq: {DoubletTypeId} }} }}) {{
                             returning {{
@@ -190,7 +191,7 @@ namespace Platform.Data.Doublets.Gql.Client
 
         private ulong GetDoubletTypeOrDefault()
         {
-            var getRequest = new DeepGqlRequest { Query = @"
+            var getRequest = new DeepGqlRequest(Token) { Query = @"
                 query GetDoubletType {
                   links(where: {string: {value: {_eq: ""doublet""}}, type_id: {_eq: ""1""}}) {
                     id
@@ -210,7 +211,7 @@ namespace Platform.Data.Doublets.Gql.Client
 
         private ulong CreateDoubletType()
         {
-            var createRequest = new DeepGqlRequest { Query = @"
+            var createRequest = new DeepGqlRequest(Token) { Query = @"
                 mutation CreateDoubletType {
                   insert_links_one(object: {type_id: ""1"", string: {data: {value: ""doublet""}}}) {
                     id
@@ -394,10 +395,16 @@ namespace Platform.Data.Doublets.Gql.Client
 
     public class DeepGqlRequest : GraphQLHttpRequest
     {
+        private string _token;
+
+        public DeepGqlRequest(string token)
+        {
+            _token = token;
+        }
         public override HttpRequestMessage ToHttpRequestMessage(GraphQLHttpClientOptions options, IGraphQLJsonSerializer serializer)
         {
             var request = base.ToHttpRequestMessage(options, serializer);
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Token);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             return request;
         }
     }
