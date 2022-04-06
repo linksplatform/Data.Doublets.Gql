@@ -6,10 +6,12 @@ using Platform.Data.Doublets.Tests;
 using Platform.IO;
 using Platform.Memory;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using Xunit;
+using TLinkAddress = System.UInt64;
 
 namespace Platform.Data.Doublets.Gql.Tests;
 
@@ -23,30 +25,67 @@ public class DeepGenericLinksTests
         TempFilePath = new TemporaryFile();
     }
 
-    [Fact]
+    [Fact (Skip = "")]
     public void CRUDTest()
     {
-        Using(links => links.TestCRUDOperations());
+        Using(links =>
+        {
+            var allLinks = links.All();
+            foreach (var linkToDelete in allLinks)
+            {
+                var id = linkToDelete![0];
+                if (links.Exists(id))
+                {
+                    links.Delete(id);
+                }
+            }
+            links.TestCRUDOperations();
+        });
     }
 
-    [Fact]
+    [Fact (Skip = "")]
     public void RawNumbersCRUDTest()
     {
-        Using(links => links.TestRawNumbersCRUDOperations());
+        Using(links =>
+        {
+            var allLinks = links.All();
+            foreach (var linkToDelete in allLinks)
+            {
+                var id = linkToDelete![0];
+                if (links.Exists(id))
+                {
+                    links.Delete(id);
+                }
+            }
+            links.TestRawNumbersCRUDOperations();
+        });
     }
 
-    [Fact]
+    [Fact (Skip = "")]
     public void MultipleRandomCreationsAndDeletionsTest()
     {
-        Using(links => links.DecorateWithAutomaticUniquenessAndUsagesResolution().TestMultipleRandomCreationsAndDeletions(10));
+        Using(links =>
+        {
+            var allLinks = links.All();
+            foreach (var linkToDelete in allLinks)
+            {
+                var id = linkToDelete![0];
+                if (links.Exists(id))
+                {
+                    links.Delete(id);
+                }
+            }
+            links.DecorateWithAutomaticUniquenessAndUsagesResolution().TestMultipleRandomCreationsAndDeletions(10);
+        });
     }
-    private void Using(Action<ILinks<ulong>> action)
+    private void Using(Action<ILinks<TLinkAddress>> action)
     {
         var graphqlClient = new GraphQLHttpClient(EndPoint, new NewtonsoftJsonSerializer());
-        var linksConstants = new LinksConstants<ulong>(true);
-        var linksGqlStorage = new DeepGqlAdapter(graphqlClient, linksConstants);
+        var linksConstants = new LinksConstants<TLinkAddress>(true);
+        var token = "";
+        var linksGqlStorage = new DeepGqlAdapter(graphqlClient, linksConstants, token);
         using var logFile = File.Open("linksLogger.txt", FileMode.Create, FileAccess.Write);
-        LoggingDecorator<ulong> decoratedLinksStorage = new(linksGqlStorage, logFile);
+        LoggingDecorator<TLinkAddress> decoratedLinksStorage = new(linksGqlStorage, logFile);
         action(decoratedLinksStorage);
     }
 }
