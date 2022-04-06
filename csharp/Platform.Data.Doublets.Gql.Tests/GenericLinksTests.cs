@@ -45,7 +45,7 @@ public class GenericLinksTests : IDisposable
     [Fact]
     public void MultipleRandomCreationsAndDeletionsTest()
     {
-        Using(links => links.DecorateWithAutomaticUniquenessAndUsagesResolution().TestMultipleRandomCreationsAndDeletions(10));
+        Using(links => links.DecorateWithAutomaticUniquenessAndUsagesResolution().TestMultipleRandomCreationsAndDeletions(7));
     }
     private void Using(Action<ILinks<ulong>> action)
     {
