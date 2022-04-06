@@ -27,12 +27,12 @@ namespace Platform.Data.Doublets.Gql.Client
         {
             _graphQlClient = graphQlClient;
             Constants = constants;
+            Token = token;
             DoubletTypeId = GetDoubletTypeOrDefault();
             if (_equalityComparer.Equals(DoubletTypeId, default))
             {
                 DoubletTypeId = CreateDoubletType();
             }
-            Token = token;
         }
 
         public LinksConstants<ulong> Constants { get; }
