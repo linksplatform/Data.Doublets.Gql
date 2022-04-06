@@ -78,6 +78,24 @@ public class DeepGenericLinksTests
             links.TestMultipleRandomCreationsAndDeletions(10);
         });
     }
+
+    [Fact (Skip = "")]
+    public void MultipleRandomCreationsAndDeletionsWithDecoratorsTest()
+    {
+        Using(links =>
+        {
+            var allLinks = links.All();
+            foreach (var linkToDelete in allLinks)
+            {
+                var id = linkToDelete![0];
+                if (links.Exists(id))
+                {
+                    links.Delete(id);
+                }
+            }
+            links.DecorateWithAutomaticUniquenessAndUsagesResolution().TestMultipleRandomCreationsAndDeletions(10);
+        });
+    }
     private void Using(Action<ILinks<TLinkAddress>> action)
     {
         var graphqlClient = new GraphQLHttpClient(EndPoint, new NewtonsoftJsonSerializer());
