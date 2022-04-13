@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Data.Doublets.Gql | LinksPlatform's Platform.Data.Doublets.Gql Library </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Data.Doublets.Gql | LinksPlatform's Platform.Data.Doublets.Gql Library ">
+    <meta name="generator" content="docfx 2.51.0.0">
+    
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="datadoubletsgql">Data.Doublets.Gql</h1>
+
+<p>If you need any help, you can ged it real-time on our official discord server: <a href="https://discord.gg/eEXJyjWv5e">https://discord.gg/eEXJyjWv5e</a></p>
+<p>Comparison of theories:</p>
+<p><img src="https://github.com/LinksPlatform/Documentation/raw/master/doc/TheoriesComparison/theories_comparison_en.png" alt="Comparison of theories"></p>
+<h2 id="online-demo">Online demo</h2>
+<p>If you are lucky (our server is up) you can test our GraphQL server online using these urls:</p>
+<ul>
+<li><a href="http://linksplatform.ddns.net:29018/ui/playground">http://linksplatform.ddns.net:29018/ui/playground</a></li>
+<li><a href="http://linksplatform.ddns.net:29018/ui/graphiql">http://linksplatform.ddns.net:29018/ui/graphiql</a></li>
+<li><a href="http://linksplatform.ddns.net:29018/ui/altair">http://linksplatform.ddns.net:29018/ui/altair</a></li>
+<li><a href="http://linksplatform.ddns.net:29018/ui/voyager">http://linksplatform.ddns.net:29018/ui/voyager</a></li>
+</ul>
+<p>You can use this URL to access the GraphQL server directly from code, browser or any GraphQL client like <a href="https://insomnia.rest/">Insomnia</a>.</p>
+<pre><code>http://linksplatform.ddns.net:29018/v1/graphql
+</code></pre>
+<h2 id="start-locally">Start locally</h2>
+<p>Execute:</p>
+<pre><code>cd csharp/Platform.Data.Doublets.Gql.Server
+</code></pre>
+<p>By default Gql server uses <code>db.links</code> as a name of the database:</p>
+<pre><code>dotnet run
+</code></pre>
+<p>You can set any path to a database file:</p>
+<pre><code>dotnet run path/to/db.links
+</code></pre>
+<p>Navigate to:</p>
+<ul>
+<li>http://localhost:60341/ui/playground</li>
+<li>http://localhost:60341/ui/graphiql</li>
+<li>http://localhost:60341/ui/altair</li>
+<li>http://localhost:60341/ui/voyager</li>
+</ul>
+<p>Or make request at:
+http://localhost:60341/v1/graphql</p>
+<p>You can change the port like this:</p>
+<pre><code>dotnet run -f net5 -c Release db.links --urls http://0.0.0.0:29018
+</code></pre>
+<h2 id="supported-query-examples">Supported query examples:</h2>
+<pre><code class="lang-gql">{
+  links {
+    id
+  }
+}
+</code></pre>
+<pre><code class="lang-gql">{
+  links(
+    where: { id: { _eq: 1 }, from_id: { _eq: 1 }, to_id: { _eq: 1 } }
+    distinct_on: [from_id]
+    order_by: { id: asc }
+    offset: 0
+    limit: 1
+  ) {
+    id
+    from_id
+    from {
+      id
+      from_id
+      to_id
+    }
+    out {
+      id
+      from_id
+      to_id
+    }
+    to_id
+    to {
+      id
+      from_id
+      to_id
+    }
+    in {
+      id
+      from_id
+      to_id
+    }
+  }
+}
+</code></pre>
+<pre><code class="lang-gql">{
+  links(
+    where: { id: { _eq: 1 }, from_id: { _eq: 1 }, to_id: { _eq: 1 } }
+    distinct_on: [from_id]
+    order_by: { id: asc }
+    offset: 0
+    limit: 1
+  ) {
+    id
+    from_id
+    from {
+      id
+      from_id
+      to_id
+    }
+    out(
+      where: { from_id: { _eq: 1 }, to_id: { _eq: 1 } }
+      distinct_on: [from_id]
+      order_by: { id: asc }
+      offset: 0
+      limit: 1
+    ) {
+      id
+      from_id
+      to_id
+    }
+    to_id
+    to {
+      id
+      from_id
+      to_id
+    }
+    in(
+      where: { from_id: { _eq: 1 }, to_id: { _eq: 1 } }
+      distinct_on: [from_id]
+      order_by: { id: asc }
+      offset: 0
+      limit: 1
+    ) {
+      id
+      from_id
+      to_id
+    }
+  }
+}
+</code></pre>
+<h2 id="supported-mutation-examples">Supported mutation examples:</h2>
+<pre><code class="lang-gql">mutation {
+  insert_links_one(object: {from_id: 1, to_id: 1}) {
+    id
+    from_id
+    to_id
+  }
+}
+</code></pre>
+<pre><code class="lang-gql">mutation {
+  insert_links(objects: [{ from_id: 1, to_id: 1 }, { from_id: 2, to_id: 2 }]) {
+    returning {
+      id
+      from_id
+      to_id
+    }
+  }
+}
+</code></pre>
+<pre><code class="lang-gql">mutation {
+  update_links(_set: { from_id: 1, to_id: 2 }, where: { from_id: { _eq: 2 }, to_id: { _eq: 2 } }) {
+    returning {
+      id
+      from_id
+      to_id
+    }
+  }
+}
+</code></pre>
+<pre><code class="lang-gql">mutation {
+  delete_links(where: { from_id: { _eq: 1 }, to_id: { _eq: 1 } }) {
+    returning {
+      id
+      from_id
+      to_id
+    }
+  }
+}
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/linksplatform/Data.Doublets.Gql/blob/master/README.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>

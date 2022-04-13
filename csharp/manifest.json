@@ -1,0 +1,2168 @@
+{
+  "homepages": [],
+  "source_base_path": "/home/runner/work/Data.Doublets.Gql/Data.Doublets.Gql",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      },
+      "is_incremental": false
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "README.md",
+      "output": {
+        ".html": {
+          "relative_path": "README.html",
+          "hash": "X2/MauUDY87l3+ZeuWngHg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Client.DeepGqlAdapter.CreateResponseType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Client.DeepGqlAdapter.CreateResponseType.html",
+          "hash": "zDoa1WfV24W9Ztrni9MvkQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Client.DeepGqlAdapter.DeepGqlRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Client.DeepGqlAdapter.DeepGqlRequest.html",
+          "hash": "a4os7tJoY0IpuPCnJX6r4A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Client.DeepGqlAdapter.DeleteResponseType.DeleteLinks.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Client.DeepGqlAdapter.DeleteResponseType.DeleteLinks.html",
+          "hash": "eEvTsoINxrBAmd46GF3qhg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Client.DeepGqlAdapter.DeleteResponseType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Client.DeepGqlAdapter.DeleteResponseType.html",
+          "hash": "FBtyYgWglD/T8yJTheX20A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Client.DeepGqlAdapter.GetLinksResponseType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Client.DeepGqlAdapter.GetLinksResponseType.html",
+          "hash": "R6ikZSQ270CyE9BgfoRxSA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Client.DeepGqlAdapter.GqlLink.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Client.DeepGqlAdapter.GqlLink.html",
+          "hash": "FsB0OpdtVhoL3AHLRHAEdw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Client.DeepGqlAdapter.ReadLinksResponseType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Client.DeepGqlAdapter.ReadLinksResponseType.html",
+          "hash": "oQB434wQaMUImWCQxhBYMg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Client.DeepGqlAdapter.UpdateResponseType.UpdateLinks.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Client.DeepGqlAdapter.UpdateResponseType.UpdateLinks.html",
+          "hash": "019oHSrjRgUjJbxYPrGn2Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Client.DeepGqlAdapter.UpdateResponseType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Client.DeepGqlAdapter.UpdateResponseType.html",
+          "hash": "oETIViOAvCgSW7YjNb9uaw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Client.DeepGqlAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Client.DeepGqlAdapter.html",
+          "hash": "CabpykU1ZaltvQlc55yjKQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Client.LinksGqlAdapter.CreateResponseType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Client.LinksGqlAdapter.CreateResponseType.html",
+          "hash": "bqToOntPUQsnSvyXTWzDnw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Client.LinksGqlAdapter.DeleteResponseType.DeleteLinks.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Client.LinksGqlAdapter.DeleteResponseType.DeleteLinks.html",
+          "hash": "j1hl920yc5KZRCdVCL3ZjA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Client.LinksGqlAdapter.DeleteResponseType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Client.LinksGqlAdapter.DeleteResponseType.html",
+          "hash": "V9G/mlOGUCJV2PNnm3TctQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Client.LinksGqlAdapter.GetLinksResponseType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Client.LinksGqlAdapter.GetLinksResponseType.html",
+          "hash": "gnGKq+sYTwWaKoBe4h9f0Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Client.LinksGqlAdapter.GqlLink.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Client.LinksGqlAdapter.GqlLink.html",
+          "hash": "ODS5cBa8D8JUnEbPAq62gg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Client.LinksGqlAdapter.ReadLinksResponseType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Client.LinksGqlAdapter.ReadLinksResponseType.html",
+          "hash": "VW90dyraO9rFRH71jMKMdQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Client.LinksGqlAdapter.UpdateResponseType.UpdateLinks.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Client.LinksGqlAdapter.UpdateResponseType.UpdateLinks.html",
+          "hash": "2SOR4GIHqVmX9EY2sD7xQQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Client.LinksGqlAdapter.UpdateResponseType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Client.LinksGqlAdapter.UpdateResponseType.html",
+          "hash": "2+6Rjyvrqup9VAw4nDEhGA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Client.LinksGqlAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Client.LinksGqlAdapter.html",
+          "hash": "BNL/zdNi4b9PmwF2NWdQ0w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Client.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Client.html",
+          "hash": "VgDWmuEqpu1hGNY6thZJRQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.BooleanExpression.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.BooleanExpression.html",
+          "hash": "JWADG19dTXmrnb1L7qTM+A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.BooleanExpressionBooleanExpression.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.BooleanExpressionBooleanExpression.html",
+          "hash": "Xryfwafjm2yCSfxyuGM1wQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.BooleanExpressionInsert.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.BooleanExpressionInsert.html",
+          "hash": "HBmIysRTZ4B+5E7NJQtl8Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.BooleanExpressionObjectRelationshipInsert.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.BooleanExpressionObjectRelationshipInsert.html",
+          "hash": "ZgAf7+ek7FjV+qEv2tdlEQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.BooleanExpressionOnConflict.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.BooleanExpressionOnConflict.html",
+          "hash": "wz39u0rpnhnltPFdQXOJ9Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.DoubleComparisonExpression.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.DoubleComparisonExpression.html",
+          "hash": "3TMEnWtAsErpIT7NUOpWQA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Enums.BoolExpressionConstraint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Enums.BoolExpressionConstraint.html",
+          "hash": "Y5SBf64bV/2+e8ROhs4bXQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Enums.BooleanExpressionUpdateColumn.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Enums.BooleanExpressionUpdateColumn.html",
+          "hash": "+Z3kw1Xn+wfve2tgPsVlWw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Enums.LinksConstraint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Enums.LinksConstraint.html",
+          "hash": "IbMud8Q1BQ7VeMqrAzujww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Enums.MaterializedPathConstraint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Enums.MaterializedPathConstraint.html",
+          "hash": "m0C9sb1PNgC8cyXn+bvH6g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Enums.MaterializedPathSelectColumn.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Enums.MaterializedPathSelectColumn.html",
+          "hash": "aUoRoY272+LuDSZlnAHiSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Enums.MaterializedPathUpdateColumn.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Enums.MaterializedPathUpdateColumn.html",
+          "hash": "hfzLXcWrVnC8wK+9tuPuAQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Enums.NumberConstraint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Enums.NumberConstraint.html",
+          "hash": "VSCNTEqhcdBMZkcNlcnlkQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Enums.NumberUpdateColumn.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Enums.NumberUpdateColumn.html",
+          "hash": "0dabSpa5d7IzMaGOaNbizw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Enums.OrderBy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Enums.OrderBy.html",
+          "hash": "IYp/jplxvreyfvW1VBay+w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Enums.StringConstraint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Enums.StringConstraint.html",
+          "hash": "EvmDktct32r0JNJwpFnmkg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Enums.StringUpdateColumn.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Enums.StringUpdateColumn.html",
+          "hash": "lkJi4BtgDne8Yi+magXLpg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Enums.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Enums.html",
+          "hash": "zEFxBmgtjnkFJll3mYYNnw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Links.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Links.html",
+          "hash": "vx/VbYMin2izG6gvviCSaA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.LinksAggregate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.LinksAggregate.html",
+          "hash": "UZPVSjvrDTcD2Mah7l4Djg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.LinksAggregateBigIntFields.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.LinksAggregateBigIntFields.html",
+          "hash": "soOG11XrRJqVMBeWB/3sNg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.LinksAggregateFields.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.LinksAggregateFields.html",
+          "hash": "IOmcsiaVY+9TYxydb2or9A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.LinksAggregateFloatFields.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.LinksAggregateFloatFields.html",
+          "hash": "p+J5fMfOz4Nm+vt5Dii52A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.LinksAggregateOrderBy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.LinksAggregateOrderBy.html",
+          "hash": "Qa5oY7PqHxJRPIy9Msh6tQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.LinksArrayRelationshipInsert.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.LinksArrayRelationshipInsert.html",
+          "hash": "OJrFNLZ6Qy5Zt/BhbtF68w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.LinksBooleanExpression.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.LinksBooleanExpression.html",
+          "hash": "Ri6U/ClwdnpovdZHX7IwuA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.LinksColumn.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.LinksColumn.html",
+          "hash": "CCwjsF7y6PChZkdw8du6+g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.LinksFieldsOrderBy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.LinksFieldsOrderBy.html",
+          "hash": "BV8P+KB/sazSXehOGvvW0A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.LinksInsert.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.LinksInsert.html",
+          "hash": "aKBo27toAME0LV4+YQm/2w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.LinksMutation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.LinksMutation.html",
+          "hash": "9LZmvpQ0MWiJpM8KkthpoQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.LinksMutationResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.LinksMutationResponse.html",
+          "hash": "1symh/JOwOGLc69SSb1YsQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.LinksObjRelInsert.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.LinksObjRelInsert.html",
+          "hash": "y0DgyV9BNL/AJacEMAwuUg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.LinksOnConflict.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.LinksOnConflict.html",
+          "hash": "S2Tm1iBmBuE59YCP3mDPoQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.LinksOrderBy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.LinksOrderBy.html",
+          "hash": "+bLiHu7LbSc/UgtKiuHKIg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.LinksQuery.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.LinksQuery.html",
+          "hash": "fSalf5OgQN+5md5KB6laKQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.LinksSchema.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.LinksSchema.html",
+          "hash": "5yvLd0OHFDS3yAZDw7Y6SA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.LinksSet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.LinksSet.html",
+          "hash": "R4PWVLI2xiYsaL4s74AZbg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.LinksSubscription.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.LinksSubscription.html",
+          "hash": "m19eAS/TxID7Y48pIDPMMw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.LongComparisonExpression.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.LongComparisonExpression.html",
+          "hash": "nepQtuBSycRwfJToa+G72g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.MaterializedPathArrayRelationshipInsert.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.MaterializedPathArrayRelationshipInsert.html",
+          "hash": "TEfV21dTic8riPO2IVdfMg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.MaterializedPathAverageFields.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.MaterializedPathAverageFields.html",
+          "hash": "ZCgGNS6HJTpplDTRMJR0CQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.MaterializedPathBooleanExpression.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.MaterializedPathBooleanExpression.html",
+          "hash": "8SSBulkiPdf4kunlp8jGHg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.MaterializedPathFields.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.MaterializedPathFields.html",
+          "hash": "Fm6C81oXUwGnLtZij+nxPQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.MaterializedPathInsert.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.MaterializedPathInsert.html",
+          "hash": "Tkv97UuJ7rOSIrwQQjytcw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.MaterializedPathMaxFields.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.MaterializedPathMaxFields.html",
+          "hash": "7wQZU0wflg0smgl6a5cy9w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.MaterializedPathMaxOrderBy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.MaterializedPathMaxOrderBy.html",
+          "hash": "wwfTl9UuUiMR7aFUTpDg7Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.MaterializedPathMinFields.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.MaterializedPathMinFields.html",
+          "hash": "Yv1inGUbLI9z0zybwwDL4w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.MaterializedPathMinOrderBy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.MaterializedPathMinOrderBy.html",
+          "hash": "DsdlhW4ok1P+vBvmBHX7QA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.MaterializedPathOnConflict.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.MaterializedPathOnConflict.html",
+          "hash": "CYkLmvQLuEW5z2g4Q1zbAg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Number.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Number.html",
+          "hash": "ixtUpI1lKXAluA53EVmGmA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.NumberBooleanExpression.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.NumberBooleanExpression.html",
+          "hash": "oqPrakLt6CcAJjd9m8EwDg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.NumberInsert.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.NumberInsert.html",
+          "hash": "LQyrio7F7TkcXLvdb6IEjw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.NumberObjectRelationshipInsert.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.NumberObjectRelationshipInsert.html",
+          "hash": "U9Ozaw6lmJwc2vUIh52ikQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.NumberOnConflict.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.NumberOnConflict.html",
+          "hash": "H90zGmXH43TOZeEohp/3cg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.StringBooleanExpression.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.StringBooleanExpression.html",
+          "hash": "y9qJFRxS5gnvTG1Yu7Otqw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.StringComparisonExpression.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.StringComparisonExpression.html",
+          "hash": "y0ZxeUvB1u5LiN3g9GdBQA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.StringExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.StringExtensions.html",
+          "hash": "H/Ad/pvJ9HW+dxm9zc1p8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.StringInsert.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.StringInsert.html",
+          "hash": "nB5K8L2TeLAhhXr0wIRNoA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.StringObjectRelationshipInsert.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.StringObjectRelationshipInsert.html",
+          "hash": "84PQun6SilMcFkxj5UDqrA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.StringOnConflict.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.StringOnConflict.html",
+          "hash": "H7bRCZgobBVwSpN6n3TTuA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Enums.BaseEnumType-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Enums.BaseEnumType-1.html",
+          "hash": "GfWjxA8NH3r4WuS4xAtczw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Enums.BooleanExpressionConstraintEnumType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Enums.BooleanExpressionConstraintEnumType.html",
+          "hash": "7Kr4CTfVQokGV/H3Xcg21Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Enums.BooleanExpressionUpdateColumnEnumType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Enums.BooleanExpressionUpdateColumnEnumType.html",
+          "hash": "DWOxa4N4h1C4VDXLmViZfw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Enums.LinksColumnEnumBaseType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Enums.LinksColumnEnumBaseType.html",
+          "hash": "wPefwo14SG3uLnEtNpOZsA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Enums.LinksConstraintEnumType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Enums.LinksConstraintEnumType.html",
+          "hash": "tfQVeGzxeLBmrg9GbtK3ZQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Enums.LinksSelectColumnEnumBaseType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Enums.LinksSelectColumnEnumBaseType.html",
+          "hash": "o1Rf310JqSWt6D8O9e3qUA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Enums.LinksUpdateColumnEnumBaseType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Enums.LinksUpdateColumnEnumBaseType.html",
+          "hash": "FRPh6/34tS8cR9KxLBs55w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Enums.MaterializedPathConstraintEnumType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Enums.MaterializedPathConstraintEnumType.html",
+          "hash": "2cfhfn+GOGw7vqhzAUM+vA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Enums.MaterializedPathSelectColumnEnumType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Enums.MaterializedPathSelectColumnEnumType.html",
+          "hash": "wgAxVBaJoEKp1wDGGYqWEQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Enums.MaterializedPathUpdateColumnEnumType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Enums.MaterializedPathUpdateColumnEnumType.html",
+          "hash": "baGfmOpBtZ0TBDvhCWSlxg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Enums.NumberConstraintEnumType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Enums.NumberConstraintEnumType.html",
+          "hash": "lz0IESLCLQeqf54tZQepfg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Enums.NumberUpdateColumnEnumType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Enums.NumberUpdateColumnEnumType.html",
+          "hash": "ulmtVL3iGWmiQOy31GlZPw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Enums.OrderByEnumType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Enums.OrderByEnumType.html",
+          "hash": "d7KZotS+Fk7zcheEdXsWHA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Enums.StringConstraintEnumType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Enums.StringConstraintEnumType.html",
+          "hash": "ysqCyN7NqA67z0k3KpXfgQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Enums.StringUpdateColumnEnumType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Enums.StringUpdateColumnEnumType.html",
+          "hash": "2ZMjeE/MWsBPzaYiBuiMSw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Enums.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Enums.html",
+          "hash": "+Cqu1sUYyBAVRoHTbI01iA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.BooleanExpressionBooleanExpressionInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.BooleanExpressionBooleanExpressionInputType.html",
+          "hash": "1ql5Ukd6xwvaFw0+so+CDQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.BooleanExpressionInsertInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.BooleanExpressionInsertInputType.html",
+          "hash": "BOxN9SvK7V1NDU8rc59G8Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.BooleanExpressionObjectRelationshipInsertInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.BooleanExpressionObjectRelationshipInsertInputType.html",
+          "hash": "C+xiJ+FSUjxmfiN4fqxlxg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.BooleanExpressionOnConflictInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.BooleanExpressionOnConflictInputType.html",
+          "hash": "eJECiw2dKYaR8xn9Xe11GQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.DoubleComparisonExpressionInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.DoubleComparisonExpressionInputType.html",
+          "hash": "3zTof5IfsuG7BxiHcdVnPg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksAggregateOrderByInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksAggregateOrderByInputType.html",
+          "hash": "8vUdaXizLDNNQZcZXeWjtQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksArrRelInsertInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksArrRelInsertInputType.html",
+          "hash": "Bmq8BOwfW8z7ia5eNxdv1w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksArrayRelationshipInsertInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksArrayRelationshipInsertInputType.html",
+          "hash": "Vrezz6Z6hgZ9qkZuUKru0A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksBooleanExpressionInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksBooleanExpressionInputType.html",
+          "hash": "teE7K7vuZ0hkN3f3rmsVfw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksFieldsAvgOrderByInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksFieldsAvgOrderByInputType.html",
+          "hash": "iRhc55GMoLM1L9bZAzP4UA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksFieldsMaxOrderByInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksFieldsMaxOrderByInputType.html",
+          "hash": "ivJYth8Ck0AcHB3+AkPXTQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksFieldsMinOrderByInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksFieldsMinOrderByInputType.html",
+          "hash": "mbK7z2tbasEYXNuxY1bb4g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksFieldsOrderByInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksFieldsOrderByInputType.html",
+          "hash": "VYcyWYNvdKu2VfJkUvYTxA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksFieldsStdDevOrderByInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksFieldsStdDevOrderByInputType.html",
+          "hash": "Yf1wYGxevVrl9Nr+IUOekA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksFieldsStdDevPopOrderByInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksFieldsStdDevPopOrderByInputType.html",
+          "hash": "o6VStAEprtJ2ASEz7w2RgA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksFieldsStdDevSampOrderByInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksFieldsStdDevSampOrderByInputType.html",
+          "hash": "VIhyANCYQeRbcwgQpcZjKw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksFieldsSumOrderByInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksFieldsSumOrderByInputType.html",
+          "hash": "XYBGq/lnawpnVo2JWWW1Rg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksFieldsVarPopOrderByInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksFieldsVarPopOrderByInputType.html",
+          "hash": "CSWgh73ILcfFunJuiMElhQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksFieldsVarSampOrderByInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksFieldsVarSampOrderByInputType.html",
+          "hash": "I8tBb4IakSGrka01FHqdzQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksFieldsVarianceOrderByInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksFieldsVarianceOrderByInputType.html",
+          "hash": "z2IxD+7EuPi+LoNDZhSvjw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksIncInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksIncInputType.html",
+          "hash": "nWk2BZ0pqlcX5xFTbbAHRQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksInputType.html",
+          "hash": "t8nxL8tX2NRn5AAvw+pWsQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksInsertInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksInsertInputType.html",
+          "hash": "2LorOdcM3L4rhcnPbZX9Yw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksObjRelInsertInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksObjRelInsertInputType.html",
+          "hash": "qp3XPdbYRnM/U3hPG+obtA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksOnConflictInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksOnConflictInputType.html",
+          "hash": "pEOCIoRAG/gnioBK4kZ6lg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksOrderByInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksOrderByInputType.html",
+          "hash": "UOCdO5uL4KAwhfSWtT6Zww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksPkColumnsInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksPkColumnsInputType.html",
+          "hash": "yCO8i/kC+uHwW5LKl15JPg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksSetInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LinksSetInputType.html",
+          "hash": "lCb7RUDhbd9rUn90I8Tt/A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.LongComparisonExpressionInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.LongComparisonExpressionInputType.html",
+          "hash": "eUNLGj//+cpUXKvPrYC/1w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.MaterializedPathArrayRelationshipInsertInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.MaterializedPathArrayRelationshipInsertInputType.html",
+          "hash": "qlvte56wy6qvcKbkd4CRCA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.MaterializedPathBooleanExpressionInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.MaterializedPathBooleanExpressionInputType.html",
+          "hash": "RzyT6RHapClZGtgMMVJucw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.MaterializedPathInsertInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.MaterializedPathInsertInputType.html",
+          "hash": "hg3gRnTJ7v4R7QekGDo/CQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.MaterializedPathMaxOrderByInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.MaterializedPathMaxOrderByInputType.html",
+          "hash": "rPQEwZ5OubZiX9Z2jgDySg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.MaterializedPathMinOrderByInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.MaterializedPathMinOrderByInputType.html",
+          "hash": "Da+jL4gDHnOUiWgidJ9qUQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.MaterializedPathOnConflictInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.MaterializedPathOnConflictInputType.html",
+          "hash": "f+fYxrvmStcrkaiWiFYdtQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.NumberBooleanExpressionInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.NumberBooleanExpressionInputType.html",
+          "hash": "kB64jQ5VXXDct8Ogl5PihQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.NumberInsertInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.NumberInsertInputType.html",
+          "hash": "HbqVo2xv2U0tf1GBQdWjFQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.NumberObjectRelationshipInsertInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.NumberObjectRelationshipInsertInputType.html",
+          "hash": "TAZyZhwhBWNIC8IK/PFHyA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.NumberOnConflictInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.NumberOnConflictInputType.html",
+          "hash": "TVJLv4/Ys1hmmj1wGNX5Ng=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.StringBooleanExpressionInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.StringBooleanExpressionInputType.html",
+          "hash": "bsTfaKnlLuBWf8sGjxG/KQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.StringComparisonExpressionInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.StringComparisonExpressionInputType.html",
+          "hash": "neql58j1Bno+DMAMepvENA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.StringInsertInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.StringInsertInputType.html",
+          "hash": "eZ1pwK0NPWnyWGwdBddrYA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.StringObjectRelationshipInsertInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.StringObjectRelationshipInsertInputType.html",
+          "hash": "MhvHD5Qte0VKIHVaxsxemA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.StringOnConflictInputType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.StringOnConflictInputType.html",
+          "hash": "kb+igf1D61ZCpPImvGJJgw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.Input.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.Input.html",
+          "hash": "I6M+H+hmzbPrbEpibsmwhw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateBigIntFieldsBaseType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateBigIntFieldsBaseType.html",
+          "hash": "aWYiEv3aAAMJsJkWdaq7Aw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateBigIntMaxFieldsType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateBigIntMaxFieldsType.html",
+          "hash": "Zto4kJGcyiQaq3TnS965DQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateBigIntMinFieldsType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateBigIntMinFieldsType.html",
+          "hash": "gZPytuDSy8dI7kl5X5MyTA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateBigIntSumFieldsType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateBigIntSumFieldsType.html",
+          "hash": "mPyT68GFtYN19UM731j3LQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateFieldsType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateFieldsType.html",
+          "hash": "bOIfjhYG9sty1Qu6EWIGSw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateFloatAvgFieldsType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateFloatAvgFieldsType.html",
+          "hash": "/g+zlaIxaXpC8Xt3PzcNyg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateFloatFieldsType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateFloatFieldsType.html",
+          "hash": "+eM/4xAMN1Ge7AS43SfQfw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateFloatStdDevPopFieldsType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateFloatStdDevPopFieldsType.html",
+          "hash": "//O90kbWeOA5lERK5rMkQQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateFloatStdDevSampFieldsType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateFloatStdDevSampFieldsType.html",
+          "hash": "QcbRvYDxeJwq+j5K8iGEzg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateFloatStddevFieldsType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateFloatStddevFieldsType.html",
+          "hash": "qjuy7MaJK4unJPCBT3Gomw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateFloatVarPopFieldsType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateFloatVarPopFieldsType.html",
+          "hash": "ngc0RotldKvOwOHnL8MsIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateFloatVarSampFieldsType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateFloatVarSampFieldsType.html",
+          "hash": "LiCgYMaLrajge4OD9zP1Ww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateFloatVarianceFieldsType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateFloatVarianceFieldsType.html",
+          "hash": "OQRJNAlKonI+bzcQhI8cDA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.LinksAggregateType.html",
+          "hash": "/jYmf0ffcnpwrNq5+3Jl7A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.LinksConstraintEnumType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.LinksConstraintEnumType.html",
+          "hash": "GFaXH9HC69RIyTUVuqGVrQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.LinksMutationResponseType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.LinksMutationResponseType.html",
+          "hash": "tDPklY45N08JNdt5o/CJfA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.LinksType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.LinksType.html",
+          "hash": "V5FtSDhu7HOnd1IvWZehxw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.MaterializedPathAverageFieldsType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.MaterializedPathAverageFieldsType.html",
+          "hash": "IAXwdWJ48oStoCxlEyLnfw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.MaterializedPathFieldsType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.MaterializedPathFieldsType.html",
+          "hash": "qX1w2QIZi1QZ9xHJJd+4RQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.MaterializedPathMaxFieldsType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.MaterializedPathMaxFieldsType.html",
+          "hash": "kRhxZHBMaazuDo84DNcrBw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.MaterializedPathMinFieldsType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.MaterializedPathMinFieldsType.html",
+          "hash": "fp+4A3iqO+85D2JUFCx9vg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.Types.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.Types.html",
+          "hash": "+w5GsULXD33zYBll44YPYQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Schema.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Schema.html",
+          "hash": "ou/vYdYocji7a5aNw5xWSg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Server.CustomErrorInfoProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Server.CustomErrorInfoProvider.html",
+          "hash": "MeD4Y6D0P41zdfBcTPLNaQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Server.Data.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Server.Data.html",
+          "hash": "IW/XTpK08Jo2qWlGZDpnmg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Server.GraphQLHttpMiddlewareWithLogs-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Server.GraphQLHttpMiddlewareWithLogs-1.html",
+          "hash": "aJ8zMpNVThgUU30Qv3LWPg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Server.MinimumAgeRequirement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Server.MinimumAgeRequirement.html",
+          "hash": "pNRvi5skfkfXnssOVSYbYw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Server.Program.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Server.Program.html",
+          "hash": "1HdKyyn+OvjW6YhmXtKBXQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Server.Startup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Server.Startup.html",
+          "hash": "V8MR5rl1bkq60hctLfN64Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Server.StartupWithRouting.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Server.StartupWithRouting.html",
+          "hash": "LKQ7yz0YxWiwCeWP81rRRQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Platform.Data.Doublets.Gql.Server.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Platform.Data.Doublets.Gql.Server.html",
+          "hash": "q7ynSIEU9f3dcr/sy/jfbg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "obj/api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "vJR6peLWvkg2uDuIN3WamQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "yM6X6KOtvO7VvfWLOLpbPQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 1,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 172,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: should not trace intermediate info.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
