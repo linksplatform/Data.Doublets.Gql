@@ -82,7 +82,7 @@ namespace Platform.Data.Doublets.Gql.Tests
             returning {
               id
               from_id
-              to_idв
+              to_id
             }
           }
         }
