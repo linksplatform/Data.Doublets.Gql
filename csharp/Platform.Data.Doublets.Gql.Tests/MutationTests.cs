@@ -10,6 +10,7 @@ using Platform.IO;
 using Platform.Memory;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 using TLinkAddress = System.UInt64;
 
@@ -40,9 +41,11 @@ namespace Platform.Data.Doublets.Gql.Tests
           }
         }
         "; });
-            var response = JObject.Parse(jsonTask.Result);
-            var error = response.ContainsKey("errors");
-            Assert.False(error);
+            dynamic result = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(jsonTask.Result);
+            if (result.ContainsKey("errors"))
+            {
+                throw new Exception(result.errors.ToString());
+            }
         }
 
         [Fact]
@@ -61,9 +64,11 @@ namespace Platform.Data.Doublets.Gql.Tests
           }
         }
         "; });
-            var response = JObject.Parse(jsonTask.Result);
-            var error = response.ContainsKey("errors");
-            Assert.False(error);
+            dynamic result = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(jsonTask.Result);
+            if (result.ContainsKey("errors"))
+            {
+                throw new Exception(result.errors.ToString());
+            }
         }
 
         [Fact]
@@ -77,14 +82,16 @@ namespace Platform.Data.Doublets.Gql.Tests
             returning {
               id
               from_id
-              to_id
+              to_idв
             }
           }
         }
         "; });
-            var response = JObject.Parse(jsonTask.Result);
-            var error = response.ContainsKey("errors");
-            Assert.False(error);
+            dynamic result = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(jsonTask.Result);
+            if (result.ContainsKey("errors"))
+            {
+                throw new Exception(result.errors.ToString());
+            }
         }
 
         [Fact]
@@ -104,9 +111,11 @@ namespace Platform.Data.Doublets.Gql.Tests
           }
         }
         "; });
-            var response = JObject.Parse(jsonTask.Result);
-            var error = response.ContainsKey("errors");
-            Assert.False(error);
+            dynamic result = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(jsonTask.Result);
+            if (result.ContainsKey("errors"))
+            {
+                throw new Exception(result.errors.ToString());
+            }
         }
 
         [Fact]
@@ -137,10 +146,12 @@ namespace Platform.Data.Doublets.Gql.Tests
               }
             }
             "; });
-            jsonResponse = jsonTask.Result;
-            dynamic? responseObject = JsonConvert.DeserializeObject(jsonResponse);
-            Assert.False(JObject.Parse(jsonResponse).ContainsKey("errors"));
-            Assert.True(1 == Convert.ToInt32(responseObject?.data.update_links.returning[0].id));
+            dynamic result = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(jsonTask.Result);
+            if (result.ContainsKey("errors"))
+            {
+                throw new Exception(result.errors.ToString());
+            }
+            Assert.True(1 == Convert.ToInt32(result.data.update_links.returning[0].id));
         }
     }
 }
