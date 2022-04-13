@@ -25,7 +25,7 @@ public class DeepGenericLinksTests
         TempFilePath = new TemporaryFile();
     }
 
-    [Fact (Skip = "")]
+    [Fact (Skip = "", Timeout = 60000)]
     public void CRUDTest()
     {
         Using(links =>
@@ -43,7 +43,7 @@ public class DeepGenericLinksTests
         });
     }
 
-    [Fact (Skip = "")]
+    [Fact (Skip = "", Timeout = 60000)]
     public void RawNumbersCRUDTest()
     {
         Using(links =>
@@ -61,7 +61,7 @@ public class DeepGenericLinksTests
         });
     }
 
-    [Fact (Skip = "")]
+    [Fact (Skip = "", Timeout = 60000)]
     public void MultipleRandomCreationsAndDeletionsTest()
     {
         Using(links =>
@@ -79,7 +79,7 @@ public class DeepGenericLinksTests
         });
     }
 
-    [Fact (Skip = "")]
+    [Fact (Skip = "", Timeout = 60000)]
     public void MultipleRandomCreationsAndDeletionsWithDecoratorsTest()
     {
         Using(links =>

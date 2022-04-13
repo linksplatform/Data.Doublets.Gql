@@ -30,25 +30,25 @@ public class GenericLinksTests : IDisposable
         ServerProcess.Kill(true);
     }
 
-    [Fact (Skip = "")]
+    [Fact (Skip = "", Timeout = 60000)]
     public void CRUDTest()
     {
         Using(links => links.TestCRUDOperations());
     }
 
-    [Fact (Skip = "")]
+    [Fact (Skip = "", Timeout = 60000)]
     public void RawNumbersCRUDTest()
     {
         Using(links => links.TestRawNumbersCRUDOperations());
     }
 
-    [Fact (Skip = "")]
+    [Fact (Skip = "", Timeout = 60000)]
     public void MultipleRandomCreationsAndDeletionsTest()
     {
         Using(links => links.TestMultipleRandomCreationsAndDeletions(7));
     }
 
-    [Fact (Skip = "")]
+    [Fact (Skip = "", Timeout = 60000)]
     public void MultipleRandomCreationsAndDeletionsWithDecoratorsTest()
     {
         Using(links =>
