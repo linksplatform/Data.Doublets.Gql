@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net5;net6</TargetFrameworks>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="GraphQL.Client" Version="4.0.1" />
+        <PackageReference Include="Platform.Data.Doublets" Version="0.13.3" />
+    </ItemGroup>
+
+
+</Project>

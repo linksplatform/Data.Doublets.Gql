@@ -40,7 +40,16 @@ namespace Platform.Data.Doublets.Gql.Schema
                 var response = new LinksMutationResponse { returning = new List<Links>() };
                 foreach (var link in LinksQuery.GetLinks(context, links))
                 {
-                    var updatedLink = links.UpdateOrCreateOrGet((ulong)link.from_id, (ulong)link.to_id, (ulong)set.from_id, (ulong)set.to_id);
+                    ulong updatedLink;
+                    var equalityComparer = EqualityComparer<ulong>.Default;
+                    if (equalityComparer.Equals(0UL, (ulong)link.id))
+                    {
+                        updatedLink = links.Update((ulong)link.from_id.Value, (ulong)link.to_id.Value, (ulong)set.from_id.Value, (ulong)set.to_id.Value);
+                    }
+                    else
+                    {
+                        updatedLink = links.Update((ulong)link.id, (ulong)set.from_id.Value, (ulong)set.to_id.Value);
+                    }
                     response.returning.Add(new Links(links.GetLink(updatedLink)));
                 }
                 response.affected_rows = response.returning.Count;
@@ -52,14 +61,14 @@ namespace Platform.Data.Doublets.Gql.Schema
         public static Links InsertLink(object service, Links links)
         {
             var link = (ILinks<ulong>)service;
-            var create = link.GetOrCreate((ulong)links.from_id, (ulong)links.to_id);
+            var create = link.GetOrCreate((ulong)(links.from_id ?? 0), (ulong)(links.to_id ?? 0));
             return LinksType.GetLinkOrDefault(service, (long)create);
         }
 
         public static Links InsertLink(object service, LinksInsert linksInsert)
         {
             var link = (ILinks<ulong>)service;
-            var create = link.GetOrCreate((ulong)linksInsert.from_id, (ulong)linksInsert.to_id);
+            var create = link.GetOrCreate((ulong)(linksInsert.from_id ?? 0), (ulong)(linksInsert.to_id ?? 0));
             return LinksType.GetLinkOrDefault(service, (long)create);
         }
     }
