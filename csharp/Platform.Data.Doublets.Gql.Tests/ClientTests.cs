@@ -61,7 +61,7 @@ public class ClientTests : IDisposable
                 allLinks.Add(new Link<TLinkAddress>(link));
                 return _constants.Continue;
             });
-            Assert.Equal(i, _linksGqlAdapter.Count(i, _constants.Any));
+            Assert.Equal(i, _linksGqlAdapter.Count());
         }
     }
 
