@@ -2,7 +2,6 @@ using GraphQL;
 using GraphQL.SystemTextJson;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Platform.Data.Doublets.Gql.Client;
 using Platform.Data.Doublets.Gql.Schema;
 using Platform.Data.Doublets.Memory;
 using Platform.Data.Doublets.Memory.United.Generic;
