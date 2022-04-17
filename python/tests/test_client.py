@@ -4,7 +4,7 @@ from unittest import TestCase, main
 
 from graphql import GraphQLError
 
-from __init__ import DeepClient
+from __init__ import DeepClient, DeepClientError
 from config import GQL_URL, GQL_TOKEN
 
 
@@ -41,16 +41,23 @@ class GraphQlClientTest(TestCase):
     def test_3_select(self):
         print(self.client.select(75))
         print(self.client.select([1, 2]))
-
-    def test_4_select(self):
         print(self.client.select_by("type_id", 1))
 
-    def test_5_deep_client_error(self):
-        self.client.select("invalid")
-        self.client.select_by("type_id", "invalid")
-        self.client.insert_one('l', 50)
+    def test_4_deep_client_error(self):
+        try:
+            self.client.select("invalid")
+        except DeepClientError as e:
+            print(e)
+        try:
+            self.client.select_by("type_id", "invalid")
+        except DeepClientError as e:
+            print(e)
+        try:
+            self.client.insert_one('l', 50)
+        except DeepClientError as e:
+            print(e)
 
-    def test_6_create_new_type(self):
+    def test_5_create_new_type(self):
         """Creates a new type if available"""
         response = self.client.query('''
             {

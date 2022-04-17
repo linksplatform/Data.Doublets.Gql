@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """This module provides working with GraphQlClient."""
 from typing import NoReturn, Dict, Any, Optional, List, Union
+from json import dumps
 
 from gql import Client, gql
 from gql.transport.aiohttp import AIOHTTPTransport
@@ -31,7 +32,18 @@ class DeepClient:
         elif isinstance(value, int | float):
             return 'number: {data: {value: %s}}' % (value,)
         elif isinstance(value, list | dict | bool):
-            return 'object: {data: {value: %s}}' % (value,)
+            return 'object: {data: {value: %s}}' % (dumps(value),)
+        elif value:
+            raise DeepClientError('failure to convert %s type' % type(value))
+
+    @staticmethod
+    def convert_to_data(value: Any) -> str:
+        if isinstance(value, str):
+            return 'data: {value: "%s"}' % (value,)
+        elif isinstance(value, int | float):
+            return 'data: {value: %s}' % (value,)
+        elif isinstance(value, list | dict | bool):
+            return 'data: {value: %s}' % (dumps(value),)
         elif value:
             raise DeepClientError('failure to convert %s type' % type(value))
 
@@ -48,7 +60,7 @@ class DeepClient:
     def select(
             self,
             _id: Union[int, List[int]],
-            *args: str
+            *args: str,
     ) -> Dict[str, Any]:
         """Selects Link from Links DB
 
@@ -61,7 +73,9 @@ class DeepClient:
         elif isinstance(_id, list):
             where = '(where: {id: {_in: %s}})' % (_id,)
         else:
-            raise DeepClientError('_id param should be int or list of int, but got %s.' % type(_id))
+            raise DeepClientError(
+                '_id param should be int or list of int, but got %s.' % type(_id)
+            )
         return self.query(
             '{ links %s { id from_id to_id type_id %s } }' % (where, ' '.join(args)))
 
@@ -77,7 +91,6 @@ class DeepClient:
         :param value: value to search
         :param args: optional fields.
         """
-        where = ''
         if isinstance(value, int | float):
             where = '(where: {%s: {_eq: %s}})' % (key, value)
         elif isinstance(value, str):
@@ -85,9 +98,24 @@ class DeepClient:
         elif isinstance(value, list):
             where = '(where: {%s: {_in: %s}})' % (key, value)
         else:
-            raise DeepClientError('_id param should be int or list of int, but got %s.' % type(value))
+            raise DeepClientError(
+                '_id param should be int or list of int, but got %s.' % type(value)
+            )
         return self.query(
             '{ links %s { id type_id from_id to_id %s } }' % (where, ' '.join(args)))
+
+    def select_with_options(
+            self,
+            options: str,
+            *args: str
+    ) -> Dict[str, Any]:
+        """Selects links from Links DB with specified options"""
+        return self.query(
+            '{ links %s { %s } }' % (
+                f'({options})' if options else '',
+                ' '.join(args)
+            )
+        )
 
     def insert_one(
             self,
@@ -102,12 +130,30 @@ class DeepClient:
         if not isinstance(type_id, int):
             raise DeepClientError('type_id should be int, but got %s' % type(type_id))
         kwargs['type_id'] = type_id
-        obj = DeepClient.convert_to_query(value)
+        obj = DeepClient.convert_to_data(value)
         if obj:
-            kwargs['object'] = obj
+            kwargs['object'] = '{%s}' % obj
         data = '''
             mutation {
               insert_links_one( object: { %s } )
               { id type_id from_id to_id}
             }''' % ','.join(['%s: %s' % (k, v) for k, v in kwargs.items()])
+        return self.query(data)
+
+    def insert(
+            self,
+            *args: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """Inserts links into Links DB"""
+        if len(args) == 0:
+            return {}
+        data = '''
+            mutation {
+              insert_links ( objects: [%s] ) {
+                returning { id type_id from_id to_id }
+              }
+            }''' % ', '.join(
+            '{ %s }' % ', '.join(['%s: %s' % (k, v) for k, v in obj.items()])
+            for obj in args
+        )
         return self.query(data)

@@ -2,4 +2,4 @@
 """Provides GraphQL client
 """
 from .client import DeepClient
-from .exceptions import GraphQlQueryError
+from .exceptions import GraphQlQueryError, DeepClientError
