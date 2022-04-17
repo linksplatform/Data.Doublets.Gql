@@ -109,9 +109,20 @@ class GraphQlClientTest(TestCase):
                 "type_id": {"_eq": 331}
             },
             {
-                "from_id": "331"
+                "from_id": 331
             },
-            "id", "type_id", "from_id", "to_id"
+            "id", "from_id", "to_id", "type_id"
+        )
+        print(response)
+        response = self.client.update(
+            {
+                "link_id": {"_eq": 345}
+            },
+            {
+                "value": "Wow it's links?"
+            },
+            "id", "value",
+            update_type='objects'
         )
         print(response)
 

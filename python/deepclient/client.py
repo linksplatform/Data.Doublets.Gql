@@ -28,6 +28,7 @@ class DeepClient:
 
     @staticmethod
     def convert_to_query(value: Any) -> str:
+        """Converts value to gql query"""
         if isinstance(value, str):
             return 'string: {data: {value: "%s"}}' % (value,)
         elif isinstance(value, int | float):
@@ -39,6 +40,7 @@ class DeepClient:
 
     @staticmethod
     def convert_to_data(value: Any) -> str:
+        """Converts value to gql query data"""
         if isinstance(value, str):
             return 'data: {value: "%s"}' % (value,)
         elif isinstance(value, int | float | bool):
@@ -50,6 +52,7 @@ class DeepClient:
 
     @staticmethod
     def dump_json(value: Dict[str, Any]) -> str:
+        """Dumps json to GQL-like representation"""
         if isinstance(value, dict):
             return sub(r'"([\S ]+?)"\s*:', r'\1:', dumps(value))
         raise DeepClientError('failure to convert %s type' % type(value))
@@ -68,11 +71,13 @@ class DeepClient:
             self,
             _id: Union[int, List[int]],
             *args: str,
+            table: str = 'links'
     ) -> Dict[str, Any]:
         """Selects Link from Links DB
 
         :param _id: unique link ID.
         :param args: optional fields.
+        :param table: table type.
         """
         if isinstance(_id, int):
             where = '(where: {id: {_eq: %s}})' % (_id,)
@@ -83,19 +88,21 @@ class DeepClient:
                 '_id param should be int or list of int, but got %s.' % type(_id)
             )
         return self.query(
-            '{ links %s { id from_id to_id type_id %s } }' % (where, ' '.join(args)))
+            '{ %s %s { id from_id to_id type_id %s } }' % (table, where, ' '.join(args)))
 
     def select_by(
             self,
             key: str,
             value: Any,
-            *args: str
+            *args: str,
+            table: str = 'links'
     ) -> Dict[str, Any]:
         """Selects Link from Links DB by type_id, id, from_id, to_id, etc.
 
         :param key: what search
         :param value: value to search
         :param args: optional fields.
+        :param table: table type
         """
         if isinstance(value, int | float):
             where = '(where: {%s: {_eq: %s}})' % (key, value)
@@ -108,16 +115,21 @@ class DeepClient:
                 '_id param should be int or list of int, but got %s.' % type(value)
             )
         return self.query(
-            '{ links %s { id type_id from_id to_id %s } }' % (where, ' '.join(args)))
+            '{ %s %s { id type_id from_id to_id %s } }' % (table, where, ' '.join(args)))
 
     def select_with_options(
             self,
             options: str,
-            *args: str
+            *args: str,
+            table: str = 'links'
     ) -> Dict[str, Any]:
-        """Selects links from Links DB with specified options"""
+        """Selects links from Links DB with specified options
+
+        :param table: table type
+        :param options: select options"""
         return self.query(
-            '{ links %s { %s } }' % (
+            '{ %s %s { %s } }' % (
+                table,
                 f'({options})' if options else '',
                 ' '.join(args)
             )
@@ -128,12 +140,14 @@ class DeepClient:
             type_id: int,
             value: Optional[Any] = None,
             *args: str,
+            table: str = 'links',
             **kwargs: Any
     ) -> Dict[str, Any]:
         """Inserts one link into Links DB.
 
         :param type_id: unique type ID.
-        :param value: object to inserting."""
+        :param value: object to inserting.
+        :param table: table type"""
         if not isinstance(type_id, int):
             raise DeepClientError('type_id should be int, but got %s' % type(type_id))
         kwargs['type_id'] = type_id
@@ -142,24 +156,30 @@ class DeepClient:
             kwargs['object'] = '{%s}' % obj
         data = '''
             mutation {
-              insert_links_one( object: { %s } )
+              insert_%s_one( object: { %s } )
               { %s }
-            }''' % (','.join(['%s: %s' % (k, v) for k, v in kwargs.items()]), ' '.join(args))
+            }''' % (table, ','.join(['%s: %s' % (k, v) for k, v in kwargs.items()]), ' '.join(args))
         return self.query(data)
 
     def insert(
             self,
-            *args: Dict[str, Any]
+            *args: Dict[str, Any],
+            table: str = 'links'
     ) -> Dict[str, Any]:
-        """Inserts links into Links DB"""
+        """Inserts links into Links DB
+
+        :param table: table type"""
         if len(args) == 0:
             return {}
         data = '''
             mutation {
-              insert_links ( objects: [%s] ) {
+              insert_%s ( objects: [%s] ) {
                 returning { id type_id from_id to_id object { value } }
               }
-            }''' % ', '.join(DeepClient.dump_json(obj) for obj in args
+            }''' % (
+                table,
+                ', '.join(DeepClient.dump_json(obj) for obj in args
+            )
         )
         return self.query(data)
 
@@ -167,19 +187,22 @@ class DeepClient:
             self,
             where: Dict[str, Any],
             _set: Dict[str, Any],
-            *args: str
+            *args: str,
+            table: str = 'links'
     ) -> Dict[str, Any]:
         """Updates all matched links
 
         :param _set: new link data
-        :param where: match options"""
+        :param where: match options
+        :param table: table type"""
         if len(args) == 0:
             return {}
         data = '''
-            mutation { update_links(_set: %s, where: %s){
+            mutation { update_%s(_set: %s, where: %s){
                 returning { %s }
             }}
         ''' % (
+            table,
             DeepClient.dump_json(_set), DeepClient.dump_json(where),
             ' '.join(args)
         )
