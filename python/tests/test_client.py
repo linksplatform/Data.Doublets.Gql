@@ -103,6 +103,18 @@ class GraphQlClientTest(TestCase):
         )
         print(response)
 
+    def test_7_update(self):
+        response = self.client.update(
+            {
+                "type_id": {"_eq": 331}
+            },
+            {
+                "from_id": "331"
+            },
+            "id", "type_id", "from_id", "to_id"
+        )
+        print(response)
+
 
 if __name__ == '__main__':
     main()

@@ -74,7 +74,6 @@ class DeepClient:
         :param _id: unique link ID.
         :param args: optional fields.
         """
-        where = ''
         if isinstance(_id, int):
             where = '(where: {id: {_eq: %s}})' % (_id,)
         elif isinstance(_id, list):
@@ -162,5 +161,26 @@ class DeepClient:
               }
             }''' % ', '.join(DeepClient.dump_json(obj) for obj in args
         )
-        print(data)
+        return self.query(data)
+
+    def update(
+            self,
+            where: Dict[str, Any],
+            _set: Dict[str, Any],
+            *args: str
+    ) -> Dict[str, Any]:
+        """Updates all matched links
+
+        :param _set: new link data
+        :param where: match options"""
+        if len(args) == 0:
+            return {}
+        data = '''
+            mutation { update_links(_set: %s, where: %s){
+                returning { %s }
+            }}
+        ''' % (
+            DeepClient.dump_json(_set), DeepClient.dump_json(where),
+            ' '.join(args)
+        )
         return self.query(data)
