@@ -122,7 +122,7 @@ class GraphQlClientTest(TestCase):
                 "value": "Wow it's links?"
             },
             "id", "value",
-            update_type='objects'
+            table='objects'
         )
         print(response)
 
