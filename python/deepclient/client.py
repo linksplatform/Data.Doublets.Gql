@@ -2,6 +2,7 @@
 """This module provides working with GraphQlClient."""
 from typing import NoReturn, Dict, Any, Optional, List, Union
 from json import dumps
+from re import sub
 
 from gql import Client, gql
 from gql.transport.aiohttp import AIOHTTPTransport
@@ -32,7 +33,7 @@ class DeepClient:
         elif isinstance(value, int | float):
             return 'number: {data: {value: %s}}' % (value,)
         elif isinstance(value, list | dict | bool):
-            return 'object: {data: {value: %s}}' % (dumps(value),)
+            return 'object: {data: {value: %s}}' % (sub(r'"([\S ]+?)"\s*:', r'\1:', dumps(value)),)
         elif value:
             raise DeepClientError('failure to convert %s type' % type(value))
 
@@ -43,7 +44,7 @@ class DeepClient:
         elif isinstance(value, int | float):
             return 'data: {value: %s}' % (value,)
         elif isinstance(value, list | dict | bool):
-            return 'data: {value: %s}' % (dumps(value),)
+            return 'data: {value: %s}' % (sub(r'"([\S ]+?)"\s*:', r'\1:', dumps(value)),)
         elif value:
             raise DeepClientError('failure to convert %s type' % type(value))
 
@@ -121,6 +122,7 @@ class DeepClient:
             self,
             type_id: int,
             value: Optional[Any] = None,
+            *args: str,
             **kwargs: Any
     ) -> Dict[str, Any]:
         """Inserts one link into Links DB.
@@ -136,8 +138,8 @@ class DeepClient:
         data = '''
             mutation {
               insert_links_one( object: { %s } )
-              { id type_id from_id to_id}
-            }''' % ','.join(['%s: %s' % (k, v) for k, v in kwargs.items()])
+              { %s }
+            }''' % (','.join(['%s: %s' % (k, v) for k, v in kwargs.items()]), ' '.join(args))
         return self.query(data)
 
     def insert(

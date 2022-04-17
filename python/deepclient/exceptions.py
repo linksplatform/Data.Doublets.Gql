@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-"""This module describes all kinds of errors received.
-"""
+"""This module describes all kinds of errors received."""
 
 
 class DeepClientError(Exception):

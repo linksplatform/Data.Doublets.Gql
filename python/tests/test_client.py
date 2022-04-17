@@ -59,14 +59,13 @@ class GraphQlClientTest(TestCase):
 
     def test_5_create_new_type(self):
         """Creates a new type if available"""
-        response = self.client.query('''
-            {
-                links(where: {
-                    type_id: {_eq: 1}
-                    string: {value: {_eq: "DeepClientTestType"}}
-                })
-                {id type_id}
-            }''')
+        response = self.client.select_with_options(
+            '''where: {
+                type_id: {_eq: 1}
+                object: {value: {_eq: "DeepClientTestType"}}
+            }''',  # options
+            'id', 'type_id', 'object {value}'  # args
+        )
         print(response)
         if len(response['links']) == 0:
             response = self.client.insert_one(1, "DeepClientTestType")
@@ -75,8 +74,12 @@ class GraphQlClientTest(TestCase):
             response = self.client.insert_one(
                 response['links'][0]['id'],
                 {"text": "Hello, world!"},
-                to_id=100, from_id=10)
+                'id', 'object { value }', 'type_id'
+            )
             print(response)
+
+    def test_6_insert(self):
+        response = ''
 
 
 if __name__ == '__main__':
