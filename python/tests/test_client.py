@@ -2,7 +2,7 @@
 """Testing around GraphQlClient."""
 from unittest import TestCase, main
 
-from graphql import GraphQLError
+from gql.transport.exceptions import TransportQueryError
 
 from __init__ import DeepClient, DeepClientError
 from config import GQL_URL, GQL_TOKEN
@@ -35,7 +35,7 @@ class GraphQlClientTest(TestCase):
                     not_exist_value
                   }
                 }''')
-        except GraphQLError as e:
+        except TransportQueryError as e:
             print('error: ', e)
 
     def test_3_select(self):
@@ -50,7 +50,7 @@ class GraphQlClientTest(TestCase):
             print(e)
         try:
             self.client.select_by("type_id", "invalid")
-        except DeepClientError as e:
+        except TransportQueryError as e:
             print(e)
         try:
             self.client.insert_one('l', 50)
@@ -79,7 +79,29 @@ class GraphQlClientTest(TestCase):
             print(response)
 
     def test_6_insert(self):
-        response = ''
+        response = self.client.select_with_options(
+            '''where: {
+                type_id: {_eq: 1}
+                object: {value: {_eq: "DeepClientTestType"}}
+            }''',  # options
+            'id', 'type_id', 'object {value}'  # args
+        )
+        print(response)
+        response = self.client.insert(
+            {
+                'type_id': response['links'][0]['id'],
+                'object': {
+                    "data": {"value": "Hello, world!"}
+                }
+            },
+            {
+                'type_id': response['links'][0]['id'],
+                'object': {
+                    "data": {"value": "Oops!"}
+                }
+            },
+        )
+        print(response)
 
 
 if __name__ == '__main__':

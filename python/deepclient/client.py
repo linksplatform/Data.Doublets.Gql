@@ -33,7 +33,7 @@ class DeepClient:
         elif isinstance(value, int | float):
             return 'number: {data: {value: %s}}' % (value,)
         elif isinstance(value, list | dict | bool):
-            return 'object: {data: {value: %s}}' % (sub(r'"([\S ]+?)"\s*:', r'\1:', dumps(value)),)
+            return 'object: {data: {value: %s}}' % (DeepClient.dump_json(value),)
         elif value:
             raise DeepClientError('failure to convert %s type' % type(value))
 
@@ -41,12 +41,18 @@ class DeepClient:
     def convert_to_data(value: Any) -> str:
         if isinstance(value, str):
             return 'data: {value: "%s"}' % (value,)
-        elif isinstance(value, int | float):
+        elif isinstance(value, int | float | bool):
             return 'data: {value: %s}' % (value,)
-        elif isinstance(value, list | dict | bool):
-            return 'data: {value: %s}' % (sub(r'"([\S ]+?)"\s*:', r'\1:', dumps(value)),)
+        elif isinstance(value, list | dict):
+            return 'data: {value: %s}' % (DeepClient.dump_json(value),)
         elif value:
             raise DeepClientError('failure to convert %s type' % type(value))
+
+    @staticmethod
+    def dump_json(value: Dict[str, Any]) -> str:
+        if isinstance(value, dict):
+            return sub(r'"([\S ]+?)"\s*:', r'\1:', dumps(value))
+        raise DeepClientError('failure to convert %s type' % type(value))
 
     def query(
             self,
@@ -152,10 +158,9 @@ class DeepClient:
         data = '''
             mutation {
               insert_links ( objects: [%s] ) {
-                returning { id type_id from_id to_id }
+                returning { id type_id from_id to_id object { value } }
               }
-            }''' % ', '.join(
-            '{ %s }' % ', '.join(['%s: %s' % (k, v) for k, v in obj.items()])
-            for obj in args
+            }''' % ', '.join(DeepClient.dump_json(obj) for obj in args
         )
+        print(data)
         return self.query(data)
