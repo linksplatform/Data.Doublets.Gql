@@ -57,6 +57,25 @@ class DeepClient:
             return sub(r'"([\S ]+?)"\s*:', r'\1:', dumps(value))
         raise DeepClientError('failure to convert %s type' % type(value))
 
+    def delete(
+            self,
+            where: Dict[str, Any],
+            *args: str,
+            table: str = 'links'
+    ) -> Dict[str, Any]:
+        """Deletes matched links
+
+        :param where: match options
+        :param table: table type"""
+        data = '''
+            mutation { delete_%s (where: %s) {
+                returning { %s }
+            }}
+        ''' % (
+            table, DeepClient.dump_json(where), ' '.join(args)
+        )
+        return self.query(data)
+
     def query(
             self,
             q: str
@@ -66,6 +85,54 @@ class DeepClient:
         :param q: GraphQL query.
         """
         return self.client.execute(gql(q))
+
+    def insert_one(
+            self,
+            type_id: int,
+            value: Optional[Any] = None,
+            *args: str,
+            table: str = 'links',
+            **kwargs: Any
+    ) -> Dict[str, Any]:
+        """Inserts one link into Links DB.
+
+        :param type_id: unique type ID.
+        :param value: object to inserting.
+        :param table: table type"""
+        if not isinstance(type_id, int):
+            raise DeepClientError('type_id should be int, but got %s' % type(type_id))
+        kwargs['type_id'] = type_id
+        obj = DeepClient.convert_to_data(value)
+        if obj:
+            kwargs['object'] = '{%s}' % obj
+        data = '''
+            mutation {
+              insert_%s_one( object: { %s } )
+              { %s }
+            }''' % (table, ','.join(['%s: %s' % (k, v) for k, v in kwargs.items()]), ' '.join(args))
+        return self.query(data)
+
+    def insert(
+            self,
+            *args: Dict[str, Any],
+            table: str = 'links'
+    ) -> Dict[str, Any]:
+        """Inserts links into Links DB
+
+        :param table: table type"""
+        if len(args) == 0:
+            return {}
+        data = '''
+            mutation {
+              insert_%s ( objects: [%s] ) {
+                returning { id type_id from_id to_id object { value } }
+              }
+            }''' % (
+                table,
+                ', '.join(DeepClient.dump_json(obj) for obj in args
+            )
+        )
+        return self.query(data)
 
     def select(
             self,
@@ -134,54 +201,6 @@ class DeepClient:
                 ' '.join(args)
             )
         )
-
-    def insert_one(
-            self,
-            type_id: int,
-            value: Optional[Any] = None,
-            *args: str,
-            table: str = 'links',
-            **kwargs: Any
-    ) -> Dict[str, Any]:
-        """Inserts one link into Links DB.
-
-        :param type_id: unique type ID.
-        :param value: object to inserting.
-        :param table: table type"""
-        if not isinstance(type_id, int):
-            raise DeepClientError('type_id should be int, but got %s' % type(type_id))
-        kwargs['type_id'] = type_id
-        obj = DeepClient.convert_to_data(value)
-        if obj:
-            kwargs['object'] = '{%s}' % obj
-        data = '''
-            mutation {
-              insert_%s_one( object: { %s } )
-              { %s }
-            }''' % (table, ','.join(['%s: %s' % (k, v) for k, v in kwargs.items()]), ' '.join(args))
-        return self.query(data)
-
-    def insert(
-            self,
-            *args: Dict[str, Any],
-            table: str = 'links'
-    ) -> Dict[str, Any]:
-        """Inserts links into Links DB
-
-        :param table: table type"""
-        if len(args) == 0:
-            return {}
-        data = '''
-            mutation {
-              insert_%s ( objects: [%s] ) {
-                returning { id type_id from_id to_id object { value } }
-              }
-            }''' % (
-                table,
-                ', '.join(DeepClient.dump_json(obj) for obj in args
-            )
-        )
-        return self.query(data)
 
     def update(
             self,

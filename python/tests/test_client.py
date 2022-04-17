@@ -68,13 +68,16 @@ class GraphQlClientTest(TestCase):
         )
         print(response)
         if len(response['links']) == 0:
-            response = self.client.insert_one(1, "DeepClientTestType")
+            response = self.client.insert_one(
+                1, "DeepClientTestType",
+                'id', 'object { value }', 'type_id'  # returning
+            )
             print(response)
         else:
             response = self.client.insert_one(
                 response['links'][0]['id'],
                 {"text": "Hello, world!"},
-                'id', 'object { value }', 'type_id'
+                'id', 'object { value }', 'type_id'  # returning
             )
             print(response)
 
@@ -123,6 +126,20 @@ class GraphQlClientTest(TestCase):
             },
             "id", "value",
             table='objects'
+        )
+        print(response)
+
+    def test_8_delete(self):
+        response = self.client.insert_one(
+            1, "Hello",
+            'id', 'object { value }', 'type_id'  # returning
+        )
+        print(response)
+        response = self.client.delete(
+            {
+                'id': {'_eq': response['insert_links_one']['id']}
+            },
+            'id', 'from_id', 'to_id'
         )
         print(response)
 
