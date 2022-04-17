@@ -15,10 +15,10 @@ namespace Platform.Data.Doublets.Gql.Tests
     {
         public static ILinks<ulong> CreateLinks() => CreateLinks<ulong>(new TemporaryFile());
 
-        public static ILinks<TLinkAddress> CreateLinks<TLinkAddress>(string dataDBFilename)
+        public static ILinks<TLinkAddress> CreateLinks<TLinkAddress>(string dataDbFilename)
         {
             var linksConstants = new LinksConstants<TLinkAddress>(true);
-            return new UnitedMemoryLinks<TLinkAddress>(new FileMappedResizableDirectMemory(dataDBFilename), UnitedMemoryLinks<TLinkAddress>.DefaultLinksSizeStep, linksConstants, IndexTreeType.Default);
+            return new UnitedMemoryLinks<TLinkAddress>(new FileMappedResizableDirectMemory(dataDbFilename), UnitedMemoryLinks<TLinkAddress>.DefaultLinksSizeStep, linksConstants, IndexTreeType.Default);
         }
 
         [InlineData(@"
