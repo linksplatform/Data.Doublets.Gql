@@ -12,6 +12,7 @@ from python.deepclient.exceptions import DeepClientError
 
 class DeepClient:
     """Provides working with GraphQl server."""
+
     def __init__(
             self,
             address: str,
@@ -67,13 +68,11 @@ class DeepClient:
 
         :param where: match options
         :param table: table type"""
-        data = '''
-            mutation { delete_%s (where: %s) {
-                returning { %s }
-            }}
-        ''' % (
-            table, DeepClient.dump_json(where), ' '.join(args)
-        )
+        data = f'''
+            mutation {{
+                delete_{table} (where: {DeepClient.dump_json(where)}) {{
+                returning {{ {' '.join(args)} }} }} }}
+        '''
         return self.query(data)
 
     def query(
@@ -105,11 +104,14 @@ class DeepClient:
         obj = DeepClient.convert_to_data(value)
         if obj:
             kwargs['object'] = '{%s}' % obj
-        data = '''
-            mutation {
-              insert_%s_one( object: { %s } )
-              { %s }
-            }''' % (table, ','.join(['%s: %s' % (k, v) for k, v in kwargs.items()]), ' '.join(args))
+        data = f'''
+            mutation {{
+              insert_{table}_one(
+                object: {{
+                    {','.join(['%s: %s' % (k, v) for k, v in kwargs.items()])}
+                }})
+              {{ {' '.join(args)} }}
+            }}'''
         return self.query(data)
 
     def insert(
@@ -122,16 +124,12 @@ class DeepClient:
         :param table: table type"""
         if len(args) == 0:
             return {}
-        data = '''
-            mutation {
-              insert_%s ( objects: [%s] ) {
-                returning { id type_id from_id to_id object { value } }
-              }
-            }''' % (
-                table,
-                ', '.join(DeepClient.dump_json(obj) for obj in args
-            )
-        )
+        data = f'''
+            mutation {{
+              insert_{table} ( objects: [{', '.join(DeepClient.dump_json(obj) for obj in args)}] ) {{
+                returning {{ id type_id from_id to_id object {{ value }} }}
+              }}
+            }}'''
         return self.query(data)
 
     def select(
