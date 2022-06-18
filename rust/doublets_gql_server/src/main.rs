@@ -16,7 +16,9 @@ use async_graphql::{
 };
 use async_graphql_actix_web::{GraphQLRequest, GraphQLResponse};
 use model::{QueryRoot, MutationRoot};
-type Store = RwLock<splited::Store<u64, FileMappedMem, FileMappedMem>>;
+use crate::model::Strings;
+
+type Store = async_std::sync::RwLock<splited::Store<u64, FileMappedMem, FileMappedMem>>;
 type Schema = async_graphql::Schema<QueryRoot, MutationRoot, EmptySubscription>;
 
 async fn index(schema: web::Data<Schema>, req: GraphQLRequest) -> GraphQLResponse {
@@ -33,24 +35,21 @@ async fn index_playground() -> Result<HttpResponse> {
 const LINKS_FILE_PATH: &str = "db.links";
 const INDEX_LINKS_FILE_PATH: &str = "index_db.links";
 
+fn open_or_create_file(path: &str) -> File {
+    File::open(path).unwrap_or_else(|error| {
+        if error.kind() == ErrorKind::NotFound {
+            File::create(path).unwrap()
+        } else {
+            panic!(error)
+        }
+    })
+}
+
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-
-    let mut memory_file = File::open(LINKS_FILE_PATH).unwrap_or_else(|error| {
-        if error.kind() == ErrorKind::NotFound {
-            File::create(LINKS_FILE_PATH).unwrap()
-        } else {
-            panic!(error)
-        }
-    });
+    let mut memory_file = open_or_create_file(LINKS_FILE_PATH);
     let links_file_mapped_mem = FileMappedMem::new(memoryFile).unwrap();
-    let mut memory_file = File::open(INDEX_LINKS_FILE_PATH).unwrap_or_else(|error| {
-        if error.kind() == ErrorKind::NotFound {
-            File::create(INDEX_LINKS_FILE_PATH).unwrap()
-        } else {
-            panic!(error)
-        }
-    });
+    let mut memory_file = open_or_create_file(INDEX_LINKS_FILE_PATH);
     let index_links_file_mapped_mem = FileMappedMem::new(index_memory_file).unwrap();
     let store = match splited::Store::new(links_file_mapped_mem, index_links_file_mapped_mem) {
         Ok(store) => store,
