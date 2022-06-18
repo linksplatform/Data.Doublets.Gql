@@ -1,0 +1,22 @@
+use crate::model::Bigint;
+use async_graphql::*;
+#[derive(Debug)]
+pub struct LinksSumFields;
+#[Object(name = "links_sum_fields")]
+impl LinksSumFields {
+    #[graphql(name = "from_id")]
+    pub async fn from_id(&self, ctx: &Context<'_>) -> Option<Bigint> {
+        todo!()
+    }
+    pub async fn id(&self, ctx: &Context<'_>) -> Option<Bigint> {
+        todo!()
+    }
+    #[graphql(name = "to_id")]
+    pub async fn to_id(&self, ctx: &Context<'_>) -> Option<Bigint> {
+        todo!()
+    }
+    #[graphql(name = "type_id")]
+    pub async fn type_id(&self, ctx: &Context<'_>) -> Option<Bigint> {
+        todo!()
+    }
+}
