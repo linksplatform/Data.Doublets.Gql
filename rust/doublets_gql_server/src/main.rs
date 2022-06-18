@@ -36,36 +36,22 @@ const INDEX_LINKS_FILE_PATH: &str = "index_db.links";
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
 
-    let mut memory_file = match File::open(LINKS_FILE_PATH) {
-        Ok(file) => file,
-        Err(e) => match e.kind() {
-            ErrorKind::NotFound => match File::create(LINKS_FILE_PATH) {
-                Ok(file) => file,
-                Err(e) => panic!("Problem creating the file: {:?}", e)
-            },
-            other_error => panic!("Problem opening the file: {:?}", other_error)
+    let mut memory_file = File::open(LINKS_FILE_PATH).unwrap_or_else(|error| {
+        if error.kind() == ErrorKind::NotFound {
+            File::create(LINKS_FILE_PATH).unwrap()
+        } else {
+            panic!(error)
         }
-    };
-    let links_file_mapped_mem = match FileMappedMem::new(memoryFile) {
-        Ok(file_mapped_mem) => file_mapped_mem,
-        Err(e) => panic!("Problem opening file mapped memory: {:?}", e)
-    };
-
-    let mut index_memory_file = match File::open(INDEX_LINKS_FILE_PATH) {
-        Ok(file) => file,
-        Err(e) => match e.kind() {
-            ErrorKind::NotFound => match File::create(INDEX_LINKS_FILE_PATH) {
-                Ok(file) => file,
-                Err(e) => panic!("Problem creating the file: {:?}", e)
-            },
-            other_error => panic!("Problem opening the file: {:?}", other_error)
+    });
+    let links_file_mapped_mem = FileMappedMem::new(memoryFile).unwrap();
+    let mut memory_file = File::open(INDEX_LINKS_FILE_PATH).unwrap_or_else(|error| {
+        if error.kind() == ErrorKind::NotFound {
+            File::create(INDEX_LINKS_FILE_PATH).unwrap()
+        } else {
+            panic!(error)
         }
-    };
-    let index_links_file_mapped_mem = match FileMappedMem::new(index_memory_file) {
-        Ok(file_mapped_mem) => file_mapped_mem,
-        Err(e) => panic!("Problem opening file mapped memory: {:?}", e)
-    };
-
+    });
+    let index_links_file_mapped_mem = FileMappedMem::new(index_memory_file).unwrap();
     let store = match splited::Store::new(links_file_mapped_mem, index_links_file_mapped_mem) {
         Ok(store) => store,
         Err(e) => panic!("Problem opening links store: {:?}", e)
