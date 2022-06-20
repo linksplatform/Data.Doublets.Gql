@@ -58,8 +58,8 @@ async fn main() -> Result<(), Box<dyn Error>> {
     HttpServer::new(move || {
         App::new()
             .app_data(web::Data::new(schema.clone()))
-            .service(web::resource("/").guard(guard::Post()).to(index))
-            .service(web::resource("/").guard(guard::Get()).to(index_playground))
+            .service(web::resource("/v1/graphql").guard(guard::Post()).to(index))
+            .service(web::resource("/ui").guard(guard::Get()).to(index_playground))
     })
         .bind("localhost:8000")?
         .run()
