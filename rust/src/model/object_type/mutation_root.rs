@@ -218,9 +218,16 @@ impl MutationRoot {
         _where: LinksBoolExp,
     ) -> Option<LinksMutationResponse> {
         let mut store = ctx.data::<Store>().unwrap().write().await;
+        let mut response = LinksMutationResponse {
+            returning: Vec::new()
+        };
         match _where.id {
             Some(id) => store.update(id.eq.unwrap() as u64,object.from_id.unwrap_or(0) as u64, object.to_id.unwrap_or(0) as u64).ok()
-            None => store.update_by([_where.from_id.unwrap().eq.unwrap(), _where.to_id.unwrap().eq.unwrap()], object.from_id.unwrap_or(0) as u64, object.to_id.unwrap_or(0) as u64).ok()
+            None => {
+                let updated_link_index = store.update_by([_where.from_id.unwrap().eq.unwrap(), _where.to_id.unwrap().eq.unwrap()], object.from_id.unwrap_or(0) as u64, object.to_id.unwrap_or(0) as u64).ok();
+                let updated_link = store.get_link(updated_link_index.unwrap());
+                response.returning.append()
+            }
         }
     }
     #[graphql(name = "update_links_by_pk")]
