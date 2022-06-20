@@ -229,3 +229,4 @@ pub use object_type::StringsVarianceFields;
 pub use object_type::SubscriptionRoot;
 pub use scalar_type::Bigint;
 pub use scalar_type::Jsonb;
+pub use scalar_type::LinksOptionExt;

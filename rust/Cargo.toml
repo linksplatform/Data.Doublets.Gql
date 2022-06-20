@@ -4,8 +4,9 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-async-std = "1.11"
+tokio = { version = "1.19", features = ["full"] }
+async-std = { version = "1.12", features = ["attributes"] }
 async-graphql = "4.0"
-actix-web = "4.1"
+actix-web = "4.0"
 async-graphql-actix-web = "4.0"
 doublets = { version = "0.1.0-alpha.19", features = ["full"] }

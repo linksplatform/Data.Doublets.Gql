@@ -27,8 +27,8 @@ use crate::model::Strings;
 use crate::model::UpLinksArgs;
 use async_graphql::*;
 
-#[derive(Debug)]
-pub struct Links;
+#[derive(Debug, Clone)]
+pub struct Links(pub doublets::Link<u64>);
 
 #[Object(name = "links")]
 impl Links {
@@ -257,7 +257,7 @@ impl Links {
         todo!()
     }
     pub async fn id(&self, ctx: &Context<'_>) -> Bigint {
-        todo!()
+        self.0.index as Bigint
     }
     pub async fn _in(
         &self,

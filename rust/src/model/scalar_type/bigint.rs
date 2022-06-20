@@ -1,6 +1,14 @@
 use async_graphql::*;
 
-#[derive(Debug, Clone)]
 pub type Bigint = i64;
 
-scalar!(Bigint, "bigint");
+pub trait LinksOptionExt {
+    // todo: rename to into_link
+    fn to_link(self) -> u64;
+}
+
+impl LinksOptionExt for Option<Bigint> {
+    fn to_link(self) -> u64 {
+        self.unwrap_or(0) as u64
+    }
+}

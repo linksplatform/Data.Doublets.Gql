@@ -3,21 +3,24 @@
 
 mod model;
 
-use crate::model::{MutationRoot, QueryRoot};
+use crate::model::{
+    Links, LinksInsertInput, LinksMutationResponse, LinksOnConflict, LinksOptionExt, MutationRoot,
+    QueryRoot,
+};
 use actix_web::{guard, web, App, HttpResponse, HttpServer, Responder};
 use async_graphql::{
     http::{playground_source, GraphQLPlaygroundConfig},
     EmptyMutation, EmptySubscription,
 };
 use async_graphql_actix_web::{GraphQLRequest, GraphQLResponse};
-use async_std::sync::RwLock;
+use async_std::sync::Mutex;
 use doublets::mem::FileMappedMem;
-use doublets::splited;
+use doublets::{splited, Link};
 use std::{error::Error, fs::File, io, path::Path};
 
 // todo: wait for fix type infer
 type RawStore = splited::Store<u64, FileMappedMem, FileMappedMem>;
-type Store = RwLock<RawStore>;
+type Store = Mutex<RawStore>;
 type Schema = async_graphql::Schema<QueryRoot, MutationRoot, EmptySubscription>;
 
 async fn index(schema: web::Data<Schema>, req: GraphQLRequest) -> GraphQLResponse {
@@ -55,14 +58,10 @@ async fn main() -> Result<(), Box<dyn Error>> {
     HttpServer::new(move || {
         App::new()
             .app_data(web::Data::new(schema.clone()))
-            .service(web::resource("/v1/graphql").guard(guard::Post()).to(index))
-            .service(
-                web::resource("/ui")
-                    .guard(guard::Get())
-                    .to(index_playground),
-            )
+            .service(web::resource("/").guard(guard::Post()).to(index))
+            .service(web::resource("/").guard(guard::Get()).to(index_playground))
     })
-    .bind("localhost:8000")?
+    .bind("127.0.0.1:8000")?
     .run()
     .await
     .map_err(|e| e.into())
