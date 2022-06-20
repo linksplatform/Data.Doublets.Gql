@@ -121,7 +121,10 @@ impl MutationRoot {
         objects: Vec<LinksInsertInput>,
         #[graphql(name = "on_conflict")] on_conflict: Option<LinksOnConflict>,
     ) -> Option<LinksMutationResponse> {
-        todo!()
+        let mut store = ctx.data::<Store>().unwrap().write().await;
+        for link_to_insert in objects {
+            store.get_or_create(link_to_insert.from_id.unwrap_or(0) as u64, link_to_insert.to_id.unwrap_or(0) as u64).ok()
+        }
     }
     #[graphql(name = "insert_links_one")]
     pub async fn insert_links_one(
