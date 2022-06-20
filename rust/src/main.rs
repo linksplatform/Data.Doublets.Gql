@@ -45,7 +45,7 @@ fn map_db_file<P: AsRef<Path>>(path: P) -> io::Result<FileMappedMem> {
         .flatten()
 }
 
-#[actix_web::main]
+#[tokio::main]
 // todo: implement Into<io::Error> for LinksError
 async fn main() -> Result<(), Box<dyn Error>> {
     let store = RawStore::new(map_db_file("db.links")?, map_db_file("index.links")?)?;

@@ -142,7 +142,7 @@ impl MutationRoot {
     pub async fn insert_links_one(
         &self,
         ctx: &Context<'_>,
-        object: LinksInsertInput,
+        object: Box<LinksInsertInput>,
         #[graphql(name = "on_conflict")] on_conflict: Option<Box<LinksOnConflict>>,
     ) -> Option<Links> {
         let mut store = ctx.data_unchecked::<Store>().lock().await;

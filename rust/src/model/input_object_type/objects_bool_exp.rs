@@ -13,7 +13,7 @@ pub struct ObjectsBoolExp {
     #[graphql(name = "_or")]
     pub or: Option<Vec<ObjectsBoolExp>>,
     pub id: Option<BigintComparisonExp>,
-    pub link: Option<LinksBoolExp>,
+    pub link: Option<Box<LinksBoolExp>>,
     #[graphql(name = "link_id")]
     pub link_id: Option<BigintComparisonExp>,
     pub value: Option<JsonbComparisonExp>,

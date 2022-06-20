@@ -9,5 +9,5 @@ pub struct LinksOnConflict {
     pub constraint: LinksConstraint,
     #[graphql(name = "update_columns")]
     pub update_columns: Vec<LinksUpdateColumn>,
-    pub _where: Option<LinksBoolExp>,
+    pub _where: Option<Box<LinksBoolExp>>,
 }

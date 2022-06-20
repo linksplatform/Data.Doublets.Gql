@@ -71,7 +71,7 @@ impl SubscriptionRoot {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<LinksOrderBy>>,
-        _where: Option<LinksBoolExp>,
+        _where: Option<Box<LinksBoolExp>>,
     ) -> Vec<Links> {
         todo!()
     }
@@ -83,7 +83,7 @@ impl SubscriptionRoot {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<LinksOrderBy>>,
-        _where: Option<LinksBoolExp>,
+        _where: Option<Box<LinksBoolExp>>,
     ) -> LinksAggregate {
         todo!()
     }

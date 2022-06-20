@@ -26,17 +26,17 @@ pub struct LinksBoolExp {
     #[graphql(name = "_or")]
     pub or: Option<Vec<LinksBoolExp>>,
     #[graphql(name = "can_action")]
-    pub can_action: Option<CanBoolExp>,
+    pub can_action: Option<Box<CanBoolExp>>,
     #[graphql(name = "can_object")]
-    pub can_object: Option<CanBoolExp>,
+    pub can_object: Option<Box<CanBoolExp>>,
     #[graphql(name = "can_rule")]
-    pub can_rule: Option<CanBoolExp>,
+    pub can_rule: Option<Box<CanBoolExp>>,
     #[graphql(name = "can_subject")]
-    pub can_subject: Option<CanBoolExp>,
+    pub can_subject: Option<Box<CanBoolExp>>,
     pub from: Option<Box<LinksBoolExp>>,
     #[graphql(name = "from_id")]
-    pub from_id: Option<BigintComparisonExp>,
-    pub id: Option<BigintComparisonExp>,
+    pub from_id: Option<Box<BigintComparisonExp>>,
+    pub id: Option<Box<BigintComparisonExp>>,
     pub _in: Option<Box<LinksBoolExp>>,
     pub number: Option<Box<NumbersBoolExp>>,
     pub object: Option<Box<ObjectsBoolExp>>,
@@ -46,10 +46,10 @@ pub struct LinksBoolExp {
     pub string: Option<Box<StringsBoolExp>>,
     pub to: Option<Box<LinksBoolExp>>,
     #[graphql(name = "to_id")]
-    pub to_id: Option<BigintComparisonExp>,
+    pub to_id: Option<Box<BigintComparisonExp>>,
     pub _type: Option<Box<LinksBoolExp>>,
     #[graphql(name = "type_id")]
-    pub type_id: Option<BigintComparisonExp>,
+    pub type_id: Option<Box<BigintComparisonExp>>,
     pub typed: Option<Box<LinksBoolExp>>,
-    pub value: Option<JsonbComparisonExp>,
+    pub value: Option<Box<JsonbComparisonExp>>,
 }
