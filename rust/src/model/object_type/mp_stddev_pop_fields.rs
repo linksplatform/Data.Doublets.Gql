@@ -1,6 +1,8 @@
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct MpStddevPopFields;
+
 #[Object(name = "mp_stddev_pop_fields")]
 impl MpStddevPopFields {
     #[graphql(name = "group_id")]

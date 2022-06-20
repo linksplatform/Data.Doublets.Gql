@@ -38,8 +38,10 @@ use crate::model::StringsBoolExp;
 use crate::model::StringsOrderBy;
 use crate::model::StringsSelectColumn;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct QueryRoot;
+
 #[Object(name = "query_root")]
 impl QueryRoot {
     pub async fn can(

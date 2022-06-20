@@ -5,8 +5,10 @@ use crate::model::LinksBoolExp;
 use crate::model::LinksOrderBy;
 use crate::model::LinksSelectColumn;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct Selectors;
+
 #[Object(name = "selectors")]
 impl Selectors {
     #[graphql(name = "bool_exp")]

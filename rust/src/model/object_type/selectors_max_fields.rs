@@ -1,7 +1,9 @@
 use crate::model::Bigint;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct SelectorsMaxFields;
+
 #[Object(name = "selectors_max_fields")]
 impl SelectorsMaxFields {
     #[graphql(name = "bool_exp_id")]

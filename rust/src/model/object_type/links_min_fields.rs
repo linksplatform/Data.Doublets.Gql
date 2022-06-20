@@ -1,7 +1,9 @@
 use crate::model::Bigint;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct LinksMinFields;
+
 #[Object(name = "links_min_fields")]
 impl LinksMinFields {
     #[graphql(name = "from_id")]

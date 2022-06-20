@@ -1,6 +1,7 @@
 use crate::model::BigintComparisonExp;
 use crate::model::LinksBoolExp;
 use async_graphql::*;
+
 #[derive(InputObject, Debug)]
 #[graphql(name = "selectors_bool_exp")]
 pub struct SelectorsBoolExp {

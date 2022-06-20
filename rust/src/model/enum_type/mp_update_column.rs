@@ -1,4 +1,5 @@
 use async_graphql::*;
+
 #[derive(Enum, Debug, Copy, Clone, Eq, PartialEq)]
 #[graphql(name = "mp_update_column")]
 pub enum MpUpdateColumn {

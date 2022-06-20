@@ -1,6 +1,8 @@
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct CanStddevSampFields;
+
 #[Object(name = "can_stddev_samp_fields")]
 impl CanStddevSampFields {
     #[graphql(name = "action_id")]

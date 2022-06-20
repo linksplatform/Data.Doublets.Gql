@@ -1,6 +1,8 @@
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct JwtOutput;
+
 #[Object(name = "JWTOutput")]
 impl JwtOutput {
     pub async fn error(&self, ctx: &Context<'_>) -> Option<String> {

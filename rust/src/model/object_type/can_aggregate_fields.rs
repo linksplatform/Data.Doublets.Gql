@@ -10,8 +10,10 @@ use crate::model::CanVarPopFields;
 use crate::model::CanVarSampFields;
 use crate::model::CanVarianceFields;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct CanAggregateFields;
+
 #[Object(name = "can_aggregate_fields")]
 impl CanAggregateFields {
     pub async fn avg(&self, ctx: &Context<'_>) -> Option<CanAvgFields> {

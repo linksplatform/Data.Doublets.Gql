@@ -26,8 +26,10 @@ use crate::model::SelectorsSelectColumn;
 use crate::model::Strings;
 use crate::model::UpLinksArgs;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct Links;
+
 #[Object(name = "links")]
 impl Links {
     #[graphql(name = "_by_group")]

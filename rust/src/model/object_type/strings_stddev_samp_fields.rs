@@ -1,6 +1,8 @@
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct StringsStddevSampFields;
+
 #[Object(name = "strings_stddev_samp_fields")]
 impl StringsStddevSampFields {
     pub async fn id(&self, ctx: &Context<'_>) -> Option<f64> {

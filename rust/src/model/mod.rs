@@ -2,6 +2,7 @@ mod enum_type;
 mod input_object_type;
 mod object_type;
 mod scalar_type;
+
 pub use enum_type::CanSelectColumn;
 pub use enum_type::LinksConstraint;
 pub use enum_type::LinksSelectColumn;

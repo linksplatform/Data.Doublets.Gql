@@ -1,5 +1,6 @@
 use crate::model::Bigint;
 use async_graphql::*;
+
 #[derive(InputObject, Debug)]
 #[graphql(name = "bigint_comparison_exp")]
 pub struct BigintComparisonExp {

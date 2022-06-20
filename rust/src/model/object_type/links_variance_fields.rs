@@ -1,6 +1,8 @@
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct LinksVarianceFields;
+
 #[Object(name = "links_variance_fields")]
 impl LinksVarianceFields {
     #[graphql(name = "from_id")]

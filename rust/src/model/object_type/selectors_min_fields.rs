@@ -1,7 +1,9 @@
 use crate::model::Bigint;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct SelectorsMinFields;
+
 #[Object(name = "selectors_min_fields")]
 impl SelectorsMinFields {
     #[graphql(name = "bool_exp_id")]

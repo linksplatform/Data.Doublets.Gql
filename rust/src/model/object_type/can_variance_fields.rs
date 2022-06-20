@@ -1,6 +1,8 @@
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct CanVarianceFields;
+
 #[Object(name = "can_variance_fields")]
 impl CanVarianceFields {
     #[graphql(name = "action_id")]

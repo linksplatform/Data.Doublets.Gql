@@ -2,6 +2,7 @@ use crate::model::BigintComparisonExp;
 use crate::model::JsonbComparisonExp;
 use crate::model::LinksBoolExp;
 use async_graphql::*;
+
 #[derive(InputObject, Debug)]
 #[graphql(name = "objects_bool_exp")]
 pub struct ObjectsBoolExp {

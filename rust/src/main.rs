@@ -3,19 +3,17 @@
 
 mod model;
 
-use std::{
-    io, fs::File, error::Error, path::Path,
-};
-use doublets::mem::FileMappedMem;
+use crate::model::{MutationRoot, QueryRoot};
 use actix_web::{guard, web, App, HttpResponse, HttpServer, Responder};
 use async_graphql::{
     http::{playground_source, GraphQLPlaygroundConfig},
-    EmptyMutation, EmptySubscription
+    EmptyMutation, EmptySubscription,
 };
 use async_graphql_actix_web::{GraphQLRequest, GraphQLResponse};
 use async_std::sync::RwLock;
+use doublets::mem::FileMappedMem;
 use doublets::splited;
-use crate::model::{MutationRoot, QueryRoot};
+use std::{error::Error, fs::File, io, path::Path};
 
 // todo: wait for fix type infer
 type RawStore = splited::Store<u64, FileMappedMem, FileMappedMem>;
@@ -39,16 +37,15 @@ fn map_db_file<P: AsRef<Path>>(path: P) -> io::Result<FileMappedMem> {
         .create(true)
         .read(true)
         .write(true)
-        .open(path).map(FileMappedMem::new).flatten()
+        .open(path)
+        .map(FileMappedMem::new)
+        .flatten()
 }
 
 #[actix_web::main]
 // todo: implement Into<io::Error> for LinksError
 async fn main() -> Result<(), Box<dyn Error>> {
-    let store = RawStore::new(
-        map_db_file("db.links")?,
-        map_db_file("index.links")?,
-    )?;
+    let store = RawStore::new(map_db_file("db.links")?, map_db_file("index.links")?)?;
     let schema = Schema::build(QueryRoot, MutationRoot, EmptySubscription)
         .data(Store::new(store))
         .finish();
@@ -59,9 +56,14 @@ async fn main() -> Result<(), Box<dyn Error>> {
         App::new()
             .app_data(web::Data::new(schema.clone()))
             .service(web::resource("/v1/graphql").guard(guard::Post()).to(index))
-            .service(web::resource("/ui").guard(guard::Get()).to(index_playground))
+            .service(
+                web::resource("/ui")
+                    .guard(guard::Get())
+                    .to(index_playground),
+            )
     })
-        .bind("localhost:8000")?
-        .run()
-        .await.map_err(|e| e.into())
+    .bind("localhost:8000")?
+    .run()
+    .await
+    .map_err(|e| e.into())
 }

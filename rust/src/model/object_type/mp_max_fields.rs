@@ -1,7 +1,9 @@
 use crate::model::Bigint;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct MpMaxFields;
+
 #[Object(name = "mp_max_fields")]
 impl MpMaxFields {
     #[graphql(name = "group_id")]

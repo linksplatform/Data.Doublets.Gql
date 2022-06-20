@@ -7,6 +7,7 @@ use crate::model::ObjectsBoolExp;
 use crate::model::SelectorsBoolExp;
 use crate::model::StringsBoolExp;
 use async_graphql::*;
+
 #[derive(InputObject, Debug)]
 #[graphql(name = "links_bool_exp")]
 pub struct LinksBoolExp {

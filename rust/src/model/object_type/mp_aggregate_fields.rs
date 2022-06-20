@@ -10,8 +10,10 @@ use crate::model::MpVarPopFields;
 use crate::model::MpVarSampFields;
 use crate::model::MpVarianceFields;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct MpAggregateFields;
+
 #[Object(name = "mp_aggregate_fields")]
 impl MpAggregateFields {
     pub async fn avg(&self, ctx: &Context<'_>) -> Option<MpAvgFields> {

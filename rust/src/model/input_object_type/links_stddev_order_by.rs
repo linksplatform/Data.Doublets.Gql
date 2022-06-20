@@ -1,5 +1,6 @@
 use crate::model::OrderBy;
 use async_graphql::*;
+
 #[derive(InputObject, Debug)]
 #[graphql(name = "links_stddev_order_by")]
 pub struct LinksStddevOrderBy {

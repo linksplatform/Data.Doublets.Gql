@@ -35,8 +35,10 @@ use crate::model::StringsBoolExp;
 use crate::model::StringsOrderBy;
 use crate::model::StringsSelectColumn;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct SubscriptionRoot;
+
 #[Object(name = "subscription_root")]
 impl SubscriptionRoot {
     pub async fn can(

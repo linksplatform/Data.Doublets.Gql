@@ -10,6 +10,7 @@ use crate::model::MpVarSampOrderBy;
 use crate::model::MpVarianceOrderBy;
 use crate::model::OrderBy;
 use async_graphql::*;
+
 #[derive(InputObject, Debug)]
 #[graphql(name = "mp_aggregate_order_by")]
 pub struct MpAggregateOrderBy {

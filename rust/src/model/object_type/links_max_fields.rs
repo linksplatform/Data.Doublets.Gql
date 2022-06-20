@@ -1,7 +1,9 @@
 use crate::model::Bigint;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct LinksMaxFields;
+
 #[Object(name = "links_max_fields")]
 impl LinksMaxFields {
     #[graphql(name = "from_id")]

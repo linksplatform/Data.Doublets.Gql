@@ -5,8 +5,10 @@ use crate::model::MpBoolExp;
 use crate::model::MpOrderBy;
 use crate::model::MpSelectColumn;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct Mp;
+
 #[Object(name = "mp")]
 impl Mp {
     #[graphql(name = "by_group")]

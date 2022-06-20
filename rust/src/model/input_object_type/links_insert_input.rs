@@ -8,6 +8,7 @@ use crate::model::ObjectsObjRelInsertInput;
 use crate::model::SelectorsArrRelInsertInput;
 use crate::model::StringsObjRelInsertInput;
 use async_graphql::*;
+
 #[derive(InputObject, Debug)]
 #[graphql(name = "links_insert_input")]
 pub struct LinksInsertInput {

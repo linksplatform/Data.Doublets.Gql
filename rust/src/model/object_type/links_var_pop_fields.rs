@@ -1,6 +1,8 @@
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct LinksVarPopFields;
+
 #[Object(name = "links_var_pop_fields")]
 impl LinksVarPopFields {
     #[graphql(name = "from_id")]
