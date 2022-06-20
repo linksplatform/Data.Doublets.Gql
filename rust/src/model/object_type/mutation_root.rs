@@ -217,7 +217,11 @@ impl MutationRoot {
         #[graphql(name = "_set")] set: Option<LinksSetInput>,
         _where: LinksBoolExp,
     ) -> Option<LinksMutationResponse> {
-        todo!()
+        let mut store = ctx.data::<Store>().unwrap().write().await;
+        match _where.id {
+            Some(id) => store.update(id.eq.unwrap() as u64,object.from_id.unwrap_or(0) as u64, object.to_id.unwrap_or(0) as u64).ok()
+            None => store.update_by([_where.from_id.unwrap().eq.unwrap(), _where.to_id.unwrap().eq.unwrap()], object.from_id.unwrap_or(0) as u64, object.to_id.unwrap_or(0) as u64).ok()
+        }
     }
     #[graphql(name = "update_links_by_pk")]
     pub async fn update_links_by_pk(
