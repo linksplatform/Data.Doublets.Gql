@@ -3,6 +3,7 @@ mod input_object_type;
 mod object_type;
 mod scalar_type;
 
+use doublets::data::LinksError;
 pub use enum_type::CanSelectColumn;
 pub use enum_type::LinksConstraint;
 pub use enum_type::LinksSelectColumn;
@@ -230,3 +231,5 @@ pub use object_type::SubscriptionRoot;
 pub use scalar_type::Bigint;
 pub use scalar_type::Jsonb;
 pub use scalar_type::LinksOptionExt;
+
+pub type LinksResult<T> = Result<T, LinksError<u64>>;

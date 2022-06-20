@@ -13,14 +13,14 @@ use async_graphql::{
     EmptyMutation, EmptySubscription,
 };
 use async_graphql_actix_web::{GraphQLRequest, GraphQLResponse};
-use async_std::sync::Mutex;
+use async_std::sync::RwLock;
 use doublets::mem::FileMappedMem;
 use doublets::{splited, Link};
 use std::{error::Error, fs::File, io, path::Path};
 
 // todo: wait for fix type infer
 type RawStore = splited::Store<u64, FileMappedMem, FileMappedMem>;
-type Store = Mutex<RawStore>;
+type Store = RwLock<RawStore>;
 type Schema = async_graphql::Schema<QueryRoot, MutationRoot, EmptySubscription>;
 
 async fn index(schema: web::Data<Schema>, req: GraphQLRequest) -> GraphQLResponse {

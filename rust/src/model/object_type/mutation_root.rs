@@ -1,4 +1,3 @@
-use crate::model::Bigint;
 use crate::model::Links;
 use crate::model::LinksBoolExp;
 use crate::model::LinksIncInput;
@@ -44,9 +43,10 @@ use crate::model::StringsMutationResponse;
 use crate::model::StringsOnConflict;
 use crate::model::StringsPkColumnsInput;
 use crate::model::StringsSetInput;
+use crate::model::{Bigint, LinksResult};
 use crate::Store;
 use async_graphql::*;
-use doublets::data::Query;
+use doublets::data::{LinksError, Query};
 use doublets::{Doublets, Link};
 use std::io::{Read, Write};
 
@@ -117,14 +117,15 @@ impl MutationRoot {
     pub async fn delete_strings_by_pk(&self, ctx: &Context<'_>, id: Bigint) -> Option<Strings> {
         todo!()
     }
+
     #[graphql(name = "insert_links")]
     pub async fn insert_links(
         &self,
         ctx: &Context<'_>,
         objects: Vec<LinksInsertInput>,
         #[graphql(name = "on_conflict")] on_conflict: Option<Box<LinksOnConflict>>,
-    ) -> Option<LinksMutationResponse> {
-        let mut store = ctx.data_unchecked::<Store>().lock().await;
+    ) -> Result<Option<LinksMutationResponse>> {
+        let mut store = ctx.data_unchecked::<Store>().write().await;
         objects
             .into_iter()
             .map(|link| {
@@ -132,28 +133,31 @@ impl MutationRoot {
                 let to_id = link.to_id.to_link();
                 store
                     .get_or_create(from_id, to_id)
-                    .ok()
                     .map(|id| Links(Link::new(id, from_id, to_id)))
             })
-            .collect::<Option<Vec<_>>>()
-            .map(|links| LinksMutationResponse(links))
+            .collect::<LinksResult<Vec<_>>>()
+            .map(|links| Some(LinksMutationResponse(links)))
+            .map_err(|e| e.into())
     }
+
     #[graphql(name = "insert_links_one")]
     pub async fn insert_links_one(
         &self,
         ctx: &Context<'_>,
         object: Box<LinksInsertInput>,
         #[graphql(name = "on_conflict")] on_conflict: Option<Box<LinksOnConflict>>,
-    ) -> Option<Links> {
-        let mut store = ctx.data_unchecked::<Store>().lock().await;
+    ) -> Result<Option<Links>> {
+        let mut store = ctx.data_unchecked::<Store>().write().await;
+        // todo: #[graphql(name = ...)]
         let link = object;
         let from_id = link.from_id.to_link();
         let to_id = link.to_id.to_link();
         store
             .get_or_create(from_id, to_id)
-            .ok()
-            .map(|id| Links(Link::new(id, from_id, to_id)))
+            .map(|id| Some(Links(Link::new(id, from_id, to_id))))
+            .map_err(|e| e.into())
     }
+
     #[graphql(name = "insert_mp")]
     pub async fn insert_mp(
         &self,
