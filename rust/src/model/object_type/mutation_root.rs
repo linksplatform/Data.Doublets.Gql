@@ -61,7 +61,7 @@ impl MutationRoot {
     pub async fn delete_links(
         &self,
         ctx: &Context<'_>,
-        _where: LinksBoolExp,
+        _where: Box<LinksBoolExp>,
     ) -> Option<LinksMutationResponse> {
         todo!()
     }
@@ -236,7 +236,7 @@ impl MutationRoot {
         ctx: &Context<'_>,
         #[graphql(name = "_inc")] inc: Option<LinksIncInput>,
         #[graphql(name = "_set")] set: Option<LinksSetInput>,
-        _where: LinksBoolExp,
+        _where: Box<LinksBoolExp>,
     ) -> Option<LinksMutationResponse> {
         todo!()
     }
