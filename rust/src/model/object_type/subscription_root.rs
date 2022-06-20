@@ -48,7 +48,7 @@ impl SubscriptionRoot {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<CanOrderBy>>,
-        _where: Option<CanBoolExp>,
+        _where: Option<Box<CanBoolExp>>,
     ) -> Vec<Can> {
         todo!()
     }
@@ -60,7 +60,7 @@ impl SubscriptionRoot {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<CanOrderBy>>,
-        _where: Option<CanBoolExp>,
+        _where: Option<Box<CanBoolExp>>,
     ) -> CanAggregate {
         todo!()
     }
@@ -98,7 +98,7 @@ impl SubscriptionRoot {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<MpOrderBy>>,
-        _where: Option<MpBoolExp>,
+        _where: Option<Box<MpBoolExp>>,
     ) -> Vec<Mp> {
         todo!()
     }
@@ -110,7 +110,7 @@ impl SubscriptionRoot {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<MpOrderBy>>,
-        _where: Option<MpBoolExp>,
+        _where: Option<Box<MpBoolExp>>,
     ) -> MpAggregate {
         todo!()
     }

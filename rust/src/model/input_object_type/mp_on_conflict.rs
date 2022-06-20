@@ -9,5 +9,5 @@ pub struct MpOnConflict {
     pub constraint: MpConstraint,
     #[graphql(name = "update_columns")]
     pub update_columns: Vec<MpUpdateColumn>,
-    pub _where: Option<MpBoolExp>,
+    pub _where: Option<Box<MpBoolExp>>,
 }
