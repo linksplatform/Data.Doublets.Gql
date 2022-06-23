@@ -57,7 +57,7 @@ pub struct LinksBoolExp {
 }
 
 impl LinksBoolExp {
-    pub fn matches(&self, store: &RawStore, link: Link<LinkType>) -> bool {
+    pub fn matches(&self, store: &RawStore, link: &Link<LinkType>) -> bool {
         let mut exp = true;
 
         if let Some(id) = &self.id {

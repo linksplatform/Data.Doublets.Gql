@@ -106,7 +106,7 @@ impl QueryRoot {
 
             store
                 .each_iter([id, from_id, to_id])
-                .filter(|link| r#where.matches(&*store, link.clone()))
+                .filter(|link| r#where.matches(&*store, link))
                 .map(|link| Links(link))
                 .collect()
         } else {
