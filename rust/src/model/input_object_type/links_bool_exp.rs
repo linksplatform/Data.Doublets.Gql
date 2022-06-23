@@ -1,4 +1,3 @@
-use crate::model::BigintComparisonExp;
 use crate::model::CanBoolExp;
 use crate::model::JsonbComparisonExp;
 use crate::model::MpBoolExp;
@@ -6,7 +5,10 @@ use crate::model::NumbersBoolExp;
 use crate::model::ObjectsBoolExp;
 use crate::model::SelectorsBoolExp;
 use crate::model::StringsBoolExp;
+use crate::model::{BigintComparisonExp, LinkType};
+use crate::RawStore;
 use async_graphql::*;
+use doublets::Link;
 
 #[derive(InputObject, Debug)]
 #[graphql(name = "links_bool_exp")]
@@ -52,4 +54,24 @@ pub struct LinksBoolExp {
     pub type_id: Option<Box<BigintComparisonExp>>,
     pub typed: Option<Box<LinksBoolExp>>,
     pub value: Option<Box<JsonbComparisonExp>>,
+}
+
+impl LinksBoolExp {
+    pub fn matches(&self, store: &RawStore, link: Link<LinkType>) -> bool {
+        let mut exp = true;
+
+        if let Some(id) = &self.id {
+            exp = exp && id.matches(link.index);
+        }
+
+        if let Some(from_id) = &self.from_id {
+            exp = exp && from_id.matches(link.source);
+        }
+
+        if let Some(to_id) = &self.to_id {
+            exp = exp && to_id.matches(link.target);
+        }
+
+        exp
+    }
 }
