@@ -1,3 +1,4 @@
+use crate::model::iterator::AtLeastAnyExt;
 use crate::model::CanBoolExp;
 use crate::model::JsonbComparisonExp;
 use crate::model::MpBoolExp;
@@ -8,7 +9,7 @@ use crate::model::StringsBoolExp;
 use crate::model::{BigintComparisonExp, LinkType};
 use crate::RawStore;
 use async_graphql::*;
-use doublets::Link;
+use doublets::{Doublets, Link};
 
 #[derive(InputObject, Debug)]
 #[graphql(name = "links_bool_exp")]
@@ -70,6 +71,52 @@ impl LinksBoolExp {
 
         if let Some(to_id) = &self.to_id {
             exp = exp && to_id.matches(link.target);
+        }
+
+        let any = store.constants().any;
+
+        if let Some(r#in) = &self._in {
+            exp = exp
+                && store
+                    .each_iter([any, any, link.index])
+                    .least_all(|link| r#in.matches(store, &link));
+        }
+
+        if let Some(out) = &self.out {
+            exp = exp
+                && store
+                    .each_iter([any, link.index, any])
+                    .least_all(|link| out.matches(store, &link));
+        }
+
+        if let Some(from) = &self.from {
+            exp = exp
+                && if let Some(link) = store.get_link(link.source) {
+                    from.matches(store, &link)
+                } else {
+                    false
+                };
+        }
+
+        if let Some(to) = &self.to {
+            exp = exp
+                && if let Some(link) = store.get_link(link.source) {
+                    to.matches(store, &link)
+                } else {
+                    false
+                };
+        }
+
+        if let Some(and) = &self.and {
+            exp = exp && and.iter().all(|exp| exp.matches(store, link));
+        }
+
+        if let Some(or) = &self.or {
+            exp = exp || or.iter().any(|exp| exp.matches(store, link));
+        }
+
+        if let Some(not) = &self.not {
+            exp = exp && !not.matches(store, link);
         }
 
         exp

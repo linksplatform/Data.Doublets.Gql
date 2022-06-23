@@ -275,8 +275,19 @@ impl Links {
         #[graphql(name = "order_by")] order_by: Option<Vec<LinksOrderBy>>,
         _where: Option<Box<LinksBoolExp>>,
     ) -> Vec<Links> {
-        todo!()
+        let store = ctx.data_unchecked::<Store>().read().await;
+        let any = store.constants().any;
+
+        let iter = store.each_iter([any, any, self.0.index]);
+        if let Some(r#where) = _where {
+            iter.filter(|link| r#where.matches(&*store, link))
+                .map(|link| Links(link))
+                .collect()
+        } else {
+            iter.map(|link| Links(link)).collect()
+        }
     }
+
     #[graphql(name = "in_aggregate")]
     pub async fn in_aggregate(
         &self,
@@ -295,6 +306,7 @@ impl Links {
     pub async fn object(&self, ctx: &Context<'_>) -> Option<Objects> {
         todo!()
     }
+
     pub async fn out(
         &self,
         ctx: &Context<'_>,
@@ -304,8 +316,19 @@ impl Links {
         #[graphql(name = "order_by")] order_by: Option<Vec<LinksOrderBy>>,
         _where: Option<Box<LinksBoolExp>>,
     ) -> Vec<Links> {
-        todo!()
+        let store = ctx.data_unchecked::<Store>().read().await;
+        let any = store.constants().any;
+
+        let iter = store.each_iter([any, self.0.index, any]);
+        if let Some(r#where) = _where {
+            iter.filter(|link| r#where.matches(&*store, link))
+                .map(|link| Links(link))
+                .collect()
+        } else {
+            iter.map(|link| Links(link)).collect()
+        }
     }
+
     #[graphql(name = "out_aggregate")]
     pub async fn out_aggregate(
         &self,

@@ -1,5 +1,6 @@
 mod enum_type;
 mod input_object_type;
+mod iterator;
 mod object_type;
 mod scalar_type;
 
