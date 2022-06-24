@@ -1,7 +1,9 @@
 use crate::model::Bigint;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct CanSumFields;
+
 #[Object(name = "can_sum_fields")]
 impl CanSumFields {
     #[graphql(name = "action_id")]

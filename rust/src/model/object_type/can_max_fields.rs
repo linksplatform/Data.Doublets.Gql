@@ -1,7 +1,9 @@
 use crate::model::Bigint;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct CanMaxFields;
+
 #[Object(name = "can_max_fields")]
 impl CanMaxFields {
     #[graphql(name = "action_id")]

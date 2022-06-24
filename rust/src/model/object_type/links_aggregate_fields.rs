@@ -10,8 +10,10 @@ use crate::model::LinksVarPopFields;
 use crate::model::LinksVarSampFields;
 use crate::model::LinksVarianceFields;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct LinksAggregateFields;
+
 #[Object(name = "links_aggregate_fields")]
 impl LinksAggregateFields {
     pub async fn avg(&self, ctx: &Context<'_>) -> Option<LinksAvgFields> {

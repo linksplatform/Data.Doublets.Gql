@@ -1,7 +1,9 @@
 use crate::model::Bigint;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct LinksSumFields;
+
 #[Object(name = "links_sum_fields")]
 impl LinksSumFields {
     #[graphql(name = "from_id")]

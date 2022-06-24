@@ -1,6 +1,7 @@
 use crate::model::BigintComparisonExp;
 use crate::model::LinksBoolExp;
 use async_graphql::*;
+
 #[derive(InputObject, Debug)]
 #[graphql(name = "selectors_bool_exp")]
 pub struct SelectorsBoolExp {
@@ -11,13 +12,13 @@ pub struct SelectorsBoolExp {
     #[graphql(name = "_or")]
     pub or: Option<Vec<SelectorsBoolExp>>,
     #[graphql(name = "bool_exp")]
-    pub bool_exp: Option<LinksBoolExp>,
+    pub bool_exp: Option<Box<LinksBoolExp>>,
     #[graphql(name = "bool_exp_id")]
     pub bool_exp_id: Option<BigintComparisonExp>,
-    pub item: Option<LinksBoolExp>,
+    pub item: Option<Box<LinksBoolExp>>,
     #[graphql(name = "item_id")]
     pub item_id: Option<BigintComparisonExp>,
-    pub selector: Option<LinksBoolExp>,
+    pub selector: Option<Box<LinksBoolExp>>,
     #[graphql(name = "selector_id")]
     pub selector_id: Option<BigintComparisonExp>,
     #[graphql(name = "selector_include_id")]

@@ -10,6 +10,7 @@ use crate::model::CanVarSampOrderBy;
 use crate::model::CanVarianceOrderBy;
 use crate::model::OrderBy;
 use async_graphql::*;
+
 #[derive(InputObject, Debug)]
 #[graphql(name = "can_aggregate_order_by")]
 pub struct CanAggregateOrderBy {

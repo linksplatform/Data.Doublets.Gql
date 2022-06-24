@@ -2,6 +2,7 @@ use crate::model::Bigint;
 use crate::model::LinksArrRelInsertInput;
 use crate::model::LinksObjRelInsertInput;
 use async_graphql::*;
+
 #[derive(InputObject, Debug)]
 #[graphql(name = "selectors_insert_input")]
 pub struct SelectorsInsertInput {

@@ -1,7 +1,9 @@
 use crate::model::Bigint;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct MpSumFields;
+
 #[Object(name = "mp_sum_fields")]
 impl MpSumFields {
     #[graphql(name = "group_id")]

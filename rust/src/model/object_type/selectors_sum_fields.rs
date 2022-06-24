@@ -1,7 +1,9 @@
 use crate::model::Bigint;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct SelectorsSumFields;
+
 #[Object(name = "selectors_sum_fields")]
 impl SelectorsSumFields {
     #[graphql(name = "bool_exp_id")]

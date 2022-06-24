@@ -10,8 +10,10 @@ use crate::model::NumbersVarPopFields;
 use crate::model::NumbersVarSampFields;
 use crate::model::NumbersVarianceFields;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct NumbersAggregateFields;
+
 #[Object(name = "numbers_aggregate_fields")]
 impl NumbersAggregateFields {
     pub async fn avg(&self, ctx: &Context<'_>) -> Option<NumbersAvgFields> {

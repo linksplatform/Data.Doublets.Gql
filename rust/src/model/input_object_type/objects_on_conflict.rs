@@ -2,6 +2,7 @@ use crate::model::ObjectsBoolExp;
 use crate::model::ObjectsConstraint;
 use crate::model::ObjectsUpdateColumn;
 use async_graphql::*;
+
 #[derive(InputObject, Debug)]
 #[graphql(name = "objects_on_conflict")]
 pub struct ObjectsOnConflict {

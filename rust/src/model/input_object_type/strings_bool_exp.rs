@@ -2,6 +2,7 @@ use crate::model::BigintComparisonExp;
 use crate::model::LinksBoolExp;
 use crate::model::StringComparisonExp;
 use async_graphql::*;
+
 #[derive(InputObject, Debug)]
 #[graphql(name = "strings_bool_exp")]
 pub struct StringsBoolExp {
@@ -12,7 +13,7 @@ pub struct StringsBoolExp {
     #[graphql(name = "_or")]
     pub or: Option<Vec<StringsBoolExp>>,
     pub id: Option<BigintComparisonExp>,
-    pub link: Option<LinksBoolExp>,
+    pub link: Option<Box<LinksBoolExp>>,
     #[graphql(name = "link_id")]
     pub link_id: Option<BigintComparisonExp>,
     pub value: Option<StringComparisonExp>,

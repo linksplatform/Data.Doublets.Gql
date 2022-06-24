@@ -10,6 +10,7 @@ use crate::model::LinksVarSampOrderBy;
 use crate::model::LinksVarianceOrderBy;
 use crate::model::OrderBy;
 use async_graphql::*;
+
 #[derive(InputObject, Debug)]
 #[graphql(name = "links_aggregate_order_by")]
 pub struct LinksAggregateOrderBy {

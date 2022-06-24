@@ -1,5 +1,3 @@
-use std::io::{Read, Write};
-use crate::model::Bigint;
 use crate::model::Links;
 use crate::model::LinksBoolExp;
 use crate::model::LinksIncInput;
@@ -45,20 +43,25 @@ use crate::model::StringsMutationResponse;
 use crate::model::StringsOnConflict;
 use crate::model::StringsPkColumnsInput;
 use crate::model::StringsSetInput;
-use async_graphql::*;
-use doublets::data::{Query};
-use doublets::Doublets;
+use crate::model::{Bigint, LinksResult};
 use crate::Store;
+use async_graphql::*;
+use doublets::data::{LinksError, Query};
+use doublets::{Doublets, Link};
+use std::io::{Read, Write};
+
+pub use crate::model::LinksOptionExt;
 
 #[derive(Debug)]
 pub struct MutationRoot;
+
 #[Object(name = "mutation_root")]
 impl MutationRoot {
     #[graphql(name = "delete_links")]
     pub async fn delete_links(
         &self,
         ctx: &Context<'_>,
-        _where: LinksBoolExp,
+        _where: Box<LinksBoolExp>,
     ) -> Option<LinksMutationResponse> {
         todo!()
     }
@@ -114,29 +117,47 @@ impl MutationRoot {
     pub async fn delete_strings_by_pk(&self, ctx: &Context<'_>, id: Bigint) -> Option<Strings> {
         todo!()
     }
+
     #[graphql(name = "insert_links")]
     pub async fn insert_links(
         &self,
         ctx: &Context<'_>,
         objects: Vec<LinksInsertInput>,
-        #[graphql(name = "on_conflict")] on_conflict: Option<LinksOnConflict>,
-    ) -> Option<LinksMutationResponse> {
-        let mut store = ctx.data::<Store>().unwrap().write().await;
-        for link_to_insert in objects {
-            store.get_or_create(link_to_insert.from_id.unwrap_or(0) as u64, link_to_insert.to_id.unwrap_or(0) as u64).ok()
-        }
+        #[graphql(name = "on_conflict")] on_conflict: Option<Box<LinksOnConflict>>,
+    ) -> Result<Option<LinksMutationResponse>> {
+        let mut store = ctx.data_unchecked::<Store>().write().await;
+        objects
+            .into_iter()
+            .map(|link| {
+                let from_id = link.from_id.to_link();
+                let to_id = link.to_id.to_link();
+                store
+                    .get_or_create(from_id, to_id)
+                    .map(|id| Links(Link::new(id, from_id, to_id)))
+            })
+            .collect::<LinksResult<Vec<_>>>()
+            .map(|links| Some(LinksMutationResponse(links)))
+            .map_err(|e| e.into())
     }
+
     #[graphql(name = "insert_links_one")]
     pub async fn insert_links_one(
         &self,
         ctx: &Context<'_>,
-        object: LinksInsertInput,
-        #[graphql(name = "on_conflict")] on_conflict: Option<LinksOnConflict>,
-    ) -> Option<Links> {
-        let mut store = ctx.data::<Store>().unwrap().write().await;
-        store.get_or_create(object.from_id.unwrap_or(0) as u64, object.to_id.unwrap_or(0) as u64).ok()
-
+        object: Box<LinksInsertInput>,
+        #[graphql(name = "on_conflict")] on_conflict: Option<Box<LinksOnConflict>>,
+    ) -> Result<Option<Links>> {
+        let mut store = ctx.data_unchecked::<Store>().write().await;
+        // todo: #[graphql(name = ...)]
+        let link = object;
+        let from_id = link.from_id.to_link();
+        let to_id = link.to_id.to_link();
+        store
+            .get_or_create(from_id, to_id)
+            .map(|id| Some(Links(Link::new(id, from_id, to_id))))
+            .map_err(|e| e.into())
     }
+
     #[graphql(name = "insert_mp")]
     pub async fn insert_mp(
         &self,
@@ -215,20 +236,9 @@ impl MutationRoot {
         ctx: &Context<'_>,
         #[graphql(name = "_inc")] inc: Option<LinksIncInput>,
         #[graphql(name = "_set")] set: Option<LinksSetInput>,
-        _where: LinksBoolExp,
+        _where: Box<LinksBoolExp>,
     ) -> Option<LinksMutationResponse> {
-        let mut store = ctx.data::<Store>().unwrap().write().await;
-        let mut response = LinksMutationResponse {
-            returning: Vec::new()
-        };
-        match _where.id {
-            Some(id) => store.update(id.eq.unwrap() as u64,object.from_id.unwrap_or(0) as u64, object.to_id.unwrap_or(0) as u64).ok()
-            None => {
-                let updated_link_index = store.update_by([_where.from_id.unwrap().eq.unwrap(), _where.to_id.unwrap().eq.unwrap()], object.from_id.unwrap_or(0) as u64, object.to_id.unwrap_or(0) as u64).ok();
-                let updated_link = store.get_link(updated_link_index.unwrap());
-                response.returning.append()
-            }
-        }
+        todo!()
     }
     #[graphql(name = "update_links_by_pk")]
     pub async fn update_links_by_pk(

@@ -1,6 +1,8 @@
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct NumbersAvgFields;
+
 #[Object(name = "numbers_avg_fields")]
 impl NumbersAvgFields {
     pub async fn id(&self, ctx: &Context<'_>) -> Option<f64> {

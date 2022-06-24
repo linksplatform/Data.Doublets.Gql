@@ -5,8 +5,10 @@ use crate::model::MpBoolExp;
 use crate::model::MpOrderBy;
 use crate::model::MpSelectColumn;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct Mp;
+
 #[Object(name = "mp")]
 impl Mp {
     #[graphql(name = "by_group")]
@@ -21,7 +23,7 @@ impl Mp {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<MpOrderBy>>,
-        _where: Option<MpBoolExp>,
+        _where: Option<Box<MpBoolExp>>,
     ) -> Vec<Mp> {
         todo!()
     }
@@ -33,7 +35,7 @@ impl Mp {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<MpOrderBy>>,
-        _where: Option<MpBoolExp>,
+        _where: Option<Box<MpBoolExp>>,
     ) -> MpAggregate {
         todo!()
     }
@@ -45,7 +47,7 @@ impl Mp {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<MpOrderBy>>,
-        _where: Option<MpBoolExp>,
+        _where: Option<Box<MpBoolExp>>,
     ) -> Vec<Mp> {
         todo!()
     }
@@ -57,7 +59,7 @@ impl Mp {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<MpOrderBy>>,
-        _where: Option<MpBoolExp>,
+        _where: Option<Box<MpBoolExp>>,
     ) -> MpAggregate {
         todo!()
     }
@@ -69,7 +71,7 @@ impl Mp {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<MpOrderBy>>,
-        _where: Option<MpBoolExp>,
+        _where: Option<Box<MpBoolExp>>,
     ) -> Vec<Mp> {
         todo!()
     }
@@ -81,7 +83,7 @@ impl Mp {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<MpOrderBy>>,
-        _where: Option<MpBoolExp>,
+        _where: Option<Box<MpBoolExp>>,
     ) -> MpAggregate {
         todo!()
     }
@@ -93,7 +95,7 @@ impl Mp {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<MpOrderBy>>,
-        _where: Option<MpBoolExp>,
+        _where: Option<Box<MpBoolExp>>,
     ) -> Vec<Mp> {
         todo!()
     }
@@ -105,7 +107,7 @@ impl Mp {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<MpOrderBy>>,
-        _where: Option<MpBoolExp>,
+        _where: Option<Box<MpBoolExp>>,
     ) -> MpAggregate {
         todo!()
     }

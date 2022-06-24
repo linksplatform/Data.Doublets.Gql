@@ -1,7 +1,9 @@
 use crate::model::Bigint;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct MpMinFields;
+
 #[Object(name = "mp_min_fields")]
 impl MpMinFields {
     #[graphql(name = "group_id")]

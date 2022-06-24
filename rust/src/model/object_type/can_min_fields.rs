@@ -1,7 +1,9 @@
 use crate::model::Bigint;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct CanMinFields;
+
 #[Object(name = "can_min_fields")]
 impl CanMinFields {
     #[graphql(name = "action_id")]

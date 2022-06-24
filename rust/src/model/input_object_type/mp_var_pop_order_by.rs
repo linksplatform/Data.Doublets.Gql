@@ -1,5 +1,6 @@
 use crate::model::OrderBy;
 use async_graphql::*;
+
 #[derive(InputObject, Debug)]
 #[graphql(name = "mp_var_pop_order_by")]
 pub struct MpVarPopOrderBy {

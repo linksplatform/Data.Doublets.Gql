@@ -1,6 +1,8 @@
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct CanVarPopFields;
+
 #[Object(name = "can_var_pop_fields")]
 impl CanVarPopFields {
     #[graphql(name = "action_id")]

@@ -35,8 +35,10 @@ use crate::model::StringsBoolExp;
 use crate::model::StringsOrderBy;
 use crate::model::StringsSelectColumn;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct SubscriptionRoot;
+
 #[Object(name = "subscription_root")]
 impl SubscriptionRoot {
     pub async fn can(
@@ -46,7 +48,7 @@ impl SubscriptionRoot {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<CanOrderBy>>,
-        _where: Option<CanBoolExp>,
+        _where: Option<Box<CanBoolExp>>,
     ) -> Vec<Can> {
         todo!()
     }
@@ -58,7 +60,7 @@ impl SubscriptionRoot {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<CanOrderBy>>,
-        _where: Option<CanBoolExp>,
+        _where: Option<Box<CanBoolExp>>,
     ) -> CanAggregate {
         todo!()
     }
@@ -69,7 +71,7 @@ impl SubscriptionRoot {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<LinksOrderBy>>,
-        _where: Option<LinksBoolExp>,
+        _where: Option<Box<LinksBoolExp>>,
     ) -> Vec<Links> {
         todo!()
     }
@@ -81,7 +83,7 @@ impl SubscriptionRoot {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<LinksOrderBy>>,
-        _where: Option<LinksBoolExp>,
+        _where: Option<Box<LinksBoolExp>>,
     ) -> LinksAggregate {
         todo!()
     }
@@ -96,7 +98,7 @@ impl SubscriptionRoot {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<MpOrderBy>>,
-        _where: Option<MpBoolExp>,
+        _where: Option<Box<MpBoolExp>>,
     ) -> Vec<Mp> {
         todo!()
     }
@@ -108,7 +110,7 @@ impl SubscriptionRoot {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<MpOrderBy>>,
-        _where: Option<MpBoolExp>,
+        _where: Option<Box<MpBoolExp>>,
     ) -> MpAggregate {
         todo!()
     }

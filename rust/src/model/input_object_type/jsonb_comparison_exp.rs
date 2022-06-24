@@ -1,5 +1,6 @@
 use crate::model::Jsonb;
 use async_graphql::*;
+
 #[derive(InputObject, Debug)]
 #[graphql(name = "jsonb_comparison_exp")]
 pub struct JsonbComparisonExp {

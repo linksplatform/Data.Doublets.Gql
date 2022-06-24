@@ -1,6 +1,8 @@
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct LinksAvgFields;
+
 #[Object(name = "links_avg_fields")]
 impl LinksAvgFields {
     #[graphql(name = "from_id")]

@@ -1,6 +1,8 @@
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct MpVarianceFields;
+
 #[Object(name = "mp_variance_fields")]
 impl MpVarianceFields {
     #[graphql(name = "group_id")]
