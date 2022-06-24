@@ -37,9 +37,9 @@ use crate::model::StringsBoolExp;
 use crate::model::StringsOrderBy;
 use crate::model::StringsSelectColumn;
 use crate::model::{Bigint, BigintComparisonExp, LinkType};
-use crate::Store;
+use crate::{RawStore, Store};
 use async_graphql::*;
-use doublets::Doublets;
+use doublets::{Doublets, Link};
 
 #[derive(Debug)]
 pub struct QueryRoot;
@@ -76,17 +76,11 @@ impl QueryRoot {
         todo!()
     }
 
-    pub async fn links(
-        &self,
-        ctx: &Context<'_>,
-        #[graphql(name = "distinct_on")] distinct_on: Option<Vec<LinksSelectColumn>>,
-        limit: Option<i32>,
-        offset: Option<i32>,
-        #[graphql(name = "order_by")] order_by: Option<Vec<LinksOrderBy>>,
+    #[graphql(skip)]
+    pub(crate) async fn filter_links(
+        store: &RawStore,
         _where: Option<Box<LinksBoolExp>>,
-    ) -> Vec<Links> {
-        let store = ctx.data_unchecked::<Store>().read().await;
-
+    ) -> Box<dyn Iterator<Item = Link<LinkType>> + '_> {
         let fast_param_impl = |param: Option<&BigintComparisonExp>| -> LinkType {
             let any = store.constants().any;
             if let Some(param) = param {
@@ -104,14 +98,30 @@ impl QueryRoot {
             let from_id = fast_param_impl(r#where.from_id.as_deref());
             let to_id = fast_param_impl(r#where.to_id.as_deref());
 
-            store
+            box store
                 .each_iter([id, from_id, to_id])
-                .filter(|link| r#where.matches(&*store, link))
-                .map(|link| Links(link))
-                .collect()
+                .filter(move |link| r#where.matches(&*store, link))
         } else {
-            store.iter().map(|link| Links(link)).collect()
+            // todo: come up with something smarter
+            //  store.iter()
+            box store.iter()
         }
+    }
+
+    pub async fn links(
+        &self,
+        ctx: &Context<'_>,
+        #[graphql(name = "distinct_on")] distinct_on: Option<Vec<LinksSelectColumn>>,
+        limit: Option<i32>,
+        offset: Option<i32>,
+        #[graphql(name = "order_by")] order_by: Option<Vec<LinksOrderBy>>,
+        _where: Option<Box<LinksBoolExp>>,
+    ) -> Vec<Links> {
+        let store = ctx.data_unchecked::<Store>().read().await;
+        Self::filter_links(&*store, _where)
+            .await
+            .map(|link| Links(link))
+            .collect()
     }
 
     #[graphql(name = "links_aggregate")]

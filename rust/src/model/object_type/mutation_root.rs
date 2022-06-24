@@ -1,4 +1,3 @@
-use crate::model::Links;
 use crate::model::LinksBoolExp;
 use crate::model::LinksIncInput;
 use crate::model::LinksInsertInput;
@@ -44,7 +43,8 @@ use crate::model::StringsOnConflict;
 use crate::model::StringsPkColumnsInput;
 use crate::model::StringsSetInput;
 use crate::model::{Bigint, LinksResult};
-use crate::Store;
+use crate::model::{LinkType, Links};
+use crate::{QueryRoot, Store};
 use async_graphql::*;
 use doublets::data::{LinksError, Query};
 use doublets::{Doublets, Link};
@@ -230,6 +230,7 @@ impl MutationRoot {
     ) -> Option<Strings> {
         todo!()
     }
+
     #[graphql(name = "update_links")]
     pub async fn update_links(
         &self,
@@ -237,9 +238,43 @@ impl MutationRoot {
         #[graphql(name = "_inc")] inc: Option<LinksIncInput>,
         #[graphql(name = "_set")] set: Option<LinksSetInput>,
         _where: Box<LinksBoolExp>,
-    ) -> Option<LinksMutationResponse> {
-        todo!()
+    ) -> Result<Option<LinksMutationResponse>> {
+        let mut store = ctx.data_unchecked::<Store>().write().await;
+
+        let ids: Vec<_> = QueryRoot::filter_links(&*store, Some(_where))
+            .await
+            .map(|link| link.index)
+            .collect();
+
+        let returning: LinksResult<Vec<_>> = ids
+            .into_iter()
+            .map(move |id| -> LinksResult<Link<LinkType>> {
+                let link = store.try_get_link(id)?;
+                let (from_id, to_id) = if let Some(inc) = &inc {
+                    (
+                        link.source + inc.from_id.to_link(),
+                        link.target + inc.from_id.to_link(),
+                    )
+                } else if let Some(set) = &set {
+                    (set.from_id.to_link(), set.to_id.to_link())
+                } else {
+                    (link.source, link.target)
+                };
+
+                if (link.source, link.target) != (from_id, to_id) {
+                    store.update(id, from_id, to_id)?;
+                    Ok(Link::new(id, from_id, to_id))
+                } else {
+                    Ok(link)
+                }
+            })
+            .map(|link| link.map(|link| Links(link)))
+            .collect();
+        returning
+            .map(|s| Some(LinksMutationResponse(s)))
+            .map_err(|e| e.into())
     }
+
     #[graphql(name = "update_links_by_pk")]
     pub async fn update_links_by_pk(
         &self,

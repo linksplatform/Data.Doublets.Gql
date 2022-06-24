@@ -1,5 +1,6 @@
 #![feature(never_type)]
 #![feature(result_flattening)]
+#![feature(box_syntax)]
 
 mod model;
 
