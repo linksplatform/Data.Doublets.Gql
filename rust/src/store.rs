@@ -102,9 +102,9 @@ impl Doublets<LinkType> for Store {
             replacement[constants.target_part as usize],
         );
         let id = if let Some(old) = store.search(from_id, to_id) {
-            store.rebase_with(old, new, &mut handler)?;
-            store.delete_with(old, &mut handler)?;
-            new
+            store.rebase_with(new, old, &mut handler)?;
+            store.delete_with(new, &mut handler)?;
+            old
         } else {
             new
         };
