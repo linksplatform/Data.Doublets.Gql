@@ -28,6 +28,5 @@
     <ItemGroup>
         <ProjectReference Include="../Platform.Data.Doublets.Gql.Schema\Platform.Data.Doublets.Gql.Schema.csproj" />
         <ProjectReference Include="../Platform.Data.Doublets.Gql.Server\Platform.Data.Doublets.Gql.Server.csproj" />
-        <ProjectReference Include="../Platform.Data.Doublets.Gql.Client\Platform.Data.Doublets.Gql.Client.csproj" />
     </ItemGroup>
 </Project>
