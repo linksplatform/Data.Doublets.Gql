@@ -1,7 +1,9 @@
 use crate::model::Objects;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct ObjectsMutationResponse;
+
 #[Object(name = "objects_mutation_response")]
 impl ObjectsMutationResponse {
     #[graphql(name = "affected_rows")]

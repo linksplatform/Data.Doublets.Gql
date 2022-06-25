@@ -1,8 +1,10 @@
 use crate::model::Bigint;
 use crate::model::Links;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct Can;
+
 #[Object(name = "can")]
 impl Can {
     pub async fn action(&self, ctx: &Context<'_>) -> Option<Links> {

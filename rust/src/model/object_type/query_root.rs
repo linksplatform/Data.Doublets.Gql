@@ -1,4 +1,3 @@
-use crate::model::Bigint;
 use crate::model::Can;
 use crate::model::CanAggregate;
 use crate::model::CanBoolExp;
@@ -37,9 +36,14 @@ use crate::model::StringsAggregate;
 use crate::model::StringsBoolExp;
 use crate::model::StringsOrderBy;
 use crate::model::StringsSelectColumn;
+use crate::model::{Bigint, BigintComparisonExp, LinkType};
+use crate::Store;
 use async_graphql::*;
+use doublets::Doublets;
+
 #[derive(Debug)]
 pub struct QueryRoot;
+
 #[Object(name = "query_root")]
 impl QueryRoot {
     pub async fn can(
@@ -49,7 +53,7 @@ impl QueryRoot {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<CanOrderBy>>,
-        _where: Option<CanBoolExp>,
+        _where: Option<Box<CanBoolExp>>,
     ) -> Vec<Can> {
         todo!()
     }
@@ -61,7 +65,7 @@ impl QueryRoot {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<CanOrderBy>>,
-        _where: Option<CanBoolExp>,
+        _where: Option<Box<CanBoolExp>>,
     ) -> CanAggregate {
         todo!()
     }
@@ -71,6 +75,7 @@ impl QueryRoot {
     pub async fn jwt(&self, ctx: &Context<'_>, input: Option<JwtInput>) -> Option<JwtOutput> {
         todo!()
     }
+
     pub async fn links(
         &self,
         ctx: &Context<'_>,
@@ -78,10 +83,37 @@ impl QueryRoot {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<LinksOrderBy>>,
-        _where: Option<LinksBoolExp>,
+        _where: Option<Box<LinksBoolExp>>,
     ) -> Vec<Links> {
-        todo!()
+        let store = ctx.data_unchecked::<Store>().read().await;
+
+        let fast_param_impl = |param: Option<&BigintComparisonExp>| -> LinkType {
+            let any = store.constants().any;
+            if let Some(param) = param {
+                match param.eq {
+                    Some(id) => id as LinkType,
+                    None => any,
+                }
+            } else {
+                any
+            }
+        };
+
+        if let Some(r#where) = _where {
+            let id = fast_param_impl(r#where.id.as_deref());
+            let from_id = fast_param_impl(r#where.from_id.as_deref());
+            let to_id = fast_param_impl(r#where.to_id.as_deref());
+
+            store
+                .each_iter([id, from_id, to_id])
+                .filter(|link| r#where.matches(&*store, link))
+                .map(|link| Links(link))
+                .collect()
+        } else {
+            store.iter().map(|link| Links(link)).collect()
+        }
     }
+
     #[graphql(name = "links_aggregate")]
     pub async fn links_aggregate(
         &self,
@@ -90,7 +122,7 @@ impl QueryRoot {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<LinksOrderBy>>,
-        _where: Option<LinksBoolExp>,
+        _where: Option<Box<LinksBoolExp>>,
     ) -> LinksAggregate {
         todo!()
     }
@@ -105,7 +137,7 @@ impl QueryRoot {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<MpOrderBy>>,
-        _where: Option<MpBoolExp>,
+        _where: Option<Box<MpBoolExp>>,
     ) -> Vec<Mp> {
         todo!()
     }
@@ -117,7 +149,7 @@ impl QueryRoot {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<MpOrderBy>>,
-        _where: Option<MpBoolExp>,
+        _where: Option<Box<MpBoolExp>>,
     ) -> MpAggregate {
         todo!()
     }

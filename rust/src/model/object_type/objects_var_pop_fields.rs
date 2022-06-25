@@ -1,6 +1,8 @@
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct ObjectsVarPopFields;
+
 #[Object(name = "objects_var_pop_fields")]
 impl ObjectsVarPopFields {
     pub async fn id(&self, ctx: &Context<'_>) -> Option<f64> {

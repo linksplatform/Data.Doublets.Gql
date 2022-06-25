@@ -1,6 +1,8 @@
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct SelectorsVarPopFields;
+
 #[Object(name = "selectors_var_pop_fields")]
 impl SelectorsVarPopFields {
     #[graphql(name = "bool_exp_id")]

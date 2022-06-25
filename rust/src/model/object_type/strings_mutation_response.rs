@@ -1,7 +1,9 @@
 use crate::model::Strings;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct StringsMutationResponse;
+
 #[Object(name = "strings_mutation_response")]
 impl StringsMutationResponse {
     #[graphql(name = "affected_rows")]

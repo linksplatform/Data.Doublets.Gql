@@ -2,6 +2,7 @@ use crate::model::Bigint;
 use crate::model::Jsonb;
 use crate::model::LinksObjRelInsertInput;
 use async_graphql::*;
+
 #[derive(InputObject, Debug)]
 #[graphql(name = "objects_insert_input")]
 pub struct ObjectsInsertInput {

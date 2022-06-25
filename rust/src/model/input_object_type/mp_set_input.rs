@@ -1,5 +1,6 @@
 use crate::model::Bigint;
 use async_graphql::*;
+
 #[derive(InputObject, Debug)]
 #[graphql(name = "mp_set_input")]
 pub struct MpSetInput {

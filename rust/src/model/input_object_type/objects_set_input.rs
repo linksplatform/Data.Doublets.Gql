@@ -1,6 +1,7 @@
 use crate::model::Bigint;
 use crate::model::Jsonb;
 use async_graphql::*;
+
 #[derive(InputObject, Debug)]
 #[graphql(name = "objects_set_input")]
 pub struct ObjectsSetInput {

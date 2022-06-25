@@ -25,9 +25,13 @@ use crate::model::SelectorsOrderBy;
 use crate::model::SelectorsSelectColumn;
 use crate::model::Strings;
 use crate::model::UpLinksArgs;
+use crate::Store;
 use async_graphql::*;
-#[derive(Debug)]
-pub struct Links;
+use doublets::Doublets;
+
+#[derive(Debug, Clone)]
+pub struct Links(pub doublets::Link<u64>);
+
 #[Object(name = "links")]
 impl Links {
     #[graphql(name = "_by_group")]
@@ -38,7 +42,7 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<MpOrderBy>>,
-        _where: Option<MpBoolExp>,
+        _where: Option<Box<MpBoolExp>>,
     ) -> Vec<Mp> {
         todo!()
     }
@@ -50,7 +54,7 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<MpOrderBy>>,
-        _where: Option<MpBoolExp>,
+        _where: Option<Box<MpBoolExp>>,
     ) -> MpAggregate {
         todo!()
     }
@@ -62,7 +66,7 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<MpOrderBy>>,
-        _where: Option<MpBoolExp>,
+        _where: Option<Box<MpBoolExp>>,
     ) -> Vec<Mp> {
         todo!()
     }
@@ -74,7 +78,7 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<MpOrderBy>>,
-        _where: Option<MpBoolExp>,
+        _where: Option<Box<MpBoolExp>>,
     ) -> MpAggregate {
         todo!()
     }
@@ -86,7 +90,7 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<MpOrderBy>>,
-        _where: Option<MpBoolExp>,
+        _where: Option<Box<MpBoolExp>>,
     ) -> Vec<Mp> {
         todo!()
     }
@@ -98,7 +102,7 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<MpOrderBy>>,
-        _where: Option<MpBoolExp>,
+        _where: Option<Box<MpBoolExp>>,
     ) -> MpAggregate {
         todo!()
     }
@@ -110,7 +114,7 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<MpOrderBy>>,
-        _where: Option<MpBoolExp>,
+        _where: Option<Box<MpBoolExp>>,
     ) -> Vec<Mp> {
         todo!()
     }
@@ -122,7 +126,7 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<MpOrderBy>>,
-        _where: Option<MpBoolExp>,
+        _where: Option<Box<MpBoolExp>>,
     ) -> MpAggregate {
         todo!()
     }
@@ -134,7 +138,7 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<CanOrderBy>>,
-        _where: Option<CanBoolExp>,
+        _where: Option<Box<CanBoolExp>>,
     ) -> Vec<Can> {
         todo!()
     }
@@ -146,7 +150,7 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<CanOrderBy>>,
-        _where: Option<CanBoolExp>,
+        _where: Option<Box<CanBoolExp>>,
     ) -> CanAggregate {
         todo!()
     }
@@ -158,7 +162,7 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<CanOrderBy>>,
-        _where: Option<CanBoolExp>,
+        _where: Option<Box<CanBoolExp>>,
     ) -> Vec<Can> {
         todo!()
     }
@@ -170,7 +174,7 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<CanOrderBy>>,
-        _where: Option<CanBoolExp>,
+        _where: Option<Box<CanBoolExp>>,
     ) -> CanAggregate {
         todo!()
     }
@@ -182,7 +186,7 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<CanOrderBy>>,
-        _where: Option<CanBoolExp>,
+        _where: Option<Box<CanBoolExp>>,
     ) -> Vec<Can> {
         todo!()
     }
@@ -194,7 +198,7 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<CanOrderBy>>,
-        _where: Option<CanBoolExp>,
+        _where: Option<Box<CanBoolExp>>,
     ) -> CanAggregate {
         todo!()
     }
@@ -206,7 +210,7 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<CanOrderBy>>,
-        _where: Option<CanBoolExp>,
+        _where: Option<Box<CanBoolExp>>,
     ) -> Vec<Can> {
         todo!()
     }
@@ -218,7 +222,7 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<CanOrderBy>>,
-        _where: Option<CanBoolExp>,
+        _where: Option<Box<CanBoolExp>>,
     ) -> CanAggregate {
         todo!()
     }
@@ -230,7 +234,7 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<LinksOrderBy>>,
-        _where: Option<LinksBoolExp>,
+        _where: Option<Box<LinksBoolExp>>,
     ) -> Option<Vec<Links>> {
         todo!()
     }
@@ -243,20 +247,25 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<LinksOrderBy>>,
-        _where: Option<LinksBoolExp>,
+        _where: Option<Box<LinksBoolExp>>,
     ) -> Option<Vec<Links>> {
         todo!()
     }
+
     pub async fn from(&self, ctx: &Context<'_>) -> Option<Links> {
-        todo!()
+        let store = ctx.data_unchecked::<Store>().read().await;
+        store.get_link(self.0.source).map(|link| Links(link))
     }
+
     #[graphql(name = "from_id")]
     pub async fn from_id(&self, ctx: &Context<'_>) -> Option<Bigint> {
-        todo!()
+        Some(self.0.source as Bigint)
     }
+
     pub async fn id(&self, ctx: &Context<'_>) -> Bigint {
-        todo!()
+        self.0.index as Bigint
     }
+
     pub async fn _in(
         &self,
         ctx: &Context<'_>,
@@ -264,10 +273,21 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<LinksOrderBy>>,
-        _where: Option<LinksBoolExp>,
+        _where: Option<Box<LinksBoolExp>>,
     ) -> Vec<Links> {
-        todo!()
+        let store = ctx.data_unchecked::<Store>().read().await;
+        let any = store.constants().any;
+
+        let iter = store.each_iter([any, any, self.0.index]);
+        if let Some(r#where) = _where {
+            iter.filter(|link| r#where.matches(&*store, link))
+                .map(|link| Links(link))
+                .collect()
+        } else {
+            iter.map(|link| Links(link)).collect()
+        }
     }
+
     #[graphql(name = "in_aggregate")]
     pub async fn in_aggregate(
         &self,
@@ -276,7 +296,7 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<LinksOrderBy>>,
-        _where: Option<LinksBoolExp>,
+        _where: Option<Box<LinksBoolExp>>,
     ) -> LinksAggregate {
         todo!()
     }
@@ -286,6 +306,7 @@ impl Links {
     pub async fn object(&self, ctx: &Context<'_>) -> Option<Objects> {
         todo!()
     }
+
     pub async fn out(
         &self,
         ctx: &Context<'_>,
@@ -293,10 +314,21 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<LinksOrderBy>>,
-        _where: Option<LinksBoolExp>,
+        _where: Option<Box<LinksBoolExp>>,
     ) -> Vec<Links> {
-        todo!()
+        let store = ctx.data_unchecked::<Store>().read().await;
+        let any = store.constants().any;
+
+        let iter = store.each_iter([any, self.0.index, any]);
+        if let Some(r#where) = _where {
+            iter.filter(|link| r#where.matches(&*store, link))
+                .map(|link| Links(link))
+                .collect()
+        } else {
+            iter.map(|link| Links(link)).collect()
+        }
     }
+
     #[graphql(name = "out_aggregate")]
     pub async fn out_aggregate(
         &self,
@@ -305,7 +337,7 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<LinksOrderBy>>,
-        _where: Option<LinksBoolExp>,
+        _where: Option<Box<LinksBoolExp>>,
     ) -> LinksAggregate {
         todo!()
     }
@@ -358,13 +390,17 @@ impl Links {
     pub async fn string(&self, ctx: &Context<'_>) -> Option<Strings> {
         todo!()
     }
+
     pub async fn to(&self, ctx: &Context<'_>) -> Option<Links> {
-        todo!()
+        let store = ctx.data_unchecked::<Store>().read().await;
+        store.get_link(self.0.target).map(|link| Links(link))
     }
+
     #[graphql(name = "to_id")]
     pub async fn to_id(&self, ctx: &Context<'_>) -> Option<Bigint> {
-        todo!()
+        Some(self.0.target as Bigint)
     }
+
     pub async fn _type(&self, ctx: &Context<'_>) -> Option<Links> {
         todo!()
     }
@@ -379,7 +415,7 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<LinksOrderBy>>,
-        _where: Option<LinksBoolExp>,
+        _where: Option<Box<LinksBoolExp>>,
     ) -> Vec<Links> {
         todo!()
     }
@@ -391,7 +427,7 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<LinksOrderBy>>,
-        _where: Option<LinksBoolExp>,
+        _where: Option<Box<LinksBoolExp>>,
     ) -> LinksAggregate {
         todo!()
     }
@@ -403,7 +439,7 @@ impl Links {
         limit: Option<i32>,
         offset: Option<i32>,
         #[graphql(name = "order_by")] order_by: Option<Vec<LinksOrderBy>>,
-        _where: Option<LinksBoolExp>,
+        _where: Option<Box<LinksBoolExp>>,
     ) -> Option<Vec<Links>> {
         todo!()
     }

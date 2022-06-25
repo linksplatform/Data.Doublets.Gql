@@ -1,4 +1,5 @@
 use async_graphql::*;
+
 #[derive(Enum, Debug, Copy, Clone, Eq, PartialEq)]
 #[graphql(name = "objects_select_column")]
 pub enum ObjectsSelectColumn {

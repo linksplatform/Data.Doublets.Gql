@@ -1,5 +1,6 @@
 use crate::model::OrderBy;
 use async_graphql::*;
+
 #[derive(InputObject, Debug)]
 #[graphql(name = "can_stddev_pop_order_by")]
 pub struct CanStddevPopOrderBy {

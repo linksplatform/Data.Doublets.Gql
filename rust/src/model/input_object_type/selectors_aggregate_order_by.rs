@@ -10,6 +10,7 @@ use crate::model::SelectorsVarPopOrderBy;
 use crate::model::SelectorsVarSampOrderBy;
 use crate::model::SelectorsVarianceOrderBy;
 use async_graphql::*;
+
 #[derive(InputObject, Debug)]
 #[graphql(name = "selectors_aggregate_order_by")]
 pub struct SelectorsAggregateOrderBy {

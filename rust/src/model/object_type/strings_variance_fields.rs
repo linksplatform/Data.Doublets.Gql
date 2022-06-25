@@ -1,6 +1,8 @@
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct StringsVarianceFields;
+
 #[Object(name = "strings_variance_fields")]
 impl StringsVarianceFields {
     pub async fn id(&self, ctx: &Context<'_>) -> Option<f64> {

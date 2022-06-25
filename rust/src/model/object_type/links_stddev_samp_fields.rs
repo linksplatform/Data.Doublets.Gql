@@ -1,6 +1,8 @@
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct LinksStddevSampFields;
+
 #[Object(name = "links_stddev_samp_fields")]
 impl LinksStddevSampFields {
     #[graphql(name = "from_id")]

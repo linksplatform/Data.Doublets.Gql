@@ -1,5 +1,6 @@
 use crate::model::OrderBy;
 use async_graphql::*;
+
 #[derive(InputObject, Debug)]
 #[graphql(name = "mp_stddev_samp_order_by")]
 pub struct MpStddevSampOrderBy {

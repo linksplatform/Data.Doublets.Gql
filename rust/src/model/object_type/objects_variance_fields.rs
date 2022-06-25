@@ -1,6 +1,8 @@
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct ObjectsVarianceFields;
+
 #[Object(name = "objects_variance_fields")]
 impl ObjectsVarianceFields {
     pub async fn id(&self, ctx: &Context<'_>) -> Option<f64> {

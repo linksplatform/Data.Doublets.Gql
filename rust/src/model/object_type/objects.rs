@@ -2,8 +2,10 @@ use crate::model::Bigint;
 use crate::model::Jsonb;
 use crate::model::Links;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct Objects;
+
 #[Object(name = "objects")]
 impl Objects {
     pub async fn id(&self, ctx: &Context<'_>) -> Bigint {

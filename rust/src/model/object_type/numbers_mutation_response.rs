@@ -1,7 +1,9 @@
 use crate::model::Numbers;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct NumbersMutationResponse;
+
 #[Object(name = "numbers_mutation_response")]
 impl NumbersMutationResponse {
     #[graphql(name = "affected_rows")]

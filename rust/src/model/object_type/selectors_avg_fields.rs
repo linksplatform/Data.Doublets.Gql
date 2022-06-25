@@ -1,6 +1,8 @@
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct SelectorsAvgFields;
+
 #[Object(name = "selectors_avg_fields")]
 impl SelectorsAvgFields {
     #[graphql(name = "bool_exp_id")]

@@ -1,7 +1,9 @@
 use crate::model::Mp;
 use async_graphql::*;
+
 #[derive(Debug)]
 pub struct MpMutationResponse;
+
 #[Object(name = "mp_mutation_response")]
 impl MpMutationResponse {
     #[graphql(name = "affected_rows")]
