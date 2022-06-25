@@ -37,7 +37,7 @@ use crate::model::StringsBoolExp;
 use crate::model::StringsOrderBy;
 use crate::model::StringsSelectColumn;
 use crate::model::{Bigint, BigintComparisonExp, LinkType};
-use crate::{RawStore, Store};
+use crate::{store, RawStore, Store};
 use async_graphql::*;
 use doublets::{Doublets, Link};
 
@@ -78,7 +78,7 @@ impl QueryRoot {
 
     #[graphql(skip)]
     pub(crate) async fn filter_links(
-        store: &RawStore,
+        store: &store::Store,
         _where: Option<Box<LinksBoolExp>>,
     ) -> Box<dyn Iterator<Item = Link<LinkType>> + '_> {
         let fast_param_impl = |param: Option<&BigintComparisonExp>| -> LinkType {

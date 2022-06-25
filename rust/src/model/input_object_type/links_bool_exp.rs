@@ -7,7 +7,7 @@ use crate::model::ObjectsBoolExp;
 use crate::model::SelectorsBoolExp;
 use crate::model::StringsBoolExp;
 use crate::model::{BigintComparisonExp, LinkType};
-use crate::RawStore;
+use crate::{store, RawStore};
 use async_graphql::*;
 use doublets::{Doublets, Link};
 
@@ -58,7 +58,7 @@ pub struct LinksBoolExp {
 }
 
 impl LinksBoolExp {
-    pub fn matches(&self, store: &RawStore, link: &Link<LinkType>) -> bool {
+    pub fn matches(&self, store: &store::Store, link: &Link<LinkType>) -> bool {
         let mut exp = true;
 
         if let Some(id) = &self.id {

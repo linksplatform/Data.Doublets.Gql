@@ -48,6 +48,7 @@ use crate::{QueryRoot, Store};
 use async_graphql::*;
 use doublets::data::{LinksError, Query};
 use doublets::{Doublets, Link};
+use smallvec::{smallvec, SmallVec};
 use std::io::{Read, Write};
 
 pub use crate::model::LinksOptionExt;
@@ -62,9 +63,27 @@ impl MutationRoot {
         &self,
         ctx: &Context<'_>,
         _where: Box<LinksBoolExp>,
-    ) -> Option<LinksMutationResponse> {
-        todo!()
+    ) -> Result<Option<LinksMutationResponse>> {
+        let mut store = ctx.data_unchecked::<Store>().write().await;
+
+        let ids: Vec<_> = QueryRoot::filter_links(&*store, Some(_where))
+            .await
+            .map(|link| link.index)
+            .collect();
+
+        let returning: LinksResult<Vec<_>> = ids
+            .into_iter()
+            .map(move |id| -> LinksResult<_> {
+                let link = store.try_get_link(id)?;
+                store.delete(id)?;
+                Ok(Links(link))
+            })
+            .collect();
+        returning
+            .map(|s| Some(LinksMutationResponse(s)))
+            .map_err(|e| e.into())
     }
+
     #[graphql(name = "delete_links_by_pk")]
     pub async fn delete_links_by_pk(&self, ctx: &Context<'_>, id: Bigint) -> Option<Links> {
         todo!()
@@ -248,7 +267,7 @@ impl MutationRoot {
 
         let returning: LinksResult<Vec<_>> = ids
             .into_iter()
-            .map(move |id| -> LinksResult<Link<LinkType>> {
+            .map(move |id| -> LinksResult<_> {
                 let link = store.try_get_link(id)?;
                 let (from_id, to_id) = if let Some(inc) = &inc {
                     (
@@ -262,13 +281,13 @@ impl MutationRoot {
                 };
 
                 if (link.source, link.target) != (from_id, to_id) {
-                    store.update(id, from_id, to_id)?;
+                    let id = store.update(id, from_id, to_id)?;
                     Ok(Link::new(id, from_id, to_id))
                 } else {
                     Ok(link)
                 }
             })
-            .map(|link| link.map(|link| Links(link)))
+            .map(|result| result.map(|link| Links(link)))
             .collect();
         returning
             .map(|s| Some(LinksMutationResponse(s)))
