@@ -66,11 +66,13 @@ impl MutationRoot {
     ) -> Result<Option<LinksMutationResponse>> {
         let mut store = ctx.data_unchecked::<Store>().write().await;
 
-        let ids = QueryRoot::filter_links(&*store, Some(_where))
+        let ids: Vec<_> = QueryRoot::filter_links(&*store, Some(_where))
             .await
-            .map(|link| link.index);
+            .map(|link| link.index)
+            .collect();
 
         let returning: LinksResult<Vec<_>> = ids
+            .into_iter()
             .map(move |id| -> LinksResult<_> {
                 let link = store.try_get_link(id)?;
                 store.delete(id)?;
@@ -280,12 +282,11 @@ impl MutationRoot {
 
                 if (link.source, link.target) != (from_id, to_id) {
                     let id = store.update(id, from_id, to_id)?;
-                    Ok(Link::new(id, from_id, to_id))
+                    Ok(Links(Link::new(id, from_id, to_id)))
                 } else {
-                    Ok(link)
+                    Ok(Links(link))
                 }
             })
-            .map(|result| result.map(|link| Links(link)))
             .collect();
         returning
             .map(|s| Some(LinksMutationResponse(s)))
