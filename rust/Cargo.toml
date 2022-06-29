@@ -9,7 +9,5 @@ async-std = { version = "1.12", features = ["attributes"] }
 async-graphql = "4.0"
 actix-web = "4.0"
 async-graphql-actix-web = "4.0"
-#doublets = { version = "0.1.0-alpha.20", features = ["full"] }
-doublets = "0.1.0-beta.4"
-doublets-decorators = "0.1.0-alpha.3"
+doublets = "0.1.0-beta.6"
 smallvec = "1.8.0"
