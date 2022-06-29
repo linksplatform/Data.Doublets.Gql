@@ -19,8 +19,7 @@ use async_graphql::{
 use async_graphql_actix_web::{GraphQLRequest, GraphQLResponse};
 use async_std::sync::RwLock;
 use doublets::mem::FileMappedMem;
-use doublets::{splited, Link};
-use doublets_decorators::{CascadeUniqueResolver, CascadeUsagesResolver};
+use doublets::{split, Link};
 use std::{error::Error, fs::File, io, path::Path};
 
 // todo: wait for fix type infer
@@ -39,7 +38,7 @@ async fn index_playground() -> actix_web::Result<HttpResponse> {
 }
 
 // todo: may be add support async-std files to platform-mem
-fn map_db_file<P: AsRef<Path>>(path: P) -> io::Result<FileMappedMem> {
+fn map_db_file<T: Default, P: AsRef<Path>>(path: P) -> io::Result<FileMappedMem<T>> {
     File::options()
         .create(true)
         .read(true)

@@ -1,12 +1,18 @@
 use crate::model::{LinkType, LinksResult};
-use doublets::data::Flow::Continue;
-use doublets::data::{LinksConstants, LinksError, ToQuery};
-use doublets::{mem::FileMappedMem, splited, Doublets, Link};
+use doublets::{
+    data::{Flow::Continue, LinksConstants, LinksError, ToQuery},
+    mem::FileMappedMem,
+    parts, split, Doublets, Link,
+};
 use smallvec::SmallVec;
 use std::ops::Try;
 
-pub type RawStore = splited::Store<u64, FileMappedMem, FileMappedMem>;
-type Inner = splited::Store<u64, FileMappedMem, FileMappedMem>;
+pub type RawStore = split::Store<
+    LinkType,
+    FileMappedMem<parts::DataPart<LinkType>>,
+    FileMappedMem<parts::IndexPart<LinkType>>,
+>;
+type Inner = RawStore;
 
 pub struct Store(Inner);
 
@@ -16,16 +22,7 @@ impl Store {
     }
 
     pub fn iter(&self) -> impl Iterator<Item = Link<LinkType>> + '_ {
-        // todo:
-        //  self.0.iter()
-        let mut vec = SmallVec::<[_; 2]>::new();
-
-        self.try_each(|link| {
-            vec.push(link);
-            Continue
-        });
-
-        vec.into_iter()
+        self.0.iter()
     }
 
     pub fn each_iter<'a>(
@@ -33,22 +30,6 @@ impl Store {
         query: impl ToQuery<LinkType> + 'a,
     ) -> impl Iterator<Item = Link<LinkType>> + 'a {
         self.0.each_iter(query)
-    }
-
-    pub fn update_iter<'a>(
-        &mut self,
-        id: LinkType,
-        from_id: LinkType,
-        to_id: LinkType,
-    ) -> LinksResult<impl Iterator<Item = Link<LinkType>> + 'a> {
-        let mut vec = SmallVec::<[_; 2]>::new();
-
-        self.update_with(id, from_id, to_id, |before, link| {
-            vec.push(link);
-            Continue
-        })?;
-
-        Ok(vec.into_iter())
     }
 }
 
