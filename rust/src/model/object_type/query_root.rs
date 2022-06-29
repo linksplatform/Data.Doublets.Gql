@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use crate::model::Can;
 use crate::model::CanAggregate;
 use crate::model::CanBoolExp;
@@ -39,7 +40,7 @@ use crate::model::StringsSelectColumn;
 use crate::model::{Bigint, BigintComparisonExp, LinkType};
 use crate::{store, RawStore, Store};
 use async_graphql::*;
-use doublets::{Doublets, Link};
+use doublets::{Doublet, Doublets, Link};
 
 #[derive(Debug)]
 pub struct QueryRoot;
@@ -118,10 +119,34 @@ impl QueryRoot {
         _where: Option<Box<LinksBoolExp>>,
     ) -> Vec<Links> {
         let store = ctx.data_unchecked::<Store>().read().await;
-        Self::filter_links(&*store, _where)
-            .await
-            .map(|link| Links(link))
-            .collect()
+        let mut links = Self::filter_links(&*store, _where)
+            .await;
+        if let Some(distinct_on) = distinct_on {
+            links = Box::new(links.map(|link| {
+                let mut distinct_fields = Vec::new();
+                let mut distinct_fields_with_link = Vec::new();
+                for link in links {
+                    for distinct_on_item in distinct_on {
+                        match distinct_on_item {
+                            LinksSelectColumn::FromId =>  distinct_fields.push(link.source),
+                            LinksSelectColumn::ToId => distinct_fields.push(link.target),
+                            _ => {}
+                        }
+                    }
+                    distinct_fields_with_link.push((&distinct_fields, link))
+                }
+                distinct_fields_with_link.sort();
+                distinct_fields_with_link.dedup_by(|(a, _), (b, _)| a.eq(b));
+                distinct_fields_with_link.into_iter().map(|(_, link)| link)
+            }));
+        }
+        if let Some(offset) = offset {
+            links = Box::new(links.skip(offset as usize));
+        }
+        if let Some(limit) = limit {
+            links = Box::new(links.take(limit as usize));
+        }
+        links.map(|link| Links(link)).collect()
     }
 
     #[graphql(name = "links_aggregate")]
