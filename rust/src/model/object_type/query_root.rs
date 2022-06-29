@@ -1,5 +1,3 @@
-use std::collections::HashMap;
-use crate::model::Can;
 use crate::model::CanAggregate;
 use crate::model::CanBoolExp;
 use crate::model::CanOrderBy;
@@ -38,9 +36,12 @@ use crate::model::StringsBoolExp;
 use crate::model::StringsOrderBy;
 use crate::model::StringsSelectColumn;
 use crate::model::{Bigint, BigintComparisonExp, LinkType};
+use crate::model::{Can, DistinctWrapper};
 use crate::{store, RawStore, Store};
 use async_graphql::*;
 use doublets::{Doublet, Doublets, Link};
+use itertools::Itertools;
+use std::collections::{HashMap, HashSet};
 
 #[derive(Debug)]
 pub struct QueryRoot;
@@ -119,34 +120,33 @@ impl QueryRoot {
         _where: Option<Box<LinksBoolExp>>,
     ) -> Vec<Links> {
         let store = ctx.data_unchecked::<Store>().read().await;
-        let mut links = *(Self::filter_links(&*store, _where)
-            .await);
+        let mut links = Self::filter_links(&*store, _where).await;
         if let Some(distinct_on) = distinct_on {
-            links = Box::new(links.map(|link| {
-                let mut distinct_fields = Vec::new();
-                let mut distinct_fields_with_link = Vec::new();
-                for link in links {
-                    for distinct_on_item in distinct_on {
-                        match distinct_on_item {
-                            LinksSelectColumn::FromId =>  distinct_fields.push(link.source),
-                            LinksSelectColumn::ToId => distinct_fields.push(link.target),
-                            _ => {}
+            let distinct_on: HashSet<_> = distinct_on.into_iter().collect();
+            links = box links
+                .map(move |link| {
+                    let mut from_id = 0;
+                    let mut to_id = 0;
+                    for column in &distinct_on {
+                        match column {
+                            LinksSelectColumn::FromId => from_id = link.source,
+                            LinksSelectColumn::ToId => to_id = link.target,
+                            _ => {
+                                todo!()
+                            }
                         }
                     }
-                    distinct_fields_with_link.push((&distinct_fields, link))
-                }
-                distinct_fields_with_link.sort();
-                distinct_fields_with_link.dedup_by(|(a, _), (b, _)| a.eq(b));
-                distinct_fields_with_link.into_iter().map(|(_, link)| link)
-            }));
+                    DistinctWrapper::from_match_link((from_id, to_id), link)
+                })
+                .collect::<HashSet<_>>()
+                .into_iter()
+                .map(DistinctWrapper::into_link)
         }
-        if let Some(offset) = offset {
-            links = links.skip(offset as usize);
-        }
-        if let Some(limit) = limit {
-            links = links.take(limit as usize);
-        }
-        links.map(|link| Links(link)).collect()
+        links
+            .skip(offset.unwrap_or(0) as usize)
+            .take(limit.map(|x| x as usize).unwrap_or(usize::MAX))
+            .map(|link| Links(link))
+            .collect()
     }
 
     #[graphql(name = "links_aggregate")]

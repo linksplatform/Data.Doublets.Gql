@@ -1,3 +1,4 @@
+mod distinct;
 mod enum_type;
 mod input_object_type;
 mod iterator;
@@ -233,6 +234,8 @@ pub use scalar_type::Bigint;
 pub use scalar_type::Jsonb;
 pub use scalar_type::LinksOptionExt;
 use std::marker::PhantomData;
+
+pub use distinct::DistinctWrapper;
 
 pub type LinkType = u64;
 pub type LinksResult<T> = Result<T, LinksError<u64>>;
