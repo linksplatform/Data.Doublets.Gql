@@ -16,16 +16,15 @@ impl Store {
     }
 
     pub fn iter(&self) -> impl Iterator<Item = Link<LinkType>> + '_ {
-        // todo:
-        //  self.0.iter()
-        let mut vec = SmallVec::<[_; 2]>::new();
-
-        self.try_each(|link| {
-            vec.push(link);
-            Continue
-        });
-
-        vec.into_iter()
+         self.0.iter()
+        // let mut vec = SmallVec::<[_; 2]>::new();
+        //
+        // self.try_each(|link| {
+        //     vec.push(link);
+        //     Continue
+        // });
+        //
+        // vec.into_iter()
     }
 
     pub fn each_iter<'a>(
