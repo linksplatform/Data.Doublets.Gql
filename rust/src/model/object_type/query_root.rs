@@ -119,8 +119,8 @@ impl QueryRoot {
         _where: Option<Box<LinksBoolExp>>,
     ) -> Vec<Links> {
         let store = ctx.data_unchecked::<Store>().read().await;
-        let mut links = Self::filter_links(&*store, _where)
-            .await;
+        let mut links = *(Self::filter_links(&*store, _where)
+            .await);
         if let Some(distinct_on) = distinct_on {
             links = Box::new(links.map(|link| {
                 let mut distinct_fields = Vec::new();
@@ -141,10 +141,10 @@ impl QueryRoot {
             }));
         }
         if let Some(offset) = offset {
-            links = Box::new(links.skip(offset as usize));
+            links = links.skip(offset as usize);
         }
         if let Some(limit) = limit {
-            links = Box::new(links.take(limit as usize));
+            links = links.take(limit as usize);
         }
         links.map(|link| Links(link)).collect()
     }
