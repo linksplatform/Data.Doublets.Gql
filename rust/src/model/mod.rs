@@ -238,7 +238,7 @@ use std::marker::PhantomData;
 pub use distinct::DistinctWrapper;
 
 pub type LinkType = u64;
-pub type LinksResult<T> = Result<T, LinksError<u64>>;
+pub type LinksResult<T> = Result<T, LinksError<LinkType>>;
 
 struct LinkTypeAssert<T: doublets::num::LinkType>(PhantomData<T>);
 
