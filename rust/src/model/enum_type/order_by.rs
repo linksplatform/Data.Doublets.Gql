@@ -24,7 +24,7 @@ impl OrderBy {
         match self {
             OrderBy::Asc => a.cmp(&b),
             OrderBy::AscNullsFirst => a.cmp(&b),
-            OrderBy::AscNullsLast => b.cmp(&b),
+            OrderBy::AscNullsLast => a.cmp(&b),
             OrderBy::Desc => b.cmp(&a),
             OrderBy::DescNullsFirst => b.cmp(&a),
             OrderBy::DescNullsLast => b.cmp(&a),
