@@ -116,11 +116,13 @@ impl QueryRoot {
         &self,
         ctx: &Context<'_>,
         #[graphql(name = "distinct_on")] distinct_on: Option<Vec<LinksSelectColumn>>,
-        limit: Option<i32>,
-        offset: Option<i32>,
+        limit: Option<usize>,
+        offset: Option<usize>,
         #[graphql(name = "order_by")] order_by: Option<Vec<LinksOrderBy>>,
         _where: Option<Box<LinksBoolExp>>,
     ) -> Vec<Links> {
+        let offset = offset.unwrap_or(0);
+        let limit = limit.unwrap_or(usize::MAX);
         let store = ctx.data_unchecked::<Store>().read().await;
         let mut links = Self::filter_links(&*store, _where).await;
         if let Some(distinct_on) = distinct_on {
@@ -157,6 +159,10 @@ impl QueryRoot {
         let mut vec = ManuallyDrop::new(links);
         // SAFETY: `Links` is transparent to `Link<LinkType>` and old `vec` is forgot
         unsafe { Vec::from_raw_parts(vec.as_mut_ptr().cast(), vec.len(), vec.capacity()) }
+            .into_par_iter()
+            .skip(offset)
+            .take(limit)
+            .collect()
     }
 
     #[graphql(name = "links_aggregate")]
