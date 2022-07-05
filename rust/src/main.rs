@@ -2,7 +2,6 @@
 #![feature(result_flattening)]
 #![feature(box_syntax)]
 #![feature(try_trait_v2)]
-#![feature(iter_order_by)]
 
 mod model;
 mod store;
