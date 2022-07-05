@@ -1,4 +1,3 @@
-use crate::model::CanAggregateOrderBy;
 use crate::model::LinksAggregateOrderBy;
 use crate::model::MpAggregateOrderBy;
 use crate::model::NumbersOrderBy;
@@ -6,7 +5,10 @@ use crate::model::ObjectsOrderBy;
 use crate::model::OrderBy;
 use crate::model::SelectorsAggregateOrderBy;
 use crate::model::StringsOrderBy;
+use crate::model::{CanAggregateOrderBy, LinkType};
 use async_graphql::*;
+use doublets::Link;
+use std::cmp::Ordering;
 
 #[derive(InputObject, Debug)]
 #[graphql(name = "links_order_by")]
@@ -51,4 +53,24 @@ pub struct LinksOrderBy {
     #[graphql(name = "typed_aggregate")]
     pub typed_aggregate: Option<LinksAggregateOrderBy>,
     pub value: Option<OrderBy>,
+}
+
+impl LinksOrderBy {
+    pub fn matches(&self, a: &Link<LinkType>, b: &Link<LinkType>) -> Ordering {
+        let mut ord = Ordering::Equal;
+
+        if let Some(id) = self.id {
+            ord = ord.then_with(|| id.matches(a.index, b.index));
+        }
+
+        if let Some(from_id) = self.from_id {
+            ord = ord.then_with(|| from_id.matches(a.source, b.source));
+        }
+
+        if let Some(to_id) = self.to_id {
+            ord = ord.then_with(|| to_id.matches(a.target, b.target));
+        }
+
+        ord
+    }
 }

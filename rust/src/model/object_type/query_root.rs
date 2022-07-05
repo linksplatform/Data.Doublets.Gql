@@ -40,7 +40,8 @@ use crate::model::{Can, DistinctWrapper};
 use crate::{store, RawStore, Store};
 use async_graphql::*;
 use doublets::{Doublet, Doublets, Link};
-use itertools::Itertools;
+use rayon::prelude::*;
+use std::cmp::Ordering;
 use std::collections::{HashMap, HashSet};
 
 #[derive(Debug)]
@@ -142,11 +143,21 @@ impl QueryRoot {
                 .into_iter()
                 .map(DistinctWrapper::into_link)
         }
-        links
+        let mut links: Vec<_> = links
             .skip(offset.unwrap_or(0) as usize)
             .take(limit.map(|x| x as usize).unwrap_or(usize::MAX))
             .map(|link| Links(link))
-            .collect()
+            .collect();
+
+        if let Some(order_by) = order_by {
+            links.par_sort_unstable_by(|a, b| {
+                order_by.iter().fold(Ordering::Equal, |ord, order| {
+                    ord.then_with(|| order.matches(&a.0, &b.0))
+                })
+            })
+        }
+
+        links
     }
 
     #[graphql(name = "links_aggregate")]
