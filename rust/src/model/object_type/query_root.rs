@@ -43,6 +43,7 @@ use doublets::{Doublet, Doublets, Link};
 use rayon::prelude::*;
 use std::cmp::Ordering;
 use std::collections::{HashMap, HashSet};
+use std::mem::ManuallyDrop;
 
 #[derive(Debug)]
 pub struct QueryRoot;
@@ -143,21 +144,19 @@ impl QueryRoot {
                 .into_iter()
                 .map(DistinctWrapper::into_link)
         }
-        let mut links: Vec<_> = links
-            .skip(offset.unwrap_or(0) as usize)
-            .take(limit.map(|x| x as usize).unwrap_or(usize::MAX))
-            .map(|link| Links(link))
-            .collect();
 
+        let mut links: Vec<_> = links.collect();
         if let Some(order_by) = order_by {
             links.par_sort_unstable_by(|a, b| {
                 order_by.iter().fold(Ordering::Equal, |ord, order| {
-                    ord.then_with(|| order.matches(&a.0, &b.0))
+                    ord.then_with(|| order.matches(a, b))
                 })
             })
         }
 
-        links
+        let mut vec = ManuallyDrop::new(links);
+        // SAFETY: `Links` is transparent to `Link<LinkType>` and old `vec` is forgot
+        unsafe { Vec::from_raw_parts(vec.as_mut_ptr().cast(), vec.len(), vec.capacity()) }
     }
 
     #[graphql(name = "links_aggregate")]

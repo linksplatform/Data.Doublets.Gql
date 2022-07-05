@@ -30,6 +30,7 @@ use async_graphql::*;
 use doublets::Doublets;
 
 #[derive(Debug, Clone)]
+#[repr(transparent)]
 pub struct Links(pub doublets::Link<u64>);
 
 #[Object(name = "links")]
