@@ -156,9 +156,9 @@ impl QueryRoot {
             })
         }
 
-        let mut vec = ManuallyDrop::new(links);
-        // SAFETY: `Links` is transparent to `Link<LinkType>` and old `vec` is forgot
-        unsafe { Vec::from_raw_parts(vec.as_mut_ptr().cast(), vec.len(), vec.capacity()) }
+        links
+            .into_par_iter()
+            .map(Links)
             .into_par_iter()
             .skip(offset)
             .take(limit)
