@@ -159,7 +159,6 @@ impl QueryRoot {
         links
             .into_par_iter()
             .map(Links)
-            .into_par_iter()
             .skip(offset)
             .take(limit)
             .collect()
