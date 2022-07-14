@@ -82,7 +82,7 @@ impl QueryRoot {
 
     #[graphql(skip)]
     pub(crate) async fn filter_links(
-        store: &store::Store,
+        store: &RawStore,
         _where: Option<Box<LinksBoolExp>>,
     ) -> Box<dyn Iterator<Item = Link<LinkType>> + '_> {
         let fast_param_impl = |param: Option<&BigintComparisonExp>| -> LinkType {

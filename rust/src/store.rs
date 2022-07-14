@@ -1,22 +1,16 @@
 use crate::model::{LinkType, LinksResult};
+use doublets::data::{Flow, ReadHandler, WriteHandler};
 use doublets::{
-    data::{Flow::Continue, LinksConstants, LinksError, ToQuery},
+    data::{Flow::Continue, LinksConstants, ToQuery},
     mem::FileMappedMem,
-    parts, split, Doublets, Link,
+    parts, split, Doublets, Error, Link, Links,
 };
 use smallvec::SmallVec;
 use std::ops::Try;
 
-pub type RawStore = split::Store<
-    LinkType,
-    FileMappedMem<parts::DataPart<LinkType>>,
-    FileMappedMem<parts::IndexPart<LinkType>>,
->;
-type Inner = RawStore;
+pub struct Store<Inner>(Inner);
 
-pub struct Store(Inner);
-
-impl Store {
+impl<Inner: Doublets<LinkType>> Store<Inner> {
     pub fn new(inner: Inner) -> Self {
         Self(inner)
     }
@@ -33,41 +27,52 @@ impl Store {
     }
 }
 
-impl Doublets<LinkType> for Store {
-    fn constants(&self) -> LinksConstants<LinkType> {
+impl<Inner: Doublets<LinkType>> Links<LinkType> for Store<Inner> {
+    fn constants(&self) -> &LinksConstants<LinkType> {
         self.0.constants()
     }
 
-    fn count_by(&self, query: impl ToQuery<LinkType>) -> LinkType {
-        self.0.count_by(query)
+    fn count_links(&self, query: &[LinkType]) -> LinkType {
+        self.0.count_links(query)
     }
 
-    fn create_by_with<F, R>(
+    fn create_links(
         &mut self,
-        query: impl ToQuery<LinkType>,
-        handler: F,
-    ) -> Result<R, LinksError<LinkType>>
-    where
-        F: FnMut(Link<LinkType>, Link<LinkType>) -> R,
-        R: Try<Output = ()>,
-    {
-        self.0.create_by_with(query, handler)
+        query: &[LinkType],
+        handler: WriteHandler<LinkType>,
+    ) -> Result<Flow, Error<LinkType>> {
+        self.0.create_links(query, handler)
     }
 
-    fn try_each_by<F, R>(&self, restrictions: impl ToQuery<LinkType>, handler: F) -> R
-    where
-        F: FnMut(Link<LinkType>) -> R,
-        R: Try<Output = ()>,
-    {
-        self.0.try_each_by(restrictions, handler)
+    fn each_links(&self, query: &[LinkType], handler: ReadHandler<LinkType>) -> Flow {
+        self.0.each_links(query, handler)
     }
 
+    fn update_links(
+        &mut self,
+        query: &[LinkType],
+        change: &[LinkType],
+        handler: WriteHandler<LinkType>,
+    ) -> Result<Flow, Error<LinkType>> {
+        self.0.update_links(query, change, handler)
+    }
+
+    fn delete_links(
+        &mut self,
+        query: &[LinkType],
+        handler: WriteHandler<LinkType>,
+    ) -> Result<Flow, Error<LinkType>> {
+        self.0.delete_links(query, handler)
+    }
+}
+
+impl<Inner: Doublets<LinkType>> Doublets<LinkType> for Store<Inner> {
     fn update_by_with<F, R>(
         &mut self,
         query: impl ToQuery<LinkType>,
         replacement: impl ToQuery<LinkType>,
         mut handler: F,
-    ) -> Result<R, LinksError<LinkType>>
+    ) -> Result<R, Error<LinkType>>
     where
         F: FnMut(Link<LinkType>, Link<LinkType>) -> R,
         R: Try<Output = ()>,
@@ -75,7 +80,7 @@ impl Doublets<LinkType> for Store {
         let query = query.to_query();
         let replacement = replacement.to_query();
 
-        let constants = self.constants();
+        let constants = self.constants().clone();
         let store = &mut self.0;
         let (new, from_id, to_id) = (
             query[constants.index_part as usize],
@@ -97,7 +102,7 @@ impl Doublets<LinkType> for Store {
         &mut self,
         query: impl ToQuery<LinkType>,
         mut handler: F,
-    ) -> Result<R, LinksError<LinkType>>
+    ) -> Result<R, Error<LinkType>>
     where
         F: FnMut(Link<LinkType>, Link<LinkType>) -> R,
         R: Try<Output = ()>,

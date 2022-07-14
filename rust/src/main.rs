@@ -7,10 +7,9 @@ mod model;
 mod store;
 
 use crate::model::{
-    Links, LinksInsertInput, LinksMutationResponse, LinksOnConflict, LinksOptionExt, MutationRoot,
-    QueryRoot,
+    LinkType, Links, LinksInsertInput, LinksMutationResponse, LinksOnConflict, LinksOptionExt,
+    MutationRoot, QueryRoot,
 };
-use crate::store::RawStore;
 use actix_web::{guard, web, App, HttpResponse, HttpServer, Responder};
 use async_graphql::{
     http::{playground_source, GraphQLPlaygroundConfig},
@@ -19,11 +18,11 @@ use async_graphql::{
 use async_graphql_actix_web::{GraphQLRequest, GraphQLResponse};
 use async_std::sync::RwLock;
 use doublets::mem::FileMappedMem;
-use doublets::{split, Link};
+use doublets::{split, Doublets, Link};
 use std::{error::Error, fs::File, io, path::Path};
 
-// todo: wait for fix type infer
-type Store = RwLock<store::Store>;
+type RawStore = Box<dyn Doublets<LinkType>>;
+type Store = RwLock<RawStore>;
 type Schema = async_graphql::Schema<QueryRoot, MutationRoot, EmptySubscription>;
 
 async fn index(schema: web::Data<Schema>, req: GraphQLRequest) -> GraphQLResponse {
@@ -51,8 +50,9 @@ fn map_db_file<T: Default, P: AsRef<Path>>(path: P) -> io::Result<FileMappedMem<
 #[tokio::main]
 // todo: implement Into<io::Error> for LinksError
 async fn main() -> Result<(), Box<dyn Error>> {
-    let store = RawStore::new(map_db_file("db.links")?, map_db_file("index.links")?)?;
-    let store = store::Store::new(store);
+    let store =
+        split::Store::<LinkType, _, _>::new(map_db_file("db.links")?, map_db_file("index.links")?)?;
+    let store: Box<dyn Doublets<_>> = box store::Store::new(store);
     let schema = Schema::build(QueryRoot, MutationRoot, EmptySubscription)
         .data(Store::new(store))
         .finish();

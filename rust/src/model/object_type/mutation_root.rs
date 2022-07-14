@@ -46,7 +46,7 @@ use crate::model::{Bigint, LinksResult};
 use crate::model::{LinkType, Links};
 use crate::{QueryRoot, Store};
 use async_graphql::*;
-use doublets::data::{LinksError, Query};
+use doublets::data::{Error, Query};
 use doublets::{Doublets, Link};
 use smallvec::{smallvec, SmallVec};
 use std::io::{Read, Write};
