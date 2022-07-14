@@ -1,11 +1,14 @@
 #![feature(never_type)]
 #![feature(result_flattening)]
+#![feature(box_syntax)]
+#![feature(try_trait_v2)]
 
 mod model;
+mod store;
 
 use crate::model::{
-    Links, LinksInsertInput, LinksMutationResponse, LinksOnConflict, LinksOptionExt, MutationRoot,
-    QueryRoot,
+    LinkType, Links, LinksInsertInput, LinksMutationResponse, LinksOnConflict, LinksOptionExt,
+    MutationRoot, QueryRoot,
 };
 use actix_web::{guard, web, App, HttpResponse, HttpServer, Responder};
 use async_graphql::{
@@ -15,11 +18,10 @@ use async_graphql::{
 use async_graphql_actix_web::{GraphQLRequest, GraphQLResponse};
 use async_std::sync::RwLock;
 use doublets::mem::FileMappedMem;
-use doublets::{splited, Link};
+use doublets::{split, Doublets, Link};
 use std::{error::Error, fs::File, io, path::Path};
 
-// todo: wait for fix type infer
-type RawStore = splited::Store<u64, FileMappedMem, FileMappedMem>;
+type RawStore = Box<dyn Doublets<LinkType>>;
 type Store = RwLock<RawStore>;
 type Schema = async_graphql::Schema<QueryRoot, MutationRoot, EmptySubscription>;
 
@@ -35,7 +37,7 @@ async fn index_playground() -> actix_web::Result<HttpResponse> {
 }
 
 // todo: may be add support async-std files to platform-mem
-fn map_db_file<P: AsRef<Path>>(path: P) -> io::Result<FileMappedMem> {
+fn map_db_file<T: Default, P: AsRef<Path>>(path: P) -> io::Result<FileMappedMem<T>> {
     File::options()
         .create(true)
         .read(true)
@@ -48,7 +50,9 @@ fn map_db_file<P: AsRef<Path>>(path: P) -> io::Result<FileMappedMem> {
 #[tokio::main]
 // todo: implement Into<io::Error> for LinksError
 async fn main() -> Result<(), Box<dyn Error>> {
-    let store = RawStore::new(map_db_file("db.links")?, map_db_file("index.links")?)?;
+    let store =
+        split::Store::<LinkType, _, _>::new(map_db_file("db.links")?, map_db_file("index.links")?)?;
+    let store: Box<dyn Doublets<_>> = box store::Store::new(store);
     let schema = Schema::build(QueryRoot, MutationRoot, EmptySubscription)
         .data(Store::new(store))
         .finish();
