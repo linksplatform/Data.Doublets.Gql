@@ -4,12 +4,19 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-tokio = { version = "1.19", features = ["full"] }
-async-std = { version = "1.12", features = ["attributes"] }
 async-graphql = "4.0"
 actix-web = "4.0"
 async-graphql-actix-web = "4.0"
-doublets = { git = "https://github.com/linksplatform/doublets-rs" }
 smallvec = "1.8"
 rayon = "1.5"
 itertools = "0.10.3"
+
+tokio = { version = "1.19", features = ["full"] }
+async-std = { version = "1.12", features = ["attributes"] }
+
+doublets = { git = "https://github.com/linksplatform/doublets-rs" }
+
+mimalloc = { version = "0.1", default-features = false, optional = true }
+
+[features]
+default = ["mimalloc"]
