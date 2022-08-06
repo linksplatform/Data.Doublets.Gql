@@ -240,7 +240,7 @@ pub use distinct::DistinctWrapper;
 pub type LinkType = u64;
 pub type LinksResult<T> = Result<T, Error<LinkType>>;
 
-struct LinkTypeAssert<T: doublets::num::LinkType>(PhantomData<T>);
+struct LinkTypeAssert<T: doublets::data::LinkType>(PhantomData<T>);
 
 #[allow(dead_code)]
 #[allow(non_camel_case_types)]

@@ -9,7 +9,7 @@ async-std = { version = "1.12", features = ["attributes"] }
 async-graphql = "4.0"
 actix-web = "4.0"
 async-graphql-actix-web = "4.0"
-doublets = "0.1.0-beta.14"
+doublets = { git = "https://github.com/linksplatform/doublets-rs" }
 smallvec = "1.8"
 rayon = "1.5"
 itertools = "0.10.3"

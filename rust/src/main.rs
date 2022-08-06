@@ -17,7 +17,7 @@ use async_graphql::{
 };
 use async_graphql_actix_web::{GraphQLRequest, GraphQLResponse};
 use async_std::sync::RwLock;
-use doublets::mem::FileMappedMem;
+use doublets::mem::FileMapped;
 use doublets::{split, Doublets, Link};
 use std::{error::Error, fs::File, io, path::Path};
 
@@ -37,14 +37,8 @@ async fn index_playground() -> actix_web::Result<HttpResponse> {
 }
 
 // todo: may be add support async-std files to platform-mem
-fn map_db_file<T: Default, P: AsRef<Path>>(path: P) -> io::Result<FileMappedMem<T>> {
-    File::options()
-        .create(true)
-        .read(true)
-        .write(true)
-        .open(path)
-        .map(FileMappedMem::new)
-        .flatten()
+fn map_db_file<T: Default, P: AsRef<Path>>(path: P) -> io::Result<FileMapped<T>> {
+    FileMapped::from_path(path)
 }
 
 #[tokio::main]

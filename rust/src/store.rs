@@ -2,7 +2,7 @@ use crate::model::{LinkType, LinksResult};
 use doublets::data::{Flow, ReadHandler, WriteHandler};
 use doublets::{
     data::{Flow::Continue, LinksConstants, ToQuery},
-    mem::FileMappedMem,
+    mem::FileMapped,
     parts, split, Doublets, Error, Link, Links,
 };
 use smallvec::SmallVec;
