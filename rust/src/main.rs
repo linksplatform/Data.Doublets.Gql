@@ -68,3 +68,6 @@ async fn main() -> Result<(), Box<dyn Error>> {
 #[cfg(feature = "mimalloc")]
 #[global_allocator]
 static MIMALLOC: mimalloc::MiMalloc = mimalloc::MiMalloc;
+
+#[cfg(feature = "jemalloc")]
+static JEMALLOC: jemalloc::Jemalloc = jemalloc::Jemalloc;
