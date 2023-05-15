@@ -4,10 +4,21 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-tokio = { version = "1.19", features = ["full"] }
-async-std = { version = "1.12", features = ["attributes"] }
-async-graphql = "4.0"
-actix-web = "4.0"
-async-graphql-actix-web = "4.0"
-#doublets = { version = "0.1.0-alpha.20", features = ["full"] }
-doublets = "0.1.0-beta.3"
+actix-web = { version = "4.1.0" }
+async-graphql = { version = "4.0.6" }
+async-graphql-actix-web = { version = "4.0.6" }
+itertools = { version = "0.10.3" }
+smallvec = { version = "1.9.0" }
+rayon = { version = "1.5.3" }
+
+tokio = { version = "1.19", features = ["macros", "rt-multi-thread"] }
+
+doublets = { git = "https://github.com/linksplatform/doublets-rs" }
+
+mimalloc = { version = "0.1", default-features = false, optional = true }
+
+[target.'cfg(all(target_os = "linux", target_arch = "x86_64"))'.dependencies]
+jemalloc = { package = "tikv-jemallocator", version = "0.5.0", optional = true }
+
+[features]
+default = ["mimalloc"]
