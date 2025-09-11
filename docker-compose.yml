@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  gql-server:
+    build: .
+    ports:
+      - "29018:80"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:80
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/ui/playground"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
