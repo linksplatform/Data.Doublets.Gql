@@ -9,7 +9,7 @@ namespace Platform.Data.Doublets.Gql.Schema
 {
     public class LinksMutation : ObjectGraphType<object>
     {
-        public LinksMutation(ILinks<ulong> links)
+        public LinksMutation(ILinks<ulong> links, LinksSubscription subscription)
         {
             Name = "mutation_root";
             Field<LinksMutationResponseType>("delete_links", arguments: new QueryArguments(new QueryArgument<NonNullGraphType<LinksBooleanExpressionInputType>> { Name = "where" }), resolve: context =>
@@ -19,6 +19,7 @@ namespace Platform.Data.Doublets.Gql.Schema
                 foreach (var linkToDelete in response.returning)
                 {
                     links.Delete((ulong)linkToDelete.id);
+                    subscription.OnLinkDeleted((ulong)linkToDelete.id);
                 }
                 return response;
             });
@@ -28,12 +29,19 @@ namespace Platform.Data.Doublets.Gql.Schema
                 var response = new LinksMutationResponse { returning = new List<Links>() };
                 foreach (var link in context.GetArgument<List<LinksInsert>>("objects"))
                 {
-                    response.returning.Add(InsertLink(links, link));
+                    var insertedLink = InsertLink(links, link);
+                    response.returning.Add(insertedLink);
+                    subscription.OnLinkCreated(insertedLink);
                 }
                 response.affected_rows = response.returning.Count;
                 return response;
             });
-            Field<LinksType>("insert_links_one", arguments: new QueryArguments(new QueryArgument<NonNullGraphType<LinksInsertInputType>> { Name = "object" }, new QueryArgument<LinksOnConflictInputType> { Name = "on_conflict" }), resolve: context => InsertLink(links, context.GetArgument<LinksInsert>("object")));
+            Field<LinksType>("insert_links_one", arguments: new QueryArguments(new QueryArgument<NonNullGraphType<LinksInsertInputType>> { Name = "object" }, new QueryArgument<LinksOnConflictInputType> { Name = "on_conflict" }), resolve: context => 
+            {
+                var insertedLink = InsertLink(links, context.GetArgument<LinksInsert>("object"));
+                subscription.OnLinkCreated(insertedLink);
+                return insertedLink;
+            });
             Field<LinksMutationResponseType>("update_links", arguments: new QueryArguments(new QueryArgument<LinksIncInputType> { Name = "_inc" }, new QueryArgument<LinksSetInputType> { Name = "_set" }, new QueryArgument<NonNullGraphType<LinksBooleanExpressionInputType>> { Name = "where" }), resolve: context =>
             {
                 var set = context.GetArgument<LinksSet>("_set");
@@ -50,7 +58,9 @@ namespace Platform.Data.Doublets.Gql.Schema
                     {
                         updatedLink = links.Update((ulong)link.id, (ulong)set.from_id.Value, (ulong)set.to_id.Value);
                     }
-                    response.returning.Add(new Links(links.GetLink(updatedLink)));
+                    var updatedLinkModel = new Links(links.GetLink(updatedLink));
+                    response.returning.Add(updatedLinkModel);
+                    subscription.OnLinkUpdated(updatedLinkModel);
                 }
                 response.affected_rows = response.returning.Count;
                 return response;
