@@ -21,6 +21,32 @@ http://linksplatform.ddns.net:29018/v1/graphql
 
 ## Start locally
 
+### Option 1: Using Docker (Recommended)
+
+The easiest way to run the GQL server is using Docker:
+
+```bash
+# Build and run with docker-compose
+docker-compose up -d
+
+# Or build and run manually
+docker build -t doublets-gql .
+docker run -p 29018:80 -v $(pwd)/data:/app/data doublets-gql
+```
+
+Navigate to:
+* http://localhost:29018/ui/playground
+* http://localhost:29018/ui/graphiql
+* http://localhost:29018/ui/altair
+* http://localhost:29018/ui/voyager
+
+Or make request at:
+http://localhost:29018/v1/graphql
+
+The database file will be stored in the `./data` directory on your host machine.
+
+### Option 2: Using .NET directly
+
 Execute:
 ```
 cd csharp/Platform.Data.Doublets.Gql.Server

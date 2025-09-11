@@ -1,0 +1,31 @@
+# Directories
+**/bin
+**/obj
+**/out
+**/TestResults
+**/.vs
+**/.vscode
+.git
+.github
+.gitignore
+.gitmodules
+
+# Files
+**/*.md
+**/*.log
+**/*.user
+**/*.suo
+**/*.userprefs
+**/.DS_Store
+**/Thumbs.db
+
+# Exclude non-C# language folders
+cpp/
+python/
+rust/
+Settings/
+
+# Keep only necessary files for build
+!csharp/
+!Dockerfile
+!docker-compose.yml
