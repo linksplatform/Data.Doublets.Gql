@@ -1,0 +1,3243 @@
+schema {
+  query: query_root
+  mutation: mutation_root
+  subscription: subscription_root
+}
+
+enum CacheControlScope {
+  PRIVATE
+  PUBLIC
+}
+
+input JWTInput {
+  linkId: Int
+  role: String
+}
+
+type JWTOutput {
+  linkId: Int
+  role: String
+  token: String
+}
+
+type Query {
+  jwt(input: JWTInput): JWTOutput
+}
+
+"""
+expression to compare columns of type String. All fields are combined with logical 'AND'.
+"""
+input String_comparison_exp {
+  _eq: String
+  _gt: String
+  _gte: String
+  _ilike: String
+  _in: [String!]
+  _is_null: Boolean
+  _like: String
+  _lt: String
+  _lte: String
+  _neq: String
+  _nilike: String
+  _nin: [String!]
+  _nlike: String
+  _nsimilar: String
+  _similar: String
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+scalar bigint
+
+"""
+expression to compare columns of type bigint. All fields are combined with logical 'AND'.
+"""
+input bigint_comparison_exp {
+  _eq: bigint
+  _gt: bigint
+  _gte: bigint
+  _in: [bigint!]
+  _is_null: Boolean
+  _lt: bigint
+  _lte: bigint
+  _neq: bigint
+  _nin: [bigint!]
+}
+
+"""
+columns and relationships of "bool_exp"
+"""
+type bool_exp {
+  gql: String
+  id: bigint!
+
+  """An array relationship"""
+  link(
+    """distinct select on columns"""
+    distinct_on: [links_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [links_order_by!]
+
+    """filter the rows returned"""
+    where: links_bool_exp
+  ): [links!]!
+
+  """An aggregated array relationship"""
+  link_aggregate(
+    """distinct select on columns"""
+    distinct_on: [links_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [links_order_by!]
+
+    """filter the rows returned"""
+    where: links_bool_exp
+  ): links_aggregate!
+  link_id: bigint
+  sql: String
+}
+
+"""
+aggregated selection of "bool_exp"
+"""
+type bool_exp_aggregate {
+  aggregate: bool_exp_aggregate_fields
+  nodes: [bool_exp!]!
+}
+
+"""
+aggregate fields of "bool_exp"
+"""
+type bool_exp_aggregate_fields {
+  avg: bool_exp_avg_fields
+  count(columns: [bool_exp_select_column!], distinct: Boolean): Int
+  max: bool_exp_max_fields
+  min: bool_exp_min_fields
+  stddev: bool_exp_stddev_fields
+  stddev_pop: bool_exp_stddev_pop_fields
+  stddev_samp: bool_exp_stddev_samp_fields
+  sum: bool_exp_sum_fields
+  var_pop: bool_exp_var_pop_fields
+  var_samp: bool_exp_var_samp_fields
+  variance: bool_exp_variance_fields
+}
+
+"""
+order by aggregate values of table "bool_exp"
+"""
+input bool_exp_aggregate_order_by {
+  avg: bool_exp_avg_order_by
+  count: order_by
+  max: bool_exp_max_order_by
+  min: bool_exp_min_order_by
+  stddev: bool_exp_stddev_order_by
+  stddev_pop: bool_exp_stddev_pop_order_by
+  stddev_samp: bool_exp_stddev_samp_order_by
+  sum: bool_exp_sum_order_by
+  var_pop: bool_exp_var_pop_order_by
+  var_samp: bool_exp_var_samp_order_by
+  variance: bool_exp_variance_order_by
+}
+
+"""
+input type for inserting array relation for remote table "bool_exp"
+"""
+input bool_exp_arr_rel_insert_input {
+  data: [bool_exp_insert_input!]!
+  on_conflict: bool_exp_on_conflict
+}
+
+"""aggregate avg on columns"""
+type bool_exp_avg_fields {
+  id: Float
+  link_id: Float
+}
+
+"""
+order by avg() on columns of table "bool_exp"
+"""
+input bool_exp_avg_order_by {
+  id: order_by
+  link_id: order_by
+}
+
+"""
+Boolean expression to filter rows from the table "bool_exp". All fields are combined with a logical 'AND'.
+"""
+input bool_exp_bool_exp {
+  _and: [bool_exp_bool_exp]
+  _not: bool_exp_bool_exp
+  _or: [bool_exp_bool_exp]
+  gql: String_comparison_exp
+  id: bigint_comparison_exp
+  link: links_bool_exp
+  link_id: bigint_comparison_exp
+  sql: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "bool_exp"
+"""
+enum bool_exp_constraint {
+  """unique or primary key constraint"""
+  bool_exp_pkey
+}
+
+"""
+input type for incrementing integer column in table "bool_exp"
+"""
+input bool_exp_inc_input {
+  id: bigint
+  link_id: bigint
+}
+
+"""
+input type for inserting data into table "bool_exp"
+"""
+input bool_exp_insert_input {
+  gql: String
+  id: bigint
+  link: links_arr_rel_insert_input
+  link_id: bigint
+  sql: String
+}
+
+"""aggregate max on columns"""
+type bool_exp_max_fields {
+  gql: String
+  id: bigint
+  link_id: bigint
+  sql: String
+}
+
+"""
+order by max() on columns of table "bool_exp"
+"""
+input bool_exp_max_order_by {
+  gql: order_by
+  id: order_by
+  link_id: order_by
+  sql: order_by
+}
+
+"""aggregate min on columns"""
+type bool_exp_min_fields {
+  gql: String
+  id: bigint
+  link_id: bigint
+  sql: String
+}
+
+"""
+order by min() on columns of table "bool_exp"
+"""
+input bool_exp_min_order_by {
+  gql: order_by
+  id: order_by
+  link_id: order_by
+  sql: order_by
+}
+
+"""
+response of any mutation on the table "bool_exp"
+"""
+type bool_exp_mutation_response {
+  """number of affected rows by the mutation"""
+  affected_rows: Int!
+
+  """data of the affected rows by the mutation"""
+  returning: [bool_exp!]!
+}
+
+"""
+input type for inserting object relation for remote table "bool_exp"
+"""
+input bool_exp_obj_rel_insert_input {
+  data: bool_exp_insert_input!
+  on_conflict: bool_exp_on_conflict
+}
+
+"""
+on conflict condition type for table "bool_exp"
+"""
+input bool_exp_on_conflict {
+  constraint: bool_exp_constraint!
+  update_columns: [bool_exp_update_column!]!
+  where: bool_exp_bool_exp
+}
+
+"""
+ordering options when selecting data from "bool_exp"
+"""
+input bool_exp_order_by {
+  gql: order_by
+  id: order_by
+  link_aggregate: links_aggregate_order_by
+  link_id: order_by
+  sql: order_by
+}
+
+"""
+primary key columns input for table: "bool_exp"
+"""
+input bool_exp_pk_columns_input {
+  id: bigint!
+}
+
+"""
+select columns of table "bool_exp"
+"""
+enum bool_exp_select_column {
+  """column name"""
+  gql
+
+  """column name"""
+  id
+
+  """column name"""
+  link_id
+
+  """column name"""
+  sql
+}
+
+"""
+input type for updating data in table "bool_exp"
+"""
+input bool_exp_set_input {
+  gql: String
+  id: bigint
+  link_id: bigint
+  sql: String
+}
+
+"""aggregate stddev on columns"""
+type bool_exp_stddev_fields {
+  id: Float
+  link_id: Float
+}
+
+"""
+order by stddev() on columns of table "bool_exp"
+"""
+input bool_exp_stddev_order_by {
+  id: order_by
+  link_id: order_by
+}
+
+"""aggregate stddev_pop on columns"""
+type bool_exp_stddev_pop_fields {
+  id: Float
+  link_id: Float
+}
+
+"""
+order by stddev_pop() on columns of table "bool_exp"
+"""
+input bool_exp_stddev_pop_order_by {
+  id: order_by
+  link_id: order_by
+}
+
+"""aggregate stddev_samp on columns"""
+type bool_exp_stddev_samp_fields {
+  id: Float
+  link_id: Float
+}
+
+"""
+order by stddev_samp() on columns of table "bool_exp"
+"""
+input bool_exp_stddev_samp_order_by {
+  id: order_by
+  link_id: order_by
+}
+
+"""aggregate sum on columns"""
+type bool_exp_sum_fields {
+  id: bigint
+  link_id: bigint
+}
+
+"""
+order by sum() on columns of table "bool_exp"
+"""
+input bool_exp_sum_order_by {
+  id: order_by
+  link_id: order_by
+}
+
+"""
+update columns of table "bool_exp"
+"""
+enum bool_exp_update_column {
+  """column name"""
+  gql
+
+  """column name"""
+  id
+
+  """column name"""
+  link_id
+
+  """column name"""
+  sql
+}
+
+"""aggregate var_pop on columns"""
+type bool_exp_var_pop_fields {
+  id: Float
+  link_id: Float
+}
+
+"""
+order by var_pop() on columns of table "bool_exp"
+"""
+input bool_exp_var_pop_order_by {
+  id: order_by
+  link_id: order_by
+}
+
+"""aggregate var_samp on columns"""
+type bool_exp_var_samp_fields {
+  id: Float
+  link_id: Float
+}
+
+"""
+order by var_samp() on columns of table "bool_exp"
+"""
+input bool_exp_var_samp_order_by {
+  id: order_by
+  link_id: order_by
+}
+
+"""aggregate variance on columns"""
+type bool_exp_variance_fields {
+  id: Float
+  link_id: Float
+}
+
+"""
+order by variance() on columns of table "bool_exp"
+"""
+input bool_exp_variance_order_by {
+  id: order_by
+  link_id: order_by
+}
+
+scalar float8
+
+"""
+expression to compare columns of type float8. All fields are combined with logical 'AND'.
+"""
+input float8_comparison_exp {
+  _eq: float8
+  _gt: float8
+  _gte: float8
+  _in: [float8!]
+  _is_null: Boolean
+  _lt: float8
+  _lte: float8
+  _neq: float8
+  _nin: [float8!]
+}
+
+"""
+columns and relationships of "links"
+"""
+type links {
+  """An array relationship"""
+  _by_group(
+    """distinct select on columns"""
+    distinct_on: [mp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [mp_order_by!]
+
+    """filter the rows returned"""
+    where: mp_bool_exp
+  ): [mp!]!
+
+  """An aggregated array relationship"""
+  _by_group_aggregate(
+    """distinct select on columns"""
+    distinct_on: [mp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [mp_order_by!]
+
+    """filter the rows returned"""
+    where: mp_bool_exp
+  ): mp_aggregate!
+
+  """An array relationship"""
+  _by_item(
+    """distinct select on columns"""
+    distinct_on: [mp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [mp_order_by!]
+
+    """filter the rows returned"""
+    where: mp_bool_exp
+  ): [mp!]!
+
+  """An aggregated array relationship"""
+  _by_item_aggregate(
+    """distinct select on columns"""
+    distinct_on: [mp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [mp_order_by!]
+
+    """filter the rows returned"""
+    where: mp_bool_exp
+  ): mp_aggregate!
+
+  """An array relationship"""
+  _by_path_item(
+    """distinct select on columns"""
+    distinct_on: [mp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [mp_order_by!]
+
+    """filter the rows returned"""
+    where: mp_bool_exp
+  ): [mp!]!
+
+  """An aggregated array relationship"""
+  _by_path_item_aggregate(
+    """distinct select on columns"""
+    distinct_on: [mp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [mp_order_by!]
+
+    """filter the rows returned"""
+    where: mp_bool_exp
+  ): mp_aggregate!
+
+  """An array relationship"""
+  _by_root(
+    """distinct select on columns"""
+    distinct_on: [mp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [mp_order_by!]
+
+    """filter the rows returned"""
+    where: mp_bool_exp
+  ): [mp!]!
+
+  """An aggregated array relationship"""
+  _by_root_aggregate(
+    """distinct select on columns"""
+    distinct_on: [mp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [mp_order_by!]
+
+    """filter the rows returned"""
+    where: mp_bool_exp
+  ): mp_aggregate!
+
+  """An object relationship"""
+  bool_exp: bool_exp
+
+  """An object relationship"""
+  from: links
+  from_id: bigint
+  id: bigint!
+
+  """An array relationship"""
+  in(
+    """distinct select on columns"""
+    distinct_on: [links_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [links_order_by!]
+
+    """filter the rows returned"""
+    where: links_bool_exp
+  ): [links!]!
+
+  """An aggregated array relationship"""
+  in_aggregate(
+    """distinct select on columns"""
+    distinct_on: [links_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [links_order_by!]
+
+    """filter the rows returned"""
+    where: links_bool_exp
+  ): links_aggregate!
+
+  """An object relationship"""
+  number: number
+
+  """An array relationship"""
+  out(
+    """distinct select on columns"""
+    distinct_on: [links_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [links_order_by!]
+
+    """filter the rows returned"""
+    where: links_bool_exp
+  ): [links!]!
+
+  """An aggregated array relationship"""
+  out_aggregate(
+    """distinct select on columns"""
+    distinct_on: [links_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [links_order_by!]
+
+    """filter the rows returned"""
+    where: links_bool_exp
+  ): links_aggregate!
+
+  """An object relationship"""
+  string: string
+
+  """An object relationship"""
+  to: links
+  to_id: bigint
+
+  """An object relationship"""
+  type: links
+  type_id: bigint!
+}
+
+"""
+aggregated selection of "links"
+"""
+type links_aggregate {
+  aggregate: links_aggregate_fields
+  nodes: [links!]!
+}
+
+"""
+aggregate fields of "links"
+"""
+type links_aggregate_fields {
+  avg: links_avg_fields
+  count(columns: [links_select_column!], distinct: Boolean): Int
+  max: links_max_fields
+  min: links_min_fields
+  stddev: links_stddev_fields
+  stddev_pop: links_stddev_pop_fields
+  stddev_samp: links_stddev_samp_fields
+  sum: links_sum_fields
+  var_pop: links_var_pop_fields
+  var_samp: links_var_samp_fields
+  variance: links_variance_fields
+}
+
+"""
+order by aggregate values of table "links"
+"""
+input links_aggregate_order_by {
+  avg: links_avg_order_by
+  count: order_by
+  max: links_max_order_by
+  min: links_min_order_by
+  stddev: links_stddev_order_by
+  stddev_pop: links_stddev_pop_order_by
+  stddev_samp: links_stddev_samp_order_by
+  sum: links_sum_order_by
+  var_pop: links_var_pop_order_by
+  var_samp: links_var_samp_order_by
+  variance: links_variance_order_by
+}
+
+"""
+input type for inserting array relation for remote table "links"
+"""
+input links_arr_rel_insert_input {
+  data: [links_insert_input!]!
+  on_conflict: links_on_conflict
+}
+
+"""aggregate avg on columns"""
+type links_avg_fields {
+  from_id: Float
+  id: Float
+  to_id: Float
+  type_id: Float
+}
+
+"""
+order by avg() on columns of table "links"
+"""
+input links_avg_order_by {
+  from_id: order_by
+  id: order_by
+  to_id: order_by
+  type_id: order_by
+}
+
+"""
+Boolean expression to filter rows from the table "links". All fields are combined with a logical 'AND'.
+"""
+input links_bool_exp {
+  _and: [links_bool_exp]
+  _by_group: mp_bool_exp
+  _by_item: mp_bool_exp
+  _by_path_item: mp_bool_exp
+  _by_root: mp_bool_exp
+  _not: links_bool_exp
+  _or: [links_bool_exp]
+  bool_exp: bool_exp_bool_exp
+  from: links_bool_exp
+  from_id: bigint_comparison_exp
+  id: bigint_comparison_exp
+  in: links_bool_exp
+  number: number_bool_exp
+  out: links_bool_exp
+  string: string_bool_exp
+  to: links_bool_exp
+  to_id: bigint_comparison_exp
+  type: links_bool_exp
+  type_id: bigint_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "links"
+"""
+enum links_constraint {
+  """unique or primary key constraint"""
+  links_pkey
+}
+
+"""
+input type for incrementing integer column in table "links"
+"""
+input links_inc_input {
+  from_id: bigint
+  id: bigint
+  to_id: bigint
+  type_id: bigint
+}
+
+"""
+input type for inserting data into table "links"
+"""
+input links_insert_input {
+  _by_group: mp_arr_rel_insert_input
+  _by_item: mp_arr_rel_insert_input
+  _by_path_item: mp_arr_rel_insert_input
+  _by_root: mp_arr_rel_insert_input
+  bool_exp: bool_exp_obj_rel_insert_input
+  from: links_obj_rel_insert_input
+  from_id: bigint
+  id: bigint
+  in: links_arr_rel_insert_input
+  number: number_obj_rel_insert_input
+  out: links_arr_rel_insert_input
+  string: string_obj_rel_insert_input
+  to: links_obj_rel_insert_input
+  to_id: bigint
+  type: links_obj_rel_insert_input
+  type_id: bigint
+}
+
+"""aggregate max on columns"""
+type links_max_fields {
+  from_id: bigint
+  id: bigint
+  to_id: bigint
+  type_id: bigint
+}
+
+"""
+order by max() on columns of table "links"
+"""
+input links_max_order_by {
+  from_id: order_by
+  id: order_by
+  to_id: order_by
+  type_id: order_by
+}
+
+"""aggregate min on columns"""
+type links_min_fields {
+  from_id: bigint
+  id: bigint
+  to_id: bigint
+  type_id: bigint
+}
+
+"""
+order by min() on columns of table "links"
+"""
+input links_min_order_by {
+  from_id: order_by
+  id: order_by
+  to_id: order_by
+  type_id: order_by
+}
+
+"""
+response of any mutation on the table "links"
+"""
+type links_mutation_response {
+  """number of affected rows by the mutation"""
+  affected_rows: Int!
+
+  """data of the affected rows by the mutation"""
+  returning: [links!]!
+}
+
+"""
+input type for inserting object relation for remote table "links"
+"""
+input links_obj_rel_insert_input {
+  data: links_insert_input!
+  on_conflict: links_on_conflict
+}
+
+"""
+on conflict condition type for table "links"
+"""
+input links_on_conflict {
+  constraint: links_constraint!
+  update_columns: [links_update_column!]!
+  where: links_bool_exp
+}
+
+"""
+ordering options when selecting data from "links"
+"""
+input links_order_by {
+  _by_group_aggregate: mp_aggregate_order_by
+  _by_item_aggregate: mp_aggregate_order_by
+  _by_path_item_aggregate: mp_aggregate_order_by
+  _by_root_aggregate: mp_aggregate_order_by
+  bool_exp: bool_exp_order_by
+  from: links_order_by
+  from_id: order_by
+  id: order_by
+  in_aggregate: links_aggregate_order_by
+  number: number_order_by
+  out_aggregate: links_aggregate_order_by
+  string: string_order_by
+  to: links_order_by
+  to_id: order_by
+  type: links_order_by
+  type_id: order_by
+}
+
+"""
+primary key columns input for table: "links"
+"""
+input links_pk_columns_input {
+  id: bigint!
+}
+
+"""
+select columns of table "links"
+"""
+enum links_select_column {
+  """column name"""
+  from_id
+
+  """column name"""
+  id
+
+  """column name"""
+  to_id
+
+  """column name"""
+  type_id
+}
+
+"""
+input type for updating data in table "links"
+"""
+input links_set_input {
+  from_id: bigint
+  id: bigint
+  to_id: bigint
+  type_id: bigint
+}
+
+"""aggregate stddev on columns"""
+type links_stddev_fields {
+  from_id: Float
+  id: Float
+  to_id: Float
+  type_id: Float
+}
+
+"""
+order by stddev() on columns of table "links"
+"""
+input links_stddev_order_by {
+  from_id: order_by
+  id: order_by
+  to_id: order_by
+  type_id: order_by
+}
+
+"""aggregate stddev_pop on columns"""
+type links_stddev_pop_fields {
+  from_id: Float
+  id: Float
+  to_id: Float
+  type_id: Float
+}
+
+"""
+order by stddev_pop() on columns of table "links"
+"""
+input links_stddev_pop_order_by {
+  from_id: order_by
+  id: order_by
+  to_id: order_by
+  type_id: order_by
+}
+
+"""aggregate stddev_samp on columns"""
+type links_stddev_samp_fields {
+  from_id: Float
+  id: Float
+  to_id: Float
+  type_id: Float
+}
+
+"""
+order by stddev_samp() on columns of table "links"
+"""
+input links_stddev_samp_order_by {
+  from_id: order_by
+  id: order_by
+  to_id: order_by
+  type_id: order_by
+}
+
+"""aggregate sum on columns"""
+type links_sum_fields {
+  from_id: bigint
+  id: bigint
+  to_id: bigint
+  type_id: bigint
+}
+
+"""
+order by sum() on columns of table "links"
+"""
+input links_sum_order_by {
+  from_id: order_by
+  id: order_by
+  to_id: order_by
+  type_id: order_by
+}
+
+"""
+update columns of table "links"
+"""
+enum links_update_column {
+  """column name"""
+  from_id
+
+  """column name"""
+  id
+
+  """column name"""
+  to_id
+
+  """column name"""
+  type_id
+}
+
+"""aggregate var_pop on columns"""
+type links_var_pop_fields {
+  from_id: Float
+  id: Float
+  to_id: Float
+  type_id: Float
+}
+
+"""
+order by var_pop() on columns of table "links"
+"""
+input links_var_pop_order_by {
+  from_id: order_by
+  id: order_by
+  to_id: order_by
+  type_id: order_by
+}
+
+"""aggregate var_samp on columns"""
+type links_var_samp_fields {
+  from_id: Float
+  id: Float
+  to_id: Float
+  type_id: Float
+}
+
+"""
+order by var_samp() on columns of table "links"
+"""
+input links_var_samp_order_by {
+  from_id: order_by
+  id: order_by
+  to_id: order_by
+  type_id: order_by
+}
+
+"""aggregate variance on columns"""
+type links_variance_fields {
+  from_id: Float
+  id: Float
+  to_id: Float
+  type_id: Float
+}
+
+"""
+order by variance() on columns of table "links"
+"""
+input links_variance_order_by {
+  from_id: order_by
+  id: order_by
+  to_id: order_by
+  type_id: order_by
+}
+
+"""
+columns and relationships of "mp"
+"""
+type mp {
+  """An object relationship"""
+  by_group: links
+
+  """An array relationship"""
+  by_item(
+    """distinct select on columns"""
+    distinct_on: [mp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [mp_order_by!]
+
+    """filter the rows returned"""
+    where: mp_bool_exp
+  ): [mp!]!
+
+  """An aggregated array relationship"""
+  by_item_aggregate(
+    """distinct select on columns"""
+    distinct_on: [mp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [mp_order_by!]
+
+    """filter the rows returned"""
+    where: mp_bool_exp
+  ): mp_aggregate!
+
+  """An array relationship"""
+  by_path_item(
+    """distinct select on columns"""
+    distinct_on: [mp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [mp_order_by!]
+
+    """filter the rows returned"""
+    where: mp_bool_exp
+  ): [mp!]!
+
+  """An aggregated array relationship"""
+  by_path_item_aggregate(
+    """distinct select on columns"""
+    distinct_on: [mp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [mp_order_by!]
+
+    """filter the rows returned"""
+    where: mp_bool_exp
+  ): mp_aggregate!
+
+  """An array relationship"""
+  by_position(
+    """distinct select on columns"""
+    distinct_on: [mp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [mp_order_by!]
+
+    """filter the rows returned"""
+    where: mp_bool_exp
+  ): [mp!]!
+
+  """An aggregated array relationship"""
+  by_position_aggregate(
+    """distinct select on columns"""
+    distinct_on: [mp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [mp_order_by!]
+
+    """filter the rows returned"""
+    where: mp_bool_exp
+  ): mp_aggregate!
+
+  """An array relationship"""
+  by_root(
+    """distinct select on columns"""
+    distinct_on: [mp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [mp_order_by!]
+
+    """filter the rows returned"""
+    where: mp_bool_exp
+  ): [mp!]!
+
+  """An aggregated array relationship"""
+  by_root_aggregate(
+    """distinct select on columns"""
+    distinct_on: [mp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [mp_order_by!]
+
+    """filter the rows returned"""
+    where: mp_bool_exp
+  ): mp_aggregate!
+  group_id: bigint
+  id: bigint!
+  insert_category: String
+
+  """An object relationship"""
+  item: links
+  item_id: bigint
+
+  """An object relationship"""
+  path_item: links
+  path_item_depth: bigint
+  path_item_id: bigint
+  position_id: String
+
+  """An object relationship"""
+  root: links
+  root_id: bigint
+}
+
+"""
+aggregated selection of "mp"
+"""
+type mp_aggregate {
+  aggregate: mp_aggregate_fields
+  nodes: [mp!]!
+}
+
+"""
+aggregate fields of "mp"
+"""
+type mp_aggregate_fields {
+  avg: mp_avg_fields
+  count(columns: [mp_select_column!], distinct: Boolean): Int
+  max: mp_max_fields
+  min: mp_min_fields
+  stddev: mp_stddev_fields
+  stddev_pop: mp_stddev_pop_fields
+  stddev_samp: mp_stddev_samp_fields
+  sum: mp_sum_fields
+  var_pop: mp_var_pop_fields
+  var_samp: mp_var_samp_fields
+  variance: mp_variance_fields
+}
+
+"""
+order by aggregate values of table "mp"
+"""
+input mp_aggregate_order_by {
+  avg: mp_avg_order_by
+  count: order_by
+  max: mp_max_order_by
+  min: mp_min_order_by
+  stddev: mp_stddev_order_by
+  stddev_pop: mp_stddev_pop_order_by
+  stddev_samp: mp_stddev_samp_order_by
+  sum: mp_sum_order_by
+  var_pop: mp_var_pop_order_by
+  var_samp: mp_var_samp_order_by
+  variance: mp_variance_order_by
+}
+
+"""
+input type for inserting array relation for remote table "mp"
+"""
+input mp_arr_rel_insert_input {
+  data: [mp_insert_input!]!
+  on_conflict: mp_on_conflict
+}
+
+"""aggregate avg on columns"""
+type mp_avg_fields {
+  group_id: Float
+  id: Float
+  item_id: Float
+  path_item_depth: Float
+  path_item_id: Float
+  root_id: Float
+}
+
+"""
+order by avg() on columns of table "mp"
+"""
+input mp_avg_order_by {
+  group_id: order_by
+  id: order_by
+  item_id: order_by
+  path_item_depth: order_by
+  path_item_id: order_by
+  root_id: order_by
+}
+
+"""
+Boolean expression to filter rows from the table "mp". All fields are combined with a logical 'AND'.
+"""
+input mp_bool_exp {
+  _and: [mp_bool_exp]
+  _not: mp_bool_exp
+  _or: [mp_bool_exp]
+  by_group: links_bool_exp
+  by_item: mp_bool_exp
+  by_path_item: mp_bool_exp
+  by_position: mp_bool_exp
+  by_root: mp_bool_exp
+  group_id: bigint_comparison_exp
+  id: bigint_comparison_exp
+  insert_category: String_comparison_exp
+  item: links_bool_exp
+  item_id: bigint_comparison_exp
+  path_item: links_bool_exp
+  path_item_depth: bigint_comparison_exp
+  path_item_id: bigint_comparison_exp
+  position_id: String_comparison_exp
+  root: links_bool_exp
+  root_id: bigint_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "mp"
+"""
+enum mp_constraint {
+  """unique or primary key constraint"""
+  mp_pkey
+}
+
+"""
+input type for incrementing integer column in table "mp"
+"""
+input mp_inc_input {
+  group_id: bigint
+  id: bigint
+  item_id: bigint
+  path_item_depth: bigint
+  path_item_id: bigint
+  root_id: bigint
+}
+
+"""
+input type for inserting data into table "mp"
+"""
+input mp_insert_input {
+  by_group: links_obj_rel_insert_input
+  by_item: mp_arr_rel_insert_input
+  by_path_item: mp_arr_rel_insert_input
+  by_position: mp_arr_rel_insert_input
+  by_root: mp_arr_rel_insert_input
+  group_id: bigint
+  id: bigint
+  insert_category: String
+  item: links_obj_rel_insert_input
+  item_id: bigint
+  path_item: links_obj_rel_insert_input
+  path_item_depth: bigint
+  path_item_id: bigint
+  position_id: String
+  root: links_obj_rel_insert_input
+  root_id: bigint
+}
+
+"""aggregate max on columns"""
+type mp_max_fields {
+  group_id: bigint
+  id: bigint
+  insert_category: String
+  item_id: bigint
+  path_item_depth: bigint
+  path_item_id: bigint
+  position_id: String
+  root_id: bigint
+}
+
+"""
+order by max() on columns of table "mp"
+"""
+input mp_max_order_by {
+  group_id: order_by
+  id: order_by
+  insert_category: order_by
+  item_id: order_by
+  path_item_depth: order_by
+  path_item_id: order_by
+  position_id: order_by
+  root_id: order_by
+}
+
+"""aggregate min on columns"""
+type mp_min_fields {
+  group_id: bigint
+  id: bigint
+  insert_category: String
+  item_id: bigint
+  path_item_depth: bigint
+  path_item_id: bigint
+  position_id: String
+  root_id: bigint
+}
+
+"""
+order by min() on columns of table "mp"
+"""
+input mp_min_order_by {
+  group_id: order_by
+  id: order_by
+  insert_category: order_by
+  item_id: order_by
+  path_item_depth: order_by
+  path_item_id: order_by
+  position_id: order_by
+  root_id: order_by
+}
+
+"""
+response of any mutation on the table "mp"
+"""
+type mp_mutation_response {
+  """number of affected rows by the mutation"""
+  affected_rows: Int!
+
+  """data of the affected rows by the mutation"""
+  returning: [mp!]!
+}
+
+"""
+input type for inserting object relation for remote table "mp"
+"""
+input mp_obj_rel_insert_input {
+  data: mp_insert_input!
+  on_conflict: mp_on_conflict
+}
+
+"""
+on conflict condition type for table "mp"
+"""
+input mp_on_conflict {
+  constraint: mp_constraint!
+  update_columns: [mp_update_column!]!
+  where: mp_bool_exp
+}
+
+"""
+ordering options when selecting data from "mp"
+"""
+input mp_order_by {
+  by_group: links_order_by
+  by_item_aggregate: mp_aggregate_order_by
+  by_path_item_aggregate: mp_aggregate_order_by
+  by_position_aggregate: mp_aggregate_order_by
+  by_root_aggregate: mp_aggregate_order_by
+  group_id: order_by
+  id: order_by
+  insert_category: order_by
+  item: links_order_by
+  item_id: order_by
+  path_item: links_order_by
+  path_item_depth: order_by
+  path_item_id: order_by
+  position_id: order_by
+  root: links_order_by
+  root_id: order_by
+}
+
+"""
+primary key columns input for table: "mp"
+"""
+input mp_pk_columns_input {
+  id: bigint!
+}
+
+"""
+select columns of table "mp"
+"""
+enum mp_select_column {
+  """column name"""
+  group_id
+
+  """column name"""
+  id
+
+  """column name"""
+  insert_category
+
+  """column name"""
+  item_id
+
+  """column name"""
+  path_item_depth
+
+  """column name"""
+  path_item_id
+
+  """column name"""
+  position_id
+
+  """column name"""
+  root_id
+}
+
+"""
+input type for updating data in table "mp"
+"""
+input mp_set_input {
+  group_id: bigint
+  id: bigint
+  insert_category: String
+  item_id: bigint
+  path_item_depth: bigint
+  path_item_id: bigint
+  position_id: String
+  root_id: bigint
+}
+
+"""aggregate stddev on columns"""
+type mp_stddev_fields {
+  group_id: Float
+  id: Float
+  item_id: Float
+  path_item_depth: Float
+  path_item_id: Float
+  root_id: Float
+}
+
+"""
+order by stddev() on columns of table "mp"
+"""
+input mp_stddev_order_by {
+  group_id: order_by
+  id: order_by
+  item_id: order_by
+  path_item_depth: order_by
+  path_item_id: order_by
+  root_id: order_by
+}
+
+"""aggregate stddev_pop on columns"""
+type mp_stddev_pop_fields {
+  group_id: Float
+  id: Float
+  item_id: Float
+  path_item_depth: Float
+  path_item_id: Float
+  root_id: Float
+}
+
+"""
+order by stddev_pop() on columns of table "mp"
+"""
+input mp_stddev_pop_order_by {
+  group_id: order_by
+  id: order_by
+  item_id: order_by
+  path_item_depth: order_by
+  path_item_id: order_by
+  root_id: order_by
+}
+
+"""aggregate stddev_samp on columns"""
+type mp_stddev_samp_fields {
+  group_id: Float
+  id: Float
+  item_id: Float
+  path_item_depth: Float
+  path_item_id: Float
+  root_id: Float
+}
+
+"""
+order by stddev_samp() on columns of table "mp"
+"""
+input mp_stddev_samp_order_by {
+  group_id: order_by
+  id: order_by
+  item_id: order_by
+  path_item_depth: order_by
+  path_item_id: order_by
+  root_id: order_by
+}
+
+"""aggregate sum on columns"""
+type mp_sum_fields {
+  group_id: bigint
+  id: bigint
+  item_id: bigint
+  path_item_depth: bigint
+  path_item_id: bigint
+  root_id: bigint
+}
+
+"""
+order by sum() on columns of table "mp"
+"""
+input mp_sum_order_by {
+  group_id: order_by
+  id: order_by
+  item_id: order_by
+  path_item_depth: order_by
+  path_item_id: order_by
+  root_id: order_by
+}
+
+"""
+update columns of table "mp"
+"""
+enum mp_update_column {
+  """column name"""
+  group_id
+
+  """column name"""
+  id
+
+  """column name"""
+  insert_category
+
+  """column name"""
+  item_id
+
+  """column name"""
+  path_item_depth
+
+  """column name"""
+  path_item_id
+
+  """column name"""
+  position_id
+
+  """column name"""
+  root_id
+}
+
+"""aggregate var_pop on columns"""
+type mp_var_pop_fields {
+  group_id: Float
+  id: Float
+  item_id: Float
+  path_item_depth: Float
+  path_item_id: Float
+  root_id: Float
+}
+
+"""
+order by var_pop() on columns of table "mp"
+"""
+input mp_var_pop_order_by {
+  group_id: order_by
+  id: order_by
+  item_id: order_by
+  path_item_depth: order_by
+  path_item_id: order_by
+  root_id: order_by
+}
+
+"""aggregate var_samp on columns"""
+type mp_var_samp_fields {
+  group_id: Float
+  id: Float
+  item_id: Float
+  path_item_depth: Float
+  path_item_id: Float
+  root_id: Float
+}
+
+"""
+order by var_samp() on columns of table "mp"
+"""
+input mp_var_samp_order_by {
+  group_id: order_by
+  id: order_by
+  item_id: order_by
+  path_item_depth: order_by
+  path_item_id: order_by
+  root_id: order_by
+}
+
+"""aggregate variance on columns"""
+type mp_variance_fields {
+  group_id: Float
+  id: Float
+  item_id: Float
+  path_item_depth: Float
+  path_item_id: Float
+  root_id: Float
+}
+
+"""
+order by variance() on columns of table "mp"
+"""
+input mp_variance_order_by {
+  group_id: order_by
+  id: order_by
+  item_id: order_by
+  path_item_depth: order_by
+  path_item_id: order_by
+  root_id: order_by
+}
+
+"""mutation root"""
+type mutation_root {
+  """
+  delete data from the table: "bool_exp"
+  """
+  delete_bool_exp(
+    """filter the rows which have to be deleted"""
+    where: bool_exp_bool_exp!
+  ): bool_exp_mutation_response
+
+  """
+  delete single row from the table: "bool_exp"
+  """
+  delete_bool_exp_by_pk(id: bigint!): bool_exp
+
+  """
+  delete data from the table: "links"
+  """
+  delete_links(
+    """filter the rows which have to be deleted"""
+    where: links_bool_exp!
+  ): links_mutation_response
+
+  """
+  delete single row from the table: "links"
+  """
+  delete_links_by_pk(id: bigint!): links
+
+  """
+  delete data from the table: "mp"
+  """
+  delete_mp(
+    """filter the rows which have to be deleted"""
+    where: mp_bool_exp!
+  ): mp_mutation_response
+
+  """
+  delete single row from the table: "mp"
+  """
+  delete_mp_by_pk(id: bigint!): mp
+
+  """
+  delete data from the table: "number"
+  """
+  delete_number(
+    """filter the rows which have to be deleted"""
+    where: number_bool_exp!
+  ): number_mutation_response
+
+  """
+  delete single row from the table: "number"
+  """
+  delete_number_by_pk(id: bigint!): number
+
+  """
+  delete data from the table: "string"
+  """
+  delete_string(
+    """filter the rows which have to be deleted"""
+    where: string_bool_exp!
+  ): string_mutation_response
+
+  """
+  delete single row from the table: "string"
+  """
+  delete_string_by_pk(id: bigint!): string
+
+  """
+  insert data into the table: "bool_exp"
+  """
+  insert_bool_exp(
+    """the rows to be inserted"""
+    objects: [bool_exp_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: bool_exp_on_conflict
+  ): bool_exp_mutation_response
+
+  """
+  insert a single row into the table: "bool_exp"
+  """
+  insert_bool_exp_one(
+    """the row to be inserted"""
+    object: bool_exp_insert_input!
+
+    """on conflict condition"""
+    on_conflict: bool_exp_on_conflict
+  ): bool_exp
+
+  """
+  insert data into the table: "links"
+  """
+  insert_links(
+    """the rows to be inserted"""
+    objects: [links_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: links_on_conflict
+  ): links_mutation_response
+
+  """
+  insert a single row into the table: "links"
+  """
+  insert_links_one(
+    """the row to be inserted"""
+    object: links_insert_input!
+
+    """on conflict condition"""
+    on_conflict: links_on_conflict
+  ): links
+
+  """
+  insert data into the table: "mp"
+  """
+  insert_mp(
+    """the rows to be inserted"""
+    objects: [mp_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: mp_on_conflict
+  ): mp_mutation_response
+
+  """
+  insert a single row into the table: "mp"
+  """
+  insert_mp_one(
+    """the row to be inserted"""
+    object: mp_insert_input!
+
+    """on conflict condition"""
+    on_conflict: mp_on_conflict
+  ): mp
+
+  """
+  insert data into the table: "number"
+  """
+  insert_number(
+    """the rows to be inserted"""
+    objects: [number_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: number_on_conflict
+  ): number_mutation_response
+
+  """
+  insert a single row into the table: "number"
+  """
+  insert_number_one(
+    """the row to be inserted"""
+    object: number_insert_input!
+
+    """on conflict condition"""
+    on_conflict: number_on_conflict
+  ): number
+
+  """
+  insert data into the table: "string"
+  """
+  insert_string(
+    """the rows to be inserted"""
+    objects: [string_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: string_on_conflict
+  ): string_mutation_response
+
+  """
+  insert a single row into the table: "string"
+  """
+  insert_string_one(
+    """the row to be inserted"""
+    object: string_insert_input!
+
+    """on conflict condition"""
+    on_conflict: string_on_conflict
+  ): string
+
+  """
+  update data of the table: "bool_exp"
+  """
+  update_bool_exp(
+    """increments the integer columns with given value of the filtered values"""
+    _inc: bool_exp_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: bool_exp_set_input
+
+    """filter the rows which have to be updated"""
+    where: bool_exp_bool_exp!
+  ): bool_exp_mutation_response
+
+  """
+  update single row of the table: "bool_exp"
+  """
+  update_bool_exp_by_pk(
+    """increments the integer columns with given value of the filtered values"""
+    _inc: bool_exp_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: bool_exp_set_input
+    pk_columns: bool_exp_pk_columns_input!
+  ): bool_exp
+
+  """
+  update data of the table: "links"
+  """
+  update_links(
+    """increments the integer columns with given value of the filtered values"""
+    _inc: links_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: links_set_input
+
+    """filter the rows which have to be updated"""
+    where: links_bool_exp!
+  ): links_mutation_response
+
+  """
+  update single row of the table: "links"
+  """
+  update_links_by_pk(
+    """increments the integer columns with given value of the filtered values"""
+    _inc: links_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: links_set_input
+    pk_columns: links_pk_columns_input!
+  ): links
+
+  """
+  update data of the table: "mp"
+  """
+  update_mp(
+    """increments the integer columns with given value of the filtered values"""
+    _inc: mp_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: mp_set_input
+
+    """filter the rows which have to be updated"""
+    where: mp_bool_exp!
+  ): mp_mutation_response
+
+  """
+  update single row of the table: "mp"
+  """
+  update_mp_by_pk(
+    """increments the integer columns with given value of the filtered values"""
+    _inc: mp_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: mp_set_input
+    pk_columns: mp_pk_columns_input!
+  ): mp
+
+  """
+  update data of the table: "number"
+  """
+  update_number(
+    """increments the integer columns with given value of the filtered values"""
+    _inc: number_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: number_set_input
+
+    """filter the rows which have to be updated"""
+    where: number_bool_exp!
+  ): number_mutation_response
+
+  """
+  update single row of the table: "number"
+  """
+  update_number_by_pk(
+    """increments the integer columns with given value of the filtered values"""
+    _inc: number_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: number_set_input
+    pk_columns: number_pk_columns_input!
+  ): number
+
+  """
+  update data of the table: "string"
+  """
+  update_string(
+    """increments the integer columns with given value of the filtered values"""
+    _inc: string_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: string_set_input
+
+    """filter the rows which have to be updated"""
+    where: string_bool_exp!
+  ): string_mutation_response
+
+  """
+  update single row of the table: "string"
+  """
+  update_string_by_pk(
+    """increments the integer columns with given value of the filtered values"""
+    _inc: string_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: string_set_input
+    pk_columns: string_pk_columns_input!
+  ): string
+}
+
+"""
+columns and relationships of "number"
+"""
+type number {
+  id: bigint!
+
+  """An array relationship"""
+  link(
+    """distinct select on columns"""
+    distinct_on: [links_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [links_order_by!]
+
+    """filter the rows returned"""
+    where: links_bool_exp
+  ): [links!]!
+
+  """An aggregated array relationship"""
+  link_aggregate(
+    """distinct select on columns"""
+    distinct_on: [links_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [links_order_by!]
+
+    """filter the rows returned"""
+    where: links_bool_exp
+  ): links_aggregate!
+  link_id: bigint
+  value: float8
+}
+
+"""
+aggregated selection of "number"
+"""
+type number_aggregate {
+  aggregate: number_aggregate_fields
+  nodes: [number!]!
+}
+
+"""
+aggregate fields of "number"
+"""
+type number_aggregate_fields {
+  avg: number_avg_fields
+  count(columns: [number_select_column!], distinct: Boolean): Int
+  max: number_max_fields
+  min: number_min_fields
+  stddev: number_stddev_fields
+  stddev_pop: number_stddev_pop_fields
+  stddev_samp: number_stddev_samp_fields
+  sum: number_sum_fields
+  var_pop: number_var_pop_fields
+  var_samp: number_var_samp_fields
+  variance: number_variance_fields
+}
+
+"""
+order by aggregate values of table "number"
+"""
+input number_aggregate_order_by {
+  avg: number_avg_order_by
+  count: order_by
+  max: number_max_order_by
+  min: number_min_order_by
+  stddev: number_stddev_order_by
+  stddev_pop: number_stddev_pop_order_by
+  stddev_samp: number_stddev_samp_order_by
+  sum: number_sum_order_by
+  var_pop: number_var_pop_order_by
+  var_samp: number_var_samp_order_by
+  variance: number_variance_order_by
+}
+
+"""
+input type for inserting array relation for remote table "number"
+"""
+input number_arr_rel_insert_input {
+  data: [number_insert_input!]!
+  on_conflict: number_on_conflict
+}
+
+"""aggregate avg on columns"""
+type number_avg_fields {
+  id: Float
+  link_id: Float
+  value: Float
+}
+
+"""
+order by avg() on columns of table "number"
+"""
+input number_avg_order_by {
+  id: order_by
+  link_id: order_by
+  value: order_by
+}
+
+"""
+Boolean expression to filter rows from the table "number". All fields are combined with a logical 'AND'.
+"""
+input number_bool_exp {
+  _and: [number_bool_exp]
+  _not: number_bool_exp
+  _or: [number_bool_exp]
+  id: bigint_comparison_exp
+  link: links_bool_exp
+  link_id: bigint_comparison_exp
+  value: float8_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "number"
+"""
+enum number_constraint {
+  """unique or primary key constraint"""
+  number_pkey
+}
+
+"""
+input type for incrementing integer column in table "number"
+"""
+input number_inc_input {
+  id: bigint
+  link_id: bigint
+  value: float8
+}
+
+"""
+input type for inserting data into table "number"
+"""
+input number_insert_input {
+  id: bigint
+  link: links_arr_rel_insert_input
+  link_id: bigint
+  value: float8
+}
+
+"""aggregate max on columns"""
+type number_max_fields {
+  id: bigint
+  link_id: bigint
+  value: float8
+}
+
+"""
+order by max() on columns of table "number"
+"""
+input number_max_order_by {
+  id: order_by
+  link_id: order_by
+  value: order_by
+}
+
+"""aggregate min on columns"""
+type number_min_fields {
+  id: bigint
+  link_id: bigint
+  value: float8
+}
+
+"""
+order by min() on columns of table "number"
+"""
+input number_min_order_by {
+  id: order_by
+  link_id: order_by
+  value: order_by
+}
+
+"""
+response of any mutation on the table "number"
+"""
+type number_mutation_response {
+  """number of affected rows by the mutation"""
+  affected_rows: Int!
+
+  """data of the affected rows by the mutation"""
+  returning: [number!]!
+}
+
+"""
+input type for inserting object relation for remote table "number"
+"""
+input number_obj_rel_insert_input {
+  data: number_insert_input!
+  on_conflict: number_on_conflict
+}
+
+"""
+on conflict condition type for table "number"
+"""
+input number_on_conflict {
+  constraint: number_constraint!
+  update_columns: [number_update_column!]!
+  where: number_bool_exp
+}
+
+"""
+ordering options when selecting data from "number"
+"""
+input number_order_by {
+  id: order_by
+  link_aggregate: links_aggregate_order_by
+  link_id: order_by
+  value: order_by
+}
+
+"""
+primary key columns input for table: "number"
+"""
+input number_pk_columns_input {
+  id: bigint!
+}
+
+"""
+select columns of table "number"
+"""
+enum number_select_column {
+  """column name"""
+  id
+
+  """column name"""
+  link_id
+
+  """column name"""
+  value
+}
+
+"""
+input type for updating data in table "number"
+"""
+input number_set_input {
+  id: bigint
+  link_id: bigint
+  value: float8
+}
+
+"""aggregate stddev on columns"""
+type number_stddev_fields {
+  id: Float
+  link_id: Float
+  value: Float
+}
+
+"""
+order by stddev() on columns of table "number"
+"""
+input number_stddev_order_by {
+  id: order_by
+  link_id: order_by
+  value: order_by
+}
+
+"""aggregate stddev_pop on columns"""
+type number_stddev_pop_fields {
+  id: Float
+  link_id: Float
+  value: Float
+}
+
+"""
+order by stddev_pop() on columns of table "number"
+"""
+input number_stddev_pop_order_by {
+  id: order_by
+  link_id: order_by
+  value: order_by
+}
+
+"""aggregate stddev_samp on columns"""
+type number_stddev_samp_fields {
+  id: Float
+  link_id: Float
+  value: Float
+}
+
+"""
+order by stddev_samp() on columns of table "number"
+"""
+input number_stddev_samp_order_by {
+  id: order_by
+  link_id: order_by
+  value: order_by
+}
+
+"""aggregate sum on columns"""
+type number_sum_fields {
+  id: bigint
+  link_id: bigint
+  value: float8
+}
+
+"""
+order by sum() on columns of table "number"
+"""
+input number_sum_order_by {
+  id: order_by
+  link_id: order_by
+  value: order_by
+}
+
+"""
+update columns of table "number"
+"""
+enum number_update_column {
+  """column name"""
+  id
+
+  """column name"""
+  link_id
+
+  """column name"""
+  value
+}
+
+"""aggregate var_pop on columns"""
+type number_var_pop_fields {
+  id: Float
+  link_id: Float
+  value: Float
+}
+
+"""
+order by var_pop() on columns of table "number"
+"""
+input number_var_pop_order_by {
+  id: order_by
+  link_id: order_by
+  value: order_by
+}
+
+"""aggregate var_samp on columns"""
+type number_var_samp_fields {
+  id: Float
+  link_id: Float
+  value: Float
+}
+
+"""
+order by var_samp() on columns of table "number"
+"""
+input number_var_samp_order_by {
+  id: order_by
+  link_id: order_by
+  value: order_by
+}
+
+"""aggregate variance on columns"""
+type number_variance_fields {
+  id: Float
+  link_id: Float
+  value: Float
+}
+
+"""
+order by variance() on columns of table "number"
+"""
+input number_variance_order_by {
+  id: order_by
+  link_id: order_by
+  value: order_by
+}
+
+"""column ordering options"""
+enum order_by {
+  """in the ascending order, nulls last"""
+  asc
+
+  """in the ascending order, nulls first"""
+  asc_nulls_first
+
+  """in the ascending order, nulls last"""
+  asc_nulls_last
+
+  """in the descending order, nulls first"""
+  desc
+
+  """in the descending order, nulls first"""
+  desc_nulls_first
+
+  """in the descending order, nulls last"""
+  desc_nulls_last
+}
+
+"""query root"""
+type query_root {
+  """
+  fetch data from the table: "bool_exp"
+  """
+  bool_exp(
+    """distinct select on columns"""
+    distinct_on: [bool_exp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [bool_exp_order_by!]
+
+    """filter the rows returned"""
+    where: bool_exp_bool_exp
+  ): [bool_exp!]!
+
+  """
+  fetch aggregated fields from the table: "bool_exp"
+  """
+  bool_exp_aggregate(
+    """distinct select on columns"""
+    distinct_on: [bool_exp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [bool_exp_order_by!]
+
+    """filter the rows returned"""
+    where: bool_exp_bool_exp
+  ): bool_exp_aggregate!
+
+  """fetch data from the table: "bool_exp" using primary key columns"""
+  bool_exp_by_pk(id: bigint!): bool_exp
+  jwt(input: JWTInput): JWTOutput
+
+  """
+  fetch data from the table: "links"
+  """
+  links(
+    """distinct select on columns"""
+    distinct_on: [links_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [links_order_by!]
+
+    """filter the rows returned"""
+    where: links_bool_exp
+  ): [links!]!
+
+  """
+  fetch aggregated fields from the table: "links"
+  """
+  links_aggregate(
+    """distinct select on columns"""
+    distinct_on: [links_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [links_order_by!]
+
+    """filter the rows returned"""
+    where: links_bool_exp
+  ): links_aggregate!
+
+  """fetch data from the table: "links" using primary key columns"""
+  links_by_pk(id: bigint!): links
+
+  """
+  fetch data from the table: "mp"
+  """
+  mp(
+    """distinct select on columns"""
+    distinct_on: [mp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [mp_order_by!]
+
+    """filter the rows returned"""
+    where: mp_bool_exp
+  ): [mp!]!
+
+  """
+  fetch aggregated fields from the table: "mp"
+  """
+  mp_aggregate(
+    """distinct select on columns"""
+    distinct_on: [mp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [mp_order_by!]
+
+    """filter the rows returned"""
+    where: mp_bool_exp
+  ): mp_aggregate!
+
+  """fetch data from the table: "mp" using primary key columns"""
+  mp_by_pk(id: bigint!): mp
+
+  """
+  fetch data from the table: "number"
+  """
+  number(
+    """distinct select on columns"""
+    distinct_on: [number_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [number_order_by!]
+
+    """filter the rows returned"""
+    where: number_bool_exp
+  ): [number!]!
+
+  """
+  fetch aggregated fields from the table: "number"
+  """
+  number_aggregate(
+    """distinct select on columns"""
+    distinct_on: [number_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [number_order_by!]
+
+    """filter the rows returned"""
+    where: number_bool_exp
+  ): number_aggregate!
+
+  """fetch data from the table: "number" using primary key columns"""
+  number_by_pk(id: bigint!): number
+
+  """
+  fetch data from the table: "string"
+  """
+  string(
+    """distinct select on columns"""
+    distinct_on: [string_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [string_order_by!]
+
+    """filter the rows returned"""
+    where: string_bool_exp
+  ): [string!]!
+
+  """
+  fetch aggregated fields from the table: "string"
+  """
+  string_aggregate(
+    """distinct select on columns"""
+    distinct_on: [string_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [string_order_by!]
+
+    """filter the rows returned"""
+    where: string_bool_exp
+  ): string_aggregate!
+
+  """fetch data from the table: "string" using primary key columns"""
+  string_by_pk(id: bigint!): string
+}
+
+"""
+columns and relationships of "string"
+"""
+type string {
+  id: bigint!
+
+  """An array relationship"""
+  link(
+    """distinct select on columns"""
+    distinct_on: [links_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [links_order_by!]
+
+    """filter the rows returned"""
+    where: links_bool_exp
+  ): [links!]!
+
+  """An aggregated array relationship"""
+  link_aggregate(
+    """distinct select on columns"""
+    distinct_on: [links_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [links_order_by!]
+
+    """filter the rows returned"""
+    where: links_bool_exp
+  ): links_aggregate!
+  link_id: bigint
+  value: String
+}
+
+"""
+aggregated selection of "string"
+"""
+type string_aggregate {
+  aggregate: string_aggregate_fields
+  nodes: [string!]!
+}
+
+"""
+aggregate fields of "string"
+"""
+type string_aggregate_fields {
+  avg: string_avg_fields
+  count(columns: [string_select_column!], distinct: Boolean): Int
+  max: string_max_fields
+  min: string_min_fields
+  stddev: string_stddev_fields
+  stddev_pop: string_stddev_pop_fields
+  stddev_samp: string_stddev_samp_fields
+  sum: string_sum_fields
+  var_pop: string_var_pop_fields
+  var_samp: string_var_samp_fields
+  variance: string_variance_fields
+}
+
+"""
+order by aggregate values of table "string"
+"""
+input string_aggregate_order_by {
+  avg: string_avg_order_by
+  count: order_by
+  max: string_max_order_by
+  min: string_min_order_by
+  stddev: string_stddev_order_by
+  stddev_pop: string_stddev_pop_order_by
+  stddev_samp: string_stddev_samp_order_by
+  sum: string_sum_order_by
+  var_pop: string_var_pop_order_by
+  var_samp: string_var_samp_order_by
+  variance: string_variance_order_by
+}
+
+"""
+input type for inserting array relation for remote table "string"
+"""
+input string_arr_rel_insert_input {
+  data: [string_insert_input!]!
+  on_conflict: string_on_conflict
+}
+
+"""aggregate avg on columns"""
+type string_avg_fields {
+  id: Float
+  link_id: Float
+}
+
+"""
+order by avg() on columns of table "string"
+"""
+input string_avg_order_by {
+  id: order_by
+  link_id: order_by
+}
+
+"""
+Boolean expression to filter rows from the table "string". All fields are combined with a logical 'AND'.
+"""
+input string_bool_exp {
+  _and: [string_bool_exp]
+  _not: string_bool_exp
+  _or: [string_bool_exp]
+  id: bigint_comparison_exp
+  link: links_bool_exp
+  link_id: bigint_comparison_exp
+  value: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "string"
+"""
+enum string_constraint {
+  """unique or primary key constraint"""
+  string_pkey
+}
+
+"""
+input type for incrementing integer column in table "string"
+"""
+input string_inc_input {
+  id: bigint
+  link_id: bigint
+}
+
+"""
+input type for inserting data into table "string"
+"""
+input string_insert_input {
+  id: bigint
+  link: links_arr_rel_insert_input
+  link_id: bigint
+  value: String
+}
+
+"""aggregate max on columns"""
+type string_max_fields {
+  id: bigint
+  link_id: bigint
+  value: String
+}
+
+"""
+order by max() on columns of table "string"
+"""
+input string_max_order_by {
+  id: order_by
+  link_id: order_by
+  value: order_by
+}
+
+"""aggregate min on columns"""
+type string_min_fields {
+  id: bigint
+  link_id: bigint
+  value: String
+}
+
+"""
+order by min() on columns of table "string"
+"""
+input string_min_order_by {
+  id: order_by
+  link_id: order_by
+  value: order_by
+}
+
+"""
+response of any mutation on the table "string"
+"""
+type string_mutation_response {
+  """number of affected rows by the mutation"""
+  affected_rows: Int!
+
+  """data of the affected rows by the mutation"""
+  returning: [string!]!
+}
+
+"""
+input type for inserting object relation for remote table "string"
+"""
+input string_obj_rel_insert_input {
+  data: string_insert_input!
+  on_conflict: string_on_conflict
+}
+
+"""
+on conflict condition type for table "string"
+"""
+input string_on_conflict {
+  constraint: string_constraint!
+  update_columns: [string_update_column!]!
+  where: string_bool_exp
+}
+
+"""
+ordering options when selecting data from "string"
+"""
+input string_order_by {
+  id: order_by
+  link_aggregate: links_aggregate_order_by
+  link_id: order_by
+  value: order_by
+}
+
+"""
+primary key columns input for table: "string"
+"""
+input string_pk_columns_input {
+  id: bigint!
+}
+
+"""
+select columns of table "string"
+"""
+enum string_select_column {
+  """column name"""
+  id
+
+  """column name"""
+  link_id
+
+  """column name"""
+  value
+}
+
+"""
+input type for updating data in table "string"
+"""
+input string_set_input {
+  id: bigint
+  link_id: bigint
+  value: String
+}
+
+"""aggregate stddev on columns"""
+type string_stddev_fields {
+  id: Float
+  link_id: Float
+}
+
+"""
+order by stddev() on columns of table "string"
+"""
+input string_stddev_order_by {
+  id: order_by
+  link_id: order_by
+}
+
+"""aggregate stddev_pop on columns"""
+type string_stddev_pop_fields {
+  id: Float
+  link_id: Float
+}
+
+"""
+order by stddev_pop() on columns of table "string"
+"""
+input string_stddev_pop_order_by {
+  id: order_by
+  link_id: order_by
+}
+
+"""aggregate stddev_samp on columns"""
+type string_stddev_samp_fields {
+  id: Float
+  link_id: Float
+}
+
+"""
+order by stddev_samp() on columns of table "string"
+"""
+input string_stddev_samp_order_by {
+  id: order_by
+  link_id: order_by
+}
+
+"""aggregate sum on columns"""
+type string_sum_fields {
+  id: bigint
+  link_id: bigint
+}
+
+"""
+order by sum() on columns of table "string"
+"""
+input string_sum_order_by {
+  id: order_by
+  link_id: order_by
+}
+
+"""
+update columns of table "string"
+"""
+enum string_update_column {
+  """column name"""
+  id
+
+  """column name"""
+  link_id
+
+  """column name"""
+  value
+}
+
+"""aggregate var_pop on columns"""
+type string_var_pop_fields {
+  id: Float
+  link_id: Float
+}
+
+"""
+order by var_pop() on columns of table "string"
+"""
+input string_var_pop_order_by {
+  id: order_by
+  link_id: order_by
+}
+
+"""aggregate var_samp on columns"""
+type string_var_samp_fields {
+  id: Float
+  link_id: Float
+}
+
+"""
+order by var_samp() on columns of table "string"
+"""
+input string_var_samp_order_by {
+  id: order_by
+  link_id: order_by
+}
+
+"""aggregate variance on columns"""
+type string_variance_fields {
+  id: Float
+  link_id: Float
+}
+
+"""
+order by variance() on columns of table "string"
+"""
+input string_variance_order_by {
+  id: order_by
+  link_id: order_by
+}
+
+"""subscription root"""
+type subscription_root {
+  """
+  fetch data from the table: "bool_exp"
+  """
+  bool_exp(
+    """distinct select on columns"""
+    distinct_on: [bool_exp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [bool_exp_order_by!]
+
+    """filter the rows returned"""
+    where: bool_exp_bool_exp
+  ): [bool_exp!]!
+
+  """
+  fetch aggregated fields from the table: "bool_exp"
+  """
+  bool_exp_aggregate(
+    """distinct select on columns"""
+    distinct_on: [bool_exp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [bool_exp_order_by!]
+
+    """filter the rows returned"""
+    where: bool_exp_bool_exp
+  ): bool_exp_aggregate!
+
+  """fetch data from the table: "bool_exp" using primary key columns"""
+  bool_exp_by_pk(id: bigint!): bool_exp
+
+  """
+  fetch data from the table: "links"
+  """
+  links(
+    """distinct select on columns"""
+    distinct_on: [links_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [links_order_by!]
+
+    """filter the rows returned"""
+    where: links_bool_exp
+  ): [links!]!
+
+  """
+  fetch aggregated fields from the table: "links"
+  """
+  links_aggregate(
+    """distinct select on columns"""
+    distinct_on: [links_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [links_order_by!]
+
+    """filter the rows returned"""
+    where: links_bool_exp
+  ): links_aggregate!
+
+  """fetch data from the table: "links" using primary key columns"""
+  links_by_pk(id: bigint!): links
+
+  """
+  fetch data from the table: "mp"
+  """
+  mp(
+    """distinct select on columns"""
+    distinct_on: [mp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [mp_order_by!]
+
+    """filter the rows returned"""
+    where: mp_bool_exp
+  ): [mp!]!
+
+  """
+  fetch aggregated fields from the table: "mp"
+  """
+  mp_aggregate(
+    """distinct select on columns"""
+    distinct_on: [mp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [mp_order_by!]
+
+    """filter the rows returned"""
+    where: mp_bool_exp
+  ): mp_aggregate!
+
+  """fetch data from the table: "mp" using primary key columns"""
+  mp_by_pk(id: bigint!): mp
+
+  """
+  fetch data from the table: "number"
+  """
+  number(
+    """distinct select on columns"""
+    distinct_on: [number_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [number_order_by!]
+
+    """filter the rows returned"""
+    where: number_bool_exp
+  ): [number!]!
+
+  """
+  fetch aggregated fields from the table: "number"
+  """
+  number_aggregate(
+    """distinct select on columns"""
+    distinct_on: [number_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [number_order_by!]
+
+    """filter the rows returned"""
+    where: number_bool_exp
+  ): number_aggregate!
+
+  """fetch data from the table: "number" using primary key columns"""
+  number_by_pk(id: bigint!): number
+
+  """
+  fetch data from the table: "string"
+  """
+  string(
+    """distinct select on columns"""
+    distinct_on: [string_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [string_order_by!]
+
+    """filter the rows returned"""
+    where: string_bool_exp
+  ): [string!]!
+
+  """
+  fetch aggregated fields from the table: "string"
+  """
+  string_aggregate(
+    """distinct select on columns"""
+    distinct_on: [string_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [string_order_by!]
+
+    """filter the rows returned"""
+    where: string_bool_exp
+  ): string_aggregate!
+
+  """fetch data from the table: "string" using primary key columns"""
+  string_by_pk(id: bigint!): string
+}
