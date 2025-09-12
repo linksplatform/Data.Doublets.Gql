@@ -357,7 +357,6 @@ db.links
 db.links.index
 
 # Schemas
-schema.graphql
 schema.json
 
 # JetBrains Rider
