@@ -1,5 +1,3 @@
-#![feature(never_type)]
-#![feature(result_flattening)]
 
 mod model;
 
@@ -10,7 +8,7 @@ use crate::model::{
 use actix_web::{guard, web, App, HttpResponse, HttpServer, Responder};
 use async_graphql::{
     http::{playground_source, GraphQLPlaygroundConfig},
-    EmptyMutation, EmptySubscription,
+    EmptySubscription,
 };
 use async_graphql_actix_web::{GraphQLRequest, GraphQLResponse};
 use async_std::sync::RwLock;

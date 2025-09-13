@@ -128,7 +128,15 @@ impl QueryRoot {
     }
     #[graphql(name = "links_by_pk")]
     pub async fn links_by_pk(&self, ctx: &Context<'_>, id: Bigint) -> Option<Links> {
-        todo!()
+        let store = ctx.data_unchecked::<Store>().read().await;
+        let link_id = id as LinkType;
+        
+        if store.exists(link_id) {
+            if let Ok(link) = store.get_link(link_id) {
+                return Some(Links(link));
+            }
+        }
+        None
     }
     pub async fn mp(
         &self,
