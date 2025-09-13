@@ -1,0 +1,47 @@
+# Source files (only ship compiled dist)
+src/
+examples/
+*.test.ts
+*.spec.ts
+__tests__/
+
+# Build configuration
+rollup.config.js
+jest.config.js
+tsconfig.json
+.eslintrc.js
+
+# Development files
+.gitignore
+.npmignore
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Environment variables
+.env*
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Optional eslint cache
+.eslintcache
+
+# TypeScript cache
+*.tsbuildinfo
