@@ -68,7 +68,32 @@ namespace Platform.Data.Doublets.Gql.Schema
         public static Links InsertLink(object service, LinksInsert linksInsert)
         {
             var link = (ILinks<ulong>)service;
-            var create = link.GetOrCreate((ulong)(linksInsert.from_id ?? 0), (ulong)(linksInsert.to_id ?? 0));
+            
+            // Handle nested 'from' object
+            ulong fromId = 0;
+            if (linksInsert.from?.data != null)
+            {
+                var fromLink = InsertLink(service, linksInsert.from.data);
+                fromId = (ulong)fromLink.id;
+            }
+            else if (linksInsert.from_id.HasValue)
+            {
+                fromId = (ulong)linksInsert.from_id.Value;
+            }
+            
+            // Handle nested 'to' object
+            ulong toId = 0;
+            if (linksInsert.to?.data != null)
+            {
+                var toLink = InsertLink(service, linksInsert.to.data);
+                toId = (ulong)toLink.id;
+            }
+            else if (linksInsert.to_id.HasValue)
+            {
+                toId = (ulong)linksInsert.to_id.Value;
+            }
+            
+            var create = link.GetOrCreate(fromId, toId);
             return LinksType.GetLinkOrDefault(service, (long)create);
         }
     }
