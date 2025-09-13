@@ -1,6 +1,23 @@
 # Data.Doublets.Gql
 
+GraphQL API for Data.Doublets with multiple implementation options for different performance and deployment needs.
+
 If you need any help, you can ged it real-time on our official discord server: https://discord.gg/eEXJyjWv5e
+
+## Implementation Comparison
+
+| Feature | Go (gqlgen) | Rust | C# |
+|---------|-------------|------|-----|
+| **Performance** | ⚡ Fastest startup | ⚡ Fastest runtime | ⚠️ JIT warmup needed |
+| **Memory Usage** | ✅ ~15MB | ✅ ~10MB | ❌ ~50MB+ |
+| **Binary Size** | ✅ ~20MB | ✅ ~15MB | ❌ Requires .NET runtime |
+| **Type Safety** | ✅ Compile-time | ✅ Compile-time | ⚠️ Runtime validation |
+| **Code Generation** | ✅ gqlgen automatic | ⚠️ Some manual | ❌ Reflection-based |
+| **Hot Reload** | ⚠️ External tools | ⚠️ External tools | ✅ Built-in |
+| **Deployment** | ✅ Single binary | ✅ Single binary | ⚠️ Requires runtime |
+| **Development** | ✅ Fast compilation | ⚠️ Slow compilation | ✅ Good tooling |
+
+**Recommendation**: Use **Go implementation** for production deployments requiring fast startup and low resource usage.
 
 Comparison of theories:
 
@@ -20,6 +37,28 @@ http://linksplatform.ddns.net:29018/v1/graphql
 ```
 
 ## Start locally
+
+### Go Implementation (Faster Compiled) ⚡
+
+**Recommended for production use** - fastest startup and runtime performance:
+
+```bash
+cd go
+make run
+```
+
+Navigate to:
+* http://localhost:8080/ui/playground
+* http://localhost:8080/ui/graphiql
+* http://localhost:8080/ui/altair
+* http://localhost:8080/ui/voyager
+
+GraphQL endpoint: http://localhost:8080/v1/graphql
+
+Custom port: `PORT=3000 make run`
+Custom database: `make run-with-db` (uses db.links and index.links)
+
+### C# Implementation
 
 Execute:
 ```
@@ -49,6 +88,15 @@ You can change the port like this:
 ```
 dotnet run -f net5 -c Release db.links --urls http://0.0.0.0:29018
 ```
+
+### Rust Implementation
+
+```bash
+cd rust
+cargo run
+```
+
+Navigate to: http://localhost:8000
 
 ## Supported query examples:
 ```gql

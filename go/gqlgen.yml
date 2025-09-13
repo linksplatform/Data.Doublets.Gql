@@ -1,0 +1,52 @@
+# gqlgen configuration for Data.Doublets.Gql
+# This file configures the code generation for faster compiled implementation
+
+# Where are all the schema files located? globs are supported eg  src/**/*.graphqls
+schema:
+  - schema.graphql
+
+# Where should the generated server code go?
+exec:
+  filename: generated/exec.go
+  package: generated
+
+# Where should any generated models go?
+model:
+  filename: generated/models.go
+  package: generated
+
+# Where should the resolver implementations go?
+resolver:
+  layout: follow-schema
+  dir: resolvers
+  package: resolvers
+  filename_template: "{name}.resolvers.go"
+
+# Enable the federation plugin
+# federation:
+#   filename: generated/federation.go
+#   package: generated
+
+# gqlgen will search for any type names in the schema in these go packages
+# if they match it will use them, otherwise it will generate them.
+autobind:
+  - "doublets-gql/generated"
+
+# This section declares type mapping between the GraphQL and go type systems
+models:
+  # Map ID type to uint64 for better performance with doublets
+  ID:
+    model:
+      - github.com/99designs/gqlgen/graphql.Uint64
+  
+  # Custom scalar types if needed
+  # Uint64:
+  #   model:
+  #     - github.com/99designs/gqlgen/graphql.Uint64
+
+# What object types, if any, should not be generated
+skip_generation:
+  # - SomeType
+
+# Speed up generation by skipping validation of schema
+skip_validation: false

@@ -1,0 +1,232 @@
+name: Go Implementation CI/CD
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'go/**'
+      - '.github/workflows/go-build.yml'
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - 'go/**'
+      - '.github/workflows/go-build.yml'
+
+env:
+  GO_VERSION: '1.21'
+
+jobs:
+  test:
+    name: Test Go Implementation
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: ${{ env.GO_VERSION }}
+
+    - name: Cache Go modules
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cache/go-build
+          ~/go/pkg/mod
+        key: ${{ runner.os }}-go-${{ hashFiles('go/go.sum') }}
+        restore-keys: |
+          ${{ runner.os }}-go-
+
+    - name: Install dependencies
+      working-directory: ./go
+      run: |
+        go mod download
+        go mod tidy
+
+    - name: Generate GraphQL code
+      working-directory: ./go
+      run: |
+        go install github.com/99designs/gqlgen@latest
+        # In real implementation: gqlgen generate
+        echo "Would run: gqlgen generate"
+
+    - name: Run tests
+      working-directory: ./go
+      run: go test -v -race -coverprofile=coverage.out ./...
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./go/coverage.out
+        flags: go-implementation
+
+    - name: Run linter
+      uses: golangci/golangci-lint-action@v3
+      with:
+        version: latest
+        working-directory: ./go
+
+  build:
+    name: Build Go Implementation
+    runs-on: ubuntu-latest
+    needs: test
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: ${{ env.GO_VERSION }}
+
+    - name: Install dependencies
+      working-directory: ./go
+      run: |
+        go mod download
+        go mod tidy
+
+    - name: Generate GraphQL code
+      working-directory: ./go
+      run: |
+        go install github.com/99designs/gqlgen@latest
+        # In real implementation: gqlgen generate
+        echo "Would run: gqlgen generate"
+
+    - name: Build application
+      working-directory: ./go
+      run: |
+        go build -o bin/doublets-gql-server ./main.go
+        
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: doublets-gql-server
+        path: go/bin/doublets-gql-server
+
+  benchmark:
+    name: Performance Benchmarks
+    runs-on: ubuntu-latest
+    needs: test
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: ${{ env.GO_VERSION }}
+
+    - name: Install dependencies
+      working-directory: ./go
+      run: go mod download
+
+    - name: Run benchmarks
+      working-directory: ./go
+      run: |
+        go test -bench=. -benchmem ./... > benchmark_results.txt
+        echo "## Go Implementation Benchmarks" >> $GITHUB_STEP_SUMMARY
+        echo "```" >> $GITHUB_STEP_SUMMARY
+        cat benchmark_results.txt >> $GITHUB_STEP_SUMMARY
+        echo "```" >> $GITHUB_STEP_SUMMARY
+
+  release:
+    name: Build Release Binaries
+    runs-on: ubuntu-latest
+    needs: [test, build]
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    
+    strategy:
+      matrix:
+        goos: [linux, windows, darwin]
+        goarch: [amd64, arm64]
+        exclude:
+          # Windows on ARM64 not commonly needed
+          - goos: windows
+            goarch: arm64
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: ${{ env.GO_VERSION }}
+
+    - name: Install dependencies
+      working-directory: ./go
+      run: go mod download
+
+    - name: Generate GraphQL code
+      working-directory: ./go
+      run: |
+        go install github.com/99designs/gqlgen@latest
+        # In real implementation: gqlgen generate
+        echo "Would run: gqlgen generate"
+
+    - name: Build release binary
+      working-directory: ./go
+      env:
+        GOOS: ${{ matrix.goos }}
+        GOARCH: ${{ matrix.goarch }}
+      run: |
+        BINARY_NAME=doublets-gql-server-${{ matrix.goos }}-${{ matrix.goarch }}
+        if [ "${{ matrix.goos }}" = "windows" ]; then
+          BINARY_NAME=${BINARY_NAME}.exe
+        fi
+        
+        go build -ldflags="-w -s" -o dist/${BINARY_NAME} ./main.go
+
+    - name: Upload release artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: release-${{ matrix.goos }}-${{ matrix.goarch }}
+        path: go/dist/
+
+  docker:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.event_name == 'push'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build Docker image
+      working-directory: ./go
+      run: |
+        # Create a simple Dockerfile for the Go implementation
+        cat > Dockerfile << 'EOF'
+        FROM golang:1.21-alpine AS builder
+        WORKDIR /app
+        COPY go.mod go.sum ./
+        RUN go mod download
+        COPY . .
+        RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o doublets-gql-server ./main.go
+
+        FROM alpine:latest
+        RUN apk --no-cache add ca-certificates
+        WORKDIR /root/
+        COPY --from=builder /app/doublets-gql-server .
+        EXPOSE 8080
+        CMD ["./doublets-gql-server"]
+        EOF
+        
+        docker build -t doublets-gql-go:latest .
+
+    - name: Save Docker image
+      run: docker save doublets-gql-go:latest > doublets-gql-go.tar
+
+    - name: Upload Docker image
+      uses: actions/upload-artifact@v3
+      with:
+        name: docker-image
+        path: doublets-gql-go.tar
