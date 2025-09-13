@@ -30,6 +30,15 @@ namespace Platform.Data.Doublets.Gql.Server
             }
             finally
             {
+                try
+                {
+                    Log.Information("Disposing links before shutdown");
+                    Data.DisposeLinks();
+                }
+                catch (Exception ex)
+                {
+                    Log.Warning(ex, "Error during links disposal");
+                }
                 Log.CloseAndFlush();
             }
         }
