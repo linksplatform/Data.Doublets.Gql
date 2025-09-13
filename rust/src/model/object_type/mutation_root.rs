@@ -67,7 +67,18 @@ impl MutationRoot {
     }
     #[graphql(name = "delete_links_by_pk")]
     pub async fn delete_links_by_pk(&self, ctx: &Context<'_>, id: Bigint) -> Option<Links> {
-        todo!()
+        let mut store = ctx.data_unchecked::<Store>().write().await;
+        let link_id = id as crate::model::LinkType;
+        
+        if store.exists(link_id) {
+            if let Ok(link) = store.get_link(link_id) {
+                let result = Links(link);
+                if store.delete(link_id).is_ok() {
+                    return Some(result);
+                }
+            }
+        }
+        None
     }
     #[graphql(name = "delete_mp")]
     pub async fn delete_mp(
