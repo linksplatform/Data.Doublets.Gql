@@ -11,9 +11,9 @@ namespace Platform.Data.Doublets.Gql.Schema
 
         public OrderBy? id { get; set; }
 
-        public LinksAggregateOrderByInputType in_aggregate { get; set; }
+        public DcDgLinksAggregateOrderByInputType in_aggregate { get; set; }
 
-        public LinksAggregateOrderByInputType out_aggregate { get; set; }
+        public DcDgLinksAggregateOrderByInputType out_aggregate { get; set; }
 
         public LinksOrderBy to { get; set; }
 
