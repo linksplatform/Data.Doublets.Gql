@@ -152,5 +152,49 @@ namespace Platform.Data.Doublets.Gql.Tests
             }
             Assert.True(1 == Convert.ToInt32(result.data.update_links.returning[0].id));
         }
+
+        [Fact]
+        public void InsertLinksWithDirectStringValue()
+        {
+            var links = CreateLinks();
+            LinksSchema linksSchema = new(links, new DefaultServiceProvider());
+            var jsonTask = linksSchema.ExecuteAsync(_ => { _.Query = @"
+            mutation {
+              insert_links_one(object: { string: { value: ""The text key or value."" } }) {
+                id
+                string
+              }
+            }
+            "; });
+            dynamic result = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(jsonTask.Result);
+            if (result.ContainsKey("errors"))
+            {
+                throw new Exception(result.errors.ToString());
+            }
+            // Verify that a link was created and the string field is accessible
+            Assert.NotNull(result.data.insert_links_one.id);
+        }
+
+        [Fact]
+        public void InsertLinksWithNestedStringData()
+        {
+            var links = CreateLinks();
+            LinksSchema linksSchema = new(links, new DefaultServiceProvider());
+            var jsonTask = linksSchema.ExecuteAsync(_ => { _.Query = @"
+            mutation {
+              insert_links_one(object: { string: { data: { value: ""Nested string value"" } } }) {
+                id
+                string
+              }
+            }
+            "; });
+            dynamic result = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(jsonTask.Result);
+            if (result.ContainsKey("errors"))
+            {
+                throw new Exception(result.errors.ToString());
+            }
+            // Verify that a link was created and the string field is accessible
+            Assert.NotNull(result.data.insert_links_one.id);
+        }
     }
 }
