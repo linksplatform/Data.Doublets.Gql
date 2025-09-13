@@ -39,6 +39,7 @@ namespace Platform.Data.Doublets.Gql.Server
             })
             .AddSingleton(sp => Data.CreateLinks())
             .AddSingleton<LinksSchema>()
+            .AddHostedService<GracefulShutdownService>()
             .AddGraphQL((options, provider) =>
             {
                 options.EnableMetrics = Environment.IsDevelopment();

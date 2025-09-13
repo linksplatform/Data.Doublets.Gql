@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Platform.IO;
 using Serilog;
 using Serilog.Events;
@@ -35,6 +36,13 @@ namespace Platform.Data.Doublets.Gql.Server
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
+            .ConfigureServices((context, services) =>
+            {
+                services.Configure<HostOptions>(options =>
+                {
+                    options.ShutdownTimeout = TimeSpan.FromSeconds(30);
+                });
+            })
             .ConfigureWebHostDefaults(webBuilder =>
             {
                 webBuilder.UseSerilog().UseStartup<StartupWithRouting>();
