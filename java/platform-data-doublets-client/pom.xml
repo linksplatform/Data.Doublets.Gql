@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>platform.data.doublets</groupId>
+        <artifactId>doublets-java-parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>platform-data-doublets-client</artifactId>
+    <packaging>jar</packaging>
+
+    <name>Platform Data Doublets Client</name>
+    <description>Abstract API for Platform Data Doublets client implementations</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
