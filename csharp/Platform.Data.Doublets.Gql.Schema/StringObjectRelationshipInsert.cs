@@ -5,5 +5,7 @@ namespace Platform.Data.Doublets.Gql.Schema
         public StringInsert data { get; set; }
 
         public StringOnConflict on_conflict { get; set; }
+        
+        public string value { get; set; }
     }
 }
