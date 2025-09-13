@@ -189,3 +189,37 @@ mutation {
   }
 }
 ```
+
+## Java Implementation
+
+This repository now includes a complete Java implementation with three packages:
+
+1. **Platform.Data.Doublets.Client** - Abstract API for both GraphQL and native implementations
+2. **Platform.Data.Doublets.Gql.Client** - GraphQL client that connects to the server
+3. **Platform.Data.Doublets.Native** - Native library wrapper using JNI
+
+### Quick Start (Java)
+
+The Java implementation provides a clean, type-safe API that can swap between GraphQL and native backends:
+
+```java
+import platform.data.doublets.client.*;
+import platform.data.doublets.gql.client.GraphQLLinksClient;
+
+// Create GraphQL client
+LinksClient client = new GraphQLLinksClient("http://localhost:60341/v1/graphql");
+
+// Create a link
+Link link = client.getOrCreate(1L, 2L);
+
+// Search with query builder
+LinkQuery query = LinkQuery.builder()
+    .fromId(1L)
+    .limit(10)
+    .sortBy(LinkQuery.SortField.ID, LinkQuery.SortOrder.ASC)
+    .build();
+    
+List<Link> results = client.searchLinks(query);
+```
+
+For detailed documentation and examples, see the [Java README](java/README.md).
