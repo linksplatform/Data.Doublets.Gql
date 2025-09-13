@@ -31,6 +31,8 @@ namespace Platform.Data.Doublets.Gql.Schema
         {
             var any = links.Constants.Any;
             Link<ulong> query = new(any, any, any);
+            IEnumerable<Links> allLinks;
+
             if (context.HasArgument("where"))
             {
                 var where = context.GetArgument<LinksBooleanExpression>("where");
@@ -42,9 +44,16 @@ namespace Platform.Data.Doublets.Gql.Schema
                 {
                     return new List<Links>();
                 }
-                query = new Link<ulong>((ulong?)where?.id?._eq ?? any, (ulong?)forceFromId ?? (ulong?)where?.from_id?._eq ?? any, (ulong?)forceToId ?? (ulong?)where?.to_id?._eq ?? any);
+
+                // Use the deep query processor for complex where clauses
+                allLinks = ProcessDeepWhereClause(links, where, forceFromId, forceToId);
             }
-            var allLinks = links.All(query).Select(l => new Links(l));
+            else
+            {
+                query = new Link<ulong>(any, (ulong?)forceFromId ?? any, (ulong?)forceToId ?? any);
+                allLinks = links.All(query).Select(l => new Links(l));
+            }
+
             if (context.HasArgument("order_by"))
             {
                 GetSelectorAndOrderByValue(context.GetArgument<List<LinksOrderBy>>("order_by").Single(), out var selector, out var orderByValue);
@@ -66,6 +75,130 @@ namespace Platform.Data.Doublets.Gql.Schema
                 return allLinks.Take((int)limit);
             }
             return allLinks;
+        }
+
+        private static IEnumerable<Links> ProcessDeepWhereClause(ILinks<ulong> links, LinksBooleanExpression where, long? forceFromId = null, long? forceToId = null)
+        {
+            var any = links.Constants.Any;
+            
+            // Start with all links if no basic filters, otherwise use basic query
+            IEnumerable<Links> candidateLinks;
+            
+            // Build basic query from simple equality conditions
+            var queryId = (ulong?)where?.id?._eq ?? any;
+            var queryFromId = (ulong?)forceFromId ?? (ulong?)where?.from_id?._eq ?? any;
+            var queryToId = (ulong?)forceToId ?? (ulong?)where?.to_id?._eq ?? any;
+            
+            Link<ulong> query = new(queryId, queryFromId, queryToId);
+            candidateLinks = links.All(query).Select(l => new Links(l));
+
+            // Apply deep filtering
+            return candidateLinks.Where(link => EvaluateWhereClause(links, link, where));
+        }
+
+        private static bool EvaluateWhereClause(ILinks<ulong> links, Links link, LinksBooleanExpression where)
+        {
+            if (where == null) return true;
+
+            // Handle logical operators
+            if (where._and != null)
+            {
+                return where._and.All(subWhere => EvaluateWhereClause(links, link, subWhere));
+            }
+
+            if (where._or != null)
+            {
+                return where._or.Any(subWhere => EvaluateWhereClause(links, link, subWhere));
+            }
+
+            if (where._not != null)
+            {
+                return !EvaluateWhereClause(links, link, where._not);
+            }
+
+            // Handle basic field comparisons
+            if (where.id != null && !EvaluateLongComparison(link.id, where.id)) return false;
+            if (where.from_id != null && !EvaluateLongComparison(link.from_id ?? 0, where.from_id)) return false;
+            if (where.to_id != null && !EvaluateLongComparison(link.to_id ?? 0, where.to_id)) return false;
+            if (where.type_id != null && !EvaluateLongComparison(link.type_id, where.type_id)) return false;
+
+            // Handle nested relationship filtering
+            if (where.from != null)
+            {
+                var fromLink = GetLinkById(links, link.from_id);
+                if (fromLink == null || !EvaluateWhereClause(links, fromLink, where.from)) return false;
+            }
+
+            if (where.to != null)
+            {
+                var toLink = GetLinkById(links, link.to_id);
+                if (toLink == null || !EvaluateWhereClause(links, toLink, where.to)) return false;
+            }
+
+            if (where.type != null)
+            {
+                var typeLink = GetLinkById(links, link.type_id);
+                if (typeLink == null || !EvaluateWhereClause(links, typeLink, where.type)) return false;
+            }
+
+            // Handle outgoing links (where this link is the source)
+            if (where.@out != null)
+            {
+                var outgoingLinks = GetOutgoingLinks(links, link.id);
+                if (!outgoingLinks.Any(outLink => EvaluateWhereClause(links, outLink, where.@out))) return false;
+            }
+
+            // Handle incoming links (where this link is the target)
+            if (where.@in != null)
+            {
+                var incomingLinks = GetIncomingLinks(links, link.id);
+                if (!incomingLinks.Any(inLink => EvaluateWhereClause(links, inLink, where.@in))) return false;
+            }
+
+            return true;
+        }
+
+        private static bool EvaluateLongComparison(long value, LongComparisonExpression comparison)
+        {
+            if (comparison._eq.HasValue && value != comparison._eq.Value) return false;
+            if (comparison._neq.HasValue && value == comparison._neq.Value) return false;
+            if (comparison._gt.HasValue && value <= comparison._gt.Value) return false;
+            if (comparison._gte.HasValue && value < comparison._gte.Value) return false;
+            if (comparison._lt.HasValue && value >= comparison._lt.Value) return false;
+            if (comparison._lte.HasValue && value > comparison._lte.Value) return false;
+            if (comparison._in != null && !comparison._in.Contains(value)) return false;
+            if (comparison._nin != null && comparison._nin.Contains(value)) return false;
+            if (comparison._is_null.HasValue)
+            {
+                // For link IDs, we consider 0 or negative values as null
+                var isNull = value <= 0;
+                if (comparison._is_null.Value != isNull) return false;
+            }
+
+            return true;
+        }
+
+        private static Links GetLinkById(ILinks<ulong> links, long? linkId)
+        {
+            if (!linkId.HasValue || linkId.Value <= 0) return null;
+            var ulongId = (ulong)linkId.Value;
+            return links.Exists(ulongId) ? new Links(links.GetLink(ulongId)) : null;
+        }
+
+        private static IEnumerable<Links> GetOutgoingLinks(ILinks<ulong> links, long sourceId)
+        {
+            if (sourceId <= 0) return Enumerable.Empty<Links>();
+            var any = links.Constants.Any;
+            var query = new Link<ulong>(any, (ulong)sourceId, any);
+            return links.All(query).Select(l => new Links(l));
+        }
+
+        private static IEnumerable<Links> GetIncomingLinks(ILinks<ulong> links, long targetId)
+        {
+            if (targetId <= 0) return Enumerable.Empty<Links>();
+            var any = links.Constants.Any;
+            var query = new Link<ulong>(any, any, (ulong)targetId);
+            return links.All(query).Select(l => new Links(l));
         }
 
         private static Func<Links, long> GetSortSelectorAndOrderByValue(LinksColumn distinct)
