@@ -21,10 +21,13 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
             Field<NonNullGraphType<LinksAggregateType>>(nameof(MappedType.in_aggregate), null, LinksQuery.Arguments, ResolveInAggregate);
             Field<NonNullGraphType<ListGraphType<NonNullGraphType<LinksType>>>>(nameof(MappedType.@out), null, LinksQuery.Arguments, ResolveOut);
             Field<NonNullGraphType<LinksAggregateType>>(nameof(MappedType.out_aggregate), null, LinksQuery.Arguments, ResolveOutAggregate);
+            Field<StringGraphType>(nameof(MappedType.@string));
             Field(o => o.to, true, typeof(LinksType)).Resolve(ResolveTo);
             Field<NonNullGraphType<LongGraphType>>(nameof(MappedType.to_id));
             Field(o => o.type, true, typeof(LinksType)).Resolve(ResolveType);
             Field<NonNullGraphType<LongGraphType>>(nameof(MappedType.type_id));
+            Field<StringGraphType>("from_string", resolve: context => ResolveFromString(context));
+            Field<StringGraphType>("to_string", resolve: context => ResolveToString(context));
         }
 
         private LinksAggregateType ResolveInAggregate(IResolveFieldContext<Links> context) => new();
@@ -40,6 +43,18 @@ namespace Platform.Data.Doublets.Gql.Schema.Types
         private Links ResolveTo(IResolveFieldContext<Links> context) => context.Source.to ?? GetLinkOrDefault(context, context.Source.to_id);
 
         private Links ResolveType(IResolveFieldContext<Links> context) => context.Source.type ?? GetLinkOrDefault(context, (long?)context.Source.type_id);
+
+        private string ResolveFromString(IResolveFieldContext<Links> context)
+        {
+            var fromLink = context.Source.from ?? GetLinkOrDefault(context, context.Source.from_id);
+            return fromLink?.@string;
+        }
+
+        private string ResolveToString(IResolveFieldContext<Links> context)
+        {
+            var toLink = context.Source.to ?? GetLinkOrDefault(context, context.Source.to_id);
+            return toLink?.@string;
+        }
 
         public static Links GetLinkOrDefault(IResolveFieldContext<Links> context, long? linkId) => linkId != null ? GetLinkOrDefault(context.RequestServices.GetService<ILinks<ulong>>(), (ulong)linkId) : default;
 
