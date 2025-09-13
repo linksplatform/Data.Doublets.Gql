@@ -4,7 +4,7 @@ from unittest import TestCase, main
 
 from gql.transport.exceptions import TransportQueryError
 
-from __init__ import DeepClient, DeepClientError
+from deepclient import DeepClient, DeepClientError
 from config import GQL_URL, GQL_TOKEN
 
 

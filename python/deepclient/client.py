@@ -7,7 +7,7 @@ from re import sub
 from gql import Client, gql
 from gql.transport.aiohttp import AIOHTTPTransport
 
-from python.deepclient.exceptions import DeepClientError
+from .exceptions import DeepClientError
 
 
 class DeepClient:
