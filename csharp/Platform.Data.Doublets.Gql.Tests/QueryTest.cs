@@ -110,6 +110,141 @@ namespace Platform.Data.Doublets.Gql.Tests
           }
         }
         ")]
+        [InlineData(@"
+        {
+          links(
+            where: { 
+              _and: [
+                { id: { _gt: 0 } }
+                { from_id: { _eq: 1 } }
+              ]
+            }
+          ) {
+            id
+            from_id
+            to_id
+          }
+        }
+        ")]
+        [InlineData(@"
+        {
+          links(
+            where: { 
+              _or: [
+                { from_id: { _eq: 1 } }
+                { to_id: { _eq: 2 } }
+              ]
+            }
+          ) {
+            id
+            from_id
+            to_id
+          }
+        }
+        ")]
+        [InlineData(@"
+        {
+          links(
+            where: { 
+              _not: { id: { _eq: 0 } }
+            }
+          ) {
+            id
+            from_id
+            to_id
+          }
+        }
+        ")]
+        [InlineData(@"
+        {
+          links(
+            where: { 
+              from: { id: { _gt: 0 } }
+            }
+          ) {
+            id
+            from_id
+            to_id
+            from {
+              id
+              from_id
+              to_id
+            }
+          }
+        }
+        ")]
+        [InlineData(@"
+        {
+          links(
+            where: { 
+              to: { id: { _lte: 10 } }
+            }
+          ) {
+            id
+            from_id
+            to_id
+            to {
+              id
+              from_id
+              to_id
+            }
+          }
+        }
+        ")]
+        [InlineData(@"
+        {
+          links(
+            where: { 
+              out: { to_id: { _gt: 0 } }
+            }
+          ) {
+            id
+            from_id
+            to_id
+            out {
+              id
+              from_id
+              to_id
+            }
+          }
+        }
+        ")]
+        [InlineData(@"
+        {
+          links(
+            where: { 
+              in: { from_id: { _gt: 0 } }
+            }
+          ) {
+            id
+            from_id
+            to_id
+            in {
+              id
+              from_id
+              to_id
+            }
+          }
+        }
+        ")]
+        [InlineData(@"
+        {
+          links(
+            where: { 
+              _and: [
+                { from: { id: { _gt: 0 } } }
+                { to: { id: { _lt: 100 } } }
+              ]
+            }
+          ) {
+            id
+            from_id
+            to_id
+            from { id }
+            to { id }
+          }
+        }
+        ")]
         [Theory]
         public void QueryData(string query)
         {

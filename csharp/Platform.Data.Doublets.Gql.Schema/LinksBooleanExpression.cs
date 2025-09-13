@@ -40,6 +40,6 @@ namespace Platform.Data.Doublets.Gql.Schema
 
         public LinksBooleanExpression type { get; set; }
 
-        public LinksBooleanExpression type_id { get; set; }
+        public LongComparisonExpression type_id { get; set; }
     }
 }
