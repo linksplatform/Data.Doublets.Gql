@@ -1,10 +1,11 @@
+mod distinct;
 mod enum_type;
 mod input_object_type;
 mod iterator;
 mod object_type;
 mod scalar_type;
 
-use doublets::data::LinksError;
+use doublets::data::Error;
 pub use enum_type::CanSelectColumn;
 pub use enum_type::LinksConstraint;
 pub use enum_type::LinksSelectColumn;
@@ -234,10 +235,12 @@ pub use scalar_type::Jsonb;
 pub use scalar_type::LinksOptionExt;
 use std::marker::PhantomData;
 
-pub type LinkType = u64;
-pub type LinksResult<T> = Result<T, LinksError<u64>>;
+pub use distinct::DistinctWrapper;
 
-struct LinkTypeAssert<T: doublets::num::LinkType>(PhantomData<T>);
+pub type LinkType = u64;
+pub type LinksResult<T> = Result<T, Error<LinkType>>;
+
+struct LinkTypeAssert<T: doublets::data::LinkType>(PhantomData<T>);
 
 #[allow(dead_code)]
 #[allow(non_camel_case_types)]

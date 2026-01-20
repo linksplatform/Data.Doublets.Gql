@@ -1,4 +1,3 @@
-use crate::model::Bigint;
 use crate::model::Can;
 use crate::model::CanAggregate;
 use crate::model::CanBoolExp;
@@ -25,12 +24,14 @@ use crate::model::SelectorsOrderBy;
 use crate::model::SelectorsSelectColumn;
 use crate::model::Strings;
 use crate::model::UpLinksArgs;
+use crate::model::{Bigint, LinkType};
 use crate::Store;
 use async_graphql::*;
 use doublets::Doublets;
 
 #[derive(Debug, Clone)]
-pub struct Links(pub doublets::Link<u64>);
+#[repr(transparent)]
+pub struct Links(pub doublets::Link<LinkType>);
 
 #[Object(name = "links")]
 impl Links {
