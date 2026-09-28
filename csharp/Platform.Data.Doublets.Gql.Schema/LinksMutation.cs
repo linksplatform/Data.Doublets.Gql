@@ -38,7 +38,7 @@ namespace Platform.Data.Doublets.Gql.Schema
             {
                 var set = context.GetArgument<LinksSet>("_set");
                 var response = new LinksMutationResponse { returning = new List<Links>() };
-                foreach (var link in LinksQuery.GetLinks(context, links))
+                foreach (var link in LinksQuery.GetLinks(context, links).ToList())
                 {
                     ulong updatedLink;
                     var equalityComparer = EqualityComparer<ulong>.Default;

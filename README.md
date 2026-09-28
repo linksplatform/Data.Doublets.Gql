@@ -51,6 +51,10 @@ dotnet run -f net5 -c Release db.links --urls http://0.0.0.0:29018
 ```
 
 ## Supported query examples:
+
+The C# server supports nested logical, numeric, and core relationship predicates
+in `where`, including mutation selection. See [deep filtering semantics and
+verification](csharp/WHERE.md).
 ```gql
 {
   links {

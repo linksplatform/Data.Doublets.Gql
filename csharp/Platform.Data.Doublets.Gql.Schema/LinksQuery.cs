@@ -30,21 +30,10 @@ namespace Platform.Data.Doublets.Gql.Schema
         public static IEnumerable<Links> GetLinks(IResolveFieldContext<object> context, ILinks<ulong> links, long? forceFromId = null, long? forceToId = null)
         {
             var any = links.Constants.Any;
-            Link<ulong> query = new(any, any, any);
-            if (context.HasArgument("where"))
-            {
-                var where = context.GetArgument<LinksBooleanExpression>("where");
-                if (where?.from_id?._eq != null && forceFromId != null && where.from_id._eq != forceFromId)
-                {
-                    return new List<Links>();
-                }
-                if (where?.to_id?._eq != null && forceToId != null && where.to_id._eq != forceToId)
-                {
-                    return new List<Links>();
-                }
-                query = new Link<ulong>((ulong?)where?.id?._eq ?? any, (ulong?)forceFromId ?? (ulong?)where?.from_id?._eq ?? any, (ulong?)forceToId ?? (ulong?)where?.to_id?._eq ?? any);
-            }
-            var allLinks = links.All(query).Select(l => new Links(l));
+            var where = context.GetArgument<LinksBooleanExpression>("where");
+            LinksWhereEvaluator.Validate(where);
+            var evaluator = new LinksWhereEvaluator(links.All(new Link<ulong>(any, any, any)).Select(link => new Links(link)));
+            IEnumerable<Links> allLinks = evaluator.Select(where, forceFromId, forceToId);
             if (context.HasArgument("order_by"))
             {
                 GetSelectorAndOrderByValue(context.GetArgument<List<LinksOrderBy>>("order_by").Single(), out var selector, out var orderByValue);
