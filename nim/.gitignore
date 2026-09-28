@@ -1,0 +1,4 @@
+nimcache/
+build/
+*.links
+__pycache__/

@@ -1,5 +1,9 @@
 # Data.Doublets.Gql
 
+## Nim clients
+
+The [three Nimble adapter packages](nim/README.md) provide standalone native DLL and GraphQL clients plus a swappable CRUD API.
+
 If you need any help, you can ged it real-time on our official discord server: https://discord.gg/eEXJyjWv5e
 
 Comparison of theories:

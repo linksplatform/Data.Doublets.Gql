@@ -1,0 +1,6 @@
+version = "0.1.0"
+author = "LinksPlatform contributors"
+description = "Standalone Doublets GraphQL client"
+license = "Unlicense"
+srcDir = "src"
+requires "nim >= 2.0.0"
