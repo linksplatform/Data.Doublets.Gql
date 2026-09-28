@@ -19,7 +19,12 @@ You can use this URL to access the GraphQL server directly from code, browser or
 http://linksplatform.ddns.net:29018/v1/graphql
 ```
 
-## Start locally
+## Rust server
+
+The Rust implementation uses `async-graphql`, Actix Web, and native persistent
+Doublets storage. See [Rust setup, supported schema, and tests](rust/README.md).
+
+## Start locally (C#)
 
 Execute:
 ```
